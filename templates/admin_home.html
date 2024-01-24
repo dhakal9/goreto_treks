@@ -1,0 +1,159 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<br>
+<br>
+<h1 class="text-center">Home page Settings !!</h1>
+
+
+<!-- Page Content -->
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+        
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Company Settings</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Company Name <span class="text-danger">*</span></label>
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Company Email</label>
+                            {{ form.email }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label> Address</label>
+                            {{ form.address }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            {{ form.contact }}
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Slogan 1:</label>
+                            {{ form.slogan1 }}
+                        </div>
+                    </div>
+    
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Slogan 2:</label>
+                            {{ form.slogan2 }}
+                        </div>
+                    </div>    
+                </div>
+    
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Home Page Image</label>
+                            {{ form.home_image }}
+                            <img class="card-img-top" src="{{ company.home_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Banner 1:</label>
+                            {{form.banner1_image}}
+                            <img class="card-img-top" src="{{ company.banner1_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Banner 2:</label>
+                            {{form.banner2_image}}
+                            {% comment %} <img class="card-img-top" src="{{ company.banner2_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap"> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Logo Image:</label>
+                            {{form.logo_image}}
+                            <img class="card-img-top" src="{{ company.logo_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Video Thumbnail Image:</label>
+                            {{form.video_thumbnail_image}}
+                            <img class="card-img-top" src="{{ company.video_thumbnail_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                        </div>
+                    </div>
+                
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Website Url :</label>
+                            {{form.video_link}}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>About Thumbnai;</label>
+                            {{ form.about_thumbnail }}
+                            <img class="card-img-top" src="{{ company.about_thumbnail.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>About Sub-heading</label>
+                            {{ form.about_sub_heading }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>About Heading</label>
+                        {{ form.about_heading }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>About Us Discription</label>
+                            {{ form.about_us }}
+                        </div>
+                    </div>
+                </div>
+                <div class="submit-section">
+                    <button class="btn btn-primary submit-btn">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /Page Content -->
+{% endblock content %}
