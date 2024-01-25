@@ -101,9 +101,14 @@ class OurTeam(models.Model):
     
 class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
+    team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     name = models.CharField(max_length = 200)
     position = models.CharField(max_length = 200)
     message = models.TextField(max_length=500)
     is_active = models.BooleanField(default=True)
     
-    
+class FunfactModel(models.Model):
+   travellers = models.CharField(max_length = 200)
+   places = models.CharField(max_length = 200)
+   miles = models.CharField(max_length = 200)
+   years = models.CharField(max_length = 200)

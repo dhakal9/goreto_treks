@@ -68,7 +68,7 @@
             <span>User</span>
           </a>
           <div class="dropdown-menu">
-            <a class="dropdown-item" href="#"> Update Company Details</a>
+            <a class="dropdown-item" href="{% url 'admin_home'%}"> Update Company Details</a>
             <a class="dropdown-item" href="#">Logout</a>
           </div>
         </li>
@@ -97,6 +97,8 @@
               <a href="#"><i class="la la-dashboard"></i> <span> Dashboard</span> <span class="menu-arrow"></span></a>
               <ul style="display: none;">
                 <li><a href="{% url 'admin_home'%}">Home Page</a></li>
+                <li><a href="{% url 'admin_review'%}">Reviews</a></li>
+                <li><a href="{% url 'admin_funfact'%}">Fun Facts</a></li>
               </ul>
             </li>
            

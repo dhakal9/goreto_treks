@@ -1,9 +1,9 @@
 
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm
 from django.contrib.auth import login, authenticate
-from .models import CustomUser, CompanyProfile
+from .models import CustomUser, CompanyProfile, Review, FunfactModel
 from django.contrib import messages
 # Create your views here.
 
@@ -11,7 +11,9 @@ class Index(View):
     template_name = "index.html"
     def get(self,request):
         company_profile = CompanyProfile.objects.first()
-        return render(request, self.template_name, {'company': company_profile})
+        reviews =  Review.objects.all()
+        funfact = FunfactModel.objects.first()
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact})
     
 class Explore(View):
     template_name = "explore.html"
@@ -77,3 +79,37 @@ class AdminHome(View):
             return redirect('admin_home')  # Redirect to the same page after saving
 
         return render(request, self.template_name, {'form': form})
+
+class Funfact(View):
+    template_name = 'admin_funfact.html'
+    form = FunfactForm
+    
+    def get(self, request):
+        funfact = FunfactModel.objects.first()
+        form = self.form(instance=funfact)  # Pass instance to make it updateable
+        return render(request, self.template_name, {'form': form, 'funfact': funfact})
+    
+    def post(self, request):
+        funfact = FunfactModel.objects.first()
+        form = self.form(request.POST,  instance=funfact)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_funfact')  # Redirect to the same page after saving
+
+        return render(request, self.template_name, {'form': form, 'funfact': funfact})
+    
+class Review_function(View):
+    template_name = 'admin_review.html'
+
+    def get(self, request):
+        form = ReviewForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ReviewForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_review')  # Redirect to a success page or another view
+
+        return render(request, self.template_name, {'form': form})
+

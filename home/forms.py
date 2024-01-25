@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile
+from .models import CustomUser, CompanyProfile, Review, FunfactModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 
 class UserLoginForm(forms.Form):
@@ -44,4 +44,24 @@ class CompanyProfileForm(forms.ModelForm):
 
     
     
+class ReviewForm(forms.ModelForm):
+
+    team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+    name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    position = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
+    is_active = forms.CheckboxInput(attrs={'class': 'form-check-input'}),
     
+    class Meta:
+        model = Review
+        fields = '__all__'
+
+class FunfactForm(forms.ModelForm):
+    travellers = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    places = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    miles = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    years = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    
+    class Meta:
+        model = FunfactModel
+        fields = '__all__'

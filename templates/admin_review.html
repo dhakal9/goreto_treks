@@ -4,4 +4,56 @@
 <br>
 <h1 class="text-center">Add Reviews</h1>
 
+    <!-- Page Content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">Company Settings</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Name <span class="text-danger">*</span></label>
+                                {{ form.name }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Position </label>
+                                {{ form.position }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Message </label><br>
+                                {{ form.message }}
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Profile Picture</label>
+                                {{ form.team_image }}
+                                {% comment %} <img class="card-img-top" src="{{ company.home_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap"> {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock content%}
