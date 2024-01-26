@@ -1,0 +1,61 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<br>
+<br>
+<h1 class="text-center"> Destinations </h1>
+
+    <!-- Page Content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">Destination Settings</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+               <!-- Inside your form tag -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Destination <span class="text-danger">*</span></label>
+                                {{ form.name }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Slogan </label>
+                                {{ form.slogan }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Description </label>
+                                {{ form.description }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Image </label>
+                                {{ form.image }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add other form fields as needed -->
+                    <div class="submit-section">
+                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content%}

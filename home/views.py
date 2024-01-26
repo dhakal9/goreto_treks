@@ -4,8 +4,9 @@ from django.views import View
 from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm
 from django.contrib.auth import login, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel
+from tour.models import DestinationModel
 from django.contrib import messages
-from core.utils import translate_text
+
 # Create your views here.
 
 class Index(View):
@@ -13,8 +14,9 @@ class Index(View):
     def get(self,request):
         company_profile = CompanyProfile.objects.first()
         reviews =  Review.objects.all()
+        destinations = DestinationModel.objects.all()
         funfact = FunfactModel.objects.first()
-        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact})
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations})
     
 class Explore(View):
     template_name = "explore.html"

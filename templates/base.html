@@ -171,12 +171,14 @@
 										<ul class="navigation clearfix">
 	
 													<li class="dropdown">
-														<a href="Chomolungma/Region7e12.html?destinationId=1"> Nepal </a>
+														<a href="Chomolungma/Region7e12.html?destinationId=1"> Destination </a>
 														<div class="megamenu">
 															<div class="row clearfix">
 																	<div class="col-xl-6 column">
 																		<ul>
-																			<li><h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">Annapurna Region Trek</a> </h5></li>
+																			
+																			<li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li>
+																			
 																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail3b7d.html?tourId=1039">10 Days Annapurna Base Camp Trekkk</a></li>
 																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail173a.html?tourId=1040">Annapurna Base Camp Budget Trek From Pokhara 7 Days</a></li>
 																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail58c9.html?tourId=1041">Annapurna Circuit Budget Trek 12 Days  </a></li>
@@ -232,7 +234,7 @@
 														</div>
 													</li>
 													<li class="dropdown">
-														<a href="Chomolungma/Region92b3.html?destinationId=2"> Bhutan </a>
+														<a href="Chomolungma/Region92b3.html?destinationId=2"> Activities </a>
 														<div class="megamenu">
 															<div class="row clearfix">
 																	<div class="col-xl-6 column">
