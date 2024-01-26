@@ -137,9 +137,12 @@
 								<li><a href="mailto:{{company.email}}">{{company.email}}</a></li>
 								<li><i class="fa fa-whatsapp"></i><a href="tel:{{company.contact}}"> {{company.contact}}</a></li>
 								<li>{{company.address}}</li>
-								<li>
-									<i href="#" class="fa fa-facebook"></i>
-								</li>
+							</ul>
+							<ul class="top-info pull-right social-links clearfix" style='margin-left:10px;'>
+								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
+								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
+								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp"></i></a></li>
+								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
 							</ul>
 							<div class="btn-box pull-right">
 								<a href="Chomolungma/AllTours.html" class="theme-btn">Book A Tour </a>
@@ -326,9 +329,81 @@
 			</div>
 			<!-- End Mobile Menu -->
 	
+
+					<!-- Add this chatbox and icon to your HTML wherever you want it to appear -->
+			<div id="whatsapp-chatbox" class="whatsapp-chatbox">
+				<button class="whatsapp-close" onclick="toggleChatbox()">Close</button>
+				<div id="whatsapp-messages" class="whatsapp-messages"></div>
+				<textarea id="whatsapp-reply" class="whatsapp-reply" placeholder="Type your message"></textarea>
+				<button id="whatsapp-send" class="whatsapp-send" onclick="sendMessage()">Send</button>
+			</div>
+			<div id="whatsapp-icon" class="whatsapp-icon" onclick="toggleChatbox()">
+				<!-- Replace 'path/to/your/whatsapp-icon.png' with the actual path to your WhatsApp icon -->
+				<img src="{% static 'assets/images/whatsapp.png' %}" alt="WhatsApp Icon" width="65" height="65">
+			</div>
+
+			<style>
+				/* Add this style to your CSS */
+				.whatsapp-icon {
+					position: fixed;
+					bottom: 40px;
+					right: 90px;
+					z-index: 1000;
+					cursor: pointer;
+				}
+			
+				.whatsapp-chatbox {
+					position: fixed;
+					bottom: 70px;
+					right: 20px;
+					z-index: 1000;
+					width: 300px;
+					background-color: #fff;
+					border: 1px solid #ccc;
+					border-radius: 5px;
+					padding: 10px;
+					display: none;
+				}
+			
+				.whatsapp-messages {
+					max-height: 150px;
+					overflow-y: auto;
+				}
+			
+				.whatsapp-reply {
+					width: 100%;
+					padding: 8px;
+					margin-top: 10px;
+					border: 1px solid #ccc;
+					border-radius: 5px;
+					resize: none;
+				}
+			
+				.whatsapp-send {
+					display: block;
+					margin-top: 10px;
+					padding: 8px 15px;
+					background-color: #25D366;
+					color: #fff;
+					border: none;
+					border-radius: 5px;
+					cursor: pointer;
+					outline: none;
+				}
+			
+				.whatsapp-close {
+					background-color: #ccc;
+					color: #fff;
+					border: none;
+					padding: 5px 10px;
+					border-radius: 3px;
+					cursor: pointer;
+					float: right;
+				}
+			</style>
 			
 	
-
+	
     {% block content %}
 
 
@@ -354,9 +429,9 @@
 							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure </p>
 						</div>
 						<ul class="social-links clearfix">
-							<li><a href="index.html"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="index.html"><i class="fab fa-instagram"></i></a></li>
-							<li><a href="index.html"><i class="fab fa-tripadvisor"></i></a></li>
+							<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
+							<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -492,6 +567,34 @@
 <!-- Brought from america -->
 <script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+<script>
+    function toggleChatbox() {
+        var chatbox = document.getElementById('whatsapp-chatbox');
+        chatbox.style.display = (chatbox.style.display === 'block') ? 'none' : 'block';
+        if (chatbox.style.display === 'block') {
+            appendMessage('Hello, how can I help you?');
+        }
+    }
+
+    function sendMessage() {
+        var replyText = document.getElementById('whatsapp-reply').value;
+        appendMessage(replyText);
+        document.getElementById('whatsapp-reply').value = '';  // Clear the reply textarea
+        // Redirect to WhatsApp with the replyText
+        window.open('https://api.whatsapp.com/send?phone=1234567890&text=' + encodeURIComponent(replyText), '_blank');
+    }
+
+    function appendMessage(message) {
+        var messagesDiv = document.getElementById('whatsapp-messages');
+        var messageDiv = document.createElement('div');
+        messageDiv.textContent = message;
+        messagesDiv.appendChild(messageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;  // Scroll to the bottom
+    }
+</script>
+
+
+	
 {% comment %} <script>
 var chatbox = document.getElementById('fb-customer-chat');
 chatbox.setAttribute("page_id", "139716102555319");

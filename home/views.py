@@ -5,6 +5,7 @@ from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm
 from django.contrib.auth import login, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel
 from django.contrib import messages
+from core.utils import translate_text
 # Create your views here.
 
 class Index(View):
