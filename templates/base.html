@@ -339,45 +339,22 @@
 			</div>
 			<div id="whatsapp-icon" class="whatsapp-icon" onclick="toggleChatbox()">
 				<!-- Replace 'path/to/your/whatsapp-icon.png' with the actual path to your WhatsApp icon -->
-				<img src="{% static 'assets/images/whatsapp.png' %}" alt="WhatsApp Icon">
+				<img src="{% static 'assets/images/whatsapp.png' %}" alt="WhatsApp Icon" width="65" height="65">
 			</div>
 
 			<style>
 				/* Add this style to your CSS */
 				.whatsapp-icon {
-					width: 62px;
-					height: 62px;
-					line-height: 64px;
 					position: fixed;
-					bottom: 7%;
-					right: 100px;
+					bottom: 40px;
+					right: 90px;
 					z-index: 1000;
 					cursor: pointer;
-				}
-
-				.goog-te-gadget-simple{
-					background-color: #ff7c5b;
-					line-height: 40px;
-					position: fixed;
-					bottom: 7%;
-					left: 20px;
-					z-index: 1000;
-					cursor: pointer;
-					color:white;
-					border:none;
-					border-radius:10px;
-				}
-
-				.goog-te-gadget-simple span{
-					color: white;
 				}
 			
-				.goog-te-gadget-simple .goog-te-gadget-icon{
-					display:none;
-				}
 				.whatsapp-chatbox {
 					position: fixed;
-					bottom: 120px;
+					bottom: 70px;
 					right: 20px;
 					z-index: 1000;
 					width: 300px;
@@ -434,7 +411,7 @@
 
     {% endblock content %}
 
-
+   
 	<script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
  <!-- main-footer -->
  <footer class="main-footer bg-color-2">
@@ -535,7 +512,6 @@
 	<span class="fal fa-angle-up"></span>
 </button>
 </div>
-
 
 
 <!-- jquery plugins -->
@@ -645,23 +621,6 @@ window.fbAsyncInit = function () {
 <!-- End of .page_wrapper -->
 
 <!-- Mirrored from travel.zeniusnepal.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jan 2024 17:21:48 GMT -->
-
-<!-- Code provided by Google -->
-<div id="google_translate_element"></div>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-	includedLanguages: 'es,ru,ja,zh-CN,ko,de,pt',
-	autoDisplay: true,
-	gaTrack: true,
-	hl: 'en',
-	forceTranslation: 'en',
-	 autoDisplay: true}, 'google_translate_element');
-  }
-</script>
-	
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-
 </html>
 
 
