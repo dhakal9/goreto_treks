@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Page Title -->
+
+
+
+<section class="place-section style-two sec-pad bg-color-1">
+    
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Choose Your place</p>
+            <h2>Our Destinations</h2>
+        </div>
+        <div class="row clearfix">
+            {% for destination in destinations %}
+                <div class="col-lg-4 col-md-6 col-sm-12 title-column">
+                    <div class="place-block-one">
+                        <div class="inner-box">
+                            <figure class="image-box"><img src="{{ destination.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
+                            <div class="text">
+                                <h3><a href="Chomolungma/Region7e12.html?destinationId=1">{{ destination.name }}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

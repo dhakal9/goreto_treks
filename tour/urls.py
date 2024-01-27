@@ -1,8 +1,9 @@
 
 from django.urls import path
-from .views import Destination
+from .views import AdminDestination, Region, Destination
 urlpatterns = [
-     path('admindestination/', Destination.as_view(), name="admin_destination"),
-     
+    path('admindestination/', AdminDestination.as_view(), name="admin_destination"),
+    path('destination/', Destination.as_view(), name="destination"),
+    path('adminregion/', Region.as_view(), name="admin_region"),
  ]
  

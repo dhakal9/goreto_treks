@@ -88,36 +88,19 @@
             <h2>Popular Destinations</h2>
         </div>
         <div class="row clearfix">
+            {% for destination in destinations %}
                 <div class="col-lg-4 col-md-6 col-sm-12 title-column">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="Image/Upload/_959343bb-07be-4fbd-b28c-9f95423c2c70.jpg" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
+                            <figure class="image-box"><img src="{{ destination.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
                             <div class="text">
-                                <h3><a href="Chomolungma/Region7e12.html?destinationId=1">Nepal</a></h3>
+                                <h3><a href="Chomolungma/Region7e12.html?destinationId=1">{{ destination.name }}</a></h3>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 title-column">
-                    <div class="place-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="Image/Upload/_86dbca12-4a1b-4f63-820e-b0f1d68706f9.jpg" alt="Bhutan The Happiness Kingdom Now! " loading="eager"></figure>
-                            <div class="text">
-                                <h3><a href="Chomolungma/Region92b3.html?destinationId=2">Bhutan</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 title-column">
-                    <div class="place-block-one">
-                        <div class="inner-box">
-                            <figure class="image-box"><img src="Image/Upload/_4e3c771b-ce95-48fa-ab00-71677e3a1aef.jpg" alt="Tibet From Monasteries to Majestic Peaks!" loading="eager"></figure>
-                            <div class="text">
-                                <h3><a href="Chomolungma/Region01e9.html?destinationId=3">Tibet</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}
+                
         </div>
     </div>
 </section>
