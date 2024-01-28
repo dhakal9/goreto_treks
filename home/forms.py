@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 
 class UserLoginForm(forms.Form):
@@ -64,4 +64,15 @@ class FunfactForm(forms.ModelForm):
     
     class Meta:
         model = FunfactModel
+        fields = '__all__'
+
+class OurTeamForm(forms.ModelForm):
+    name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+    facebook_link = forms.URLInput(attrs={'class':'form-control'})
+    instagram_link = forms.URLInput(attrs={'class':'form-control'})
+    
+    class Meta:
+        model = OurTeamModel
         fields = '__all__'

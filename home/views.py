@@ -1,9 +1,9 @@
 
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm
 from django.contrib.auth import login, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel
 from tour.models import DestinationModel
 from django.contrib import messages
 
@@ -116,3 +116,27 @@ class Review_function(View):
 
         return render(request, self.template_name, {'form': form})
 
+class ContactUs(View):
+    template_name = 'contactus.html'
+    def get(self, request):
+        return render(request, self.template_name)
+
+class OurTeamAdmin(View):
+    template_name = 'admin_team.html'
+    def get(self, request):
+        form = OurTeamForm()
+        return render( request, self.template_name, {'form':form})
+    
+    def post(self, request):
+        form = OurTeamForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_team')  # Redirect to a success page or another view
+
+        return render(request, self.template_name, {'form': form})
+
+class OurTeam(View):
+    template_name='our_team.html'
+    def get(self, request):
+        teams = OurTeamModel.objects.all()
+        return render(request, self.template_name, {'teams':teams})

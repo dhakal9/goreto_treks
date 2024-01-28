@@ -90,7 +90,7 @@ class ExcludeInclude(models.Model):
     name = models.CharField(max_length = 200) 
     is_active = models.BooleanField(default=True)
     
-class OurTeam(models.Model):
+class OurTeamModel(models.Model):
     team_id =  models.AutoField(primary_key=True)
     name = models.CharField(max_length = 200) 
     position = models.CharField(max_length = 200)
@@ -112,3 +112,6 @@ class FunfactModel(models.Model):
    places = models.CharField(max_length = 200)
    miles = models.CharField(max_length = 200)
    years = models.CharField(max_length = 200)
+
+
+    

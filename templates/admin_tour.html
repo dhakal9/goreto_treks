@@ -1,0 +1,207 @@
+
+{% extends "admin_base.html" %}
+{% block content %}
+<div class="content container-fluid">
+
+                <h4 class="card-title">Tour</h4>
+                <ul class="nav nav-tabs nav-tabs-top">
+                    <li class="nav-item"><a class="nav-link active" href="#top-tab1" data-toggle="tab">Tour Details</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#top-tab2" data-toggle="tab">Itinary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#top-tab3" data-toggle="tab">Include/Exclude</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#top-tab4" data-toggle="tab">Gallary</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#top-tab5" data-toggle="tab">FAQ</a></li>
+                </ul>
+                <div class="tab-content">
+
+                    <div class="tab-pane show active" id="top-tab1">
+                        {% comment %} Tour Details form {% endcomment %}
+                        <form method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Destination <span class="text-danger">*</span></label>
+                                        {{ form.destination }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Region <span class="text-danger">*</span></label>
+                                        {{ form.region }}
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Name <span class="text-danger">*</span></label>
+                                        {{ form.name }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Description </label><br>
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Departure </label>
+                                        {{ form.depature }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Time </label>
+                                        {{ form.time }}
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Start/End </label>
+                                        {{ form.start_end }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Max Price </label>
+                                        {{ form.max_price }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Actual Price</label>
+                                        {{ form.price }}
+                                    </div>
+                                </div>
+                                 <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Transportation </label>
+                                        {{ form.transport }}
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Days</label>
+                                        {{ form.days }}
+                                    </div>
+                                </div>
+                                 <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Age</label>
+                                        {{ form.age }}
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Best Season</label>
+                                        {{ form.season }}
+                                    </div>
+                                </div>
+                                 <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Altitude</label>
+                                        {{ form.altitude }}
+                                    </div>
+                                </div> 
+                            </div>
+                    
+                            <!-- Add the remaining fields as needed -->
+                    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Map </label>
+                                        {{ form.map }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Map Overview </label><br>
+                                        {{ form.map_overview }}
+                                    </div>
+                                </div>
+                            </div>
+                    
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Image </label>
+                                        {{ form.image }}
+                                    </div>
+                                </div>
+            
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Active </label>
+                                        {{ form.is_active }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="submit-section">
+                                <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                
+
+                    <div class="tab-pane" id="top-tab2">
+                        <form method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Plan Name <span class="text-danger">*</span></label>
+                                        {{ form1.name }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label> Day Sequence <span class="text-danger">*</span></label>
+                                        {{ form1.day }}
+                                    </div>
+                                </div>
+                            </div>    
+                            <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Start And End  <span class="text-danger">*</span></label>
+                                            {{ form1.start_end }}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Description <span class="text-danger">*</span></label><br>
+                                            {{ form1.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="submit-section">
+                                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                                    </div>
+                        
+                        </form>
+                    </div>
+                    {% comment %} Itinary tab {% endcomment %}
+                    <div class="tab-pane" id="top-tab3">
+                        Tab content 3
+                    </div>
+                </div>
+
+</div>
+
+{% endblock content%}

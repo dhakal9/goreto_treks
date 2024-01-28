@@ -106,19 +106,16 @@
             </li>
             <li class="submenu">
                 {% comment %} <li class="submenu {% if active_link == 'addEmployee' or active_link == 'addhost' %} active{% endif %}"> {% endcomment %}
-              <a href="#"><i class="la la-user"></i> <span> Users </span> <span class="menu-arrow"></span></a>
-              <ul style="display: none;">
-                <li><a href="#"> Add Company User</a></li>
-                <li><a href="#"> Host User</a></li>
-              </ul>
+              <a href="{% url 'admin_team'%}"><i class="la la-user"></i> <span> Our Team </span></a>
             </li>
             <!-- <li> 
               <a href="clients.html"><i class="la la-users"></i> <span>Clients</span></a>
             </li> --> <li>
-              <a href="#"><i class="la la-cube"></i> <span> Company </span> <span class="menu-arrow"></span></a>
+              <a href="#"><i class="la la-cube"></i> <span> Tour </span> <span class="menu-arrow"></span></a>
               <ul style="display: none;">
-                <li><a href="#"> Add Company</a></li>
-                <li><a href="#"> My Companies</a></li>
+                <li><a href="{% url 'admin_destination' %}"> Destination </a></li>
+                <li><a href="{% url 'admin_region' %}"> Region </a></li>
+                <li><a href="{% url 'admin_tour' %}"> Tour </a></li>
               </ul>
             </li>
             <li class="submenu">

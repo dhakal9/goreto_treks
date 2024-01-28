@@ -1,0 +1,106 @@
+{%extends 'base.html'%}
+{%block content%}
+<!-- contact-info-section -->
+<section class="contact-info-section bg-color-1" style="padding-top: 30px; padding-bottom: 30px;">
+    <div class="anim-icon">
+        <div class="icon anim-icon-1" ></div>
+        <div class="icon anim-icon-2" ></div>
+    </div>
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-6 col-sm-12 info-column">
+                <div class="single-info-box wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="icon-box"><i class="icon-Location"></i></div>
+                        <h3>Address</h3>
+                        <p>Balaju-16, Kathmandu</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 info-column">
+                <div class="single-info-box wow fadeInUp animated animated" data-wow-delay="300ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="icon-box"><i class="icon-Phone"></i></div>
+                        <h3>Phone</h3>
+                        <p><a href="tel:9779851316017">9779851316017</a><br /></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 info-column">
+                <div class="single-info-box wow fadeInUp animated animated" data-wow-delay="600ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        <div class="icon-box"><i class="icon-Envelope"></i></div>
+                        <h3>Email</h3>
+                        <p><a href="mailto:goretortreks@gmail.com">goretortreks@gmail.com</a><br /></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <br />
+            <div class="row clearfix">
+                <div class="map-inner col-lg-12 col-12 col-sm-12 col-md-6">
+                    <div class="google-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28253.556337651244!2d85.29482298645573!3d27.7267159749417!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19de17a79383%3A0x52118c7e3510d982!2sGoreto%20Treks%20and%20Expedition!5e0!3m2!1sen!2snp!4v1703222719904!5m2!1sen!2snp" width="1175" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- contact-info-section end -->
+<!-- contact-section -->
+<section class="contact-section" style="padding-top:50px;">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-5 col-md-12 col-sm-12 content-column">
+                <div class="content_block_5">
+                    <div class="content-box">
+                        <div class="sec-title">
+                            <p>Get in touch</p>
+                            <h2>Feel Free to Contact with us</h2>
+                        </div>
+                        <div class="text">
+                            <p>At Goreto Treks, we're here to turn your travel dreams into reality. Whether you have questions about our unforgettable journeys, need assistance with booking, or simply want to share your wanderlust, we're just a message away. Feel free to reach out, and our dedicated team will be delighted to assist you on your journey of a lifetime.</p>
+                        </div>
+                        <ul class="social-links clearfix">
+                            <li><a title target="_blank" href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a title class="" style="background-color:green!important" target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor" style="color:black!important"></i></a></li>
+                            <li><a title style="background-color:#FE0E4A!important" target="_blank" href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram" style="color:white!important"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 form-column">
+                <div class="form-inner">
+                    <form method="post"  id="contact-form" class="default-form">
+                        <div class="row clearfix">
+                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <input type="text" name="username" placeholder="Your Name" required="" id="username">
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                <input type="email" name="email" placeholder="Email Address" required="" id="email">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                <input type="text" name="phone" required="" placeholder="Phone Number" id="phone">
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                <input type="text" name="subject" required="" placeholder="Subject" id="subject">
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                <textarea name="message" placeholder="Write Message" id="message"></textarea>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
+                                <button class="theme-btn" type="submit" name="submit-form">Submit Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock content%}

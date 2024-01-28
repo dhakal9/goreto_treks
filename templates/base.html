@@ -156,7 +156,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								<div class="bg-layer"></div>
-								<figure class="logo"><a href="index.html"><img src="{{company.logo_image.url}}" alt=""></a></figure>
+								<figure class="logo"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
 							<div class="menu-area clearfix">
@@ -171,7 +171,7 @@
 										<ul class="navigation clearfix">
 	
 													<li class="dropdown">
-														<"> Destination </a>
+														<a href="{% url 'destination'%}"> Destinations </a>
 														<div class="megamenu">
 															<div class="row clearfix">
 																	<div class="col-xl-6 column">
@@ -179,57 +179,10 @@
 																			
 																			<li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li>
 																			
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail3b7d.html?tourId=1039">10 Days Annapurna Base Camp Trekkk</a></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail173a.html?tourId=1040">Annapurna Base Camp Budget Trek From Pokhara 7 Days</a></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail58c9.html?tourId=1041">Annapurna Circuit Budget Trek 12 Days  </a></li>
+									
 																		</ul>
 																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList1467.html?regionId=2" style="color:#ff7c5b">Everest Region Trek</a> </h5></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail4a3e.html?tourId=1033">Short Everest Base Camp Trek</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b">Langtang Region Trek</a> </h5></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail8a86.html?tourId=1045">Langtang Helambu Gosainkunda Trekking</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourListd9aa.html?regionId=4" style="color:#ff7c5b">Manaslu Region Trek</a> </h5></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetailbebb.html?tourId=1051">21 Days Manaslu Circuit and Tsum Valley Trek</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList2cd2.html?regionId=5" style="color:#ff7c5b">Wilderness Trek</a> </h5></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail96b7.html?tourId=1058">Limi Valley Trek</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList7245.html?regionId=6" style="color:#ff7c5b">Expedition</a> </h5></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail1871.html?tourId=1061">Gangchempo Expedition</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourListdbc5.html?regionId=7" style="color:#ff7c5b">Jungle Safari</a> </h5></li>
-																				<li><a style="cursor:pointer" href="Chomolungma/TourDetail8056.html?tourId=1060">Chitwan Adventure Tour 3 Nights 4 Days</a></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourListe39c.html?regionId=15" style="color:#ff7c5b">West Nepal</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList35b8.html?regionId=16" style="color:#ff7c5b">Day tour</a> </h5></li>
-																		</ul>
-																	</div>
+																	
 															</div>
 														</div>
 													</li>
@@ -239,32 +192,91 @@
 															<div class="row clearfix">
 																	<div class="col-xl-6 column">
 																		<ul>
-																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Bhutan Tour</a> </h5></li>
+																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Trekking</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Day Hike</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Heritage Tour</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Luxury</a> </h5></li>
 																		</ul>
 																	</div>
 															</div>
 														</div>
 													</li>
 													<li class="dropdown">
-														<a href="Chomolungma/Region01e9.html?destinationId=3"> Tibet </a>
+														<a href="Chomolungma/Region01e9.html?destinationId=3"> Attractions </a>
 														<div class="megamenu">
 															<div class="row clearfix">
 																	<div class="col-xl-6 column">
 																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Tibet Tour</a> </h5></li>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Bunjee</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Rafting/Kayaking</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Jungle Safari</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Helitour</a> </h5></li>
 																		</ul>
 																	</div>
 															</div>
 														</div>
 													</li>
 	
+													<li class="dropdown">
+														<a href="Chomolungma/Region01e9.html?destinationId=3"> About Us </a>
+														<div class="megamenu">
+															<div class="row clearfix">
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="{%url 'contact_us' %}" style="color:#ff7c5b">Contact Us</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="{% url 'our_team'%}" style="color:#ff7c5b">Our Team</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Why Gotero</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Our Motto</a> </h5></li>
+																		</ul>
+																	</div>
+																	<div class="col-xl-6 column">
+																		<ul>
+																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">FAQ</a> </h5></li>
+																		</ul>
+																	</div>
+															</div>
+														</div>
+													</li>
 											<li class="dropdown">
-												<a href="#">Blog</a>
+												<a href="Chomolungma/About.html">Blogs</a>
 											</li>
-											<li class="dropdown">
-												<a href="Chomolungma/About.html">About Us</a>
-											</li>
-											<li><a href="Chomolungma/Contact.html">Contact</a></li>
+											<li><a href="Chomolungma/Contact.html">CSR</a></li>
 										</ul>
 									</div>
 								</nav>
