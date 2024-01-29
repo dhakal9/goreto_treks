@@ -3,30 +3,38 @@
 
 <!-- Page Title -->
 
+<!-- Page Title -->
 
-<section class="place-section style-two sec-pad bg-color-1">
-    
+<section class="page-title centred" style="background-image: url({{country.image.url}}); ">
     <div class="auto-container">
-        <div class="sec-title centred">
-            <p>Choose Your place</p>
-            <h2>Our Destinations</h2>
+        <div class="content-box">
+            <h1>{{country.name}}</h1>
+            <p>Where Culture Meets Mountains!</p>
         </div>
+    </div>
+</section>
+<!-- End Page Title -->
+
+<!-- Gallary Sections -->
+
+<section class="gallery-section">
+    <div class="auto-container">
         <div class="row clearfix">
-            {% for desti in solo_desti %}
-                <div class="col-lg-4 col-md-6 col-sm-12 title-column">
+                {%for region in regions %}
+                {% if region.destination_id == country.destination_id%}
+                <div class="col-lg-4 col-md-6 col-sm-12 place-block">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{ desti.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
+                            <figure class="image-box"><img src="{{region.image.url}}" alt=""></figure>
                             <div class="text">
-                                <h3><a href="{% url 'one_destination' pk=destination.pk %}">{{ desti.name }}</a></h3>
+                                <h3><a href="{% url 'tour_list' region.region_id%}">{{region.name}}</a></h3>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-                
+                {%endif%}
+                {% endfor %}            
         </div>
     </div>
-</section>
-
+</section>    
 {% endblock content %}

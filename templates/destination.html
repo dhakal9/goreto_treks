@@ -8,7 +8,7 @@
     
     <div class="auto-container">
         <div class="sec-title centred">
-            <p>Choose Your place</p>
+            <p>Choose Your places</p>
             <h2>Our Destinations</h2>
         </div>
         <div class="row clearfix">
@@ -18,7 +18,7 @@
                         <div class="inner-box">
                             <figure class="image-box"><img src="{{ destination.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
                             <div class="text">
-                                <h3><a href="#">{{ destination.name }}</a></h3>
+                                <h3><a href="{% url 'one_destination' destination.destination_id %}">{{ destination.name }}</a></h3>
                             </div>
                         </div>
                     </div>

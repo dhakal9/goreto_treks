@@ -37,7 +37,8 @@ class OneDestination(View):
 
     def get(self, request, pk):
         countries = DestinationModel.objects.get(pk=pk)
-        return render(request, self.template_name, {'contries': countries})
+        regions = RegionModel.objects.all()
+        return render(request, self.template_name, {'country': countries, 'regions':regions})
 
         
 class Region(View):
@@ -58,6 +59,13 @@ class Region(View):
 
         return render(request, self.template_name, {'form': form, 'regions':regions})
     
+class Tourlist(View):
+    template_name = 'tourlist.html'
+    def get(self, request, pk):
+        region = RegionModel.objects.get(pk=pk)
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'region':region, 'tours':tours})
+        
 class AdminTour(View):
     template_name = 'admin_tour.html'
 
