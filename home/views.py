@@ -106,15 +106,17 @@ class Review_function(View):
 
     def get(self, request):
         form = ReviewForm()
-        return render(request, self.template_name, {'form': form})
+        reviews = Review.objects.all()
+        return render(request, self.template_name, {'form': form, 'reviews':reviews})
 
     def post(self, request):
+        reviews = Review.objects.all()
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('admin_review')  # Redirect to a success page or another view
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'reviews':reviews})
 
 class ContactUs(View):
     template_name = 'contactus.html'
@@ -125,15 +127,17 @@ class OurTeamAdmin(View):
     template_name = 'admin_team.html'
     def get(self, request):
         form = OurTeamForm()
-        return render( request, self.template_name, {'form':form})
+        teams = OurTeamModel.objects.all()
+        return render( request, self.template_name, {'form':form, 'teams':teams})
     
     def post(self, request):
+        teams = OurTeamModel.objects.all()
         form = OurTeamForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('admin_team')  # Redirect to a success page or another view
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'teams':teams})
 
 class OurTeam(View):
     template_name='our_team.html'

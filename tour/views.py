@@ -8,16 +8,18 @@ class AdminDestination(View):
     form_class = DestinationForm
 
     def get(self, request):
+        destinations = DestinationModel.objects.all()
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'destinations': destinations})
 
     def post(self, request):
+        destinations = DestinationModel.objects.all()
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('admin_destination')  # Replace 'your_redirect_url' with the actual URL to redirect after form submission
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'destinations': destinations})
 
 class Destination(View):
     template_name = "destination.html"
@@ -37,16 +39,18 @@ class Region(View):
     form_class = RegionForm
 
     def get(self, request):
+        regions = RegionModel.objects.all()
         form = self.form_class()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'regions':regions})
 
     def post(self, request):
+        regions = RegionModel.objects.all()
         form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             region_instance = form.save()
             return redirect('admin_region')
 
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'regions':regions})
     
 class AdminTour(View):
     template_name = 'admin_tour.html'
