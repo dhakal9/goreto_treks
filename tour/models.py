@@ -2,8 +2,9 @@ from django.db import models
 
 # Create your models here.
 class DestinationModel(models.Model):
-    destinati_id =  models.AutoField(primary_key=True)
-    name = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    destination_id =  models.AutoField(primary_key=True)
+    # name = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
+    name = models.CharField(max_length=500, null=False, blank=False)
     slogan = models.CharField(max_length=500, null=False, blank=False)
     description = models.TextField(max_length=10000, null=False, blank=False)
     is_active = models.BooleanField(default=True)

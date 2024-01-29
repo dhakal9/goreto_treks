@@ -1,7 +1,13 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel
 from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinatyForm
+
+def get_regions(request):
+    destination_id = request.GET.get('destination_id')
+    regions = RegionModel.objects.filter(destination_id=destination_id).values('region_id', 'name')
+    return JsonResponse({'regions': list(regions)})
 
 class AdminDestination(View):
     template_name = "admin_destination.html"
