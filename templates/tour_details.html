@@ -1,0 +1,671 @@
+{% extends 'base.html'%}
+{% block content%}
+<main>
+            
+
+
+
+    <script src="../../code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <style>
+        .tour-details-content .inner-box .text .info-list li {
+            position: relative;
+            display: inline-block;
+            float: left;
+            width: 30%;
+            font-size: 14px;
+            font-weight: 515;
+            text-align: left;
+        }
+    
+            .tour-details-content .inner-box .text .info-list li i {
+                padding-left: 3px !important;
+            }
+    
+        .tour-details-content .overview-inner .overview-list > li:before {
+            position: absolute;
+            content: '';
+            background: #e4e8e9;
+            /*width: 1px;*/
+            width: 0px;
+            height: 100%;
+            left: 285px;
+            top: 0px;
+        }
+    </style>
+    <!-- Page Title -->
+    <section class="page-title style-three" style="background-image: url({{tour_details.image.url}}); ">
+        <div class="auto-container">
+            <div class="inner-box">
+                <div class="rating"><span><i class="fas fa-star"></i>8.0  based on 133 reviews</span></div>
+                <h2>{{tour_details.name}}</h2>
+                <h3>{{tour_details.price}}$<span> / Per person</span></h3>
+            </div>
+        </div>
+    </section>
+    <!-- End Page Title -->
+    <!-- tour-details -->
+    <section class="tour-details">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                    <div class="tour-details-content">
+                        <div class="inner-box">
+                            <div class="text">
+                                <h2>Overview</h2>
+                                <p>Short Everest Base Camp Trek 10 Days are like your dream trekking route that you must engage with. A trekking fan can walk a distance from Lukla to the best appropriate time of the year is JAN to May and mid-August to December. This relentless walk is the best exponent of how one can explore snowfall, narrow trail and during the trip; the traveler can enjoy their time with irresistible snow-clad mountains which creates excitement for trekkers. In the first schedule of the trek, trekkers will love to walk from Lukla to Namche and may end up with Everest base camp. Because of higher altitude and inclement weather, those are having fitness issue are advised to not to trek long route.</p>  <p>Short Everest Base Camp Trek A daily walk of 4 hours is required in order to see and explore Sherpa hospitality and warm reception in the remotest villages that you will suppose to stay. For trekking, you need to get engaged a seasoned trekking company who will make arrangement and schedule your trip with ease. Though there are many ways you can commence your trip it is a recommendation to follow the trekking company suggestion.</p>
+                                <ul class="info-list clearfix">
+                                    <li><i class="far fa-clock"></i>{{tour_details.days}} Days</li>
+                                    <li><i class="far fa-user"></i>Age {{tour_details.age}}+</li>
+                                    <li><i class="far fa-map"></i>Trip Grade, Moderate<i class="fa fa-question-circle text-secondary" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate"></i></li>
+                                    <li><i class="far fa-mountain"></i>Max. Altitude {{tour_details.altitude}} m</li>
+                                    <li><i class="far fa-bus-school"></i>Transport {{tour_details.transport}}</li>
+                                    <li><i class="far fa-cloud-sun-rain"></i>Best Season,{{tour_details.season}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="overview-inner">
+                            <ul class="overview-list clearfix">
+                                <li><span>Destination:</span>{{tour_details.destination.name}}</li>
+                                <li><span>Start/End:</span>{{tour_details.start_end}}</li>
+                                <li><span>Departure Location:</span>{{tour_details.depature}}</li>
+                                <li><span>Departure Time:</span>{{tour_details.time}}</li>
+    
+                                <li class="clearfix">
+                                    <span>Included:</span>
+                                    <ul class="included-list clearfix">
+                                            <li>Hotel to Airport Pick up and Airport to Hotel Drop</li>
+                                            <li>Domestic airport departure tax.</li>
+                                            <li>First aid medical kit.</li>
+                                    </ul>
+                                </li>
+                                <li class="clearfix">
+                                    <span>Excluded:</span>
+                                    <ul class="excluded-list clearfix">
+                                            <li>Hot shower, WIFI, any electronic battery charges during only in trekking</li>
+                                            <li>Optional - Breakfast about USD $40 per person</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tour-plan">
+                            <div class="text">
+                                <h2>Tour Plan</h2>
+                                
+                            </div>
+                            <div class="content-box">
+                                    <div class="single-box">
+                                        <span>01</span>
+                                        <h4>Pokhara  830 m / 2,723 ft – 7hrs</h4>
+                                        <h3>Day 1 Kathmandu to Pokhara (Drive)</h3>
+                                        <p>We will collect you from your hotel and take you to the bus departure stop.  If you are traveling by air or private jeep, we will organize this for you.   Overnight in Pokhara at a hotel is included in the cost. Dinner, however, is not included in the package price. </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>02</span>
+                                        <h4>Naya Pool 1940 m / 6364 ft – 6hrs</h4>
+                                        <h3>Day 2: Pokhara to Naya Pool (Drive)</h3>
+                                        <p>Today we leave after breakfast to drive from Pokhara to Naya Pool, which takes around an hour. From Naya Pool, we start trekking, passing through lovely villages such as Birethanti.  These villages are inhabited by Gurungs, Magars, and Tamangs, who are local to this area.  We pass the hot springs at Jhinu Danda on the way.  Whether you wish to enjoy the hot springs is up to you! It takes around 5 hours of hiking to reach our first overnight stop at Ghandruk.  There is time to explore the Gurung Museum at Ghandruk to get a glimpse into the everyday lives of the Gurung people.  Their working tools, household items, and details of their past and present lives are on display.  Dinner is taken in the teahouse, giving you a chance to get to know your trekking companions and guide. </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>03</span>
+                                        <h4>Chomrong  2,170 m / 7,119 ft – 6hrs</h4>
+                                        <h3>Day 3: Ghandruk to Chomrong</h3>
+                                        <p>Leaving the teahouse, stunning scenery greets us as we head up the trail from Ghandruk, following the Modi River.  After ascending, you come to another river, the Kimrong, which is crossed by a suspension bridge before the trail turns steep for a couple of hours of uphill hiking.   Chomrong itself is a small settlement which we are told is an old off-shoot of Ghandruk and is also inhabited by Gurung people.  There is a Buddhist stupa at the bottom of the village.</p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>04</span>
+                                        <h4>Bamboo  2,310 m / 7,578 ft – 5hrs</h4>
+                                        <h3>Day 4: Chomrong to Bamboo  </h3>
+                                        <p>The scenery around Bamboo has wonderful views of all the best mountains on offer in the Annapurnas, including Annapurna South, Annapurna I, II, and III, and Machhapucchre.  There is also the possibility of seeing some wildlife, such as deer and Himalayan goats.   </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>05</span>
+                                        <h4>Deurali  3,230 m / 10,597 ft – 5hrs</h4>
+                                        <h3>Day 5: Bamboo to Deurali </h3>
+                                        <p>Setting off after breakfast, we pass through bamboo forests.  This creates a cool atmosphere, which is great on hot summer days, perhaps a little chilly in the early morning.  The trail ascends green hills and opens up.  Below us lies a glacial river. The trail becomes a little more rugged, and there is a steep climb to Hinku cave and more bamboo forest. Vegetation has fallen away as we approach Deurali, but there are waterfalls and a suspension bridge to cross, which makes the trail interesting. </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>06</span>
+                                        <h4>Annapurna Base  4,130 m / 13,549 ft – 6hrs</h4>
+                                        <h3>Day 6: Deurali to Annapurna Base Camp</h3>
+                                        <p>Have a good breakfast today, as the journey starts with an uphill climb over rocky terrain. Since today we reach the highest altitude on the trek, we should pay attention to our bodies and not walk too fast.  Instead, take a steady pace and enjoy the wonderful surrounding mountains.  We first reach Machhapucchre Base Camp and enjoy some time there, taking photographs of the snow-capped mountains before walking on for approximately another two hours to reach Annapurna Base Camp. From Annapurna Base Camp, some of the mountains we can enjoy include Annapurna South, Annapurna I and  III, Hiunchuli, and of course, Machhapuchhre, which has been with us all along the trek.  Overnight at Annapurna Base Camp and celebrate your achievement with a great dinner. </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>07</span>
+                                        <h4>Bamboo 2,310 m / 7,578 ft – 8hrs</h4>
+                                        <h3>Day 7: Annapurna Base Camp to Bamboo</h3>
+                                        <p>While there are beautiful sunrises every day on this trek, you might want to wake up extra early today to catch the sun rising over the Annapurna range.  This is something really special and well worth getting up early for!  Then it’s time for breakfast and back on the trail to hike back to Bamboo.  Following the Modi Khola and rhododendron forests, it takes around 7 hours to reach Bamboo.  A long but not too hard trail.  </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>08</span>
+                                        <h4>Jhinu Danda 1,760 m / 5,774 ft – 6hrs</h4>
+                                        <h3>Day 8: Bamboo to Jhinu Danda</h3>
+                                        <p>Retracing our route through the rhododendron and bamboo forests, there is a steep descent from Chhomrung to Jhinu.  Since it takes around 5 hours and since we have learned from experience the hot springs at Jhinu Danda seem much more appealing than they were at the start of this trek, we suggest leaving Bamboo early.  By leaving early, having lunch at Jhinu Danda and spending the afternoon in the hot springs is possible.  Time to relax and enjoy the natural hot water! </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>09</span>
+                                        <h4>Naya Pool 830 m / 2,723 ft – 7hrs</h4>
+                                        <h3>Day 9: Jhinu Danda to Naya Pool</h3>
+                                        <p>This is the final day of the trek, so take in as much of the mountains as you can as you hike for around 5 hours to reach Naya Pool, where transport is waiting to take us back to Pokhara.  Since it is a long day, we will take lunch on route or in Naya Pool.  After checking into your comfortable Pokhara hotel, there is time for some shopping before relaxing at the lakeside with a long cool drink before dinner.  Dinner is not included in the package, but we are sure your guide would be delighted to recommend an excellent restaurant and join you, on your invitation, on your final night. </p>
+                                    </div>
+                                    <div class="single-box">
+                                        <span>10</span>
+                                        <h4>Kathmandu 1,300 m / 4,265 ft – 8hrs</h4>
+                                        <h3>Day 10: Pokhara to Kathmandu</h3>
+                                        <p>Today drive (or fly) back to Kathmandu.  Wave goodbye to the massive, majestic, and magical Machhapucchre mountain as you leave this special area of Nepal.  </p>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="location-map">
+                            <div class="text">
+                                <h2>View On Map</h2>
+                                <p>The Annapurna Base Camp Trek is situated in the Annapurna Sanctuary within the Annapurna Conservation Area of Nepal. Starting from Nayapul, this 10 day trek traverses picturesque villages like Ghorepani and Chhomrong, leading through lush forests, terraced fields, and bamboo groves. Trekkers are rewarded with a stunning sunrise at Poon Hill, panoramic vistas of the Annapurna and Dhaulagiri mountain ranges, and a close-up view of the Annapurna massif at an altitude of 4,130 meters at the base camp. The journey also offers relaxation in natural hot springs at Jhinu Danda. Proper permits are required, which can be arranged in Kathmandu or Pokhara for entry into the Annapurna Conservation Area.</p>
+                            </div>
+                            <div class="map-inner">
+                                <div class="google-map">
+                                    <iframe src="https://www.google.com/maps/d/embed?mid=10xxqTVKlfTcli_NEBF3L4bUiiQM&amp;hl=en_US&amp;ehbc=2E312F" width="100%" height="600"></iframe>
+                                    
+                                </div>
+                            </div>
+                        </div>
+    
+                            <div class="photo-gallery">
+                                <div class="text">
+                                    <h2>Photo Gallery</h2>
+                                </div>
+                                <div class="image-box clearfix">
+                                        <figure class="image" style="width:40%!important">
+                                            <img src="../Image/Upload/_1f9c62d6-2276-4b6d-9da9-7a42d024c635.jpg" alt="ABC" loading="eager">
+                                            <a href="../Image/Upload/_1f9c62d6-2276-4b6d-9da9-7a42d024c635.jpg" class="view-btn lightbox-image" data-fancybox="gallery"><i class="icon-Plus"></i></a>
+                                        </figure>
+                                        <figure class="image" style="width:40%!important">
+                                            <img src="../Image/Upload/_4617589f-2827-4ad2-b885-517f87d04e3d.jpg" alt="jhinu" loading="eager">
+                                            <a href="../Image/Upload/_4617589f-2827-4ad2-b885-517f87d04e3d.jpg" class="view-btn lightbox-image" data-fancybox="gallery"><i class="icon-Plus"></i></a>
+                                        </figure>
+                                </div>
+                            </div>
+                                                <div class="faq-content ">
+                                <div class="sec-title">
+                                    <h2>Frequently Asked <br>Question</h2>
+                                </div>
+                                <ul class="accordion-box">
+    
+                                                <li class="accordion block active-block">
+                                                    <div class="acc-btn active">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>What is the best time for 10 Days Annapurna Base Camp Trek?</h4>
+                                                    </div>
+                                                    <div class="acc-content current">
+                                                        <div class="text">
+                                                            <p>Trekking to the Annapurna Base Camp is best done in the spring (March, April, and May), fall (September, October, and November), till mid-December. More specifically, October is considered as the ideal month to hike to the Annapurna Base Camp. The sky is clear, the weather is mostly constant, and the sights are spectacular. Additionally, the pleasant weather during these months adds to the full enjoyment of the journey.
+    
+    The trek is also achievable during winter as it offers dry air and clear views, but with the chances of snowfall and sub-zero temperatures. It makes for a quiet hike if you can withstand the cold. However, monsoon isn&#39;t recommended due to slippery paths and landslides.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>What are the essential trekking gears, and where do I get them?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>What to bring for the 10 days ABC Trek is one of the most important things to consider. Without the proper tools, getting about might be challenging. You can either bring the gear with you or shop them in Kathmandu. There are more than enough trekking gear shops in Thamel, and you will get a great deal.
+    
+    Here is a general idea of what you will need for your hike.
+    *Hiking boots
+    *Sandals/Crocs
+    *Several sets of undergarments
+    *Good quality down jacket and pants
+    *Fleece jacket
+    *Warm woolen clothes for the night</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Is there a power supply to charge my devices?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>You can recharge your phone and camera batteries at the teahouses by paying for energy. The service could be offered freely by the tea house where you spend the night. Since solar energy provides electricity, winter months present certain reliability issues. Having extra batteries or power banks on hand is typically a smart idea.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Do we need any acclimatization days to trek to Annapurna Base Camp in 10 days?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>As we will be starting our trek from a relatively lower altitude and gradually ascending to a higher altitude every day, there&#39;s no need for an acclimatization day during our 10 Days ABC trek. The maximum altitude we reach is only 4100 m which is quite low compared to EBC. In case you feel uneasy while trekking, you can inform the guide, and they will decide what&#39;s best for you and the group.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>How to prevent altitude sickness in the Himalayas?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>Taking enough rest, eating well, and drinking plenty of fluids help you tackle Acute Mountain Sickness (AMS) or altitude sickness. There&#39;s not much risk of AMS in the 10 Days Annapurna Base Camp Trek, though.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>What happens if someone gets sick during the hike?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>In case someone feels unwell during the trek, the guide will evaluate the situation and let you know if they should continue with the trek or not. The rest of the group can carry on when someone from Outfitter Nepal takes care of the sick person. If the situation is serious, the patient will be airlifted to Pokhara or Kathmandu for proper medical treatment.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Do I need travel insurance for 10 Days Annapurna Base Camp Trek?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>Yes, you need to get travel insurance for trekking to ABC. The Himalayas is full of surprises. You never know what&#39;s waiting for you. Travel insurance protects you from theft, natural disasters, and medical emergencies. Please get the insurance that covers helicopter rescue if required.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Is the Kathmandu – Pokhara – Kathmandu reliable?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>Yes. It is a short 15-20 minutes flight that usually takes off on time. However, if the visibility is unclear, you might have to wait for the air to clear up. In case of any problems with the flights, we will arrange a luxury tourist bus for you that only takes 6-7 hours to reach Pokhara from Kathmandu. This, however, might slightly lengthen the trip.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Do I find any ATMs on the ABC trekking trail?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>No, you won&#39;t find any ATMs along the route of the ABC 10 days trek. The last place to find an ATM is Pokhara, so make sure you withdraw enough cash from either Kathmandu or Pokhara.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Is there an age limit to travel to Annapurna Base Camp in 10 days?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>No. People from any age group can go for the 10 Days Annapurna Base Camp Trek if they have the mental and physical fitness to withstand the rough Himalayan terrain.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Can I customize the trek itinerary?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>Absolutely. We are more than happy to customize the trek for you if you book a private tour. Making changes to a group tour according to your preference is unfair to other trekkers in the group. We can customize the number of trip days, modes of transport, and accommodation in Kathmandu for you as per your requirement.</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="accordion block">
+                                                    <div class="acc-btn">
+                                                        <div class="icon-outer"></div>
+                                                        <h4>Why choose Chomolungma Adventures ?</h4>
+                                                    </div>
+                                                    <div class="acc-content">
+                                                        <div class="text">
+                                                            <p>Since we have been in the industry for more than a decade, we are quite familiar with the expectations of trekkers. So, we go beyond our ways to turn those expectations into a reality. Your safety and satisfaction are our utmost priorities.
+    
+    While our knowledgeable English-speaking guides take care of you during the trek, we arrange all the permits so you can hike without any hassle.
+    
+    As part of our commitment to sustainable travel, we always try to reduce our carbon footprint as much as possible. We also help our local economy to flourish by hiring local guides and potters.
+    
+    Feel free to contact us via mail or Whatsapp if you have questions about our services. We&#39;re available to you at all times. See you in Nepal!</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+    
+    
+                                </ul>
+                            </div>
+                        <div class="review-box mt-5">
+                            <div class="text">
+                                <div class="total-rating">
+                                    <h2>4.8</h2>
+                                    <span>Superb</span>
+                                </div>
+                            </div>
+                            <div class="progress-content">
+                                <div class="progress-box">
+                                    <p>Accommodation</p>
+                                    <div class="bar">
+                                        <div class="bar-inner count-bar" data-percent="70%"></div>
+                                        <div class="count-text">70%</div>
+                                    </div>
+                                </div>
+                                <div class="progress-box">
+                                    <p>Transport</p>
+                                    <div class="bar">
+                                        <div class="bar-inner count-bar" data-percent="80%"></div>
+                                        <div class="count-text">80%</div>
+                                    </div>
+                                </div>
+                                <div class="progress-box">
+                                    <p>Comfort</p>
+                                    <div class="bar">
+                                        <div class="bar-inner count-bar" data-percent="100%"></div>
+                                        <div class="count-text">100%</div>
+                                    </div>
+                                </div>
+                                <div class="progress-box">
+                                    <p>Food</p>
+                                    <div class="bar">
+                                        <div class="bar-inner count-bar" data-percent="90%"></div>
+                                        <div class="count-text">90%</div>
+                                    </div>
+                                </div>
+                                <div class="progress-box">
+                                    <p>Hospitality</p>
+                                    <div class="bar">
+                                        <div class="bar-inner count-bar" data-percent="70%"></div>
+                                        <div class="count-text">70%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-box">
+                            <div class="text">
+                                <h2>Leave Your Comments</h2>
+                                <p>See what our travelers have to say about their incredible journeys with Goreto Treks!</p>
+                                <ul class="list clearfix">
+                                    <li>
+                                        <h5>Accommodation:</h5>
+                                        <i id="A1" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="A2" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="A3" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="A4" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="A5" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                    </li>
+                                    <li>
+                                        <h5>Transport:</h5>
+                                        <i id="T1" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="T2" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="T3" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="T4" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="T5" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                    </li>
+                                    <li>
+                                        <h5>Comfort:</h5>
+                                        <i id="C1" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="C2" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="C3" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="C4" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="C5" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                    </li>
+                                    <li>
+                                        <h5>Food:</h5>
+                                        <i id="F1" onclick="setRatingCss(this)" class="fa-star far "></i>
+                                        <i id="F2" onclick="setRatingCss(this)" class="fa-star far "></i>
+                                        <i id="F3" onclick="setRatingCss(this)" class="fa-star far "></i>
+                                        <i id="F4" onclick="setRatingCss(this)" class="fa-star far "></i>
+                                        <i id="F5" onclick="setRatingCss(this)" class="fa-star far "></i>
+                                    </li>
+                                    <li>
+                                        <h5>Hospitality:</h5>
+                                        <i id="H1" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="H2" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="H3" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="H4" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                        <i id="H5" onclick="setRatingCss(this)" class="fa-star far"></i>
+                                    </li>
+                                </ul>
+                            </div>
+                            <form method="post" class="comment-form" id="comment-form">
+                                <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="text" name="name" placeholder="Your Name" required="" id="commentName">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="email" name="email" placeholder="Email Address" required="" id="commentEmail">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                        <input type="text" name="review" placeholder="Review Title" required="" id="commentTitle">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                        <textarea name="message" placeholder="Write Message" id="commentMessage"></textarea>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+    
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
+                                        <button type="submit" class="theme-btn">Submit Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                        <style>
+                            .booking-sticky {
+                                z-index: 10;
+                                opacity: 1;
+                                animation-iteration-count: 1;
+                                position: fixed;
+                            }
+                        </style>
+    
+                    <div class="default-sidebar tour-sidebar ml-20 booking-sticky">
+                        <div class="form-widget">
+                            <div class="widget-title">
+                                <h3>Book This Tour</h3>
+                            </div>
+                            <form action="#" method="post" class="tour-form">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="Your Name" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Your Email" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" placeholder="Phone" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="tickets" placeholder="Tickets" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="date" placeholder="dd/mm/yy" id="datepicker">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="message" placeholder="Message"></textarea>
+                                </div>
+                                <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+    
+                                </div>
+                                <div class="form-group message-btn">
+                                    <button type="submit" class="theme-btn">Book Tour</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="sidebar-widget downloads-widget">
+                            <div class="widget-title">
+                                <h3>Downloads</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="download-links clearfix">
+                                    <li><a>Attachment not found</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget downloads-widget">
+                            <div class="widget-title">
+                                <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
+                            </div>
+                            <div class="widget-content">
+                                <img src="../Image/recommended-tripadvisor.png" />
+    
+                                <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- tour-details end -->
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+        var accommodation;
+        var transport;
+        var comfort;
+        var food;
+        var hospitality;
+    
+        function setRatingCss(element) {
+            var letter = element.id.charAt(0);
+            var number = element.id.substr(1);
+            switch (letter) {
+                case "A":
+                    accommodation = number;
+                    break;
+                case "T":
+                    transport = number;
+                    break;
+                case "C":
+                    comfort = number;
+                    break;
+                case "F":
+                    food = number;
+                    break;
+                case "H":
+                    hospitality = number;
+                    break;
+                default:
+            }
+    
+            var starId = element.id;
+    
+            // Check if the clicked star already has the 'fas' class
+            var isSolid = element.classList.contains('fas');
+    
+            // Loop through all stars (A1 to A5)
+            for (var i = 1; i <= 5; i++) {
+                var star = document.getElementById(letter + i);
+    
+                // Check if the current star is less than or equal to the clicked star
+                if (star.id <= starId) {
+                    // Toggle the CSS class between 'far' and 'fas' based on the current state
+                    star.classList.toggle('far', isSolid);
+                    star.classList.toggle('fas', !isSolid);
+                } else {
+                    // Change the CSS class back to "far" for stars greater than the clicked star
+                    star.classList.remove('fas');
+                    star.classList.add('far');
+                }
+            }
+        }
+    
+    
+        let isFormSubmitting = false;
+    
+        document.getElementById("comment-form").addEventListener("submit", function (evt) {
+            evt.preventDefault(); // Prevent the default form submission
+    
+            if (isFormSubmitting) {
+                // If the form is already being submitted, do nothing
+                return;
+            }
+            debugger;
+            const commentName = document.getElementById("commentName").value;
+            const commentEmail = document.getElementById("commentEmail").value;
+            const commentTitle = document.getElementById("commentTitle").value;
+            const commentMessage = document.getElementById("commentMessage").value;
+            if (commentName == "") {
+                return Techyatra.UI.Toast("Please enter name: ", 1);
+            } else if (commentEmail == "") {
+                return Techyatra.UI.Toast("Please enter email: ", 1);
+            } else if (commentTitle == "") {
+                return Techyatra.UI.Toast("Please enter title: ", 1);
+            } else if (commentMessage == "") {
+                return Techyatra.UI.Toast("Please enter message: ", 1);
+            }
+            else if (accommodation == undefined || transport == undefined || comfort == undefined || food == undefined || hospitality == undefined) {
+                return Techyatra.UI.Toast("Please click star to give comment", 1);
+            }
+            else {
+                var response = grecaptcha.getResponse();
+                if (response.length == 0) {
+                    // reCaptcha not verified
+                    Techyatra.UI.Toast("Please verify you are human!");
+                } else {
+                    let data = {
+                        Name: commentName,
+                        Email: commentEmail,
+                        ReviewTitle: commentTitle,
+                        TourId: '1039',
+                        Accommodation: accommodation,
+                        Transport: transport,
+                        Comfort: comfort,
+                        Food: food,
+                        Hospitality: hospitality,
+                    };
+                    isFormSubmitting = true;
+                    subbmitTourComment(data);
+                }
+            }
+        });
+    
+        function subbmitTourComment(data) {
+            $.ajax({
+                type: "POST",
+                url: "/Chomolungma/TourComment",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (response) {
+                    Techyatra.UI.Toast(response.message, 4);
+    
+                },
+                error: function (error) {
+                    Techyatra.UI.Toast("Error sending data: " + error, 1);
+                },
+                complete: function () {
+                    // Reset the form submission flag after the AJAX request is complete
+                    isFormSubmitting = false;
+                    resetCommentForm();
+                }
+            });
+        };
+    
+        function resetCommentForm() {
+            document.getElementById("commentName").value = '';
+            document.getElementById("commentEmail").value = '';
+            document.getElementById("commentTitle").value = '';
+            document.getElementById("commentMessage").value = '';
+            setTimeout(function () {
+                // Reload the page
+                location.reload();
+            }, 3000);
+        };
+    </script>
+    
+    
+            </main>
+    
+{%endblock content%}

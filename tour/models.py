@@ -3,8 +3,7 @@ from django.db import models
 # Create your models here.
 class DestinationModel(models.Model):
     destination_id =  models.AutoField(primary_key=True)
-    # name = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
-    name = models.CharField(max_length=500, null=False, blank=False)
+    name = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
     slogan = models.CharField(max_length=500, null=False, blank=False)
     description = models.TextField(max_length=10000, null=False, blank=False)
     is_active = models.BooleanField(default=True)
@@ -20,7 +19,7 @@ class RegionModel(models.Model):
     is_nav = models.BooleanField(default=False)
     
 class TourDetailsModel(models.Model):
-    actvity_id = models.AutoField(primary_key=True)
+    activity_id = models.AutoField(primary_key=True)
     destination = models.ForeignKey(DestinationModel, null=False, on_delete=models.CASCADE)
     region = models.ForeignKey(RegionModel, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=False, blank=False)
@@ -46,7 +45,7 @@ class ItinatyModel(models.Model):
     itinary_id = models.AutoField(primary_key=True)
     tour = models.ForeignKey(TourDetailsModel, null= False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=False, blank=False)
-    day = models.IntegerField(max_length=2 )
+    day = models.IntegerField(null=False, blank=False )
     start_end = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(max_length=2000)
     

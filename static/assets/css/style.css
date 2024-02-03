@@ -635,7 +635,7 @@ img {
 
 .main-header .logo-box{
   position: relative;
-  padding: 36px 0px;
+  padding: 15px 0px;
 }
 
 .main-header .logo-box .logo{
@@ -790,7 +790,7 @@ img {
   position:inherit;
   float:left;
   z-index:2;
-  padding:35px 0px;
+  padding:20px 0px;
   margin: 0px 20px;
   -webkit-transition:all 300ms ease;
   -moz-transition:all 300ms ease;
@@ -1156,7 +1156,7 @@ img {
 }
 
 .main-header.style-two .menu-area .mobile-nav-toggler .icon-bar{
-  background-color: #222;
+  background-color: #ffffff;
 }
 
 .menu-area .mobile-nav-toggler .icon-bar:last-child{
@@ -3253,11 +3253,11 @@ div#mCSB_1_container{
 }
 
 .main-header.style-two .header-lower .main-menu .navigation > li{
-  padding: 50px 0px;
+  padding: 20px 0px;
 }
 
 .main-header.style-two .header-lower .logo-box{
-  padding: 51px 0px;
+  padding: 15px 0px;
   padding-right: 60px;
 }
 

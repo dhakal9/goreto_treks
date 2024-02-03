@@ -72,14 +72,22 @@ class AdminTour(View):
     def get(self, request):
         form = TourDetailsForm()
         form1 = ItinatyForm()
-        return render(request, self.template_name, {'form': form, 'form1':form1})
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
 
     def post(self, request):
+        tours = TourDetailsModel.objects.all()
         form1 = ItinatyForm()
         form = TourDetailsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('admin_tour')  # Replace 'your_redirect_url' with the actual URL to redirect after form submission
 
-        return render(request, self.template_name, {'form': form, 'form1':form1})
+        return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
+
+class TourDeatails(View):
+    template_name = 'tour_details.html'
+    def get(self, request, pk):
+        tour_details = TourDetailsModel.objects.get(pk=pk)
+        return render(request, self.template_name, {'tour_details':tour_details})
 

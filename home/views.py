@@ -33,7 +33,7 @@ class Login(View):
     def get(self, request):
         form = self.form_name()
         if request.user.is_authenticated:
-            return redirect('/')
+            return redirect('admin_home')
         else:
             return render(request, self.template_name, {'form': form})
     
@@ -49,7 +49,7 @@ class Login(View):
                     # if remember_me:
                     #     request.session.set_expiry(1209600)
                     #     request.session.set_expiry(0)
-                    return redirect("index")
+                    return redirect("admin_home")
                 else:
                     if not CustomUser.objects.filter(email=email).exists():
                         messages.error(request, "Invalid email. Please enter a valid email address.")
