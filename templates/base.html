@@ -174,31 +174,20 @@
 														<a href="Chomolungma/Region01e9.html?destinationId=3"> About Us </a>
 														<div class="megamenu">
 															<div class="row clearfix">
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="{%url 'contact_us' %}" style="color:#ff7c5b">Contact Us</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="{% url 'our_team'%}" style="color:#ff7c5b">Our Team</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Why Gotero</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Our Motto</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">FAQ</a> </h5></li>
-																		</ul>
-																	</div>
+																<div class="col-xl-6 column">
+																	<ul>
+																		{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
+																		<div class="col-xl-6 column">
+																			<ul>
+																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
+																					<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
+																					<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
+																					<li><a style="cursor:pointer" href="#"> Why Gotero </a></li>
+																					<li><a style="cursor:pointer" href="#"> Our Motto </a></li>
+																			</ul>
+																		</div>
+																	</ul>
+																</div>
 															</div>
 														</div>
 													</li>

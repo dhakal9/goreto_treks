@@ -76,3 +76,10 @@ class OurTeamForm(forms.ModelForm):
     class Meta:
         model = OurTeamModel
         fields = '__all__'
+
+class ContactUs(forms.Form):
+    username = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    phone = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    subject = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})

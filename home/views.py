@@ -1,13 +1,14 @@
 
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel
 from tour.models import DestinationModel
 from django.contrib import messages
-
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 class Index(View):
@@ -122,7 +123,29 @@ class Review_function(View):
 class ContactUs(View):
     template_name = 'contactus.html'
     def get(self, request):
-        return render(request, self.template_name)
+        form = ContactUs()
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request):
+        form = ContactUs()
+        if request.method == 'POST':
+            message = request.POST['message']
+            email = request.POST['email']
+            name = request.POST['username']
+            phone = request.POST['phone']
+            subject = request.POST['subject']
+
+            message_body = f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
+
+            send_mail(
+                subject,            # Title
+                message_body,       # Message
+                settings.EMAIL_HOST_USER,  # Sender email
+                ['dhakalamrit19@gmail.com'],  # Receiver email
+                fail_silently=False
+            )
+
+        return render(request, self.template_name, {'form': form})
 
 class OurTeamAdmin(View):
     template_name = 'admin_team.html'

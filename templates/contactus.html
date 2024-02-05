@@ -73,8 +73,11 @@
             </div>
             <div class="col-lg-7 col-md-12 col-sm-12 form-column">
                 <div class="form-inner">
-                    <form method="post"  id="contact-form" class="default-form">
+                    
+                    <form method="POST"  id="contact-form" class="default-form">
+                        {% csrf_token %}
                         <div class="row clearfix">
+                            {{ form.as_p }}
                             <div class="col-lg-6 col-md-6 col-sm-12 form-group">
                                 <input type="text" name="username" placeholder="Your Name" required="" id="username">
                             </div>
