@@ -156,55 +156,18 @@
 														<a href="Chomolungma/Region92b3.html?destinationId=2"> Activities </a>
 														<div class="megamenu">
 															<div class="row clearfix">
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Trekking</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Day Hike</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Heritage Tour</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList0340.html?regionId=13" style="color:#ff7c5b">Luxury</a> </h5></li>
-																		</ul>
-																	</div>
-															</div>
-														</div>
-													</li>
-													<li class="dropdown">
-														<a href="Chomolungma/Region01e9.html?destinationId=3"> Attractions </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Bunjee</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Rafting/Kayaking</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Jungle Safari</a> </h5></li>
-																		</ul>
-																	</div>
-																	<div class="col-xl-6 column">
-																		<ul>
-																			<li><h5><a href="Chomolungma/TourList6e6f.html?regionId=14" style="color:#ff7c5b">Helitour</a> </h5></li>
-																		</ul>
-																	</div>
-															</div>
-														</div>
+																<div class="col-xl-6 column">
+																	<ul>
+																		{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
+																		<div class="col-xl-6 column">
+																			<ul>
+																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
+																					<li>{% for activity in activities %}<a style="cursor:pointer" href="{% url 'tour_list' activity.region_id%}">{{activity.name}}</a>{% endfor %}</li>
+																			</ul>
+																		</div>
+																	</ul>
+																</div>
+															<div>
 													</li>
 	
 													<li class="dropdown">

@@ -59,6 +59,15 @@ class Region(View):
 
         return render(request, self.template_name, {'form': form, 'regions':regions})
     
+# class CloseTicket(View):
+#     def get(self, request, ticket_id):
+#         user_project_id = ProjectUser.objects.filter(user_id=request.user.id).values_list('project_id', flat=True)
+#         open_ticket = Tickets.objects.get(prj_id__in=user_project_id, ticket_id=ticket_id)
+#         open_ticket.closed_status = True
+#         open_ticket.save()
+#         messages.success(request, 'Ticket Closed Successfullly')
+#         return redirect('my_tickets')
+    
 class Tourlist(View):
     template_name = 'tourlist.html'
     def get(self, request, pk):

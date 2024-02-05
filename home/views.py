@@ -2,7 +2,8 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel
 from tour.models import DestinationModel
 from django.contrib import messages
@@ -144,3 +145,10 @@ class OurTeam(View):
     def get(self, request):
         teams = OurTeamModel.objects.all()
         return render(request, self.template_name, {'teams':teams})
+    
+class Logout(LoginRequiredMixin, View):
+    template_name = 'login.html'
+    def get(self, request):
+        logout(request)
+        return redirect('login')
+
