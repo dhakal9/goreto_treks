@@ -1,10 +1,11 @@
 {% extends 'base.html'%}
 {%block content%}
+{% load static %}
 <!-- team-section -->
 <section class="team-section sec-pad bg-color-1 centred">
     <div class="anim-icon">
-        <div class="icon anim-icon-1" style="background-image: url(../content/assets/images/shape/shape-5.png);"></div>
-        <div class="icon anim-icon-2" style="background-image: url(../content/assets/images/shape/shape-5.png);"></div>
+        <div class="icon anim-icon-1" style="background-image: url({% static "assets/images/shape/shape-5.png" %});"></div>
+        <div class="icon anim-icon-2" style="background-image: url({% static "assets/images/shape/shape-5.png)" %});"></div>
     </div>
     <div class="auto-container">
         <div class="sec-title">

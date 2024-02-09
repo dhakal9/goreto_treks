@@ -1,10 +1,10 @@
 
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
 from tour.models import DestinationModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -144,7 +144,7 @@ class ContactUs(View):
                 ['dhakalamrit19@gmail.com'],  # Receiver email
                 fail_silently=False
             )
-
+            messages.success(request, 'Message sent Successfully')
         return render(request, self.template_name, {'form': form})
 
 class OurTeamAdmin(View):
@@ -175,3 +175,30 @@ class Logout(LoginRequiredMixin, View):
         logout(request)
         return redirect('login')
 
+class AdminBlogs(View):
+    template_name = 'admin_blogs.html'
+    def get(self, request):
+        blogs = BlogsModel.objects.all()
+        form = BlogsForm()
+        return render(request, self.template_name, {'form':form, 'blogs':blogs})
+    
+    def post(self, request):
+        form = BlogsForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Blogs Added Successfully')
+            return redirect('admin_blogs')
+        return render(request, self.template_name, {'form':form})
+    
+class Blogs(View):
+    template_name = 'blogs.html'
+    def get(self, request):
+        blogs = BlogsModel.objects.all()
+        return render(request, self.template_name, {'blogs':blogs})
+
+class AboutUs(View):
+    template_name = 'aboutus.html'
+    def get(self, request):
+        teams = OurTeamModel.objects.all()
+        reviews =  Review.objects.all()
+        return render(request, self.template_name, {'teams':teams, 'reviews':reviews})

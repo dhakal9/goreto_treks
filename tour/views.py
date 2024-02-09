@@ -100,3 +100,7 @@ class TourDeatails(View):
         tour_details = TourDetailsModel.objects.get(pk=pk)
         return render(request, self.template_name, {'tour_details':tour_details})
 
+class Activities(View):
+    template_name = 'activities.html'
+    def get(self, request):
+        return render(request, self.template_name)

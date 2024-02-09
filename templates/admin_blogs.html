@@ -1,0 +1,82 @@
+{%extends 'admin_base.html'%}
+{%block content%}
+    <div class="content container-fluid">
+        <form method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div style='margin:5px'>
+            <label>Heading</label>
+            {{form.title}}<br>
+            </div>
+            <div>
+            <label>Image</label><br>
+            {{form.image}}<br><br>
+            </div>
+            <div>
+            <label>Description</label><br>
+            {{form.description}}
+            </div>
+            <div class="submit-section">
+                <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+            </div>
+        </form>
+        
+    <div class="container-fluid">
+        <h4>List Of Blogs </h4><br>
+        
+        <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+        <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+        <thead class="bt-5">
+        <tr>
+        <th>Title</th>
+        <th>Image</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+        </tr>
+        </thead>
+        
+         {% for blog in blogs %} 
+        <tr>
+        <td>{{blog.title}} </td>
+        <td><img src="{{blog.image.url}}" style="width: 50px; height: 45px;"></td>
+        <td>{{blog.description|wordwrap:"10"|slice:":100"}}....... </td>
+        <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
+        <td>
+        <a type="button" href="" class="btn btn-link btn-sm btn-rounded">
+        Edit
+        </a>
+        <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal {{blog.id}}">
+        Delete
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal {{blog.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Priority Level</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> Are You Sure want to delete ? </div>
+        <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        <a type="action" href="" class="btn btn-link btn-sm btn-rounded">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+        Delete
+        </button>
+        </a>
+        </div>
+        </div>
+        </div>
+        </a>
+        
+        </td>
+        </tr>
+        {% endfor %}
+    
+        </table>
+    </div>
+{%endblock content%}

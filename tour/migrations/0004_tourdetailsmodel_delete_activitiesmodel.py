@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TourDetailsModel',
             fields=[
-                ('actvity_id', models.AutoField(primary_key=True, serialize=False)),
+                ('activity_id', models.AutoField(primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=100)),
                 ('description', models.TextField(max_length=2000)),
                 ('depature', models.CharField(blank=True, max_length=100, null=True)),

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="place-section style-two sec-pad bg-color-1">
+    
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p> Adventures fill your soul</p>
+            <h2>Our Activities</h2>
+        </div>
+        <div class="row clearfix">
+            {% for activity in activities %}
+                <div class="col-lg-4 col-md-6 col-sm-12 title-column">
+                    <div class="place-block-one">
+                        <div class="inner-box">
+                            <figure class="image-box"><img src="{{ activity.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
+                            <div class="text">
+                                <h3><a href="{% url 'tour_list' activity.region_id %}">{{ activity.name }}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+                
+        </div>
+    </div>
+</section>
+{%endblock content%}

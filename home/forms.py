@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 
 class UserLoginForm(forms.Form):
@@ -69,7 +69,7 @@ class FunfactForm(forms.ModelForm):
 class OurTeamForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+    team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     facebook_link = forms.URLInput(attrs={'class':'form-control'})
     instagram_link = forms.URLInput(attrs={'class':'form-control'})
     
@@ -83,3 +83,12 @@ class ContactUs(forms.Form):
     phone = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     subject = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    
+class BlogsForm(forms.ModelForm):
+    title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    
+    class Meta:
+        model = BlogsModel
+        fields = '__all__'
