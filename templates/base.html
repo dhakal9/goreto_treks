@@ -66,7 +66,7 @@
 			right: 0px;
 			width: 5000px;
 			height: 100%;
-			background: #061a3a !important;
+			background: #008fd6; !important;
 		}
 
 		.main-header.style-two .header-lower .main-menu .navigation > li > a {
@@ -99,13 +99,13 @@
 								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
 							</ul>
 							<div class="btn-box pull-right">
-								<a href="Chomolungma/AllTours.html" class="theme-btn">Book A Tour </a>
+								<a href="{%url 'destination'%}" class="theme-btn">Book A Tour </a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- header-lower -->
-				<div class="header-lower" style="background-color:#061a3a!important">
+				<div class="header-lower" style="background-color:#008fd6!important">
 					<div class="auto-container">
 						<div class="outer-box">
 							<div class="logo-box">
@@ -182,7 +182,7 @@
 																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
 																					<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
 																					<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
-																					<li><a style="cursor:pointer" href="#"> Why Gotero </a></li>
+																					<li><a style="cursor:pointer" href="{% url 'why_us'%}"> Why Gotero </a></li>
 																					<li><a style="cursor:pointer" href="#"> Our Motto </a></li>
 																			</ul>
 																		</div>

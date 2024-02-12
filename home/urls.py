@@ -2,7 +2,7 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
-from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Funfact, ContactUs, OurTeamAdmin, OurTeam, AdminBlogs, Blogs, AboutUs
+from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Funfact, ContactUs, OurTeamAdmin, OurTeam, AdminBlogs, Blogs, AboutUs, WhyUs
 urlpatterns = [
      path('', Index.as_view(), name="index"),
      path('explore/', Explore.as_view(), name="explore"),
@@ -18,6 +18,7 @@ urlpatterns = [
      path('adminblogs/', AdminBlogs.as_view(), name="admin_blogs"),
      path('blogs/', Blogs.as_view(), name="blogs"),
      path('aboutus/', AboutUs.as_view(), name="about_us"),
+     path('whyus/', WhyUs.as_view(), name="why_us"),
      
  ]
  

@@ -5,7 +5,7 @@ from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, O
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
-from tour.models import DestinationModel
+from tour.models import DestinationModel, TourDetailsModel
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -18,7 +18,8 @@ class Index(View):
         reviews =  Review.objects.all()
         destinations = DestinationModel.objects.all()
         funfact = FunfactModel.objects.first()
-        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations})
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours})
     
 class Explore(View):
     template_name = "explore.html"
@@ -202,3 +203,10 @@ class AboutUs(View):
         teams = OurTeamModel.objects.all()
         reviews =  Review.objects.all()
         return render(request, self.template_name, {'teams':teams, 'reviews':reviews})
+    
+
+class WhyUs(View):
+    template_name ='why_us.html'
+    def get(self, request):
+        return render(request, self.template_name)
+    
