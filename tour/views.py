@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinaryModel
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel
 from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm
 
 def get_regions(request):

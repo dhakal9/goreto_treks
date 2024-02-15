@@ -41,7 +41,7 @@ class TourDetailsModel(models.Model):
     is_acttraction = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
-class ItinaryModel(models.Model):
+class ItinatyModel(models.Model):
     itinary_id = models.AutoField(primary_key=True)
     tour = models.ForeignKey(TourDetailsModel, null= False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=False, blank=False)

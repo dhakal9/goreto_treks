@@ -1,5 +1,5 @@
 from django import forms
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinaryModel
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel
 
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
@@ -98,5 +98,5 @@ class ItinaryForm(forms.ModelForm):
         return instance.name   
         
     class Meta:
-        model = ItinaryModel
+        model = ItinatyModel
         fields =['name', 'day', 'start_end', 'description']
