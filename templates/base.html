@@ -162,6 +162,7 @@
 																		<div class="col-xl-6 column">
 																			<ul>
 																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
+																				<li><a style="cursor:pointer" href="#">Trekking</a></li>
 																					<li>{% for activity in activities %}<a style="cursor:pointer" href="{% url 'tour_list' activity.region_id%}">{{activity.name}}</a>{% endfor %}</li>
 																			</ul>
 																		</div>
@@ -412,7 +413,7 @@
 							<h3>Gallery</h3>
 						</div>
 						<div class="widget-content">
-							<ul class="image-list clearfix">
+							<ul class="image-list clearfix">			
 								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-1.jpg" alt=""></a></figure></li>
 								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-2.jpg" alt=""></a></figure></li>
 								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-3.jpg" alt=""></a></figure></li>
@@ -437,6 +438,30 @@
 						</div>
 					</div>
 				</div>
+				<div class="w-100 d-flex justify-content-center text-center">
+					<aside id="nepamount_association_widget-5" class="col-md-12">
+						<div class="footer-widget">
+							<h3 class="widget-title">IN Association With</h3>
+							<ul class="social-icons">
+								<ul class="footsocial">
+									<a href="http://www.nepal.gov.np/" target="_blank" class="footer-aslogo">
+										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/nepal-gray-1.png" alt="">
+									</a>
+									<a href="https://ntb.gov.np/" target="_blank" class="footer-aslogo">
+										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/ntb.png" alt="">
+									</a>
+									<a href="https://www.taan.org.np/" target="_blank" class="footer-aslogo">
+										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/taanlogo.png" alt="">
+									</a>
+									<a href="https://www.nepalmountaineering.org/" target="_blank" class="footer-aslogo">
+										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/nm.png" alt="">
+									</a>
+								</ul>
+							</ul>
+						</div>
+					</aside>
+				</div>
+				
 			</div>
 		</div>
 	</div>
