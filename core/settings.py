@@ -52,8 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'tour',
-    "ckeditor",
-    "ckeditor_uploader",
+    # "ckeditor",
+    # "ckeditor_uploader",
 ]
 
 MIDDLEWARE = [
@@ -169,19 +169,19 @@ EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = env('EMAIL_PORT')
 EMAIL_USE_TLS = True
 
-CKEDITOR_UPLOAD_PATH="uploads/"
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline', 'Strike'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Table', 'SpecialChar'],
-            ['Source'],
-        ],
-        'height': 300,
-        'width': 800,
-    },
-}
+# CKEDITOR_UPLOAD_PATH="uploads/"
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'Custom',
+#         'toolbar_Custom': [
+#             ['Bold', 'Italic', 'Underline', 'Strike'],
+#             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+#             ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+#             ['Link', 'Unlink', 'Anchor'],
+#             ['Image', 'Table', 'SpecialChar'],
+#             ['Source'],
+#         ],
+#         'height': 300,
+#         'width': 800,
+#     },
+# }

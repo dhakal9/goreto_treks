@@ -195,7 +195,7 @@
                         {% for activity in activities %}
                             <div class="offer-block-one">
                                 <div class="inner-box">
-                                    <figure class="image-box"><img src="{{ activity.image.url }}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"></figure>
+                                    <figure class="image-box"><img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{ activity.image.url }}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"></figure>
                                     <div class="content-box">
                                         {% comment %} <span>Get 30% Off</span> {% endcomment %}
                                         <h3><a href="{% url 'tour_list' activity.region_id %}">{{ activity.name }}</a></h3>
@@ -244,7 +244,7 @@
                                 <div class="inner-box">
                                     
                                     <figure class="image-box">
-                                        <img src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk">
+                                        <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk">
                                         <a href="{% url 'tour_details' tour.activity_id %}"><i class="fas fa-link"></i></a>
                                     </figure>
                                     <div class="lower-content">
