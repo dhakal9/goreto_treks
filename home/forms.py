@@ -2,7 +2,7 @@
 from django import forms
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from ckeditor.widgets import CKEditorWidget
+
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField(max_length=50, required=True, widget=forms.EmailInput(attrs={'placeholder':'abc@email.com', 'class':'form-control'}))
