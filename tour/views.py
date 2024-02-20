@@ -109,3 +109,8 @@ class Activities(View):
     template_name = 'activities.html'
     def get(self, request):
         return render(request, self.template_name)
+
+class Trekking(View):
+    template_name ='trekking.html'
+    def get(self, request):
+        return render(request, self.template_name)

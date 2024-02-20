@@ -66,9 +66,9 @@
 			right: 0px;
 			width: 5000px;
 			height: 100%;
-			background: #008fd6; !important;
+			background: #008fd6;  !important;
 		}
-
+		{% comment %}#008fd6; #c9e0f5 {% endcomment %}
 		.main-header.style-two .header-lower .main-menu .navigation > li > a {
 			color: #ffffff;
 		}
@@ -98,9 +98,9 @@
 								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp"></i></a></li>
 								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
 							</ul>
-							<div class="btn-box pull-right">
+							{% comment %} <div class="btn-box pull-right">
 								<a href="{%url 'destination'%}" class="theme-btn">Book A Tour </a>
-							</div>
+							</div> {% endcomment %}
 						</div>
 					</div>
 				</div>
@@ -110,7 +110,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								<div class="bg-layer"></div>
-								<figure class="logo"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
+								<figure class="logo" style="float: left; width: 127px; object-fit: cover;"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
 							<div class="menu-area clearfix">
@@ -162,8 +162,8 @@
 																		<div class="col-xl-6 column">
 																			<ul>
 																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
-																				<li><a style="cursor:pointer" href="#">Trekking</a></li>
-																					<li>{% for activity in activities %}<a style="cursor:pointer" href="{% url 'tour_list' activity.region_id%}">{{activity.name}}</a>{% endfor %}</li>
+																				<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
+																					<li>{% for activity in activities %} <a style="cursor:pointer" href="{% url 'tour_list' activity.region_id %}">{{activity.name}}</a>{% endfor %}</li>
 																			</ul>
 																		</div>
 																	</ul>
@@ -195,7 +195,7 @@
 											<li class="dropdown">
 												<a href="{%url 'blogs'%}">Blogs</a>
 											</li>
-											<li><a href="Chomolungma/Contact.html">CSR</a></li>
+											<li><a href="{% url 'csr'%}">CSR</a></li>
 										</ul>
 									</div>
 								</nav>
@@ -441,7 +441,9 @@
 				<div class="w-100 d-flex justify-content-center text-center">
 					<aside id="nepamount_association_widget-5" class="col-md-12">
 						<div class="footer-widget">
-							<h3 class="widget-title">IN Association With</h3>
+							<div class="widget-title">
+								<h3>IN Association With</h3>
+							</div>
 							<ul class="social-icons">
 								<ul class="footsocial">
 									<a href="http://www.nepal.gov.np/" target="_blank" class="footer-aslogo">

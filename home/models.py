@@ -121,4 +121,11 @@ class BlogsModel(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
     
-        
+
+class CsrModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    title =models.CharField(max_length = 200, blank=False, null=False)
+    description =  models.TextField(max_length=3000, blank=False, null=False)
+    image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)

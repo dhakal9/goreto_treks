@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 
 
@@ -92,4 +92,13 @@ class BlogsForm(forms.ModelForm):
     
     class Meta:
         model = BlogsModel
+        fields = '__all__'
+
+class CsrForm(forms.ModelForm):
+    title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    
+    class Meta:
+        model = CsrModel
         fields = '__all__'
