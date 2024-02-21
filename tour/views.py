@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinatyForm
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm
 
 def get_regions(request):
     destination_id = request.GET.get('destination_id')
@@ -80,19 +80,24 @@ class AdminTour(View):
 
     def get(self, request):
         form = TourDetailsForm()
-        form1 = ItinatyForm()
+        form1 = ItinaryForm()
         tours = TourDetailsModel.objects.all()
         return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
 
     def post(self, request):
         tours = TourDetailsModel.objects.all()
-        form1 = ItinatyForm()
+        form1 = ItinaryForm(request.POST, request.FILES)
         form = TourDetailsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('admin_tour')  # Replace 'your_redirect_url' with the actual URL to redirect after form submission
+            return redirect('admin_tour')
+        if form1.is_valid():
+            form1.save()
+            return redirect('admin_tour') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
 
         return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
+
+
 
 class TourDeatails(View):
     template_name = 'tour_details.html'
@@ -102,5 +107,10 @@ class TourDeatails(View):
 
 class Activities(View):
     template_name = 'activities.html'
+    def get(self, request):
+        return render(request, self.template_name)
+
+class Trekking(View):
+    template_name ='trekking.html'
     def get(self, request):
         return render(request, self.template_name)

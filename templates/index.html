@@ -40,12 +40,16 @@
 </section>
 <!-- banner-section end -->
 
+
+<!--Added later -->
+
 <section class="feature-section centred bg-color-1 sec-pad">
     <div class="auto-container">
-        {% comment %} <div class="sec-title text-center">
-            <p>Travio Specials</p>
-            <h2>Why Travel with Tutive?</h2>
-        </div> {% endcomment %}
+        <div class="sec-title text-center">
+            <p>Namaste</p>
+            <hr>
+            <h2>We welcome you all.</h2>
+        </div>
         <div class="row clearfix">
             <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
                 <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;"> 
@@ -53,7 +57,7 @@
                         <figure class="image-box"><img src="assets/images/resource/feature-1.jpg" alt=""></figure>
                         <div class="lower-content">
                             <div class="icon-box"><i class="icon-1"></i></div>
-                            <h4>2000+ Our Worldwide Guides</h4>
+                            <h4>Certified World Class Guides</h4>
                         </div>
                     </div>
                 </div> 
@@ -92,11 +96,74 @@
                 </div>
             </div>
         </div>
+        <div class="sec-title text-center">
+            
+            <hr>
+            
+        </div>
     </div>
 </section>
 
-<!-- about-style-two -->
-<section class="about-style-two" style="padding-bottom:50px;">
+<style>
+    .tour-block-one .inner-box .lower-content .info li {
+        position: relative;
+        float: left;
+        display: inline-block;
+        font-size: 13px;
+        color: #808080;
+        font-weight: 500;
+        padding-left: 24px;
+        margin-right: 35px;
+    }
+
+    .tour-block-one .inner-box .lower-content h3 {
+        display: block;
+        font-size: 18px;
+        line-height: 30px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+</style>
+<!-- tour-section -->
+<section class="tour-section sec-pad">
+<div class="auto-container">
+    <div class="sec-title text-center">
+        <p>Modern & Beautiful</p>
+        <h2>Our Most Popular Adventures</h2>
+    </div>
+        <div class="row clearfix">
+        {% for tour in tours %}
+            <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
+                <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        
+                        <figure class="image-box">
+                            <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk">
+                            <a href="{% url 'tour_details' tour.activity_id %}"><i class="fas fa-link"></i></a>
+                        </figure>
+                        <div class="lower-content">
+                            <div class="rating"><span><i class="fas fa-star"></i>5 based on 133 reviews</span></div>
+                            <h3><a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
+                            <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4>
+                            <ul class="info clearfix">
+                                <li><i class="far fa-clock"></i>{{tour.days}} Days</li>
+                                <li><i class="far fa-map"></i>Trip Grade,<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
+                            </ul>
+                            <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p>
+                            <div class="btn-box">
+                                <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {%endfor%}
+
+    </div>
+</div>
+</section>
+<!-- tour-section end -->
+{% comment %} <section class="about-style-two" style="padding-bottom:50px;">
     <div class="pattern-layer" style="background-image: url({% static 'assets/images/shape/shape-2.png' %});"></div>
     <div class="auto-container">
         <div class="row clearfix">
@@ -131,7 +198,8 @@
         </div>
     </div>
 </section>
-<!-- about-style-two end -->
+<!-- about-style-two end -->  {% endcomment %}
+
 <!-- place-section -->
 <section class="place-section style-two sec-pad bg-color-1">
     <div class="anim-icon">
@@ -210,7 +278,7 @@
             </section>
         <!-- offer-section end -->
 
-            <style>
+            {% comment %} <style>
                 .tour-block-one .inner-box .lower-content .info li {
                     position: relative;
                     float: left;
@@ -268,7 +336,7 @@
                 </div>
             </div>
         </section>
-        <!-- tour-section end -->
+        <!-- tour-section end --> {% endcomment %}
 
 
     <!-- video-style-two -->
@@ -318,13 +386,13 @@
                                     <li><i class="icon-Star"></i></li>
                                 </ul>
                                 <div class="text">
-                                    <div class="icon" style="background-image: url(Content/assets/images/icons/quote-1.png);"></div>
-                                    <p style="height:245px">{{ review.message }}</p>
+                                    <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
+                                    <p style="height:245px">{{ review.message|truncatewords:50}}</p>
                                 </div>
                                 <div class="author-box">
                                     <h4>{{ review.name }}</h4>
                                     <span class="designation">{{ review.position }}</span>
-                                    <figure class="thumb-box"><img src="{{ review.team_image.url }}" alt=""></figure>
+                                    <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
                                 </div>
                             </div>
                         </div>
@@ -334,128 +402,7 @@
             </div>
         </section>
         <!-- testimonial-section end -->
-        <section class="bottom-a common-box">
-            <div class="container">
-                <h3 style='color:#fff;'>Clients Review</h3>
-                <div class="row">
-                    <div class="col-md-8">
-                        <div class="review-list" id="review-list">
-                            <div class="item">
-                                <h4>You can stop your research now and book Zam Zam!</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p>Don't hesitate to book with Zam Zam Trekking, you won't regret it! We can't write more than a few characters here so for more details check out the multiple-paragraph reviews on the Zam Zam Trip Advisor page.</p>
-                                <div class="review-by"><img src="uploads/reviews/noimage.jpg" alt="You can stop your research now and book Zam Zam!"><h5 style='color:#fff;'>Susan Davies</h5>
-                                    United States
-                                </div>
-                            </div><div class="item">
-                                <h4>Zam Zam Kathmandu</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>I’m greatful to know zam zam trekking thanks to my friend(jotee didi). I went to Swayambhunath Temple, Boudhanath Temple, Durbar Square. It was amazing to me. There are many temple in South of Korea, too. The temple in Nepal is&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/noimage.jpg" alt="Zam Zam Kathmandu"><h5>Yeonmin Seo</h5>
-                                    Korea
-                                </div>
-                            </div><div class="item">
-                                <h4>Sightseeing</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>Sightseeing Kathmandu with ZamZamTrecking was so wonderful. We visited so many places Swayambunath, Boudhanath, and Bhaktapur. It was good chance to learn Nepali culture and their religion(Buddism especially). I really loved the day.</p></p>
-                                <div class="review-by"><img src="uploads/reviews/noimage.jpg" alt="Sightseeing"><h5>Hayoon Song</h5>
-                                    Korea
-                                </div>
-                            </div><div class="item">
-                                <h4>Highly recommend using ZamZamTrekking</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>I did a day tour of Kathmandu with Dinesh. He was excellent. He is very knowledgeable and accommodating to your needs. It was a very enjoyable day and such a great introduction to the area. I highly recommend using ZamZamTrekking.</p></p>
-                                <div class="review-by"><img src="uploads/reviews/Suzanne.jpg" alt="Highly recommend using ZamZamTrekking"><h5>Suzanne Wienstroer</h5>
-                                    United States
-                                </div>
-                            </div><div class="item">
-                                <h4>Thank you</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>Zam Zam Trekking, we just want to thank you for a wonderful tour through Kathmandu. You guys are the BEST and I will surely come back next year for more adventure with Zam Zam Trekking. Thank you for enriching my&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/Review.jpg" alt="Thank you"><h5>Chris Locklear</h5>
-                                    United States
-                                </div>
-                            </div><div class="item">
-                                <h4>Incredible great journey with Dinesh/Zam Zam Trekking</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>It was an incredible great journey with Dinesh/ ZamZamTrekking. I warmly recommend this Trekking! With Dinesh it will be fantastic, relaxed, safe and fanny days. You will see incredible landscapes and meet frendly local peoples and dogs!- I send many&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/Johna-milcka.jpg" alt="Incredible great journey with Dinesh/Zam Zam Trekking"><h5>Joanna Malicka</h5>
-                                    Germany
-                                </div>
-                            </div><div class="item">
-                                <h4>This trek was a highlight for us! Highly recommend!</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>I went on a trek with Zam Zam Trekking earlier this year and recommend Dinesh and Zam Zam enough! He is professional, friendly and flexible - he will cater a trek to suit whatever needs you may have. He is a&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/tara.jpg" alt="This trek was a highlight for us! Highly recommend!"><h5>Tara Wardrop</h5>
-                                    Australia
-                                </div>
-                            </div><div class="item">
-                                <h4>Amazing experience and one I will remember for the rest of my life.</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>A friend and I did EBC about 3 years ago with Dinesh and his crew. It was amazing experience and one <strong>I will remember for the rest of my life.</strong> It was made truly special by our guide Dinesh  and&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/micheal-bonida.jpg" alt="Amazing experience and one I will remember for the rest of my life."><h5>Michael Bonadio</h5>
-                                    United States
-                                </div>
-                            </div><div class="item">
-                                <h4>Best Trekking Company</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>Zam Zam Trekking - You are simply the BEST! Thank you for the opportunity that I had to do Everest Base Camp Trek with you. Your guides are very knowledgeable and look very good after us. I am coming back&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/noimage.jpg" alt="Best Trekking Company"><h5>Annemarie Smith</h5>
-                                    South Africa
-                                </div>
-                            </div><div class="item">
-                                <h4>Annapurna Base Camp Trek</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>What a lovely experience. Dinesh, We just want to thank you and your team for a wonderful and unforgettable experience. We are surely coming back to Nepal and Zam Zam Trekking for more expeditions.</p></p>
-                                <div class="review-by"><img src="uploads/reviews/IMG_20151115_101243.jpg" alt="Annapurna Base Camp Trek"><h5>Annemarie Smith</h5>
-                                    South Africa
-                                </div>
-                            </div><div class="item">
-                                <h4>Perfect Everest Trek Arrangement</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>I spent very memorable days in the Everest region in Nepal. I used to dream to see this highest peak of the world and now I arrested it in my camera. My guide arranged everything and helped me a lot.&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/avatar.jpg" alt="Perfect Everest Trek Arrangement"><h5>Stephen Gray</h5>
-                                    Australia
-                                </div>
-                            </div><div class="item">
-                                <h4>Truily Amazing Experience !!</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>A friend and I did Annapurna Circut trek about 3 years ago with Dinesh and his crew. It was amazing experience and one I will remember for the rest of my life. It was made truly special by our guide&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/Shun.jpg" alt="Truily Amazing Experience !!"><h5>Shun Ying Tung</h5>
-                                    Canada
-                                </div>
-                            </div><div class="item">
-                                <h4>Life Changing Experience</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>Thank you <strong>Zam Zam trekking</strong> for the best adventure of my life. Everest Base Camp was a life changing experience. Your guides are the best in the world. I am coming back for more trekking.</p></p>
-                                <div class="review-by"><img src="uploads/reviews/anna.jpg" alt="Life Changing Experience"><h5>Annemarie Smith</h5>
-                                    South Africa
-                                </div>
-                            </div><div class="item">
-                                <h4>Best trek of my life</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>My dad went there last year, i fell sick at the start but i got better fast and with the help and guidance of Dinish and his team, it was a wonderful trip. He and our super Sherpa&#39;s were simple&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/noimage.jpg" alt="Best trek of my life"><h5>Lye Kwan Wong</h5>
-                                    Malaysia
-                                </div>
-                            </div><div class="item">
-                                <h4>Wonderful experience!</h4>
-                                <div class="rating"><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i><i class="fa fa-dot-circle-o"></i></div>
-                                <p><p>I did the Annapurna base camp trek with Dinesh about 2 years ago and it was absolutely incredible. Dinesh was a great guide and I felt very fortunate to have his knowledge and experience throughout the trek! I would highly&#8230;</p>
-                                <div class="review-by"><img src="uploads/reviews/noimage.jpg" alt="Wonderful experience!"><h5>Emma</h5>
-                                    United States
-                                </div>
-                            </div>                    
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-md-offset-1">
-                        <div class="tripadvisor-block box">
-            <a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><img src="{% static 'assets/images/recommended-tripadvisor.png'%}" alt="TripAdvisor"/></a>
-        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      
 
         <!-- funfact-style-two -->
         <section class="funfact-style-two centred">

@@ -1795,7 +1795,7 @@ div#mCSB_1_container{
 .feature-block-one .inner-box .lower-content .icon-box{
   position: absolute;
   left: 50%;
-  top: -40px;
+  top: -20px;
   transform: translateX(-50%);
   width: 80px;
   height: 80px;

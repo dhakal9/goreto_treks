@@ -80,12 +80,23 @@ class TourDetailsForm(forms.ModelForm):
         fields = "__all__"
 
 
-class ItinatyForm(forms.ModelForm):
+class ItinaryForm(forms.ModelForm):
+    tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
+                                     widget=forms.Select(attrs={'class': 'form-control'}))
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     day = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
     start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
 
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['tour'].queryset = TourDetailsModel.objects.all()
+        self.fields['tour'].label_from_instance = self.get_tour_name
+    
+    def get_tour_name(self, instance):
+        return instance.name   
+        
     class Meta:
         model = ItinatyModel
         fields =['name', 'day', 'start_end', 'description']
