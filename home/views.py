@@ -4,7 +4,7 @@ from django.views import View
 from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel
 from tour.models import DestinationModel, TourDetailsModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -214,20 +214,23 @@ class WhyUs(View):
 class CsrAdmin(View):
     template_name = 'admin_csr.html'
     def get(self, request):
+        csrs = CsrModel.objects.all()
         form = CsrForm()
-        return render(request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form':form, 'csrs':csrs})
     
     def post(self, request):
+        csrs = CsrModel.objects.all()
         form = CsrForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'CSR Added successfully')
             return redirect('csr_admin')
-        return render(request, self.template_name, {'form':form})
+        return render(request, self.template_name, {'form':form, 'csrs':csrs})
     
 class Csr(View):
     template_name = 'csr.html'
     def get(self, request):
-        return render(request, self.template_name)
+        csrs = CsrModel.objects.all()
+        return render(request, self.template_name, {'csrs':csrs})
     
     
