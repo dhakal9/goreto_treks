@@ -292,7 +292,7 @@
                     var regionSelect = $('#id_region');
                     regionSelect.empty(); 
                     $.each(data.regions, function(key, value) {
-                        regionSelect.append($('<option>').text(value.name).attr('value', key));
+                        regionSelect.append($('<option>').text(value.name).attr('value', value.id));
                     });
                 },
                 error: function(error) {

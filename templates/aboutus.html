@@ -2,7 +2,6 @@
 
 {%block content%}
 {%load static%}
-
         <!-- about-style-two -->
 <section class="about-style-two" style="padding-bottom:50px;">
     <div class="pattern-layer" style="background-image: url({% static 'assets/images/shape/shape-2.png' %});"></div>
@@ -91,26 +90,31 @@
                 </div>
                 <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">
 					{% for review in reviews %}
-                        <div class="testimonial-block-one">
-                            <div class="inner-box" style="height:490px;">
-                                <ul class="rating-box clearfix">
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                </ul>
-                                <div class="text">
-                                    <div class="icon" style="background-image: url(Content/assets/images/icons/quote-1.png);"></div>
-                                    <p style="height:245px">{{ review.message }}</p>
-                                </div>
-                                <div class="author-box">
-                                    <h4>{{ review.name }}</h4>
-                                    <span class="designation">{{ review.position }}</span>
-                                    <figure class="thumb-box"><img src="{{ review.team_image.url }}" alt=""></figure>
-                                </div>
+                    <div class="testimonial-block-one">
+                        <div class="inner-box" style="height:490px; position: relative;">
+                            <ul class="rating-box clearfix">
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                                <li><i class="icon-Star"></i></li>
+                            </ul>
+                            <div class="text">
+                                <div class="icon" style="background-image: url(Content/assets/images/icons/quote-1.png);"></div>
+                                <p style="height:245px">{{ review.message }}</p>
+                            </div>
+                            <div class="author-box">
+                                <h4>{{ review.name }}</h4>
+                                <span class="designation">{{ review.position }}</span>
+                                <figure class="thumb-box"><img src="{{ review.team_image.url }}" alt=""></figure>
+                            </div>
+                            <!-- Watermark -->
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1;">
+                                <img src="https://play-lh.googleusercontent.com/Ab1J0ePMYcebGMVwhZJoJqCVRi7HERJNWglBAJJjQUlEWk-2Ikeac6akTTGmkxOYC0I" alt="Watermark" style="max-width: 100%; max-height: 100%;">
                             </div>
                         </div>
+                    </div>
+                    
 					{% endfor %}
                         
                 </div>
