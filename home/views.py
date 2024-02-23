@@ -120,7 +120,24 @@ class Review_function(View):
             return redirect('admin_review')  # Redirect to a success page or another view
 
         return render(request, self.template_name, {'form': form, 'reviews':reviews})
+    
+class DeleteReview(View):
+    def get(self, request, review_id):
+        reviews = Review.objects.get(review_id=review_id)
+        reviews.delete()
+        messages.success(request, "Review Deleted Successfully")
+        return redirect('admin_review')
 
+class UpdateReview(View):
+        
+        
+        def post(self, request, review_id):
+            review = Review.objects.get(id=review_id)
+            form = ReviewForm(request.POST, request.FILES, instance=review)
+            if form.is_valid():
+                form.save()
+                return redirect('admin_review')
+            
 class ContactUs(View):
     template_name = 'contactus.html'
     def get(self, request):

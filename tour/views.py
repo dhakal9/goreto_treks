@@ -72,6 +72,7 @@ class Tourlist(View):
     template_name = 'tourlist.html'
     def get(self, request, pk):
         region = RegionModel.objects.get(pk=pk)
+        print(pk)
         tours = TourDetailsModel.objects.all()
         return render(request, self.template_name, {'region':region, 'tours':tours})
         
