@@ -130,7 +130,6 @@ class DeleteReview(View):
 
 class UpdateReview(View):
         
-        
         def post(self, request, review_id):
             review = Review.objects.get(id=review_id)
             form = ReviewForm(request.POST, request.FILES, instance=review)
