@@ -136,7 +136,12 @@ class UpdateReview(View):
             if form.is_valid():
                 form.save()
                 return redirect('admin_review')
-            
+class Reviews(View):
+    template_name = 'reviews.html'
+    def get(self, request):
+        reviews = Review.objects.all()
+        return render(request, self.template_name, {'reviews':reviews})
+        
 class ContactUs(View):
     template_name = 'contactus.html'
     def get(self, request):
@@ -185,6 +190,7 @@ class OurTeam(View):
     def get(self, request):
         teams = OurTeamModel.objects.all()
         return render(request, self.template_name, {'teams':teams})
+
     
 class Logout(LoginRequiredMixin, View):
     template_name = 'login.html'

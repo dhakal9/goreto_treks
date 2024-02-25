@@ -1,5 +1,5 @@
 from django import forms
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel
 
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
@@ -99,4 +99,21 @@ class ItinaryForm(forms.ModelForm):
         
     class Meta:
         model = ItinatyModel
-        fields =['name', 'day', 'start_end', 'description']
+        fields ="__all__"
+        
+class GallaryForm(forms.ModelForm):
+    tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
+                                     widget=forms.Select(attrs={'class': 'form-control'}))
+    image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['tour'].queryset = TourDetailsModel.objects.all()
+        self.fields['tour'].label_from_instance = self.get_tour_name
+    
+    def get_tour_name(self, instance):
+        return instance.name  
+    
+    class Meta:
+        model = GallaryModel
+        fields ="__all__"

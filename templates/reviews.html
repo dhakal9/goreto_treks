@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .review {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    .review .image,
+    .review .content {
+        flex: 1;
+    }
+    .review .image img {
+        max-width: 100%;
+        height: auto;
+    }
+    .review .content {
+        padding: 0 20px;
+    }
+    .review .content h2 {
+        margin-top: 0;
+    }
+    .review .stars {
+        color: #ffd700;
+    }
+    /* Adjustments for alternating layout */
+    .review:nth-child(even) .image {
+        order: 2;
+    }
+    .review:nth-child(even) .content {
+        order: 1;
+    }
+</style>
+
+<!-- Page Title -->
+<section class="page-title style-two centred">
+    <div class="auto-container">
+        <div class="content-box">
+            <h1>Reviews</h1>
+        </div>
+    </div>
+</section>
+<!-- End Page Title -->
+<div class="auto-container">
+{% for review in reviews %}
+<div class="review">
+    <div class="image">
+        <img style="width: 500px; height: 300px; object-fit: cover;" src="{{ review.team_image.url }}" alt="{{ review.name }}">
+    </div>
+    <div class="content">
+        <h2>{{ review.name }}</h2>
+        <h4>{{ review.position }}</h4>
+        <div class="stars">★★★★★</div>
+        <p>{{ review.message }}</p>
+    </div>
+</div>
+<hr>
+{% endfor %}
+</div>
+{% endblock content %}

@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm
+from django.contrib import messages
 
 def get_regions(request):
     destination_id = request.GET.get('destination_id')
@@ -92,10 +93,7 @@ class AdminTour(View):
         if form.is_valid():
             form.save()
             return redirect('admin_tour')
-        if form1.is_valid():
-            form1.save()
-            return redirect('admin_tour') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
-
+        
         return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
 
 
@@ -104,7 +102,45 @@ class TourDeatails(View):
     template_name = 'tour_details.html'
     def get(self, request, pk):
         tour_details = TourDetailsModel.objects.get(pk=pk)
-        return render(request, self.template_name, {'tour_details':tour_details})
+        images = GallaryModel.objects.all()
+        return render(request, self.template_name, {'tour_details':tour_details, 'images':images})
+
+class Itinary(View):
+    template_name ='admin_itinary.html'
+    def get(self, request):
+        form = ItinaryForm()
+        itinaries = ItinatyModel.objects.all()
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'form': form, 'tours':tours, 'itinaries':itinaries})
+    
+    def post(self, request):
+        itinaries = ItinatyModel.objects.all()
+        tours = TourDetailsModel.objects.all()
+        form = ItinaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Itinary saved Successfully')
+            return redirect('admin_itinary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
+        return render(request, self.template_name, {'form': form, 'tours':tours, 'itinaries':itinaries})
+    
+class Gallary(View):
+    template_name ='admin_gallary.html'
+    def get(self, request):
+        form = GallaryForm()
+        images = GallaryModel.objects.all()
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'form': form, 'tours':tours, 'images':images})
+    
+    def post(self, request):
+        tours = TourDetailsModel.objects.all()
+        images = GallaryModel.objects.all()
+        form = GallaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Image Added Successfully')
+            return redirect('admin_gallary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
+        return render(request, self.template_name, {'form': form, 'tours':tours, 'images':images})
+
 
 class Activities(View):
     template_name = 'activities.html'
