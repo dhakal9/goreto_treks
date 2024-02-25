@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, Destination, AdminTour, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking
+from .views import AdminDestination, Region, Destination, AdminTour, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, Itinary, Gallary
 urlpatterns = [
     path('admindestination/', AdminDestination.as_view(), name="admin_destination"),
     path('destination/', Destination.as_view(), name="destination"),
@@ -13,5 +13,7 @@ urlpatterns = [
     path('tourdetails/<int:pk>/', TourDeatails.as_view(), name='tour_details'),
     path('activities/', Activities.as_view(), name='activities'),
     path('trekking/', Trekking.as_view(), name='trekking'),
+    path('itinary/', Itinary.as_view(), name='admin_itinary'),
+    path('gallary/', Gallary.as_view(), name='admin_gallary'),
  ]
  

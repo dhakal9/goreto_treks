@@ -123,6 +123,29 @@
         font-weight: 700;
         margin-bottom: 5px;
     }
+    
+    .bottom-right {
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+            
+    }
+    .middleclass{
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        opacity: 1;
+        color: #fff;
+        z-index:1;
+    }
+    .bottom-left {
+        position: absolute;
+        bottom: 8px;
+        left: 16px;
+        
+      }
+      .bottom-left .rating{
+        color: #ffab01;
+      }
 </style>
 <!-- tour-section -->
 <section class="tour-section sec-pad">
@@ -138,21 +161,23 @@
                     <div class="inner-box">
                         
                         <figure class="image-box">
-                            {% comment %} <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk"> {% endcomment %}
+                            <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk">
+                            <div class="bottom-left"><div class="rating"><span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span></div></div>
+                            <div class="bottom-right"><h5 class="middleclass"><i class="far fa-clock"></i> {{tour.days}} Day</h5></div>
                             <a href="{% url 'tour_details' tour.activity_id %}"><i class="fas fa-link"></i></a>
                         </figure>
                         <div class="lower-content">
-                            <div class="rating"><span><i class="fas fa-star"></i>5 based on 133 reviews</span></div>
-                            <h3><a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
-                            <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4>
+                           
+                            <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
+                            {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
                             <ul class="info clearfix">
-                                <li><i class="far fa-clock"></i>{{tour.days}} Days</li>
-                                <li><i class="far fa-map"></i>Trip Grade,<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
+                                <li><i class="far fa-mountain"></i>{{tour.altitude}}</li>
+                                <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
                             </ul>
-                            <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p>
-                            <div class="btn-box">
+                            {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
+                            {% comment %} <div class="btn-box">
                                 <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
-                            </div>
+                            </div> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -200,6 +225,13 @@
 </section>
 <!-- about-style-two end -->  {% endcomment %}
 
+<style>
+    .bottom-right {
+        position: absolute;
+        bottom: 8px;
+        right: 16px;
+      }
+</style>
 <!-- place-section -->
 <section class="place-section style-two sec-pad bg-color-1">
     <div class="anim-icon">

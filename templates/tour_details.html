@@ -175,14 +175,14 @@
                                     <h2>Photo Gallery</h2>
                                 </div>
                                 <div class="image-box clearfix">
+                                    {%for image in images%}
+                                    {% if image.tour_id == tour_details.activity_id%}
                                         <figure class="image" style="width:40%!important">
-                                            <img src="../Image/Upload/_1f9c62d6-2276-4b6d-9da9-7a42d024c635.jpg" alt="ABC" loading="eager">
-                                            <a href="../Image/Upload/_1f9c62d6-2276-4b6d-9da9-7a42d024c635.jpg" class="view-btn lightbox-image" data-fancybox="gallery"><i class="icon-Plus"></i></a>
+                                            <img style="float: left; width: 300px; height: 250px; object-fit: cover;" src="{{image.image.url}}" alt="ABC" loading="eager">
+                                            <a href="{{image.image.url}}" class="view-btn lightbox-image" data-fancybox="gallery"><i class="icon-Plus"></i></a>
                                         </figure>
-                                        <figure class="image" style="width:40%!important">
-                                            <img src="../Image/Upload/_4617589f-2827-4ad2-b885-517f87d04e3d.jpg" alt="jhinu" loading="eager">
-                                            <a href="../Image/Upload/_4617589f-2827-4ad2-b885-517f87d04e3d.jpg" class="view-btn lightbox-image" data-fancybox="gallery"><i class="icon-Plus"></i></a>
-                                        </figure>
+                                    {%endif%}
+                                    {% endfor%}
                                 </div>
                             </div>
                                                 <div class="faq-content ">

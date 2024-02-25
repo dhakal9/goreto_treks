@@ -17,9 +17,6 @@ class RegionModel(models.Model):
     description =  models.TextField()
     is_active = models.BooleanField(default=True)
     is_nav = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.name
     
 class TourDetailsModel(models.Model):
     activity_id = models.AutoField(primary_key=True)
@@ -51,5 +48,8 @@ class ItinatyModel(models.Model):
     day = models.IntegerField(null=False, blank=False )
     start_end = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField()
-    
 
+class GallaryModel(models.Model):
+    image_id = models.AutoField(primary_key=True)
+    tour = models.ForeignKey(TourDetailsModel, null= False, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='blog_images', blank=True, null=True)
