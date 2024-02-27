@@ -9,8 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-
-
     <title>Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company</title>
     <meta name="description" content="Welcome Nepal Treks Pvt. Ltd is the leading local Trekking Agency in Nepal. We are professional Nepal Trekking Company based in Thamel, Kathmandu Nepal. Nepal Trekking Company specialized for trekking in Nepal, Nepal Trekking, family trekking &amp; Private Trek. Book directly with local trekking operator, and pay less." />
         <!-- Fav Icon -->
@@ -51,6 +49,9 @@
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	<style>
+		.dark-header li a{
+			color:white;
+		}
 		.main-header.style-two .header-lower .logo-box .bg-layer {
 			position: absolute;
 			top: 0px;
@@ -84,18 +85,22 @@
 			<!-- main header -->
 			<header class="main-header style-two">
 				<!-- header-top -->
-				<div class="header-top">
+				
+
+				<div class="dark-header" style="background-color:#14161c;">
 					<div class="auto-container">
-						<div class="top-inner clearfix">
-							<ul class="top-info pull-left">
+						<div class="top-inner clearfix d-flex">
+							<ul class="top-info pull-left d-flex justify-content-start w-75">
 								<li><a href="mailto:{{company.email}}">{{company.email}}</a></li>
-								<li><i class="fa fa-whatsapp"></i><a href="tel:{{company.contact}}"> {{company.contact}}</a></li>
-								<li>{{company.address}}</li>
+								<li class="mx-5">
+									{% comment %} <i class="fa fa-whatsapp"></i> {% endcomment %}
+									<a href="tel:{{company.contact}}"> {{company.contact}}</a></li>
+								<li><a href="https://googlemap.com">{{company.address}}</a></li>
 							</ul>
-							<ul class="top-info pull-right social-links clearfix" style='margin-left:10px;'>
+							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
 								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
-								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp"></i></a></li>
+								<li class="mx-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
+								<li class="mr-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp"></i></a></li>
 								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
 							</ul>
 							{% comment %} <div class="btn-box pull-right">
@@ -109,7 +114,7 @@
 					<div class="auto-container">
 						<div class="outer-box">
 							<div class="logo-box">
-								<div class="bg-layer"></div>
+								{% comment %} <div class="bg-layer"></div> {% endcomment %}
 								<figure class="logo" style="float: left; width: 127px; object-fit: cover;"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
