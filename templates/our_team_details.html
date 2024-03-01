@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .review {
+        display: flex;
+        margin-bottom: 20px;
+    }
+    .review .image,
+    .review .content {
+        flex: 1;
+    }
+    .review .image img {
+        max-width: 100%;
+        height: auto;
+    }
+    .review .content {
+        padding: 0 20px;
+    }
+    .review .content h2 {
+        margin-top: 0;
+    }
+    .review .stars {
+        color: #ffd700;
+    }
+    /* Adjustments for alternating layout */
+    .review:nth-child(even) .image {
+        order: 2;
+    }
+    .review:nth-child(even) .content {
+        order: 1;
+    }
+</style>
+
+<!-- Page Title -->
+<section class="page-title style-two centred">
+    <div class="auto-container">
+        <div class="content-box">
+            <h1>Team Goreto</h1>
+        </div>
+    </div>
+</section>
+<!-- End Page Title -->
+<div class="auto-container">
+{% for team in teams %}
+<div class="review">
+    <div class="image">
+        <img style="width: 500px; height: 300px; object-fit: cover;" src="{{ team.team_image.url }}" alt="{{ team.name }}">
+        <h2>{{ team.name }}</h2>
+        <h4>Travell Guide</h4>
+    </div>
+    <div class="content">
+        <p>Step into the world of trekking with a true aficionado, Madhab Kumar Dhamala, affectionately known as Madhu. With an astounding experience spanning over two decades, Madhu has etched his name as a stalwart in the trekking industry. Having catered to hundreds of guests annually, his wealth of expertise is unparalleled.
+
+            Madhu’s mastery extends across the length and breadth of major trekking routes in Nepal. His journey began in the quaint mountain village of Dhading, where he nurtured a childhood dream of forming connections with people from around the world. Upon completing his middle school education in the village, Madhu pursued his high school studies while simultaneously embarking on his career as a trekking guide.
+            
+            At Team Goreto, we count ourselves fortunate to have Madhu as an integral part of our team. His profound knowledge and experience have been instrumental in setting Team Goreto apart from the ordinary trekking companies. Madhu’s influence has shaped the core principles that define the essence of our company, ensuring that your trekking experience with us is nothing short of extraordinary.
+            
+            Embark on a journey with Madhab Kumar Dhamala and let his seasoned guidance lead you through the awe-inspiring landscapes of Nepal. Uncover the magic of the Himalayas under the care of a true expert.</p>
+    </div>
+</div>
+<hr>
+{% endfor %}
+</div>
+{% endblock content %}

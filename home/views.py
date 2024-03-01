@@ -129,13 +129,13 @@ class DeleteReview(View):
         return redirect('admin_review')
 
 class UpdateReview(View):
-        
         def post(self, request, review_id):
             review = Review.objects.get(id=review_id)
             form = ReviewForm(request.POST, request.FILES, instance=review)
             if form.is_valid():
                 form.save()
                 return redirect('admin_review')
+            
 class Reviews(View):
     template_name = 'reviews.html'
     def get(self, request):
@@ -190,7 +190,12 @@ class OurTeam(View):
     def get(self, request):
         teams = OurTeamModel.objects.all()
         return render(request, self.template_name, {'teams':teams})
-
+    
+class OurTeamDetails(View):
+    template_name = 'our_team_details.html'
+    def get(self, request):
+        teams = OurTeamModel.objects.all()
+        return render(request, self.template_name, {'teams':teams})
     
 class Logout(LoginRequiredMixin, View):
     template_name = 'login.html'
@@ -217,6 +222,12 @@ class Blogs(View):
     template_name = 'blogs.html'
     def get(self, request):
         blogs = BlogsModel.objects.all()
+        return render(request, self.template_name, {'blogs':blogs})
+
+class BlogsDetails(View):
+    template_name = 'blogs_details.html'
+    def get(self, request, pk):
+        blogs = BlogsModel.objects.get(pk=pk)
         return render(request, self.template_name, {'blogs':blogs})
 
 class AboutUs(View):
@@ -255,4 +266,9 @@ class Csr(View):
         csrs = CsrModel.objects.all()
         return render(request, self.template_name, {'csrs':csrs})
     
+class CsrDetails(View):
+    template_name = 'csr_details.html'
+    def get(self, request, pk):
+        csrs = CsrModel.objects.get(pk=pk)
+        return render(request, self.template_name, {'csrs':csrs})
     

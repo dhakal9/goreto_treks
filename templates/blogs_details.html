@@ -1,0 +1,66 @@
+{% extends 'base.html'%}
+{% block content%}
+<main>
+            
+
+
+
+    <script src="../../code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <style>
+        .tour-details-content .inner-box .text .info-list li {
+            position: relative;
+            display: inline-block;
+            float: left;
+            width: 30%;
+            font-size: 14px;
+            font-weight: 515;
+            text-align: left;
+        }
+    
+            .tour-details-content .inner-box .text .info-list li i {
+                padding-left: 3px !important;
+            }
+    
+        .tour-details-content .overview-inner .overview-list > li:before {
+            position: absolute;
+            content: '';
+            background: #e4e8e9;
+            /*width: 1px;*/
+            width: 0px;
+            height: 100%;
+            left: 285px;
+            top: 0px;
+        }
+    </style>
+    <!-- Page Title -->
+    <section class="page-title style-three" style="background-image: url({{blogs.image.url}}); ">
+        <div class="auto-container">
+            <div class="inner-box">
+                
+                <h2>{{ blogs.created_at|date:"Y F d" }}</h2>
+            
+            </div>
+        </div>
+    </section>
+    <!-- End Page Title -->
+    <!-- tour-details -->
+    <section class="tour-details">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                    <div class="tour-details-content">
+                        <div class="inner-box">
+                            <div class="text">
+                                <h2>{{blogs.title}}</h2>
+                                <p>{{blogs.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{%endblock content%}

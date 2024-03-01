@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel
 from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm
@@ -60,14 +60,7 @@ class Region(View):
 
         return render(request, self.template_name, {'form': form, 'regions':regions})
     
-# class CloseTicket(View):
-#     def get(self, request, ticket_id):
-#         user_project_id = ProjectUser.objects.filter(user_id=request.user.id).values_list('project_id', flat=True)
-#         open_ticket = Tickets.objects.get(prj_id__in=user_project_id, ticket_id=ticket_id)
-#         open_ticket.closed_status = True
-#         open_ticket.save()
-#         messages.success(request, 'Ticket Closed Successfullly')
-#         return redirect('my_tickets')
+
     
 class Tourlist(View):
     template_name = 'tourlist.html'
@@ -95,7 +88,26 @@ class AdminTour(View):
             return redirect('admin_tour')
         
         return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
+    
+class EditTour(View):
+    template_name = 'admin_tour.html'
 
+    def get(self, request, tour_id):
+        tour = get_object_or_404(TourDetailsModel, pk=tour_id)
+        form = TourDetailsForm(instance=tour)
+        form1 = ItinaryForm()
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
+
+    def post(self, request, tour_id):
+        tour = get_object_or_404(TourDetailsModel, pk=tour_id)
+        form1 = ItinaryForm(request.POST, request.FILES)
+        form = TourDetailsForm(request.POST, request.FILES, instance=tour)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_tour')
+        
+        return render(request, self.template_name, {'form': form, 'form1':form1, 'tours':tours})
 
 
 class TourDeatails(View):

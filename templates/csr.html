@@ -13,6 +13,92 @@
 </section>
 <!-- End Page Title -->
 
+<!--Enhanced later -->
+<section class="feature-section centred bg-color-1 sec-pad">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-6">
+                <div class="about-description">
+                    <div class="sec-title text-center">
+                        <p>We serve</p>
+                        <hr>
+                        <h2>A responsibility we owe<h2>
+                    </div>
+                    <p>Corporate Social Responsibility (CSR) is a business approach that integrates social and environmental concerns into the company's operations and interactions with stakeholders. It encompasses various initiatives and activities undertaken by businesses to ensure they are accountable not only for their economic performance but also for their impact on society and the environment. CSR initiatives often include philanthropy, ethical labor practices, environmental sustainability efforts, and community engagement. By embracing CSR, companies strive to contribute positively to the well-being of society, reduce their environmental footprint, and build trust with customers, employees, investors, and communities. CSR is increasingly seen as a fundamental aspect of responsible business conduct, with many organizations recognizing its importance in fostering long-term sustainability and resilience in an ever-changing global landscape.</p><br>
+                    
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row feature-row">
+                    {% comment %} <img style="float: left; width: 400px; height: 200px; object-fit: cover;" src="{% static "assets/images/csras.jpeg" %}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"> {% endcomment %}
+                    <figure class="image" style="margin-top:40px"><img src="{% static "assets/images/csras.jpeg" %}" alt="Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company" loading="eager"></figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .feature-section {
+        background: #f8f8f8;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    .about-description {
+        padding-right: 30px;
+    }
+    
+    .about-description h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .about-description p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+    }
+    
+    .feature-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    
+    .feature-block {
+        margin-bottom: 30px;
+    }
+    
+    .feature-block .inner-box {
+        background: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-block:hover .inner-box {
+        transform: translateY(-5px);
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-block .inner-box h4 {
+        font-size: 20px;
+        color: #333;
+        margin-top: 15px;
+    }
+    
+    .feature-block .inner-box p {
+        font-size: 14px;
+        color: #777;
+        margin-top: 10px;
+    }
+</style>
+<!--Enhanced later End-->
+<hr>
 <section class="news-section">
     <div class="auto-container">
         <div class="row clearfix">
@@ -21,19 +107,19 @@
                 <div class="news-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
                     <div class="inner-box">
                         <figure class="image-box">
-                            <a href="blog-details.html"><img style="float: left; width: 420px; height: 300px; object-fit: cover;" src={{ csr.image.url }} alt=""></a>
+                            <a href="{% url 'csr_details' csr.id %}"><img style="float: left; width: 420px; height: 300px; object-fit: cover;" src={{ csr.image.url }} alt=""></a>
                             <span class="post-date"><i class="icon-Calendar"></i>{{ csr.created_at}}</span>
                         </figure>
                         <div class="lower-content">
-                            <div class="category"><a href="blog-details.html">social</a></div>
-                            <h3><a href="blog-details.html">{{csr.title}}</a></h3>
+                            <div class="category"><a>social</a></div>
+                            <h3><a href="{% url 'csr_details' csr.id %}">{{csr.title}}</a></h3>
                             {% comment %} <ul class="post-info clearfix">
                                 <li><span>By</span> <a href="index.html">Eva Green</a></li>
                                 <li>{{ csr.created_at}}</li>
                             </ul> {% endcomment %}
                             <p>{{csr.description}}</p>
                             <div class="btn-box">
-                                <a href="blog-details.html" class="theme-btn-two">See Details</a>
+                                <a href="{% url 'csr_details' csr.id %}" class="theme-btn-two">See Details</a>
                             </div>
                         </div>
                     </div>

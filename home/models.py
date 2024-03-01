@@ -1,6 +1,7 @@
 # models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from ckeditor.fields import RichTextField
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         """
@@ -70,7 +71,7 @@ class CompanyProfile(models.Model):
     about_sub_heading = models.CharField(max_length = 200)
     about_heading = models.CharField(max_length = 200)
     about_thumbnail = models.ImageField(upload_to='company_images', blank=True, null=True)
-    about_us = models.TextField(max_length=2000)
+    about_us = RichTextField()
     home_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner1_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner2_image = models.ImageField(upload_to='company_images', blank=True, null=True)

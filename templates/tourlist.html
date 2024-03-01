@@ -69,7 +69,7 @@
                                                 </ul>
                                                 <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p>
                                                 <div class="btn-box">
-                                                    <a href="TourDetail3b7d.html?tourId=1039">See Details</a>
+                                                    <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
                                                 </div>
                                             </div>
                                         </div>
