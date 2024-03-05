@@ -130,3 +130,7 @@ class CsrModel(models.Model):
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
+class MainGallaryModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    image =  models.ImageField(upload_to='blog_images', blank=False, null=False)

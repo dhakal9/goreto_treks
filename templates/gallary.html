@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .gallery-item {
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+
+  .gallery-item img, .gallery-item video {
+    width: 100%;
+    vertical-align: top;
+  }
+
+  @media screen and (min-width: 768px) {
+    .gallery-item {
+      flex: 1 0 calc(33.333% - 20px);
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .gallery-item {
+      flex: 1 0 calc(25% - 20px);
+    }
+  }
+</style>
+
+<div class="gallery">
+  {% for image in images %}
+  <div class="gallery-item">
+    <img src="{{ image.image.url }}" alt="">
+  </div>
+  {% endfor %}
+  {% comment %} <div class="gallery-item">
+    <img src="image2.jpg" alt="Image 2">
+  </div>
+  <div class="gallery-item">
+    <video controls>
+      <source src="video1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <div class="gallery-item">
+    <img src="image3.jpg" alt="Image 3">
+  </div> {% endcomment %}
+  <!-- Add more images and videos as needed -->
+</div>
+
+<script>
+  // Optional JavaScript code for additional functionality
+</script>
+
+{% endblock content %}

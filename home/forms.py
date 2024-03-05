@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from ckeditor.widgets import CKEditorWidget
 
@@ -101,4 +101,11 @@ class CsrForm(forms.ModelForm):
     
     class Meta:
         model = CsrModel
+        fields = '__all__'
+    
+class MainGallaryForm(forms.ModelForm):
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    
+    class Meta:
+        model = MainGallaryModel
         fields = '__all__'

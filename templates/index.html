@@ -132,6 +132,7 @@
             <div class="col-lg-6">
                 <div class="row feature-row">
                     <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
+                        
                         <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;"> 
                             <div class="inner-box">
                                 <figure class="image-box"><img src="assets/images/resource/feature-1.jpg" alt=""></figure>
@@ -497,45 +498,85 @@
     <!-- video-style-two end -->
 
 
-        <!-- testimonial-section -->
-        <section class="testimonial-section bg-color-1 sec-pad centred">
-            <div class="auto-container">
-                <div class="sec-title centred">
-                    <p>Review & Testimonials</p>
-                    <h2>Top Reviews for Goreto Treks</h2>
-                </div>
-                <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">
-					{% for review in reviews %}
-                        <div class="testimonial-block-one">
-                            <div class="inner-box" style="height:490px;">
-                                <ul class="rating-box clearfix">
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                </ul>
-                                <div class="text">
-                                    <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
-                                    <p style="height:245px">{{ review.message|truncatewords:40}}</p>
-                                </div>
-                                <div class="author-box">
-                                    <h4>{{ review.name }}</h4>
-                                    <span class="designation">{{ review.position }}</span>
-                                    <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
-                                </div>
-                                <!-- Watermark -->
-                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1;">
-                                    <img src="{% static 'assets/images/recommended-tripadvisor.png'%}" alt="Watermark" style="max-width: 100%; max-height: 100%;">
-                                </div>
-                            </div>
-                        </div>
-    					{% endfor %}
-                        
+ <!-- testimonial-section -->
+ <section class="testimonial-section bg-color-1 sec-pad centred">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Review & Testimonials</p>
+            <h2>Top Reviews for Goreto Treks</h2>
+        </div>
+        <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">   
+            {% for review in reviews %}
+            <div class="testimonial-block-one">
+                <a href="{% url 'reviews' %}" class="testimonial-link">
+                <div class="inner-box" style="height: 490px;">
+                    <br>
+                    <ul class="rating-box clearfix">
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                    </ul>
+                    <div class="text">
+                        <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
+                        <p style="height: 245px">{{ review.message|truncatewords:50 }}</p>
+                    </div>
+                    <div class="author-box">
+                        <h4>{{ review.name }}</h4>
+                        <span class="designation">{{ review.position }}</span>
+                        <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
+                    </div>
+                    <!-- Watermark -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1;">
+                        <img src="{% static 'assets/images/recommended-tripadvisor.png'%}" alt="Watermark" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <!-- Read More Button -->
+                    </a>
+                    <!-- Dark Overlay -->
+                    <div class="dark-overlay"></div>
+                    
                 </div>
             </div>
-        </section>
-        <!-- testimonial-section end -->
+            
+{% endfor %}
+                          
+        </div>
+    </div>
+</section>
+<!-- testimonial-section end -->
+<style>
+    .testimonial-block-one .dark-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(192,192,192); /* Adjust opacity as needed */
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .testimonial-block-one:hover .dark-overlay {
+        opacity: 1;
+    }
+    
+    .testimonial-block-one .testimonial-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2; /* Ensure it's above the dark overlay */
+    }
+    
+    .testimonial-block-one:hover .testimonial-link {
+        cursor: pointer;
+    }
+    
+</style>
       
             
         <!-- funfact-style-two -->

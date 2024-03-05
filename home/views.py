@@ -1,10 +1,10 @@
 
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel
 from tour.models import DestinationModel, TourDetailsModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -20,6 +20,8 @@ class Index(View):
         funfact = FunfactModel.objects.first()
         tours = TourDetailsModel.objects.all()
         return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours})
+    
+
     
 class Explore(View):
     template_name = "explore.html"
@@ -271,4 +273,25 @@ class CsrDetails(View):
     def get(self, request, pk):
         csrs = CsrModel.objects.get(pk=pk)
         return render(request, self.template_name, {'csrs':csrs})
+    
+class MainGallaryAdmin(View):
+    template_name = 'admin_main_gallary.html'
+    def get(self, request):
+        form = MainGallaryForm()
+        images = MainGallaryModel.objects.all()
+        return render(request, self.template_name, {'form':form, 'images':images})
+    def post(self, request):
+        images = MainGallaryModel.objects.all()
+        form = MainGallaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Image Added successfully')
+            return redirect('main_admin_gallary')
+        return render(request, self.template_name, {'form':form, 'images':images})
+    
+class Gallary(View):
+    tempale_name = 'gallary.html'
+    def get(self, request):
+        images = MainGallaryModel.objects.all()
+        return render(request, self.tempale_name, {'images':images})
     

@@ -90,12 +90,12 @@
 				<div class="dark-header" style="background-color:#14161c;">
 					<div class="auto-container">
 						<div class="top-inner clearfix d-flex">
-							<ul class="top-info pull-left d-flex justify-content-start w-75">
-								<li><a href="mailto:{{company.email}}">{{company.email}}</a></li>
+							<ul class="top-info pull-left d-flex justify-content-start w-75 social-links">
+								<li><a href="mailto:{{company.email}}"><i class="fas fa-envelope"></i> {{company.email}}</a></li>
 								<li class="mx-5">
 									{% comment %} <i class="fa fa-whatsapp"></i> {% endcomment %}
-									<a href="tel:{{company.contact}}"> {{company.contact}}</a></li>
-								<li><a href="https://googlemap.com">{{company.address}}</a></li>
+									<a href="tel:{{company.contact}}"><i class="fa fa-phone"></i> {{company.contact}}</a></li>
+								<li><a href="https://googlemap.com"><i class="fas fa-map-marker-alt"></i> {{company.address}}</a></li>
 							</ul>
 							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
 								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
@@ -115,6 +115,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								{% comment %} <div class="bg-layer"></div> {% endcomment %}
+								
 								<figure class="logo" style="float: left; width: 127px; object-fit: cover;"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
@@ -131,76 +132,79 @@
 	
 													<li class="dropdown">
 														<a href="{% url 'destination'%}"> Destinations </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																	<div class="col-xl-6 column">
-																		<ul>
-																			
-																			{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
-																			
-
-
-																			<div class="col-xl-6 column">
+																																		
 																				<ul>
-																					<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
-																						<li>{% for destination in destinations %}<a style="cursor:pointer" href="{% url 'one_destination' destination.destination_id %}">{{destination.name}}</a>{% endfor %}</li>
+																					<li class="dropdown">
+																						{% for destination in destinations %}
+																						<a style="cursor:pointer" href="{% url 'one_destination' destination.destination_id %}">{{destination.name}}</a>
+																						{% if destination.name == "Nepal"%}
+																																											
+																						<ul>
+																							
+																							{% for nep_reg in nepal_regions %}
+																							{%if nep_reg.destination_id == 3%}
+																							
+																							<li><a href="index.html">{{nep_reg.name}}</a></li>
+																							{%endif%}
+																							{%endfor%}
+																							
+																						</ul>
+																						
+																							
+																						<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+																						
+																						{% endif %}
+																						{% endfor %}
+																					</li>
+																					<li class="dropdown"><a href="index.html">Nepal</a>
+																						<ul>
+																							<li><a href="index.html">Annapurna Region</a></li>
+																							<li><a href="index-2.html">Everest Region</a></li>
+																							<li><a href="index-3.html">Langtang Region</a></li>
+																						</ul>
+																					<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+																				</li>
 																				</ul>
-																			</div>
-
-
-
-
-									
-																		</ul>
-																	</div>
-																	
-															</div>
-														</div>
+																			
+															
 													</li>
 													<li class="dropdown">
 														<a href="{% url 'activities' %}"> Activities </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																<div class="col-xl-6 column">
-																	<ul>
-																		{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
-																		<div class="col-xl-6 column">
+														
+																
 																			<ul>
-																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
+																			
 																				<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
 																					<li>{% for activity in activities %} <a style="cursor:pointer" href="{% url 'tour_list' activity.region_id %}">{{activity.name}}</a>{% endfor %}</li>
 																			</ul>
-																		</div>
-																	</ul>
-																</div>
-															<div>
+																		
+																
 													</li>
 	
 													<li class="dropdown">
 														<a href="{%url 'about_us'%}"> About Us </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																<div class="col-xl-6 column">
-																	<ul>
-																		{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
-																		<div class="col-xl-6 column">
+														{% comment %} <div class="megamenu"> {% endcomment %}
 																			<ul>
-																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
+																				
 																					<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
 																					<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
 																					<li><a style="cursor:pointer" href="{% url 'why_us'%}"> Why Gotero </a></li>
 																					<li><a style="cursor:pointer" href="#"> Our Motto </a></li>
 																			</ul>
-																		</div>
-																	</ul>
-																</div>
-															</div>
-														</div>
+																		
+														{% comment %} </div> {% endcomment %}
 													</li>
 											<li class="dropdown">
 												<a href="{%url 'blogs'%}">Blogs</a>
 											</li>
-											<li><a href="{% url 'csr'%}">CSR</a></li>
+
+											<li class="dropdown">
+												<a href="{% url 'csr'%}">CSR</a>
+											</li>
+											
+											<li class="dropdown">
+												<a href="{% url 'gallary'%}">Gallary</a>
+											</li>
 										</ul>
 									</div>
 								</nav>
@@ -382,9 +386,6 @@
 			<div class="row clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12 footer-column">
 					<div class="footer-widget logo-widget">
-
-						
-						
 						<figure class="footer-logo" style="margin-bottom: 5px;"><a href="index.html"> <h3 style="color:#FF7C5B">GORETO TREK</h3> </a></figure>
 						<div class="text">
 							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure </p>
@@ -403,11 +404,10 @@
 						</div>
 						<div class="widget-content">
 							<ul class="links-list clearfix">
-								<li><a href="Chomolungma/About.html">About Us</a></li>
-								
-								
-								<li><a href="#">Our Blog</a></li>
-								<li><a href="Chomolungma/Contact.html">Contact Us</a></li>
+								<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
+								{% for activity in activities %} 
+								<li><a style="cursor:pointer" href="{% url 'tour_list' activity.region_id %}">{{activity.name}}</a></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
@@ -443,6 +443,7 @@
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="w-100 d-flex justify-content-center text-center">
 					<aside id="nepamount_association_widget-5" class="col-md-12">
 						<div class="footer-widget">
@@ -452,16 +453,16 @@
 							<ul class="social-icons">
 								<ul class="footsocial">
 									<a href="http://www.nepal.gov.np/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/nepal-gray-1.png" alt="">
+										<img style="width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/nepgov.png'%}" alt="">
 									</a>
 									<a href="https://ntb.gov.np/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/ntb.png" alt="">
+										<img style=" width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/ntb1.png'%}" alt="">
 									</a>
 									<a href="https://www.taan.org.np/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/taanlogo.png" alt="">
+										<img style=" width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/taan.png'%}" alt="">
 									</a>
 									<a href="https://www.nepalmountaineering.org/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/nm.png" alt="">
+										<img style=" width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/nma1.png'%}" alt="">
 									</a>
 								</ul>
 							</ul>

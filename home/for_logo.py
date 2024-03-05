@@ -8,9 +8,10 @@ def additional_context(request):
     company_profile = CompanyProfile.objects.first()
     destinations = DestinationModel.objects.all()
     activities = RegionModel.objects.filter(is_nav = True)
+    nepal_regions = RegionModel.objects.filter(is_nav = False)
     all_activities = TourDetailsModel.objects.all()
     trekkings = TourDetailsModel.objects.filter(is_activity = False)
-    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings}
+    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions}
     return additional_data
 
 def get_tripadvisor_reviews(company_name):

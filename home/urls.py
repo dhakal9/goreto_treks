@@ -1,8 +1,9 @@
 
 from django.urls import path
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
-from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Reviews, DeleteReview, UpdateReview, Funfact, ContactUs, OurTeamAdmin, OurTeam, OurTeamDetails, AdminBlogs, Blogs, BlogsDetails, AboutUs, WhyUs, CsrAdmin, Csr, CsrDetails
+from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Reviews, DeleteReview, UpdateReview, Funfact, ContactUs, OurTeamAdmin, OurTeam, OurTeamDetails, AdminBlogs, Blogs, BlogsDetails, AboutUs, WhyUs, CsrAdmin, Csr, CsrDetails, Gallary, MainGallaryAdmin
 urlpatterns = [
      path('', Index.as_view(), name="index"),
      path('explore/', Explore.as_view(), name="explore"),
@@ -26,7 +27,8 @@ urlpatterns = [
      path('csradmin/', CsrAdmin.as_view(), name="csr_admin"),
      path('csr/', Csr.as_view(), name="csr"),
      path('csr/<int:pk>', CsrDetails.as_view(), name="csr_details"),
-     path('reviews/', Reviews.as_view(), name='reviews')
-     
+     path('reviews/', Reviews.as_view(), name='reviews'),
+     path('gallary/', Gallary.as_view(), name='gallary'),
+     path('admingallary/', MainGallaryAdmin.as_view(), name='main_admin_gallary'),
  ]
  

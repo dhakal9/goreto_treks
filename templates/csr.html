@@ -117,7 +117,7 @@
                                 <li><span>By</span> <a href="index.html">Eva Green</a></li>
                                 <li>{{ csr.created_at}}</li>
                             </ul> {% endcomment %}
-                            <p>{{csr.description}}</p>
+                            <p>{{csr.description|wordwrap:"10"|slice:":80"}}</p>
                             <div class="btn-box">
                                 <a href="{% url 'csr_details' csr.id %}" class="theme-btn-two">See Details</a>
                             </div>
