@@ -84,7 +84,7 @@
         <td><img src="{{destination.image.url}}" style="width: 50px; height: 45px;"></td>
         <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
         <td>
-        <a type="button" href="" class="btn btn-link btn-sm btn-rounded">
+        <a type="button" href="{% url 'update_destination' destination.destination_id%}" class="btn btn-link btn-sm btn-rounded">
         Edit
         </a>
         <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
