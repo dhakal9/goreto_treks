@@ -3,7 +3,7 @@ from django.urls import path
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
-from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Reviews, DeleteReview, UpdateReview, Funfact, ContactUs, OurTeamAdmin, DeleteTeam, UpdateTeam, OurTeam, OurTeamDetails, AdminBlogs, UpdateBlogs, DeleteBlogs, Blogs, BlogsDetails, AboutUs, WhyUs, CsrAdmin, Csr, UpdateCsr, DeleteCsr, CsrDetails, Gallary, MainGallaryAdmin, DeleteGallary
+from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Reviews, DeleteReview, UpdateReview, Funfact, ContactUs, OurTeamAdmin, DeleteTeam, UpdateTeam, OurTeam, OurTeamDetails, AdminBlogs, UpdateBlogs, DeleteBlogs, Blogs, BlogsDetails, AboutUs, WhyUsAdmin, WhyUs, CsrAdmin, Csr, UpdateCsr, DeleteCsr, CsrDetails, Gallary, MainGallaryAdmin, DeleteGallary
 urlpatterns = [
      path('', Index.as_view(), name="index"),
      path('explore/', Explore.as_view(), name="explore"),
@@ -27,6 +27,7 @@ urlpatterns = [
      path('blogs/', Blogs.as_view(), name="blogs"),
      path('blogs/<int:pk>', BlogsDetails.as_view(), name="blogs_details"),
      path('aboutus/', AboutUs.as_view(), name="about_us"),
+     path('adminwhyus/', WhyUsAdmin.as_view(), name="admin_why_us"),
      path('whyus/', WhyUs.as_view(), name="why_us"),
      path('csradmin/', CsrAdmin.as_view(), name="csr_admin"),
      path('update_csrs/<int:id>', UpdateCsr.as_view(), name="update_csr"),

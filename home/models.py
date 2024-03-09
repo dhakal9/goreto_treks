@@ -134,3 +134,8 @@ class CsrModel(models.Model):
 class MainGallaryModel(models.Model):
     id = models.AutoField(primary_key=True)
     image =  models.ImageField(upload_to='blog_images', blank=False, null=False)
+
+class WhyUsModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length = 200, blank=False, null=False)
+    description =  models.TextField(max_length=3000, blank=False, null=False)

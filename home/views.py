@@ -1,10 +1,10 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
 from tour.models import DestinationModel, TourDetailsModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -298,10 +298,27 @@ class AboutUs(View):
         return render(request, self.template_name, {'teams':teams, 'reviews':reviews})
     
 
+
+class WhyUsAdmin(View):
+    template_name ='admin_whyus.html'
+    def get(self, request):
+        form = WhyUsForms() 
+        return render(request, self.template_name, {'form':form})
+
+        
+    def post(self, request):
+        form = WhyUsForms(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Why Added Successfully')
+            return redirect('admin_why_us')
+        return render(request, self.template_name, {'form':form})
+    
 class WhyUs(View):
     template_name ='why_us.html'
     def get(self, request):
-        return render(request, self.template_name)
+        whyuss = WhyUsModel.objects.all()
+        return render(request, self.template_name, {'whyuss':whyuss})
     
 
 class CsrAdmin(View):

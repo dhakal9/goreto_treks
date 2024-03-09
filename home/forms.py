@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from ckeditor.widgets import CKEditorWidget
 
@@ -108,4 +108,12 @@ class MainGallaryForm(forms.ModelForm):
     
     class Meta:
         model = MainGallaryModel
+        fields = '__all__'
+
+class WhyUsForms(forms.ModelForm):
+    title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    
+    class Meta:
+        model = WhyUsModel
         fields = '__all__'
