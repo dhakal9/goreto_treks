@@ -73,6 +73,17 @@
 		.main-header.style-two .header-lower .main-menu .navigation > li > a {
 			color: #ffffff;
 		}
+
+.dropdown > ul {
+    left: 100%; 
+    top: 0; 
+}
+
+.dropdown ul ul {
+    top: 0;
+    left: 100%; 
+}
+
 	</style>
 
 </head>
@@ -94,7 +105,12 @@
 								<li><a href="mailto:{{company.email}}"><i class="fas fa-envelope"></i> {{company.email}}</a></li>
 								<li class="mx-5">
 									{% comment %} <i class="fa fa-whatsapp"></i> {% endcomment %}
-									<a href="tel:{{company.contact}}"><i class="fa fa-phone"></i> {{company.contact}}</a></li>
+									<a href="tel:{{company.contact}}">
+										{% comment %} <i class="fa fa-phone"></i>  {% endcomment %}
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+											<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+										  </svg>
+										{{company.contact}}</a></li>
 								<li><a href="https://googlemap.com"><i class="fas fa-map-marker-alt"></i> {{company.address}}</a></li>
 							</ul>
 							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
@@ -115,7 +131,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								<div class="bg-layer"></div>
-								<figure class="logo" style="float: left; object-fit: cover;"><a href="{% url 'index' %}"><img style="min-width: 200px; min-height: 80px;" src="{{company.logo_image.url}}" alt=""></a></figure>
+								<figure class="logo" style="float: left; object-fit: cover;"><a href="{% url 'index' %}"><img style="min-width: 150px" src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
 							<div class="menu-area clearfix">
@@ -612,17 +628,39 @@ window.fbAsyncInit = function () {
 
 <!-- Code provided by Google -->
 <div id="google_translate_element"></div>
-<script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-	includedLanguages: 'es,ru,ja,zh-CN,ko,de,pt',
-	autoDisplay: true,
-	gaTrack: true,
-	hl: 'en',
-	forceTranslation: 'en',
-	 autoDisplay: true}, 'google_translate_element');
-  }
-</script>
+<div class="menu-traslate-header">
+	<ul>
+	  <li><a href="#googtrans/es">Español</a></li>
+	  <li><a href="#googtrans/zh-CN">汉语</a></li>
+	  <li><a href="#googtrans/vi">Việt</a></li>
+	  <li><a href="#googtrans/ru">Русский</a></li>
+	  <li><a href="#googtrans/sq">SHQIP</a></li>
+	  <li><a href="#googtrans/km">ខ្មែរ</a></li>
+	  <li><a href="#googtrans/fr">Français</a></li>
+	  <li><a href="#googtrans/ar">عربي</a></li>
+	</ul>
+	</div>
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+		  new google.translate.TranslateElement({
+			pageLanguage: 'en', 
+			includedLanguages: 'ar,en,es,fr,km,ru,sq,vi,zh-CN', 
+			layout: google.translate.TranslateElement.InlineLayout.SIMPLE, 
+			multilanguagePage: true, 
+			gaTrack: true, 
+		  }, 'google_translate_element');
+		}
+		</script>
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+		 <script type="text/javascript">
+		jQuery(document).ready(function($) {
+		  $('.menu-traslate-header ul li a').click(function(event) {
+			  window.location = $(this).attr('href');
+			  location.reload();
+		  });
+		});
+		</script>
+
 	
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 
