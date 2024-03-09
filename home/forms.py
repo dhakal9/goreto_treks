@@ -1,8 +1,8 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-
+from ckeditor.widgets import CKEditorWidget
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField(max_length=50, required=True, widget=forms.EmailInput(attrs={'placeholder':'abc@email.com', 'class':'form-control'}))
@@ -101,4 +101,19 @@ class CsrForm(forms.ModelForm):
     
     class Meta:
         model = CsrModel
+        fields = '__all__'
+    
+class MainGallaryForm(forms.ModelForm):
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    
+    class Meta:
+        model = MainGallaryModel
+        fields = '__all__'
+
+class WhyUsForms(forms.ModelForm):
+    title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
+    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    
+    class Meta:
+        model = WhyUsModel
         fields = '__all__'

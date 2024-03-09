@@ -11,81 +11,6 @@
 </section>
 <!-- End Page Title -->
 
-<section class="news-section sec-pad">
-    <div class="auto-container">
-        <div class="row clearfix">
-            <div class="col-lg-4 col-md-6 col-sm-12 news-block">
-                <div class="news-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
-                    <div class="inner-box">
-                        <figure class="image-box">
-                            <a href="blog-details.html"><img src="assets/images/news/news-1.jpg" alt=""></a>
-                            <span class="post-date"><i class="icon-Calendar"></i>5 Oct, 2020</span>
-                        </figure>
-                        <div class="lower-content">
-                            <div class="category"><a href="blog-details.html">Lifestyle</a></div>
-                            <h3><a href="blog-details.html">Including animation in your design system</a></h3>
-                            <ul class="post-info clearfix">
-                                <li><span>By</span> <a href="index.html">Eva Green</a></li>
-                                <li> - October 13, 2020</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet consectur adip icing sed do eiusmod tempor incididunt labore dolore magna aliqua enim.</p>
-                            <div class="btn-box">
-                                <a href="blog-details.html" class="theme-btn-two">See Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 news-block">
-                <div class="news-block-one wow fadeInUp animated animated animated" data-wow-delay="300ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 300ms; animation-name: fadeInUp;">
-                    <div class="inner-box">
-                        <figure class="image-box">
-                            <a href="blog-details.html"><img src="assets/images/news/news-2.jpg" alt=""></a>
-                            <span class="post-date"><i class="icon-Calendar"></i>4 Oct, 2020</span>
-                        </figure>
-                        <div class="lower-content">
-                            <div class="category"><a href="blog-details.html">Lifestyle</a></div>
-                            <h3><a href="blog-details.html">Including animation in your design system</a></h3>
-                            <ul class="post-info clearfix">
-                                <li><span>By</span> <a href="index.html">Eva Green</a></li>
-                                <li> - October 13, 2020</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet consectur adip icing sed do eiusmod tempor incididunt labore dolore magna aliqua enim.</p>
-                            <div class="btn-box">
-                                <a href="blog-details.html" class="theme-btn-two">See Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 news-block">
-                <div class="news-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 600ms; animation-name: fadeInUp;">
-                    <div class="inner-box">
-                        <figure class="image-box">
-                            <a href="blog-details.html"><img src="assets/images/news/news-3.jpg" alt=""></a>
-                            <span class="post-date"><i class="icon-Calendar"></i>3 Oct, 2020</span>
-                        </figure>
-                        <div class="lower-content">
-                            <div class="category"><a href="blog-details.html">Lifestyle</a></div>
-                            <h3><a href="blog-details.html">Including animation in your design system</a></h3>
-                            <ul class="post-info clearfix">
-                                <li><span>By</span> <a href="index.html">Eva Green</a></li>
-                                <li> - October 13, 2020</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet consectur adip icing sed do eiusmod tempor incididunt labore dolore magna aliqua enim.</p>
-                            <div class="btn-box">
-                                <a href="blog-details.html" class="theme-btn-two">See Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
 
 <!-- tours-page-section -->
 <section class="tours-page-section">
@@ -122,16 +47,16 @@
                                         <div class="inner-box">
                                             <figure class="image-box">
                                                 <img src="{{blog.image.url}}" alt="10 Days Annapurna Base Camp Trekkk">
-                                                <a href="#"><i class="fas fa-link"></i></a>
+                                                <a href="{% url 'blogs_details' blog.id %}"><i class="fas fa-link"></i></a>
                                             </figure>
                                             <div class="lower-content">
-                                                <h3><a href="#">{{blog.title}}</a></h3>
+                                                <h3><a href="{% url 'blogs_details' blog.id %}">{{blog.title}}</a></h3>
                                                 <ul class="info clearfix">
                                                     <li><i class="far fa-clock"></i>{{ blog.created_at|date:"Y-m-d" }}</li>
                                                 </ul>
                                                 <p>{{blog.description|wordwrap:"10"|slice:":150"}}....</p>
                                                 <div class="btn-box">
-                                                    <a href="TourDetail3b7d.html?tourId=1039">See Details</a>
+                                                    <a href="{% url 'blogs_details' blog.id %}">See Details</a>
                                                 </div>
                                             </div>
                                         </div>

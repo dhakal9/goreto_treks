@@ -69,7 +69,7 @@
                                                 </ul>
                                                 <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p>
                                                 <div class="btn-box">
-                                                    <a href="TourDetail3b7d.html?tourId=1039">See Details</a>
+                                                    <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -302,7 +302,7 @@
                             <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
                         </div>
                         <div class="widget-content">
-                            <img src="{% static 'assets/images/favicon.ico/recommended-tripadvisor.png' %}" />
+                            <img src="{% static 'assets/images/recommended-tripadvisor.png' %}" />
                             <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
                         </div>
                     </div>

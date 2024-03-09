@@ -1,10 +1,10 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
 from tour.models import DestinationModel, TourDetailsModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -20,6 +20,8 @@ class Index(View):
         funfact = FunfactModel.objects.first()
         tours = TourDetailsModel.objects.all()
         return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours})
+    
+
     
 class Explore(View):
     template_name = "explore.html"
@@ -129,13 +131,23 @@ class DeleteReview(View):
         return redirect('admin_review')
 
 class UpdateReview(View):
-        
-        def post(self, request, review_id):
-            review = Review.objects.get(id=review_id)
-            form = ReviewForm(request.POST, request.FILES, instance=review)
-            if form.is_valid():
-                form.save()
-                return redirect('admin_review')
+    template_name = 'admin_review.html'
+
+    def get(self, request, review_id):
+        reviews = Review.objects.all()
+        review = get_object_or_404(Review, pk=review_id)
+        form = ReviewForm(instance=review)
+        return render(request, self.template_name, {'form': form, 'review':review, 'reviews':reviews })
+
+    def post(self, request, review_id):
+        review = get_object_or_404(Review, pk=review_id)
+        form = ReviewForm(request.POST, request.FILES, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reviews Updated Successfully')
+            return redirect('admin_review')
+        return render(request, self.template_name, {'form': form,  'review':review})
+            
 class Reviews(View):
     template_name = 'reviews.html'
     def get(self, request):
@@ -184,13 +196,42 @@ class OurTeamAdmin(View):
             return redirect('admin_team')  # Redirect to a success page or another view
 
         return render(request, self.template_name, {'form': form, 'teams':teams})
+    
+class DeleteTeam(View):
+    def get(self, request, team_id):
+        teams = OurTeamModel.objects.get(team_id=team_id)
+        teams.delete()
+        messages.success(request, "Team Deleted Successfully")
+        return redirect('admin_team')
+    
+class UpdateTeam(View):
+    template_name = 'admin_team.html'
+    def get(self, request, team_id):
+        teams = OurTeamModel.objects.all()
+        team = get_object_or_404(OurTeamModel, pk=team_id)
+        form = OurTeamForm(instance=team)
+        return render(request, self.template_name, {'form': form, 'team':team, 'teams':teams })
+
+    def post(self, request, team_id):
+        team = get_object_or_404(OurTeamModel, pk=team_id)
+        form = OurTeamForm(request.POST, request.FILES, instance=team)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Team Updated Successfully')
+            return redirect('admin_team')
+        return render(request, self.template_name, {'form': form,  'team':team})
 
 class OurTeam(View):
     template_name='our_team.html'
     def get(self, request):
         teams = OurTeamModel.objects.all()
         return render(request, self.template_name, {'teams':teams})
-
+    
+class OurTeamDetails(View):
+    template_name = 'our_team_details.html'
+    def get(self, request):
+        teams = OurTeamModel.objects.all()
+        return render(request, self.template_name, {'teams':teams})
     
 class Logout(LoginRequiredMixin, View):
     template_name = 'login.html'
@@ -213,10 +254,40 @@ class AdminBlogs(View):
             return redirect('admin_blogs')
         return render(request, self.template_name, {'form':form})
     
+class UpdateBlogs(View):
+    template_name = 'admin_blogs.html'
+    def get(self, request, id):
+        blogs = BlogsModel.objects.all()
+        blog = get_object_or_404(BlogsModel, pk=id)
+        form = BlogsForm(instance=blog)
+        return render(request, self.template_name, {'form': form, 'blog':blog, 'blogs':blogs })
+
+    def post(self, request, id):
+        blog = get_object_or_404(BlogsModel, pk=id)
+        form = BlogsForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Blogs Updated Successfully')
+            return redirect('admin_blogs')
+        return render(request, self.template_name, {'form': form,  'blog':blog})
+
+class DeleteBlogs(View):
+    def get(self, request, id):
+        blogs = BlogsModel.objects.get(pk=id)
+        blogs.delete()
+        messages.success(request, "Blogs Deleted Successfully")
+        return redirect('admin_blogs')
+    
 class Blogs(View):
     template_name = 'blogs.html'
     def get(self, request):
         blogs = BlogsModel.objects.all()
+        return render(request, self.template_name, {'blogs':blogs})
+
+class BlogsDetails(View):
+    template_name = 'blogs_details.html'
+    def get(self, request, pk):
+        blogs = BlogsModel.objects.get(pk=pk)
         return render(request, self.template_name, {'blogs':blogs})
 
 class AboutUs(View):
@@ -227,10 +298,27 @@ class AboutUs(View):
         return render(request, self.template_name, {'teams':teams, 'reviews':reviews})
     
 
+
+class WhyUsAdmin(View):
+    template_name ='admin_whyus.html'
+    def get(self, request):
+        form = WhyUsForms() 
+        return render(request, self.template_name, {'form':form})
+
+        
+    def post(self, request):
+        form = WhyUsForms(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Why Added Successfully')
+            return redirect('admin_why_us')
+        return render(request, self.template_name, {'form':form})
+    
 class WhyUs(View):
     template_name ='why_us.html'
     def get(self, request):
-        return render(request, self.template_name)
+        whyuss = WhyUsModel.objects.all()
+        return render(request, self.template_name, {'whyuss':whyuss})
     
 
 class CsrAdmin(View):
@@ -249,10 +337,66 @@ class CsrAdmin(View):
             return redirect('csr_admin')
         return render(request, self.template_name, {'form':form, 'csrs':csrs})
     
+class UpdateCsr(View):
+    template_name = 'admin_csr.html'
+    def get(self, request, id):
+        csrs = CsrModel.objects.all()
+        csr = get_object_or_404(CsrModel, pk=id)
+        form = CsrForm(instance=csr)
+        return render(request, self.template_name, {'form': form, 'csr':csr, 'csrs':csrs })
+
+    def post(self, request, id):
+        csr = get_object_or_404(CsrModel, pk=id)
+        form = CsrForm(request.POST, request.FILES, instance=csr)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'CSR Updated Successfully')
+            return redirect('csr_admin')
+        return render(request, self.template_name, {'form': form,  'csr':csr})
+
+class DeleteCsr(View):
+    def get(self, request, id):
+        csrs = CsrModel.objects.get(pk=id)
+        csrs.delete()
+        messages.success(request, "CSR Deleted Successfully")
+        return redirect('admin_blogs')
+    
 class Csr(View):
     template_name = 'csr.html'
     def get(self, request):
         csrs = CsrModel.objects.all()
         return render(request, self.template_name, {'csrs':csrs})
     
+class CsrDetails(View):
+    template_name = 'csr_details.html'
+    def get(self, request, pk):
+        csrs = CsrModel.objects.get(pk=pk)
+        return render(request, self.template_name, {'csrs':csrs})
     
+class MainGallaryAdmin(View):
+    template_name = 'admin_main_gallary.html'
+    def get(self, request):
+        form = MainGallaryForm()
+        images = MainGallaryModel.objects.all()
+        return render(request, self.template_name, {'form':form, 'images':images})
+    def post(self, request):
+        images = MainGallaryModel.objects.all()
+        form = MainGallaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Image Added successfully')
+            return redirect('main_admin_gallary')
+        return render(request, self.template_name, {'form':form, 'images':images})
+    
+class Gallary(View):
+    tempale_name = 'gallary.html'
+    def get(self, request):
+        images = MainGallaryModel.objects.all()
+        return render(request, self.tempale_name, {'images':images})
+    
+class DeleteGallary(View):
+    def get(self, request, id):
+        images = MainGallaryModel.objects.get(id=id)
+        images.delete()
+        messages.success(request, "Image Deleted Successfully")
+        return redirect('main_admin_gallary')

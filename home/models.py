@@ -1,6 +1,7 @@
 # models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         """
@@ -70,7 +71,7 @@ class CompanyProfile(models.Model):
     about_sub_heading = models.CharField(max_length = 200)
     about_heading = models.CharField(max_length = 200)
     about_thumbnail = models.ImageField(upload_to='company_images', blank=True, null=True)
-    about_us = models.TextField(max_length=2000)
+    about_us = models.TextField()
     home_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner1_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner2_image = models.ImageField(upload_to='company_images', blank=True, null=True)
@@ -129,3 +130,12 @@ class CsrModel(models.Model):
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
+
+class MainGallaryModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    image =  models.ImageField(upload_to='blog_images', blank=False, null=False)
+
+class WhyUsModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length = 200, blank=False, null=False)
+    description =  models.TextField(max_length=3000, blank=False, null=False)

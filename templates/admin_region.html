@@ -81,30 +81,30 @@
         <td>{{region.name}} </td>
         <td> {{region.description}}</td>
         <td>{{region.destination.name}} </td>
-        <td><img src="#" style="width: 50px; height: 45px;"></td>
+        <td><img src="{{region.destination.image.url}}" style="width: 50px; height: 45px;"></td>
         <td> {%if region.is_nav is True%}<span class="badge badge-success rounded-pill d-inline">Activity</span>{%else%}<span class="badge badge-danger rounded-pill d-inline">Trekking</span>{%endif%} </td>
         <td>
-        <a type="button" href="#" class="btn btn-link btn-sm btn-rounded">
+        <a type="button" href="{% url 'update_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
         Edit
         </a>
         <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal {{team.id}}">
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{region.region_id}}">
         Delete
         </button>
         
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal {{team.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal{{region.region_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Delete Priority Level</h5>
+        <h5 class="modal-title" id="exampleModalLabel{{region.region_id}}">Delete Priority Level</h5>
         <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body"> Are You Sure want to delete ? </div>
         <div class="modal-footer">
         <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-        <a type="action" href="" class="btn btn-link btn-sm btn-rounded">
+        <a type="action" href="{% url 'delete_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
         Delete

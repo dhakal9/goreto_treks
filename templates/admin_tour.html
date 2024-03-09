@@ -235,30 +235,30 @@
     <td> {{tour.region.name}}</td>
     <td>{{tour.name}} </td>
     <td>{{tour.days}} </td>
-    <td>{{tour.price}} $</td>
+    <td>{{tour.price}} </td>
     <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
     <td>
-    <a type="button" href="" class="btn btn-link btn-sm btn-rounded">
-    Edit
-    </a>
+        <a type="button" href="{% url 'edit_tour' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">
+            Edit
+        </a>        
     <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal {{tour.activity_id}}">
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{tour.activity_id}}">
     Delete
     </button>
     
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal {{tour.activity_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal{{tour.activity_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Delete Priority Level</h5>
+    <h5 class="modal-title" id="exampleModalLabel{{tour.activity_id}}">Delete Priority Level</h5>
     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body"> Are You Sure want to delete ? </div>
     <div class="modal-footer">
     <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-    <a type="action" href="" class="btn btn-link btn-sm btn-rounded">
+    <a type="action" href="{% url 'delete_tour' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
     Delete
@@ -292,7 +292,7 @@
                     var regionSelect = $('#id_region');
                     regionSelect.empty(); 
                     $.each(data.regions, function(key, value) {
-                        regionSelect.append($('<option>').text(value.name).attr('value', key));
+                        regionSelect.append($('<option>').text(value.name).attr('value', value.id));
                     });
                 },
                 error: function(error) {
@@ -302,5 +302,6 @@
         });
     });
 </script>
+
 
 {% endblock content%}

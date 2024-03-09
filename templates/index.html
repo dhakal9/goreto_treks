@@ -40,69 +40,208 @@
 </section>
 <!-- banner-section end -->
 
+<!-- tour-section -->
+<section class="tour-section sec-pad">
+<div class="auto-container">
+    <div class="sec-title text-center">
+        <p>Modern & Beautiful</p>
+        <h2>Our Most Popular Adventures</h2>
+    </div>
+        <div class="row clearfix">
+        {% for tour in tours %}
+            <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
+                <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                    <div class="inner-box">
+                        
+                        <figure class="image-box">
+                            <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trek">
+                            <div class="bottom-left">
+                                <div class="rating">
+                                    <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
+                                </div>
+                            </div>
+                            <div class="bottom-right">
+                                <h5 class="middleclass"><i class="far fa-clock"></i> {{tour.days}} Day</h5>
+                            </div>
+                            <a href="{% url 'tour_details' tour.activity_id %}"><i class="fas fa-link"></i></a>
+                            <div class="price-overlay">Starting From {{tour.price}}
 
-<!--Added later -->
+                            </div>
+                        </figure>
+                        
+                        <style>
+                            .price-overlay {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                {% comment %} background-color: rgba(0, 0, 0, 0.5); {% endcomment %}
+                                color: white;
+                                font-size: 24px;
+                                text-align: center;
+                                line-height: 250px; /* Adjust based on image height */
+                                opacity: 0;
+                                transition: opacity 0.3s;
+                            }
+                        
+                            .image-box:hover .price-overlay {
+                                opacity: 1;
+                            }
+                        </style>
+                        <div class="lower-content">
+                           
+                            <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
+                            {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
+                            <ul class="info clearfix">
+                                <li><i class="far fa-mountain"></i>{{tour.altitude}}</li>
+                                <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
+                            </ul>
+                            {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
+                            {% comment %} <div class="btn-box">
+                                <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
+                            </div> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+                {%endfor%}
+    </div>
+</div>
+</section>
 
+<!-- tour-section end -->
+
+<!--Enhanced later -->
 <section class="feature-section centred bg-color-1 sec-pad">
     <div class="auto-container">
-        <div class="sec-title text-center">
-            <p>Namaste</p>
-            <hr>
-            <h2>We welcome you all.</h2>
-        </div>
         <div class="row clearfix">
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;"> 
-                    <div class="inner-box">
-                        <figure class="image-box"><img src="assets/images/resource/feature-1.jpg" alt=""></figure>
-                        <div class="lower-content">
-                            <div class="icon-box"><i class="icon-1"></i></div>
-                            <h4>Certified World Class Guides</h4>
+            <div class="col-lg-6">
+                <div class="about-description">
+                    <div class="sec-title text-center">
+                        <p>Namaste</p>
+                        <hr>
+                        <h2>We welcome you all.</h2>
+                    </div>
+                    <p>{{company.about_us|truncatewords:100}}</p><br>
+                    <div class="btn-box">
+                        <a href="{% url 'about_us'%}" class="theme-btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="row feature-row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
+                        
+                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;"> 
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="assets/images/resource/feature-1.jpg" alt=""></figure>
+                                <div class="lower-content">
+                                    <div class="icon-box"><i class="icon-1"></i></div>
+                                    <h4>Certified World Class Guides</h4>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
+                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="200ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="assets/images/resource/feature-2.jpg" alt=""></figure>
+                                <div class="lower-content">
+                                    <div class="icon-box"><i class="icon-2"></i></div>
+                                    <h4>100% Trusted Tour Agency</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> 
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="200ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;">
-                    <div class="inner-box">
-                        <figure class="image-box"><img src="assets/images/resource/feature-2.jpg" alt=""></figure>
-                        <div class="lower-content">
-                            <div class="icon-box"><i class="icon-2"></i></div>
-                            <h4>100% Trusted Tour Agency</h4>
+                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
+                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="400ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 400ms; animation-name: fadeInUp;">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="assets/images/resource/feature-3.jpg" alt=""></figure>
+                                <div class="lower-content">
+                                    <div class="icon-box"><i class="icon-3"></i></div>
+                                    <h4>12+ Years of Travel Experience</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
+                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 600ms; animation-name: fadeInUp;">
+                            <div class="inner-box">
+                                <figure class="image-box"><img src="assets/images/resource/feature-4.jpg" alt=""></figure>
+                                <div class="lower-content">
+                                    <div class="icon-box"><i class="icon-4"></i></div>
+                                    <h4>98% of Our Travelers are Happy</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="400ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 400ms; animation-name: fadeInUp;">
-                    <div class="inner-box">
-                        <figure class="image-box"><img src="assets/images/resource/feature-3.jpg" alt=""></figure>
-                        <div class="lower-content">
-                            <div class="icon-box"><i class="icon-3"></i></div>
-                            <h4>12+ Years of Travel Experience</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 feature-block">
-                <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 600ms; animation-name: fadeInUp;">
-                    <div class="inner-box">
-                        <figure class="image-box"><img src="assets/images/resource/feature-4.jpg" alt=""></figure>
-                        <div class="lower-content">
-                            <div class="icon-box"><i class="icon-4"></i></div>
-                            <h4>98% of Our Travelers are Happy</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="sec-title text-center">
-            
-            <hr>
-            
         </div>
     </div>
 </section>
+
+<style>
+    .feature-section {
+        background: #f8f8f8;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .about-description {
+        padding-right: 30px;
+    }
+    
+    .about-description h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+    
+    .about-description p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+    }
+    
+    .feature-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    
+    .feature-block {
+        margin-bottom: 30px;
+    }
+    
+    .feature-block .inner-box {
+        background: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .feature-block:hover .inner-box {
+        transform: translateY(-5px);
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .feature-block .inner-box h4 {
+        font-size: 20px;
+        color: #333;
+        margin-top: 15px;
+    }
+    
+    .feature-block .inner-box p {
+        font-size: 14px;
+        color: #777;
+        margin-top: 10px;
+    }
+</style>
+<!--Enhanced later End-->
 
 <style>
     .tour-block-one .inner-box .lower-content .info li {
@@ -147,47 +286,7 @@
         color: #ffab01;
       }
 </style>
-<!-- tour-section -->
-<section class="tour-section sec-pad">
-<div class="auto-container">
-    <div class="sec-title text-center">
-        <p>Modern & Beautiful</p>
-        <h2>Our Most Popular Adventures</h2>
-    </div>
-        <div class="row clearfix">
-        {% for tour in tours %}
-            <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
-                <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                    <div class="inner-box">
-                        
-                        <figure class="image-box">
-                            {% comment %} <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk"> {% endcomment %}
-                            <div class="bottom-left"><div class="rating"><span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span></div></div>
-                            <div class="bottom-right"><h5 class="middleclass"><i class="far fa-clock"></i> {{tour.days}} Day</h5></div>
-                            <a href="{% url 'tour_details' tour.activity_id %}"><i class="fas fa-link"></i></a>
-                        </figure>
-                        <div class="lower-content">
-                           
-                            <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
-                            {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
-                            <ul class="info clearfix">
-                                <li><i class="far fa-mountain"></i>{{tour.altitude}}</li>
-                                <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
-                            </ul>
-                            {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
-                            {% comment %} <div class="btn-box">
-                                <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
-                            </div> {% endcomment %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-                {%endfor%}
 
-    </div>
-</div>
-</section>
-<!-- tour-section end -->
 {% comment %} <section class="about-style-two" style="padding-bottom:50px;">
     <div class="pattern-layer" style="background-image: url({% static 'assets/images/shape/shape-2.png' %});"></div>
     <div class="auto-container">
@@ -285,7 +384,7 @@
                         font-weight: 500;
                     }
                 </style>
-            <section class="offer-section sec-pad" style="background-image: url({% static 'assets/images/background/deals-2.jpg' %});">
+            <section class="offer-section sec-pad" style="background-image: url({% static 'assets/images/background/nepvector.jpg' %});">
                 <div class="auto-container">
                     <div class="sec-title light">
                         <p>With us you can have all adventures experienced, feel the adrenaline. Just book a travel with us and get ready to experience the rush.</p>
@@ -295,7 +394,7 @@
                         {% for activity in activities %}
                             <div class="offer-block-one">
                                 <div class="inner-box">
-                                    <figure class="image-box"><img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{ activity.image.url }}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"></figure>
+                                    <figure class="image-box"><img style="float: left; width: 400px; height: 200px; object-fit: cover;" src="{{ activity.image.url }}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"></figure>
                                     <div class="content-box">
                                         {% comment %} <span>Get 30% Off</span> {% endcomment %}
                                         <h3><a href="{% url 'tour_list' activity.region_id %}">{{ activity.name }}</a></h3>
@@ -372,7 +471,7 @@
 
 
     <!-- video-style-two -->
-    <section class="video-style-two centred">
+    <section class="video-style-two centred sec-pad">
         <div class="anim-icon">
             <div class="icon anim-icon-1" style="background-image: url({% static 'assets/images/shape/shape-3.png' %});"></div>
             <div class="icon anim-icon-2" style="background-image: url({% static 'assets/images/shape/shape-3.png' %});"></div>
@@ -399,43 +498,87 @@
     <!-- video-style-two end -->
 
 
-        <!-- testimonial-section -->
-        <section class="testimonial-section bg-color-1 sec-pad centred">
-            <div class="auto-container">
-                <div class="sec-title centred">
-                    <p>Review & Testimonials</p>
-                    <h2>Top Reviews for Goreto Treks</h2>
-                </div>
-                <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">
-					{% for review in reviews %}
-                        <div class="testimonial-block-one">
-                            <div class="inner-box" style="height:490px;">
-                                <ul class="rating-box clearfix">
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                </ul>
-                                <div class="text">
-                                    <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
-                                    <p style="height:245px">{{ review.message|truncatewords:50}}</p>
-                                </div>
-                                <div class="author-box">
-                                    <h4>{{ review.name }}</h4>
-                                    <span class="designation">{{ review.position }}</span>
-                                    <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
-                                </div>
-                            </div>
-                        </div>
-					{% endfor %}
-                        
+ <!-- testimonial-section -->
+ <section class="testimonial-section bg-color-1 sec-pad centred">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Review & Testimonials</p>
+            <h2>Top Reviews for Goreto Treks</h2>
+        </div>
+        <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">   
+            {% for review in reviews %}
+            <div class="testimonial-block-one">
+                <a href="{% url 'reviews' %}" class="testimonial-link">
+                <div class="inner-box" style="height: 490px;">
+                    <br>
+                    <ul class="rating-box clearfix">
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                    </ul>
+                    <div class="text">
+                        <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
+                        <p style="height: 245px">{{ review.message|truncatewords:50 }}</p>
+                    </div>
+                    <div class="author-box">
+                        <h4>{{ review.name }}</h4>
+                        <span class="designation">{{ review.position }}</span>
+                        <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
+                    </div>
+                    <!-- Watermark -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1;">
+                        <img src="{% static 'assets/images/recommended-tripadvisor.png'%}" alt="Watermark" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <!-- Read More Button -->
+                    </a>
+                    <!-- Dark Overlay -->
+                    <div class="dark-overlay"></div>
+                    
                 </div>
             </div>
-        </section>
-        <!-- testimonial-section end -->
+            
+{% endfor %}
+                          
+        </div>
+    </div>
+</section>
+<!-- testimonial-section end -->
+<style>
+    .testimonial-block-one .dark-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(192,192,192); /* Adjust opacity as needed */
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .testimonial-block-one:hover .dark-overlay {
+        opacity: 1;
+    }
+    
+    .testimonial-block-one .testimonial-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2; /* Ensure it's above the dark overlay */
+    }
+    
+    .testimonial-block-one:hover .testimonial-link {
+        cursor: pointer;
+    }
+    
+</style>
       
-
+            
         <!-- funfact-style-two -->
         <section class="funfact-style-two centred">
             <div class="pattern-layer" style="background-image: url(Content/assets/images/shape/shape-14.png);"></div>
