@@ -572,14 +572,28 @@
 <script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <script>
-    function toggleChatbox() {
+    {% comment %} function toggleChatbox() {
         var chatbox = document.getElementById('whatsapp-chatbox');
         chatbox.style.display = (chatbox.style.display === 'block') ? 'none' : 'block';
         if (chatbox.style.display === 'block') {
             appendMessage('Hello, how can I help you?');
         }
-    }
+    } {% endcomment %}
 
+	var messageAppended = false; // Flag to track if message is appended
+
+function toggleChatbox() {
+    var chatbox = document.getElementById('whatsapp-chatbox');
+    if (chatbox.style.display === 'none') {
+        chatbox.style.display = 'block';
+        if (!messageAppended) {
+            appendMessage('Hello, how can I help you?');
+            messageAppended = true;
+        }
+    } else {
+        chatbox.style.display = 'none';
+    }
+}
     function sendMessage() {
         var replyText = document.getElementById('whatsapp-reply').value;
         appendMessage(replyText);
@@ -628,18 +642,6 @@ window.fbAsyncInit = function () {
 
 <!-- Code provided by Google -->
 <div id="google_translate_element"></div>
-<div class="menu-traslate-header">
-	<ul>
-	  <li><a href="#googtrans/es">Español</a></li>
-	  <li><a href="#googtrans/zh-CN">汉语</a></li>
-	  <li><a href="#googtrans/vi">Việt</a></li>
-	  <li><a href="#googtrans/ru">Русский</a></li>
-	  <li><a href="#googtrans/sq">SHQIP</a></li>
-	  <li><a href="#googtrans/km">ខ្មែរ</a></li>
-	  <li><a href="#googtrans/fr">Français</a></li>
-	  <li><a href="#googtrans/ar">عربي</a></li>
-	</ul>
-	</div>
 	<script type="text/javascript">
 		function googleTranslateElementInit() {
 		  new google.translate.TranslateElement({
