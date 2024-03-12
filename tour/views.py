@@ -27,23 +27,24 @@ class AdminDestination(View):
             return redirect('admin_destination')  # Replace 'your_redirect_url' with the actual URL to redirect after form submission
 
         return render(request, self.template_name, {'form': form, 'destinations': destinations})
-    
+
 class UpdateDestination(View):
     template_name = 'admin_destination.html'
-    def get(self, request, destination_id):
-        destinations = DestinationModel.objects.all()
-        destination = get_object_or_404(DestinationModel, pk=destination_id)
-        form = DestinationForm(instance=destination)
-        return render(request, self.template_name, {'form': form, 'destination':destination, 'destinations':destinations })
 
-    def post(self, request, destination_id):
-        destination = get_object_or_404(DestinationModel, pk=destination_id)
+    def get(self, request, destination_slug):
+        destinations = DestinationModel.objects.all()
+        destination = get_object_or_404(DestinationModel, slug=destination_slug)
+        form = DestinationForm(instance=destination)
+        return render(request, self.template_name, {'form': form, 'destination': destination, 'destinations': destinations})
+
+    def post(self, request, destination_slug):
+        destination = get_object_or_404(DestinationModel, slug=destination_slug)
         form = DestinationForm(request.POST, request.FILES, instance=destination)
         if form.is_valid():
             form.save()
             messages.success(request, 'Destination Updated Successfully')
             return redirect('admin_destination')
-        return render(request, self.template_name, {'form': form,  'destination':destination})
+        return render(request, self.template_name, {'form': form, 'destination': destination})
 
 class Destination(View):
     template_name = "destination.html"
@@ -53,8 +54,8 @@ class Destination(View):
 class OneDestination(View):
     template_name = 'one_destination.html'
 
-    def get(self, request, pk):
-        countries = DestinationModel.objects.get(pk=pk)
+    def get(self, request, destination_slug):
+        countries = DestinationModel.objects.get(slug=destination_slug)
         regions = RegionModel.objects.all()
         return render(request, self.template_name, {'country': countries, 'regions':regions})
 
