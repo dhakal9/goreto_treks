@@ -1,17 +1,19 @@
 
-from .models import CompanyProfile
+from .models import CompanyProfile, MainGallaryModel
 from tour.models import DestinationModel, RegionModel,TourDetailsModel
+import random
 # import requests
 
 
 def additional_context(request):
     company_profile = CompanyProfile.objects.first()
     destinations = DestinationModel.objects.all()
+    gallary_images = MainGallaryModel.objects.order_by('?')[:6]
     activities = RegionModel.objects.filter(is_nav = True)
     nepal_regions = RegionModel.objects.filter(is_nav = False)
     all_activities = TourDetailsModel.objects.all()
     trekkings = TourDetailsModel.objects.filter(is_activity = False)
-    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions}
+    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images}
     return additional_data
 
 # def get_tripadvisor_reviews(company_name):

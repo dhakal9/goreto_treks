@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-<!DOCTYPE html>
 
 <style>
   * {
@@ -25,49 +24,83 @@
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
+    cursor: pointer; /* Add cursor pointer for clickable effect */
+    width: calc(33.333% - 20px); /* Adjust width for 3-column grid */
+    flex: 1 0 calc(33.333% - 20px); /* Ensure equal spacing */
+    max-width: 300px; /* Set max width to prevent stretching */
   }
 
-  .gallery-item img, .gallery-item video {
+  .gallery-item img {
     width: 100%;
-    vertical-align: top;
+    height: auto; /* Ensure proper aspect ratio */
+    display: block;
+    transition: transform 0.3s ease; /* Add transition effect */
   }
 
-  @media screen and (min-width: 768px) {
-    .gallery-item {
-      flex: 1 0 calc(33.333% - 20px);
-    }
+  .gallery-item:hover img {
+    transform: scale(1.05); /* Add scaling effect on hover */
   }
 
-  @media screen and (min-width: 992px) {
-    .gallery-item {
-      flex: 1 0 calc(25% - 20px);
-    }
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    overflow: auto;
+  }
+
+  .popup-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .popup img {
+    max-width: 90%;
+    max-height: 90%;
   }
 </style>
 
-<div class="gallery">
+<section class="page-title style-two centred">
+  <div class="auto-container">
+      <div class="content-box">
+          <h1>Gallary</h1>
+      </div>
+  </div>
+</section>
+<div class="gallery" onclick="openPopup(event)">
   {% for image in images %}
   <div class="gallery-item">
-    <img src="{{ image.image.url }}" alt="">
+    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{ image.image.url }}" alt="">
   </div>
   {% endfor %}
-  {% comment %} <div class="gallery-item">
-    <img src="image2.jpg" alt="Image 2">
+</div>
+
+<div id="popup" class="popup" onclick="closePopup()">
+  <div class="popup-content">
+    <img id="popup-image" src="" alt="">
   </div>
-  <div class="gallery-item">
-    <video controls>
-      <source src="video1.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
-  <div class="gallery-item">
-    <img src="image3.jpg" alt="Image 3">
-  </div> {% endcomment %}
-  <!-- Add more images and videos as needed -->
 </div>
 
 <script>
-  // Optional JavaScript code for additional functionality
+  function openPopup(event) {
+    if (event.target.tagName === 'IMG') {
+      var imageUrl = event.target.src;
+      document.getElementById('popup-image').src = imageUrl;
+      document.getElementById('popup').style.display = 'block';
+      document.body.style.overflow = 'hidden'; // Disable scrolling when popup is open
+    }
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.body.style.overflow = 'auto'; // Enable scrolling when popup is closed
+  }
 </script>
 
 {% endblock content %}

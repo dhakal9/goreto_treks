@@ -4,8 +4,9 @@ from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, Destina
 urlpatterns = [
     path('admindestination/', AdminDestination.as_view(), name="admin_destination"),
     path('destination/', Destination.as_view(), name="destination"),
- path('updatedestination/<slug:destination_slug>', UpdateDestination.as_view(), name='update_destination'),
-    path('destination/<slug:destination_slug>/', OneDestination.as_view(), name='one_destination'),
+   path('updatedestination/<int:destination_id>', UpdateDestination.as_view(), name='update_destination'),
+#  path('updatedestination/<slug:destination_slug>', UpdateDestination.as_view(), name='update_destination'),
+    path('destination/<int:destination_id>/', OneDestination.as_view(), name='one_destination'),
     path('adminregion/', Region.as_view(), name="admin_region"),
     path('updateregion/<int:region_id>', UpdateRegion.as_view(), name='update_region'),
     path('deleteregion/<int:region_id>', DeleteRegion.as_view(), name='delete_region'),

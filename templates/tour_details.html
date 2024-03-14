@@ -522,11 +522,47 @@
                                 <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
                             </div>
                         </div>
+                        {% comment %} sticky inquery form {% endcomment %}
+                        
+                        <div style="position:-webkit-sticky;" class="form-widget">
+                            <div class="widget-title">
+                                <h3>Customize Itinary</h3>
+                            </div>
+                            <form action="#" method="post" class="tour-form">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="Your Name" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="Your Email" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="phone" placeholder="Phone" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="tickets" placeholder="Tickets" required="">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="date" placeholder="dd/mm/yy" id="datepicker">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="message" placeholder="Message"></textarea>
+                                </div>
+                                <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+    
+                                </div>
+                                <div class="form-group message-btn">
+                                    <button type="submit" class="theme-btn">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
+                        {% comment %} sticky inquery form {% endcomment %}
                     </div>
+                
                 </div>
             </div>
         </div>
     </section>
+   
     <!-- tour-details end -->
     <script>
         $(document).ready(function () {

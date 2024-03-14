@@ -67,7 +67,7 @@
 			right: 0px;
 			width: 5000px;
 			height: 100%;
-			background: #008fd6;  !important;
+			background: #ffffff;  !important;
 		}
 		{% comment %}#008fd6; #c9e0f5 {% endcomment %}
 		.main-header.style-two .header-lower .main-menu .navigation > li > a {
@@ -98,11 +98,11 @@
 				<!-- header-top -->
 				
 
-				<div class="dark-header" style="background-color:#14161c;">
+				<div class="dark-header" style="background-color:#008fd6;">
 					<div class="auto-container">
 						<div class="top-inner clearfix d-flex">
 							<ul class="top-info pull-left d-flex justify-content-start w-75 social-links">
-								<li><a href="mailto:{{company.email}}"><i class="fas fa-envelope"></i> {{company.email}}</a></li>
+								<li><a href="mailto:{{company.email}}"><i class="fas fa-envelope" ></i> {{company.email}}</a></li>
 								<li class="mx-5">
 									{% comment %} <i class="fa fa-whatsapp"></i> {% endcomment %}
 									<a href="tel:{{company.contact}}">
@@ -114,10 +114,10 @@
 								<li><a href="https://googlemap.com"><i class="fas fa-map-marker-alt"></i> {{company.address}}</a></li>
 							</ul>
 							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
-								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
-								<li class="mx-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
-								<li class="mr-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp"></i></a></li>
-								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
+								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f" style="font-size: 20px"></i></a></li>
+								<li class="mx-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp" style="font-size: 20px"></i></a></li>
+								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor" style="font-size: 20px"></i></a></li>
 							</ul>
 							{% comment %} <div class="btn-box pull-right">
 								<a href="{%url 'destination'%}" class="theme-btn">Book A Tour </a>
@@ -126,7 +126,7 @@
 					</div>
 				</div>
 				<!-- header-lower -->
-				<div class="header-lower" style="background-color:#008fd6!important">
+				<div class="header-lower" style="background-color:#ffffff!important">
 					<div class="auto-container">
 						<div class="outer-box">
 							<div class="logo-box">
@@ -159,7 +159,9 @@
 																							{% for nep_reg in nepal_regions %}
 																							{%if nep_reg.destination_id == 3%}
 																							
-																							<li><a href="index.html">{{nep_reg.name}}</a></li>
+																							<li class="dropdown" ><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">{{nep_reg.name}}</a>
+																								
+																							</li>
 																							{%endif%}
 																							{%endfor%}
 																							
@@ -177,8 +179,8 @@
 																							<li><a href="index-2.html">Everest Region</a></li>
 																							<li><a href="index-3.html">Langtang Region</a></li>
 																						</ul>
-																					<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-																				</li>
+																						<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+																					</li>
 																				</ul>
 																			
 															
@@ -313,7 +315,7 @@
 				}
 
 				.goog-te-gadget-simple{
-					background-color: #ff7c5b;
+					background-color: #008fd6;
 					line-height: 40px;
 					position: fixed;
 					bottom: 7%;
@@ -401,14 +403,14 @@
 			<div class="row clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12 footer-column">
 					<div class="footer-widget logo-widget">
-						<figure class="footer-logo" style="margin-bottom: 5px;"><a href="index.html"> <h3 style="color:#FF7C5B">GORETO TREK</h3> </a></figure>
+						<figure class="footer-logo" style="margin-bottom: 5px;"><a href="index.html"> <h3 style="color:#008fd6">GORETO TREK</h3> </a></figure>
 						<div class="text">
 							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure </p>
 						</div>
 						<ul class="social-links clearfix">
-							<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
-							<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
+							<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor" style="font-size: 30px; padding:8px;"></i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -433,13 +435,10 @@
 							<h3>Gallery</h3>
 						</div>
 						<div class="widget-content">
-							<ul class="image-list clearfix">			
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-1.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-2.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-3.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-4.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-5.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-6.jpg" alt=""></a></figure></li>
+							<ul class="image-list clearfix">
+								{% for image in gallary_images%}			
+								<li><figure class="image-box"><a href="{% url 'gallary' %}"><img style="float: left; width: 400px; height: 200px; object-fit: cover;"src="{{image.image.url}}" alt=""></a></figure></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>

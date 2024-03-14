@@ -31,14 +31,14 @@ class AdminDestination(View):
 class UpdateDestination(View):
     template_name = 'admin_destination.html'
 
-    def get(self, request, destination_slug):
+    def get(self, request, destination_id):
         destinations = DestinationModel.objects.all()
-        destination = get_object_or_404(DestinationModel, slug=destination_slug)
+        destination = get_object_or_404(DestinationModel, destination_id=destination_id)
         form = DestinationForm(instance=destination)
         return render(request, self.template_name, {'form': form, 'destination': destination, 'destinations': destinations})
 
-    def post(self, request, destination_slug):
-        destination = get_object_or_404(DestinationModel, slug=destination_slug)
+    def post(self, request, destination_id):
+        destination = get_object_or_404(DestinationModel, destination_id=destination_id)
         form = DestinationForm(request.POST, request.FILES, instance=destination)
         if form.is_valid():
             form.save()
@@ -54,8 +54,8 @@ class Destination(View):
 class OneDestination(View):
     template_name = 'one_destination.html'
 
-    def get(self, request, destination_slug):
-        countries = DestinationModel.objects.get(slug=destination_slug)
+    def get(self, request, destination_id):
+        countries = DestinationModel.objects.get(destination_id=destination_id)
         regions = RegionModel.objects.all()
         return render(request, self.template_name, {'country': countries, 'regions':regions})
 

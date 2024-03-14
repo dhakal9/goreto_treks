@@ -8,10 +8,10 @@
 <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
     <div class="auto-container">
         <div class="content-box">
-            <h2>Explore Your Travel With Goreto Treks</h2>
-            <p>Discover your next great adventure</p>
+            <h2>{{company.slogan1}}</h2>
+            <p>{{company.slogan2}}</p>
             <div class="form-inner">
-                <form action="https://travel.zeniusnepal.com/Chomolungma/AllTours" method="get" class="booking-form clearfix">
+                <form action="#" method="get" class="booking-form clearfix">
                     <div class="form-group">
                         <input type="text" name="service" placeholder="Where to?" required="">
                     </div>
@@ -130,52 +130,10 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="row feature-row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
-                        
-                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;"> 
-                            <div class="inner-box">
-                                <figure class="image-box"><img src="assets/images/resource/feature-1.jpg" alt=""></figure>
-                                <div class="lower-content">
-                                    <div class="icon-box"><i class="icon-1"></i></div>
-                                    <h4>Certified World Class Guides</h4>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="200ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 200ms; animation-name: fadeInUp;">
-                            <div class="inner-box">
-                                <figure class="image-box"><img src="assets/images/resource/feature-2.jpg" alt=""></figure>
-                                <div class="lower-content">
-                                    <div class="icon-box"><i class="icon-2"></i></div>
-                                    <h4>100% Trusted Tour Agency</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="400ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 400ms; animation-name: fadeInUp;">
-                            <div class="inner-box">
-                                <figure class="image-box"><img src="assets/images/resource/feature-3.jpg" alt=""></figure>
-                                <div class="lower-content">
-                                    <div class="icon-box"><i class="icon-3"></i></div>
-                                    <h4>12+ Years of Travel Experience</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 feature-block">
-                        <div class="feature-block-one wow fadeInUp animated animated animated" data-wow-delay="600ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 600ms; animation-name: fadeInUp;">
-                            <div class="inner-box">
-                                <figure class="image-box"><img src="assets/images/resource/feature-4.jpg" alt=""></figure>
-                                <div class="lower-content">
-                                    <div class="icon-box"><i class="icon-4"></i></div>
-                                    <h4>98% of Our Travelers are Happy</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {% comment %} <div id="TA_selfserveprop518" class="TA_selfserveprop"><ul id="R6IefCJMuvs" class="TA_links nc2B86y8eXT"><li id="L6wXDK64" class="zWTR9bJGSzw"><a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><img src="https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-11900-2.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=518&amp;locationId=15755650&amp;lang=en_US&amp;rating=true&amp;nreviews=5&amp;writereviewlink=true&amp;popIdx=true&amp;iswide=false&amp;border=true&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script> {% endcomment %}
+                <div class="row feature-row" style="margin-top:50px; justify-content: center;">
+                    <div id="TA_selfserveprop518" style="border: 5px solid #34e0a1; width=300px; height=400px;" class="TA_selfserveprop"><ul id="R6IefCJMuvs" class="TA_links nc2B86y8eXT"><li id="L6wXDK64" class="zWTR9bJGSzw"><a target="_blank" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><img src="https://www.tripadvisor.com/img/cdsi/img2/branding/v2/Tripadvisor_lockup_horizontal_secondary_registered-11900-2.svg" alt="TripAdvisor"/></a></li></ul></div><script async src="https://www.jscache.com/wejs?wtype=selfserveprop&amp;uniq=518&amp;locationId=15755650&amp;lang=en_US&amp;rating=true&amp;nreviews=5&amp;writereviewlink=true&amp;popIdx=true&amp;iswide=false&amp;border=true&amp;display_version=2" data-loadtrk onload="this.loadtrk=true"></script>
+                    
                 </div>
             </div>
         </div>
@@ -519,8 +477,9 @@
                         <li><i class="icon-Star"></i></li>
                     </ul>
                     <div class="text">
+                        
+                        <p style="color:#000000; height: 245px; z-index:1;">{{ review.message|truncatewords:50 }}</p>
                         <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
-                        <p style="height: 245px">{{ review.message|truncatewords:50 }}</p>
                     </div>
                     <div class="author-box">
                         <h4>{{ review.name }}</h4>
@@ -528,7 +487,7 @@
                         <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
                     </div>
                     <!-- Watermark -->
-                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.1;">
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.5;">
                         <img src="{% static 'assets/images/recommended-tripadvisor.png'%}" alt="Watermark" style="max-width: 100%; max-height: 100%;">
                     </div>
                     <!-- Read More Button -->

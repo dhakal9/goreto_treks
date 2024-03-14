@@ -1,7 +1,7 @@
 /* template-color */
 
 .scroll-top{
-  background-color: #ff7c5b;
+  background-color: #008fd6;
 }
 
 .handle-preloader{
@@ -45,7 +45,7 @@
 }
 
 .theme-btn{
-	background: #ff7c5b;
+	background: #072063;
 }
 
 .feature-block-one .inner-box .lower-content .icon-box{
@@ -61,7 +61,7 @@
 }
 
 .tour-block-one .inner-box .image-box:before{
-	background: #ff7c5b;
+	background: #646464;
 }
 
 .tour-block-one .inner-box .lower-content .rating span i{
@@ -140,9 +140,9 @@
 	background: #ff7c5b;
 }
 
-.footer-top .gallery-widget .image-list li .image-box{
-	background: #ff7c5b;
-}
+/* .footer-top .gallery-widget .image-list li .image-box{
+	background: 
+} */
 
 .footer-top .contact-widget .info-list li i{
 	color: #ff7c5b;
