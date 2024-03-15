@@ -51,7 +51,7 @@
         <div class="auto-container">
             <div class="row clearfix">
                 <div class="col-lg-8 col-md-12 col-sm-12 content-side">
-                    <div class="tour-details-content">
+                    <div class="tour-details-content" id="overview">
                         <div class="inner-box">
                             <div class="text">
                                 <h2>Overview</h2>
@@ -73,7 +73,7 @@
                                 <li><span>Departure Location:</span>{{tour_details.depature}}</li>
                                 <li><span>Departure Time:</span>{{tour_details.time}}</li>
     
-                                <li class="clearfix">
+                                <li class="clearfix" id="include-exclude">
                                     <span>Included:</span>
                                     <ul class="included-list clearfix">
                                             <li>Hotel to Airport Pick up and Airport to Hotel Drop</li>
@@ -92,70 +92,30 @@
                         </div>
                         <div class="tour-plan">
                             <div class="text">
-                                <h2>Tour Plan</h2>
+                                <h2>Tour Plan / Itinary</h2>
                                 
                             </div>
-                            <div class="content-box">
-                                    <div class="single-box">
+                            <div class="content-box" id="itinerary">
+                                {% for itinary in itinaries %}
+                                        {% if itinary.tour_id == tour_details.activity_id %}
+                                            <div class="single-box">
+                                                <span>{{ itinary.day }}</span>
+                                                <h4>{{ itinary.start_end }}</h4>
+                                                <h3>{{ itinary.name }}
+                                                    <button class="toggle-btn" onclick="toggleParagraph('{{ itinary.itinary_id }}')">▼</button>
+                                                </h3>
+                                                <p id="paragraph{{ itinary.itinary_id  }}" class="paragraph" style="display: none;">{{ itinary.description }}</p>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                
+
+                                <div class="single-box">
                                         <span>01</span>
                                         <h4>Pokhara  830 m / 2,723 ft – 7hrs</h4>
                                         <h3>Day 1 Kathmandu to Pokhara (Drive)</h3>
                                         <p>We will collect you from your hotel and take you to the bus departure stop.  If you are traveling by air or private jeep, we will organize this for you.   Overnight in Pokhara at a hotel is included in the cost. Dinner, however, is not included in the package price. </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>02</span>
-                                        <h4>Naya Pool 1940 m / 6364 ft – 6hrs</h4>
-                                        <h3>Day 2: Pokhara to Naya Pool (Drive)</h3>
-                                        <p>Today we leave after breakfast to drive from Pokhara to Naya Pool, which takes around an hour. From Naya Pool, we start trekking, passing through lovely villages such as Birethanti.  These villages are inhabited by Gurungs, Magars, and Tamangs, who are local to this area.  We pass the hot springs at Jhinu Danda on the way.  Whether you wish to enjoy the hot springs is up to you! It takes around 5 hours of hiking to reach our first overnight stop at Ghandruk.  There is time to explore the Gurung Museum at Ghandruk to get a glimpse into the everyday lives of the Gurung people.  Their working tools, household items, and details of their past and present lives are on display.  Dinner is taken in the teahouse, giving you a chance to get to know your trekking companions and guide. </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>03</span>
-                                        <h4>Chomrong  2,170 m / 7,119 ft – 6hrs</h4>
-                                        <h3>Day 3: Ghandruk to Chomrong</h3>
-                                        <p>Leaving the teahouse, stunning scenery greets us as we head up the trail from Ghandruk, following the Modi River.  After ascending, you come to another river, the Kimrong, which is crossed by a suspension bridge before the trail turns steep for a couple of hours of uphill hiking.   Chomrong itself is a small settlement which we are told is an old off-shoot of Ghandruk and is also inhabited by Gurung people.  There is a Buddhist stupa at the bottom of the village.</p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>04</span>
-                                        <h4>Bamboo  2,310 m / 7,578 ft – 5hrs</h4>
-                                        <h3>Day 4: Chomrong to Bamboo  </h3>
-                                        <p>The scenery around Bamboo has wonderful views of all the best mountains on offer in the Annapurnas, including Annapurna South, Annapurna I, II, and III, and Machhapucchre.  There is also the possibility of seeing some wildlife, such as deer and Himalayan goats.   </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>05</span>
-                                        <h4>Deurali  3,230 m / 10,597 ft – 5hrs</h4>
-                                        <h3>Day 5: Bamboo to Deurali </h3>
-                                        <p>Setting off after breakfast, we pass through bamboo forests.  This creates a cool atmosphere, which is great on hot summer days, perhaps a little chilly in the early morning.  The trail ascends green hills and opens up.  Below us lies a glacial river. The trail becomes a little more rugged, and there is a steep climb to Hinku cave and more bamboo forest. Vegetation has fallen away as we approach Deurali, but there are waterfalls and a suspension bridge to cross, which makes the trail interesting. </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>06</span>
-                                        <h4>Annapurna Base  4,130 m / 13,549 ft – 6hrs</h4>
-                                        <h3>Day 6: Deurali to Annapurna Base Camp</h3>
-                                        <p>Have a good breakfast today, as the journey starts with an uphill climb over rocky terrain. Since today we reach the highest altitude on the trek, we should pay attention to our bodies and not walk too fast.  Instead, take a steady pace and enjoy the wonderful surrounding mountains.  We first reach Machhapucchre Base Camp and enjoy some time there, taking photographs of the snow-capped mountains before walking on for approximately another two hours to reach Annapurna Base Camp. From Annapurna Base Camp, some of the mountains we can enjoy include Annapurna South, Annapurna I and  III, Hiunchuli, and of course, Machhapuchhre, which has been with us all along the trek.  Overnight at Annapurna Base Camp and celebrate your achievement with a great dinner. </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>07</span>
-                                        <h4>Bamboo 2,310 m / 7,578 ft – 8hrs</h4>
-                                        <h3>Day 7: Annapurna Base Camp to Bamboo</h3>
-                                        <p>While there are beautiful sunrises every day on this trek, you might want to wake up extra early today to catch the sun rising over the Annapurna range.  This is something really special and well worth getting up early for!  Then it’s time for breakfast and back on the trail to hike back to Bamboo.  Following the Modi Khola and rhododendron forests, it takes around 7 hours to reach Bamboo.  A long but not too hard trail.  </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>08</span>
-                                        <h4>Jhinu Danda 1,760 m / 5,774 ft – 6hrs</h4>
-                                        <h3>Day 8: Bamboo to Jhinu Danda</h3>
-                                        <p>Retracing our route through the rhododendron and bamboo forests, there is a steep descent from Chhomrung to Jhinu.  Since it takes around 5 hours and since we have learned from experience the hot springs at Jhinu Danda seem much more appealing than they were at the start of this trek, we suggest leaving Bamboo early.  By leaving early, having lunch at Jhinu Danda and spending the afternoon in the hot springs is possible.  Time to relax and enjoy the natural hot water! </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>09</span>
-                                        <h4>Naya Pool 830 m / 2,723 ft – 7hrs</h4>
-                                        <h3>Day 9: Jhinu Danda to Naya Pool</h3>
-                                        <p>This is the final day of the trek, so take in as much of the mountains as you can as you hike for around 5 hours to reach Naya Pool, where transport is waiting to take us back to Pokhara.  Since it is a long day, we will take lunch on route or in Naya Pool.  After checking into your comfortable Pokhara hotel, there is time for some shopping before relaxing at the lakeside with a long cool drink before dinner.  Dinner is not included in the package, but we are sure your guide would be delighted to recommend an excellent restaurant and join you, on your invitation, on your final night. </p>
-                                    </div>
-                                    <div class="single-box">
-                                        <span>10</span>
-                                        <h4>Kathmandu 1,300 m / 4,265 ft – 8hrs</h4>
-                                        <h3>Day 10: Pokhara to Kathmandu</h3>
-                                        <p>Today drive (or fly) back to Kathmandu.  Wave goodbye to the massive, majestic, and magical Machhapucchre mountain as you leave this special area of Nepal.  </p>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="location-map">
@@ -163,7 +123,7 @@
                                 <h2>View On Map</h2>
                                 <p>The Annapurna Base Camp Trek is situated in the Annapurna Sanctuary within the Annapurna Conservation Area of Nepal. Starting from Nayapul, this 10 day trek traverses picturesque villages like Ghorepani and Chhomrong, leading through lush forests, terraced fields, and bamboo groves. Trekkers are rewarded with a stunning sunrise at Poon Hill, panoramic vistas of the Annapurna and Dhaulagiri mountain ranges, and a close-up view of the Annapurna massif at an altitude of 4,130 meters at the base camp. The journey also offers relaxation in natural hot springs at Jhinu Danda. Proper permits are required, which can be arranged in Kathmandu or Pokhara for entry into the Annapurna Conservation Area.</p>
                             </div>
-                            <div class="map-inner">
+                            <div class="map-inner" id="map">
                                 <div class="google-map">
                                     <iframe src="https://www.google.com/maps/d/embed?mid=10xxqTVKlfTcli_NEBF3L4bUiiQM&amp;hl=en_US&amp;ehbc=2E312F" width="100%" height="600"></iframe>
                                     
@@ -171,7 +131,7 @@
                             </div>
                         </div>
     
-                            <div class="photo-gallery">
+                            <div class="photo-gallery" id="gallery" >
                                 <div class="text">
                                     <h2>Photo Gallery</h2>
                                 </div>
@@ -186,7 +146,7 @@
                                     {% endfor%}
                                 </div>
                             </div>
-                            <div class="faq-content ">
+                            <div class="faq-content" id="faq">
                                 <div class="sec-title">
                                     <h2>Frequently Asked <br>Question</h2>
                                 </div>
@@ -524,37 +484,7 @@
                         </div>
                         {% comment %} sticky inquery form {% endcomment %}
                         
-                        <div style="position:-webkit-sticky;" class="form-widget">
-                            <div class="widget-title">
-                                <h3>Customize Itinary</h3>
-                            </div>
-                            <form action="#" method="post" class="tour-form">
-                                <div class="form-group">
-                                    <input type="text" name="name" placeholder="Your Name" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" name="email" placeholder="Your Email" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="phone" placeholder="Phone" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="tickets" placeholder="Tickets" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="date" placeholder="dd/mm/yy" id="datepicker">
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="message" placeholder="Message"></textarea>
-                                </div>
-                                <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
-    
-                                </div>
-                                <div class="form-group message-btn">
-                                    <button type="submit" class="theme-btn">Send Message</button>
-                                </div>
-                            </form>
-                        </div>
+                    
                         {% comment %} sticky inquery form {% endcomment %}
                     </div>
                 
@@ -562,7 +492,180 @@
             </div>
         </div>
     </section>
-   
+
+     <div id="fixed-bar">
+        <button onclick="scrollToSection('overview')">Overview</button>
+        <button onclick="scrollToSection('gallery')">Gallery</button>
+        <button onclick="scrollToSection('map')">Map</button>
+        <button onclick="scrollToSection('faq')">FAQ</button>
+        <button onclick="scrollToSection('itinerary')">Itinerary</button>
+        <button onclick="scrollToSection('include-exclude')">Include/Exclude</button>
+    </div> 
+{% comment %} booking Card {% endcomment %}
+<div class="card" id="bookingCard">
+    <!-- Your booking card content goes here -->
+    <h2>Make an Inquiry</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+      <label for="destination">Message:</label>
+      <input type="text" id="destination" name="destination" required>
+      <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+    
+      </div>
+      <button type="submit">Send</button>
+    </form>
+</div>
+{% comment %} booking Card {% endcomment %}
+<style>
+    .card {
+        display: none;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 20px;
+        position: fixed;
+        top: 50%;
+        right: 10px;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+      
+      .card h2 {
+        margin-top: 0;
+      }
+      
+      .card form {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .card label {
+        margin-bottom: 5px;
+      }
+      
+      .card input {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      
+      .card button {
+        padding: 10px;
+        background-color: #072063;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      .card button:hover {
+        background-color: #0056b3;
+      }
+</style>
+
+
+    <style>
+        
+        /* Style for the fixed bar */
+        #fixed-bar {
+            position: fixed; 
+            top: 50vh; /* Adjusted position */
+            right: 1px;
+            transform: translateY(-50%);
+            display: none; /* Initially hidden */
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            {% comment %} background-color: rgba(0, 0, 0, 0.7); {% endcomment %}
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 2; 
+        }
+        #fixed-bar button {
+            background-color: #072063;
+            color: white;
+            border: none;
+            padding: 2px 2px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #fixed-bar button:hover {
+            background-color: #2980b9;
+        }
+        
+    </style> 
+   <script>
+        window.addEventListener('scroll', function() {
+            const fixedBar = document.getElementById('fixed-bar');
+            if (window.scrollY > window.innerHeight * 0.5) {
+                fixedBar.style.display = 'flex'; // Display the fixed bar
+            } else {
+                fixedBar.style.display = 'none'; // Hide the fixed bar
+            }
+        });
+    
+        // Function to scroll to a specific section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
+
+    {% comment %} Booking card {% endcomment %}
+    <script>
+        window.addEventListener('scroll', function() {
+          var bookingCard = document.getElementById('bookingCard');
+          var footer = document.getElementById('leg'); // Assuming you have a footer with the id 'footer'
+          var scrollPosition = window.pageYOffset;
+          var windowHeight = window.innerHeight;
+          var footerOffset = footer.offsetTop;
+      
+          // Hide the entire section on smaller devices
+          if (window.innerWidth <= 768) { // Adjust the width as needed for tablet devices
+            bookingCard.style.display = 'none';
+            return;
+          }
+      
+          // Show or hide the booking card based on scroll position
+          if (scrollPosition > windowHeight * 2.55 && scrollPosition < footerOffset - windowHeight) {
+            bookingCard.style.display = 'flex'; // Display the booking card
+          } else {
+            bookingCard.style.display = 'none'; // Hide the booking card
+          }
+        });
+      </script>
+      
+    
+      {% comment %} Booking card {% endcomment %}
+  
+<script>
+    function toggleParagraph(itinaryId) {
+        var paragraph = document.getElementById("paragraph" + itinaryId);
+        console.log("Paragraph ID:", itinaryId);
+        if (paragraph) {
+            paragraph.style.display = paragraph.style.display === "none" ? "block" : "none";
+        } else {
+            console.error("Paragraph not found with ID:", itinaryId);
+        }
+    }
+</script>
+    <script>
+        // Function to scroll to a specific section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    </script>
     <!-- tour-details end -->
     <script>
         $(document).ready(function () {

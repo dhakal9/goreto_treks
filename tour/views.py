@@ -157,7 +157,8 @@ class TourDeatails(View):
     def get(self, request, pk):
         tour_details = TourDetailsModel.objects.get(pk=pk)
         images = GallaryModel.objects.all()
-        return render(request, self.template_name, {'tour_details':tour_details, 'images':images})
+        itinaries = ItinatyModel.objects.all()
+        return render(request, self.template_name, {'tour_details':tour_details, 'images':images, 'itinaries':itinaries})
 
 class ItinaryAdmin(View):
     template_name ='admin_itinary.html'

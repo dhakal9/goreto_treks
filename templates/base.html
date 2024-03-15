@@ -84,6 +84,11 @@
     left: 100%; 
 }
 
+.dropdown ul ul ul{
+    top: 0;
+    left: 100%; 
+}
+
 	</style>
 
 </head>
@@ -160,7 +165,7 @@
 																							{%if nep_reg.destination_id == 3%}
 																							
 																							<li class="dropdown" ><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">{{nep_reg.name}}</a>
-																								
+																						
 																							</li>
 																							{%endif%}
 																							{%endfor%}
@@ -396,7 +401,7 @@
 
 	<script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
  <!-- main-footer -->
- <footer class="main-footer bg-color-2">
+ <footer class="main-footer bg-color-2" id="leg">
 	<div class="footer-top pt-130">
 		<div class="vector-bg" style="background-image: url({%static 'assets/images/shape/1212.png'%}); "></div>
 		<div class="auto-container">
