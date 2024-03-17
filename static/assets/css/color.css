@@ -109,11 +109,11 @@
 }
 
 .news-block-one .inner-box .image-box{
-	background: #ff7c5b;
+	background: rgba(192,192,192);
 }
 
 .news-block-one .inner-box .image-box .post-date i{
-	background: #ff7c5b;
+	background: #072063;
 }
 
 .news-block-one .inner-box .lower-content .category a:hover{
@@ -501,5 +501,5 @@
 }
 
 .news-block-one .inner-box .lower-content .category a{
-	background: #ff7c5b;
+	background: #072063;
 }

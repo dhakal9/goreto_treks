@@ -74,21 +74,24 @@
 			color: #000000;
 		}
 
-.dropdown > ul {
-    left: 100%; 
-    top: 0; 
-}
+		.dropdown > ul {
+			left: 100%; 
+			top: 0; 
+		}
 
-.dropdown ul ul {
-    top: 0;
-    left: 100%; 
-}
+		.dropdown ul ul {
+			top: 0;
+			left: 100%; 
+		}
 
-.dropdown ul ul ul{
-    top: 0;
-    left: 100%; 
-}
-
+		.dropdown ul ul ul {
+			top: 0;
+			left: 100%; 
+		}
+		.dropdown ul ul ul ul{
+			top: 0;
+			left: 100%; 
+		}
 	</style>
 
 </head>
@@ -136,7 +139,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								<div class="bg-layer"></div>
-								<figure class="logo" style="float: left; object-fit: cover;"><a href="{% url 'index' %}"><img style="min-width: 150px" src="{{company.logo_image.url}}" alt=""></a></figure>
+								 <figure class="logo" style="float: left; object-fit: cover;"><a href="{% url 'index' %}"><img style="min-width: 150px" src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
 							<div class="menu-area clearfix">
@@ -165,7 +168,16 @@
 																							{%if nep_reg.destination_id == 3%}
 																							
 																							<li class="dropdown" ><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">{{nep_reg.name}}</a>
-																						
+																								<ul>
+																									
+																										
+																									<li class="dropdown"><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">Ghandruk</a></li>
+																									<li class="dropdown"><a style="cursor:pointer" href="#">Poonhill</a></li>	
+																									<li class="dropdown"><a style="cursor:pointer" href="a">Mardi</a></li>	
+																									
+
+																								</ul> 
+
 																							</li>
 																							{%endif%}
 																							{%endfor%}
@@ -294,6 +306,8 @@
 			<!-- End Mobile Menu -->
 	
 
+
+
 					<!-- Add this chatbox and icon to your HTML wherever you want it to appear -->
 			<div id="whatsapp-chatbox" class="whatsapp-chatbox">
 				<button class="whatsapp-close" onclick="toggleChatbox()">Close</button>
@@ -390,7 +404,37 @@
 			</style>
 			
 	
-	
+	<!-- Logo added later like magical Himalayan-->
+	<style>
+		/* CSS for logo */
+		.custom-logo {
+			position: fixed;
+			top: 30px;
+			left: 150px;
+			z-index: 9999; /* Ensure it appears above other content */
+			opacity: 1; /* Initially visible */
+			transition: opacity 0.3s ease; /* Add smooth transition */
+			width: 100px; /* Set width as needed */
+			height: auto; /* Maintain aspect ratio */
+		}
+		
+		/* CSS to hide logo on scroll */
+		.hidden {
+			opacity: 0;
+		}
+		</style>
+		{% comment %} <img class="custom-logo" style="cursor:pointer" src="{% static 'assets/images/squarelogo.jpeg'%}" alt="Logo" width="500"> {% endcomment %}
+		<script>
+			// JavaScript to hide logo on scroll
+			window.addEventListener('scroll', function() {
+				var logo = document.querySelector('.custom-logo');
+				if (window.scrollY > 50) { // Adjust the scroll threshold as needed
+					logo.classList.add('hidden');
+				} else {
+					logo.classList.remove('hidden');
+				}
+			});
+		</script>
     {% block content %}
 
 

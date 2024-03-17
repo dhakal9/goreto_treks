@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block content%}
-<main>
+{% comment %} <main>
             
 
 
@@ -62,5 +62,182 @@
             </div>
         </div>
     </section>
-</main>
+</main> {% endcomment %}
+
+<section class="page-title centred" style="background-image: url({{company.home_image.url}});">
+    <div class="auto-container">
+        <div class="content-box">
+            <p style="position:absolute">Home/ Blogs/ Blog Details</p>
+        </div>
+    </div>
+</section>
+
+<section class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                <div class="blog-details-content">
+                    <div class="news-block-one">
+                        <div class="inner-box">
+                            <div class="lower-content">
+                                {% comment %} <div class="category"><a href="blog-details.html">Travell</a></div> {% endcomment %}
+                                <h2>{{blogs.title}}</h2>
+                                {% comment %} <ul class="post-info clearfix">
+                                    <li><span>By</span> <a href="index.html">Eva Green</a></li>
+                                    <li>-</li>
+                                    <li class="comment"><a href="blog-details.html">0 Comment</a></li>
+                                </ul> {% endcomment %}
+                            </div>
+                            <figure class="image-box">
+                                <img src="{{blogs.image.url}}" alt="">
+                                <span class="post-date"><i class="icon-Calendar"></i>{{ blogs.created_at|date:"Y F d" }}</span>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="text">
+                        <p>{{blogs.description}}</p>
+                    </div>
+                    <div class="image-box clearfix">
+                        <figure class="image"><img src="assets/images/resource/destination-1.jpg" alt=""></figure>
+                        <figure class="image"><img src="assets/images/resource/destination-2.jpg" alt=""></figure>
+                        <figure class="image"><img src="assets/images/resource/destination-3.jpg" alt=""></figure>
+                    </div>
+                    <div class="post-share-option clearfix">
+                        <div class="text pull-left">
+                            <h3>We Are Social On:</h3>
+                        </div>
+                        <ul class="social-links pull-right clearfix">
+                            <li><a href="blog-details.html"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="blog-details.html"><i class="fab fa-google-plus-g"></i></a></li>
+                            <li><a href="blog-details.html"><i class="fab fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                    {% comment %} <div class="comment-box">
+                        <div class="group-title">
+                            <h2>3 Comments</h2>
+                        </div>
+                        <div class="comment">
+                            <figure class="thumb-box">
+                                <img src="assets/images/news/comment-1.png" alt="">
+                            </figure>
+                            <div class="comment-inner">
+                                <div class="comment-info clearfix">
+                                    <h5>Rebeka Dawson</h5>
+                                    <span class="post-date">April 12, 2020</span>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nos trud exerc itation ullamco laboris.</p>
+                                <a href="blog-details.html" class="reply-btn"><i class="fas fa-share"></i>Reply</a>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <figure class="thumb-box">
+                                <img src="assets/images/news/comment-2.png" alt="">
+                            </figure>
+                            <div class="comment-inner">
+                                <div class="comment-info clearfix">
+                                    <h5>Elizabeth Winstead</h5>
+                                    <span class="post-date">April 11, 2020</span>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nos trud exerc itation ullamco laboris.</p>
+                                <a href="blog-details.html" class="reply-btn"><i class="fas fa-share"></i>Reply</a>
+                            </div>
+                        </div>
+                        <div class="comment">
+                            <figure class="thumb-box">
+                                <img src="assets/images/news/comment-3.png" alt="">
+                            </figure>
+                            <div class="comment-inner">
+                                <div class="comment-info clearfix">
+                                    <h5>Benedict Cumbatch</h5>
+                                    <span class="post-date">April 10, 2020</span>
+                                </div>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nos trud exerc itation ullamco laboris.</p>
+                                <a href="blog-details.html" class="reply-btn"><i class="fas fa-share"></i>Reply</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comments-form-area">
+                        <div class="group-title">
+                            <h2>Leave Your Comments</h2>
+                            <p>Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex commodo consequat duis aute irure dolor.</p>
+                        </div>
+                        <div class="form-inner">
+                            <form method="post" action="sendemail.php" id="contact-form" class="default-form" novalidate="novalidate"> 
+                                <div class="row clearfix">
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="text" name="username" placeholder="Your Name" required="" aria-required="true">
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-12 form-group">
+                                        <input type="email" name="email" placeholder="Email Address" required="" aria-required="true">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <input type="text" name="phone" required="" placeholder="Phone Number" aria-required="true">
+                                    </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12 form-group">
+                                        <input type="text" name="subject" required="" placeholder="Subject" aria-required="true">
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                        <textarea name="message" placeholder="Write Message"></textarea>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-sm-12 form-group message-btn">
+                                        <button class="theme-btn" type="submit" name="submit-form">Submit Now</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                <div class="blog-sidebar default-sidebar ml-20">
+                    <div class="sidebar-widget sidebar-search">
+                        <div class="widget-title">
+                            <h3>Search</h3>
+                        </div>
+                        <form action="destination-details.html" method="post" class="search-form">
+                            <div class="form-group">
+                                <input type="search" name="search-field" placeholder="Search" required="">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="sidebar-widget category-widget">
+                        <div class="widget-title">
+                            <h3>Categories</h3>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="category-list clearfix">
+                                <li><a href="blog-details"><i class="icon-Hover-Arrow"></i>Travel Direction</a></li>
+                                <li><a href="blog-details"><i class="icon-Hover-Arrow"></i>Documetation</a></li>
+                                <li><a href="blog-details"><i class="icon-Hover-Arrow"></i>Logo &amp; Assets</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget post-widget">
+                        <div class="widget-title">
+                            <h3>Latest News</h3>
+                        </div>
+                        <div class="post-inner">
+                            <div class="post">
+                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-1.png" alt=""></a></figure>
+                                <span class="post-date">April 18, 2020</span>
+                                <h4><a href="blog-details.html">Consequntur eos magni dolore.</a></h4>
+                            </div>
+                            <div class="post">
+                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-2.png" alt=""></a></figure>
+                                <span class="post-date">April 17, 2020</span>
+                                <h4><a href="blog-details.html">Magni dolore qui ratione seque.</a></h4>
+                            </div>
+                            <div class="post">
+                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-3.png" alt=""></a></figure>
+                                <span class="post-date">April 16, 2020</span>
+                                <h4><a href="blog-details.html">Ratone magni sed dolore eos.</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {%endblock content%}

@@ -1013,7 +1013,60 @@ img {
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
 }
+/* added later for sub-sub-Nav */
+/* Updated CSS for sub-sub menu */
+.main-menu .navigation > li > ul > li > ul > li > ul > li {
+  position: absolute;
+  width:100%;
+  top: 5%;
+  left: 100%; /* Position it to the right of the parent */
+  display: none; /* Initially hide the sub-sub menu */
+  background-color: #fff; /* Add desired background color */
+  border: 1px solid #ccc; /* Add desired border */
+  border-radius: 5px; /* Add desired border radius */
+  padding: 0px 30px; /* Add desired padding */
+  z-index: 999; /* Ensure it appears above other content */
+}
 
+/* Show sub-sub menu when parent li is hovered */
+.main-menu .navigation > li > ul > li > ul > li:hover > ul > li {
+  display: block;
+}
+
+/* Add styles for sub-sub menu items */
+.main-menu .navigation > li > ul > li > ul > li > ul > li > a {
+  position:relative;
+  display:block;
+  padding:7px 0px;
+  line-height:24px;
+  font-weight:600;
+  font-size:15px;
+  font-family: 'Work Sans', sans-serif;
+  text-transform:capitalize;
+  color:#061a3a;
+  text-align: left;
+  transition:all 500ms ease;
+  -moz-transition:all 500ms ease;
+  -webkit-transition:all 500ms ease;
+  -ms-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+}
+
+/* Style for the dropdown arrow */
+.main-menu .navigation > li > ul > li > ul > li > ul > li.dropdown > a:after {
+  font-family: 'Font Awesome 5 Pro';
+  content: "\f105";
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  display: block;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 900;
+  z-index: 5;  
+}
+
+/* endof added later for sub-sub-Nav */
 .main-menu .navigation > li > ul > li:hover > ul > li{
   opacity: 1;
   visibility: visible;
@@ -7125,7 +7178,7 @@ div#mCSB_1_container{
 
 .sidebar-page-container{
   position: relative;
-  padding: 150px 0px;
+  padding: 100px 0px;
 }
 
 .blog-grid-content .news-block-one .inner-box{
