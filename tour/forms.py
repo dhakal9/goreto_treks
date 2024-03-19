@@ -1,6 +1,7 @@
 from django import forms
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel
 
+
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
     slogan = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Where culture meets nature', 'class': 'form-control'}))
@@ -55,7 +56,7 @@ class TourDetailsForm(forms.ModelForm):
     age = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     days = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     map = forms.URLField(max_length=2048, required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
-    map_overview = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    map_overview = forms.CharField(widget=forms.Textarea(attrs={'id': 'editor'}))
     image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     is_activity = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_acttraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
@@ -78,6 +79,7 @@ class TourDetailsForm(forms.ModelForm):
     class Meta:
         model = TourDetailsModel
         fields = "__all__"
+        
 
 
 class ItinaryForm(forms.ModelForm):

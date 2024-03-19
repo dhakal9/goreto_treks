@@ -62,3 +62,8 @@ class GallaryModel(models.Model):
     image_id = models.AutoField(primary_key=True)
     tour = models.ForeignKey(TourDetailsModel, null= False, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='blog_images', blank=True, null=True)
+
+class IncludeExcludeModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=250, null=False, blank=False)
+    is_include = models.BooleanField(default=True)
