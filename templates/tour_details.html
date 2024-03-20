@@ -436,30 +436,34 @@
                             <div class="widget-title">
                                 <h3>Book This Tour</h3>
                             </div>
-                            <form action="#" method="post" class="tour-form">
+                            <form method="POST" class="tour-form">
+                                {% csrf_token %}
+
                                 <div class="form-group">
-                                    <input type="text" name="name" placeholder="Your Name" required="">
+                                    
+                                    {{booking_form.username}}
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" placeholder="Your Email" required="">
+                                    
+                                    {{booking_form.email}}
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="phone" placeholder="Phone" required="">
+                                   
+                                    {{booking_form.phone}}
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="tickets" placeholder="Tickets" required="">
+                                    {% comment %} <input type="text" name="date" placeholder="dd/mm/yy" id="datepicker"> {% endcomment %}
+                                    {{booking_form.date}}
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" name="date" placeholder="dd/mm/yy" id="datepicker">
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="message" placeholder="Message"></textarea>
+                                   
+                                    {{booking_form.message}}
                                 </div>
                                 <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
     
                                 </div>
                                 <div class="form-group message-btn">
-                                    <button type="submit" class="theme-btn">Book Tour</button>
+                                    <button type="submit" class="theme-btn" name="booking_form_submit">Book Tour</button>
                                 </div>
                             </form>
                         </div>
@@ -505,17 +509,18 @@
 <div class="card" id="bookingCard">
     <!-- Your booking card content goes here -->
     <h2>Make an Inquiry</h2>
-    <form>
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required>
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required>
-      <label for="destination">Message:</label>
-      <input type="text" id="destination" name="destination" required>
-      <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
-    
-      </div>
-      <button type="submit">Send</button>
+    <form method='POST'>
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        {{inquiry_form.username}}
+        <label for="email">Email:</label>
+        {{inquiry_form.email}}
+        <label for="destination">Message:</label>
+        {{inquiry_form.message}}
+        <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+        
+        </div>
+        <button type="submit" name ="inquiry_form_submit">Send</button>
     </form>
 </div>
 {% comment %} booking Card {% endcomment %}

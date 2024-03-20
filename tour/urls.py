@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, DeleteItinary, EditItinary, Gallary, DeleteImage
+from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, DeleteItinary, EditItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude
 urlpatterns = [
     path('admindestination/', AdminDestination.as_view(), name="admin_destination"),
     path('destination/', Destination.as_view(), name="destination"),
@@ -24,5 +24,8 @@ urlpatterns = [
     path('delete_itinary/<int:itinary_id>', DeleteItinary.as_view(), name='delete_itinary'),
     path('singlegallary/', Gallary.as_view(), name='admin_gallary'),
     path('delete_single_gallary/<int:image_id>', DeleteImage.as_view(), name='delete_gallary'),
+    path('admin_include_exclude/', AdminIncludeExclude.as_view(), name="admin_include_exclude"),
+    path('delete_include_exclude/<int:id>/', DeleteIncludeExclude.as_view(), name='delete_include_exclude'),
+    path('edit_include_exclude/<int:id>/', EditIncludeExclude.as_view(), name='edit_include_exclude'),
  ]
  

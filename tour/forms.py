@@ -1,5 +1,5 @@
 from django import forms
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel
 
 
 class DestinationForm(forms.ModelForm):
@@ -119,3 +119,25 @@ class GallaryForm(forms.ModelForm):
     class Meta:
         model = GallaryModel
         fields ="__all__"
+
+
+class BookingForm(forms.Form):
+    username = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text', 'placeholder':'Your Name'}))
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'email', 'placeholder':'Your Email', 'name':'email'}))
+    phone = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text', 'name':'phone', 'placeholder':'Phone'}))
+    date = forms.DateField(required=True, widget=forms.DateInput(attrs={'class': 'form-control', 'placeholder':'dd/mm/yyyy', 'id':'datepicker'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2, "placeholder":"Message"}))
+
+
+class InqueryForm(forms.Form):
+    username = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={ 'type':'text', 'placeholder':'Your Name', 'id':'name'}))
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={ 'type':'email', 'placeholder':'Your Email', 'name':'email', 'id':'email'}))
+    message = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Message',}))
+
+class IncludeExcludeForm(forms.ModelForm):
+    name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+     
+    class Meta:
+        model = IncludeExcludeModel
+        fields ="__all__"
+    

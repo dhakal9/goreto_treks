@@ -1,9 +1,11 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 
 def get_regions(request):
     destination_id = request.GET.get('destination_id')
@@ -154,11 +156,67 @@ class DeleteTour(View):
     
 class TourDeatails(View):
     template_name = 'tour_details.html'
+
     def get(self, request, pk):
+        inquiry_form = InqueryForm()
+        booking_form = BookingForm()
         tour_details = TourDetailsModel.objects.get(pk=pk)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
-        return render(request, self.template_name, {'tour_details':tour_details, 'images':images, 'itinaries':itinaries})
+        return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form})
+
+    def post(self, request, pk):
+        tour_details = TourDetailsModel.objects.get(pk=pk)
+        images = GallaryModel.objects.all()
+        itinaries = ItinatyModel.objects.all()
+
+        if request.method == 'POST':
+            if 'booking_form_submit' in request.POST:
+                booking_form = BookingForm(request.POST)
+                if booking_form.is_valid():
+                    name = booking_form.cleaned_data['username']
+                    email = booking_form.cleaned_data['email']
+                    phone = booking_form.cleaned_data['phone']
+                    message = booking_form.cleaned_data['message']
+                    subject = "Booking Inquiry"
+
+                    message_body = f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
+
+                    send_mail(
+                        subject,  # Title
+                        message_body,  # Message
+                        settings.EMAIL_HOST_USER,  # Sender email
+                        ['dhakalamrit19@gmail.com'],  # Receiver email
+                        fail_silently=False
+                    )
+                    messages.success(request, 'Booking Inquiry sent Successfully')
+                    return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
+
+            elif 'inquiry_form_submit' in request.POST:
+                inquiry_form = InqueryForm(request.POST)
+                if inquiry_form.is_valid():
+                    name = inquiry_form.cleaned_data['username']
+                    email = inquiry_form.cleaned_data['email']
+                    message = inquiry_form.cleaned_data['message']
+                    subject = "General Inquiry"
+
+                    message_body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+
+                    send_mail(
+                        subject,  # Title
+                        message_body,  # Message
+                        settings.EMAIL_HOST_USER,  # Sender email
+                        ['dhakalamrit19@gmail.com'],  # Receiver email
+                        fail_silently=False
+                    )
+                    messages.success(request, 'General Inquiry sent Successfully')
+                    return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
+
+        # If neither booking nor inquiry form is submitted, render the template with the forms
+        booking_form = BookingForm()
+        inquiry_form = InqueryForm()
+        return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form})
+
 
 class ItinaryAdmin(View):
     template_name ='admin_itinary.html'
@@ -240,3 +298,44 @@ class Trekking(View):
     template_name ='trekking.html'
     def get(self, request):
         return render(request, self.template_name)
+
+class AdminIncludeExclude(View):
+    template_name = 'admin_include_exclude.html'
+    def get(self, request):
+        details = IncludeExcludeModel.objects.all()
+        form = IncludeExcludeForm()
+        return render(request, self.template_name, {'form':form, 'details':details})
+    
+    def post(self, request):
+        details = IncludeExcludeModel.objects.all()
+        form = IncludeExcludeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Include/Exclude Added Successfully')
+            return redirect('admin_include_exclude') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
+        return render(request, self.template_name, {'form': form, 'details':details})
+
+class DeleteIncludeExclude(View):
+    def get(self, request, id):
+        details = IncludeExcludeModel.objects.get(pk=id)
+        details.delete()
+        messages.success(request, "Include/Exclude Successfully")
+        return redirect('admin_include_exclude')
+
+class EditIncludeExclude(View):
+    template_name = 'admin_include_exclude.html'
+
+    def get(self, request, id):
+        details = IncludeExcludeModel.objects.all()
+        det = get_object_or_404(IncludeExcludeModel, pk=id)
+        form = IncludeExcludeForm(instance=det)
+        return render(request, self.template_name, {'form':form, 'details':details})
+
+    def post(self, request, id):
+        det = get_object_or_404(IncludeExcludeModel, pk=id)
+        details = IncludeExcludeModel.objects.all()
+        form = IncludeExcludeForm(request.POST, instance=det)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_include_exclude')
+        return render(request, self.template_name, {'form':form, 'details':details})

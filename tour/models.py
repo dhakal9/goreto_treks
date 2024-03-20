@@ -67,3 +67,10 @@ class IncludeExcludeModel(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250, null=False, blank=False)
     is_include = models.BooleanField(default=True)
+
+
+class TourIncludeExcludeModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    tour = models.ForeignKey(TourDetailsModel, on_delete=models.CASCADE)
+    sentence = models.ForeignKey(IncludeExcludeModel, on_delete=models.CASCADE)
+    is_included = models.BooleanField(default=True)
