@@ -74,24 +74,38 @@
 			color: #000000;
 		}
 
-		.dropdown > ul {
+		{% comment %} .dropdown > ul {
 			left: 100%; 
 			top: 0; 
-		}
+		} {% endcomment %}
 
 		.dropdown ul ul {
 			top: 0;
 			left: 100%; 
+		} 
+
+		  .dropdown ul ul ul {
+			top: 0;
+			left: 100%;
+		} 
+
+		ul ul ul ul{
+			width: 120%;
+			height: auto;
+			position: absolute;
+			top: 0;
+			left: 100%;
+			margin-left: -120%;
 		}
 
-		.dropdown ul ul ul {
-			top: 0;
-			left: 100%; 
-		}
+
+		
+		
+{% comment %}
 		.dropdown ul ul ul ul{
 			top: 0;
 			left: 100%; 
-		}
+		} {% endcomment %}
 
 		
 
@@ -231,14 +245,6 @@
 															{% endfor %}
 														</ul>
 													</li>
-													{% comment %} <li class="dropdown">
-														<a href="index.html">Nepal</a>
-														<ul class="submenu">
-															<li><a href="index.html">Annapurna Region</a></li>
-															<li><a href="index-2.html">Everest Region</a></li>
-															<li><a href="index-3.html">Langtang Region</a></li>
-														</ul>
-													</li> {% endcomment %}
 
 													<li class="dropdown">
 														<a href="{% url 'activities' %}"> Activities </a>
