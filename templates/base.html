@@ -92,6 +92,9 @@
 			top: 0;
 			left: 100%; 
 		}
+
+		
+
 	</style>
 
 </head>
@@ -153,10 +156,10 @@
 									<div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
 										<ul class="navigation clearfix">
 	
-													<li class="dropdown">
+													{% comment %} <li class="dropdown">
 														<a href="{% url 'destination'%}"> Destinations </a>
 																																		
-																				<ul>
+																				 <ul>
 																					<li class="dropdown">
 																						{% for destination in destinations %}
 																						<a style="cursor:pointer" href="{% url 'one_destination' destination.destination_id %}">{{destination.name}}</a>
@@ -165,7 +168,7 @@
 																						<ul>
 																							
 																							{% for nep_reg in nepal_regions %}
-																							{%if nep_reg.destination_id == 3%}
+																							{%if nep_reg.destination_id == destination.destination_id%}
 																							
 																							<li class="dropdown" ><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">{{nep_reg.name}}</a>
 																								<ul>
@@ -201,7 +204,42 @@
 																				</ul>
 																			
 															
+													</li> {% endcomment %}
+
+													<li class="dropdown">
+														<a href="{% url 'destination' %}">Destinations</a>
+														<ul class="submenu">
+															{% for destination in destinations %}
+															<li class="dropdown">
+																<a href="{% url 'one_destination' destination.destination_id %}">{{ destination.name }}</a>
+																<ul class="sub-submenu">
+																	{% for nep_reg in nepal_regions %}
+																	{% if nep_reg.destination_id == destination.destination_id %}
+																	<li class="dropdown"><a href="{% url 'tour_list' nep_reg.region_id %}">{{ nep_reg.name }}</a>
+																	<ul class="sub-submenu">
+																		{% for trekking in trekkings %}
+																		{% if nep_reg.region_id == trekking.region.region_id %}
+																		<li><a href="#">{{trekking.name}}</a></li>
+																		{% endif %}
+																		{% endfor %}
+																	</ul>
+																	</li>
+																	{% endif %}
+																	{% endfor %}
+																</ul>
+															</li>
+															{% endfor %}
+														</ul>
 													</li>
+													{% comment %} <li class="dropdown">
+														<a href="index.html">Nepal</a>
+														<ul class="submenu">
+															<li><a href="index.html">Annapurna Region</a></li>
+															<li><a href="index-2.html">Everest Region</a></li>
+															<li><a href="index-3.html">Langtang Region</a></li>
+														</ul>
+													</li> {% endcomment %}
+
 													<li class="dropdown">
 														<a href="{% url 'activities' %}"> Activities </a>
 														
