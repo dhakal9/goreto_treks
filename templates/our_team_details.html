@@ -35,18 +35,20 @@
 <section class="page-title style-two centred">
     <div class="auto-container">
         <div class="content-box">
-            <h1>Team Goreto</h1>
+            <h1>Message From Team Goreto</h1>
         </div>
     </div>
 </section>
 <!-- End Page Title -->
 <div class="auto-container">
 {% for team in teams %}
-<div class="review">
+<div class="review text-center">
     <div class="image">
-        <img style="width: 500px; height: 300px; object-fit: cover;" src="{{ team.team_image.url }}" alt="{{ team.name }}">
-        <h2>{{ team.name }}</h2>
-        <h4>Travell Guide</h4>
+        <img style="width: 370px; height: 400px; object-fit: cover;" src="{{ team.team_image.url }}" alt="{{ team.name }}">
+        <div class="sec-title text-center" >
+            <h2>{{ team.name }}</h2>
+            <h4>Travell Guide</h4>
+        </div>
     </div>
     <div class="content">
         <p>Step into the world of trekking with a true aficionado, Madhab Kumar Dhamala, affectionately known as Madhu. With an astounding experience spanning over two decades, Madhu has etched his name as a stalwart in the trekking industry. Having catered to hundreds of guests annually, his wealth of expertise is unparalleled.

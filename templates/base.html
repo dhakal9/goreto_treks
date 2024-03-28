@@ -127,16 +127,18 @@
 					<div class="auto-container">
 						<div class="top-inner clearfix d-flex">
 							<ul class="top-info pull-left d-flex justify-content-start w-75 social-links">
-								<li><a href="mailto:{{company.email}}"><i class="fas fa-envelope" ></i> {{company.email}}</a></li>
+								<li class="d-none d-md-block"><a href="mailto:{{company.email}}"><i class="fas fa-envelope"></i> {{company.email}}</a></li>
 								<li class="mx-5">
 									{% comment %} <i class="fa fa-whatsapp"></i> {% endcomment %}
 									<a href="tel:{{company.contact}}">
 										{% comment %} <i class="fa fa-phone"></i>  {% endcomment %}
 										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
 											<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
-										  </svg>
-										{{company.contact}}</a></li>
-								<li><a href="https://googlemap.com"><i class="fas fa-map-marker-alt"></i> {{company.address}}</a></li>
+										</svg>
+										<span class="d-none d-md-inline">{{company.contact}}</span>
+									</a>
+								</li>
+								<li class="d-none d-md-block"><a href="https://maps.app.goo.gl/ua15KsG7UcuBbr6V6"><i class="fas fa-map-marker-alt"></i> {{company.address}}</a></li>
 							</ul>
 							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
 								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f" style="font-size: 20px"></i></a></li>
@@ -150,6 +152,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<!-- header-lower -->
 				<div class="header-lower" style="background-color:#ffffff!important">
 					<div class="auto-container">
@@ -229,15 +232,15 @@
 																<ul class="sub-submenu">
 																	{% for nep_reg in nepal_regions %}
 																	{% if nep_reg.destination_id == destination.destination_id %}
-																	<li class="dropdown"><a href="{% url 'tour_list' nep_reg.region_id %}">{{ nep_reg.name }}</a>
-																	<ul class="sub-submenu">
-																		{% for trekking in trekkings %}
-																		{% if nep_reg.region_id == trekking.region.region_id %}
-																		<li><a href="#">{{trekking.name}}</a></li>
-																		{% endif %}
-																		{% endfor %}
-																	</ul>
-																	</li>
+																	<li class="dropdown sub-sub-item"><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id %}">{{nep_reg.name}}</a>
+																		<ul class="sub-submenu">
+																		  {% for trekking in trekkings %}
+																		  {% if nep_reg.region_id == trekking.region.region_id %}
+																		  <li class="sub-sub-item"><a href="#">{{trekking.name}}</a></li>
+																		  {% endif %}
+																		  {% endfor %}
+																		</ul>
+																	  </li>
 																	{% endif %}
 																	{% endfor %}
 																</ul>
@@ -288,9 +291,9 @@
 								</nav>
 							</div>
 							<ul class="menu-right-content clearfix">
-								<li class="user-link">
+								{% comment %} <li class="user-link">
 									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
-								</li>
+								</li> {% endcomment %}
 							</ul>
 						</div>
 					</div>
@@ -302,7 +305,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								
-								<figure class="logo"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
+								<figure class="logo"><a href="{% url 'index' %}"><img src="{% static "assets/images/scroll_logo.png" %}" alt=""></a></figure>
 							</div>
 							<div class="menu-area">
 								<nav class="main-menu clearfix">
@@ -311,9 +314,9 @@
 							</div>
 							<ul class="menu-right-content clearfix">
 								
-								<li class="user-link">
+								{% comment %} <li class="user-link">
 									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
-								</li>
+								</li> {% endcomment %}
 							</ul>
 						</div>
 					</div>
@@ -505,6 +508,11 @@
 							<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram" style="font-size: 30px; padding:10px;"></i></a></li>
 							<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor" style="font-size: 30px; padding:8px;"></i></a></li>
 						</ul>
+						<ul class="social-links clearfix" style="margin-top:10px">
+							<li><a href="https://twitter.com/goretotreks"><i class="fab fa-twitter" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="https://www.youtube.com/@goretotreks1606"><i class="fab fa-youtube" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="#"><i class="fab fa-linkedin" style="font-size: 30px; padding:8px;"></i></a></li>
+						</ul>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12 footer-column">
@@ -515,7 +523,7 @@
 						<div class="widget-content">
 							<ul class="links-list clearfix">
 								<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
-								{% for activity in activities %} 
+								{% for activity in footer_activities %} 
 								<li><a style="cursor:pointer" href="{% url 'tour_list' activity.region_id %}">{{activity.name}}</a></li>
 								{% endfor %}
 							</ul>
@@ -543,9 +551,10 @@
 						</div>
 						<div class="widget-content">
 							<ul class="info-list clearfix">
-								<li><i class="fas fa-map-marker-alt"></i>{{company.address}}</li>
+								<li><i class="fas fa-map-marker-alt"></i><a href="https://maps.app.goo.gl/ua15KsG7UcuBbr6V6">{{company.address}}</li>
 								<li><i class="fas fa-microphone"></i><a href="tel:{{company.contact}}">{{company.contact}}</a></li>
 								<li><i class="fas fa-envelope"></i><a href="mailto:{{company.email}}">{{company.email}}</a></li>
+								<li><i class="fa fa-phone"></i><a href="tel:+977 15915493">+977 15915493</a></li>
 							</ul>
 						</div>
 					</div>
@@ -555,7 +564,7 @@
 					<aside id="nepamount_association_widget-5" class="col-md-12">
 						<div class="footer-widget">
 							<div class="widget-title">
-								<h3>IN Association With</h3>
+								<h3>In Association With</h3>
 							</div>
 							<ul class="social-icons">
 								<ul class="footsocial">

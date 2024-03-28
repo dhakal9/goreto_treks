@@ -17,9 +17,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 team-block">
                     <div class="team-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{team.team_image.url}}" alt=""></figure>
+                            <figure class="image-box"><a href="{% url 'our_team_details'%}"><img style="width: 370px; height: 400px; object-fit: cover;" src="{{team.team_image.url}}" alt=""></a></figure>
                             <div class="lower-content">
-                                <h3><a>{{team.name}}</a></h3>
+                                <h3><a href="{% url 'our_team_details'%}">{{team.name}}</a></h3>
                                 <span class="designation">{{team.position}}</span>
                                 <ul class="social-links clearfix">
                                     <li><a href="{{team.facebook_link}}"><i class="fab fa-facebook-f"></i></a></li>

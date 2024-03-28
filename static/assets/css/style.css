@@ -1098,9 +1098,6 @@ img {
   border-bottom:none; 
 }
 
-.main-menu .navigation > li > ul > li > ul > li:last-child{
-  border-bottom:none; 
-}
 
 .main-menu .navigation > li > ul > li > ul > li > a{
   position:relative;
@@ -1210,7 +1207,7 @@ img {
 }
 
 .main-header.style-two .menu-area .mobile-nav-toggler .icon-bar{
-  background-color: #ffffff;
+  background-color: #072063;
 }
 
 .menu-area .mobile-nav-toggler .icon-bar:last-child{
