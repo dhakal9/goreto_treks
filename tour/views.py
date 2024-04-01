@@ -6,6 +6,7 @@ from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, Ga
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.urls import reverse
 
 def get_regions(request):
     destination_id = request.GET.get('destination_id')
@@ -222,48 +223,76 @@ class ItinaryAdmin(View):
     template_name ='admin_itinary.html'
     def get(self, request):
         form = ItinaryForm()
-        itinaries = ItinatyModel.objects.all()
         tours = TourDetailsModel.objects.all()
-        return render(request, self.template_name, {'form': form, 'tours':tours, 'itinaries':itinaries})
+        return render(request, self.template_name, {'form': form, 'tours':tours})
     
     def post(self, request):
-        itinaries = ItinatyModel.objects.all()
         tours = TourDetailsModel.objects.all()
         form = ItinaryForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, 'Itinary saved Successfully')
             return redirect('admin_itinary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
-        return render(request, self.template_name, {'form': form, 'tours':tours, 'itinaries':itinaries})
+        return render(request, self.template_name, {'form': form, 'tours':tours})
 
 class EditItinary(View):
     template_name = 'admin_itinary.html'
 
     def get(self, request, itinary_id):
-        itinaries = ItinatyModel.objects.all()
         itinary = get_object_or_404(ItinatyModel, pk=itinary_id)
+        tour = itinary.tour  # Get the tour associated with the itinerary
+        itinaries = ItinatyModel.objects.filter(tour=tour)  # Filter itineraries by tour
         form = ItinaryForm(instance=itinary)
         tours = TourDetailsModel.objects.all()
-        return render(request, self.template_name, {'form': form,  'tours':tours, 'itinaries':itinaries})
-
+        return render(request, self.template_name, {'form': form, 'tours': tours, 'itinaries': itinaries})
+        
     def post(self, request, itinary_id):
         itinary = get_object_or_404(ItinatyModel, pk=itinary_id)
+        tour = itinary.tour  # Get the tour associated with the itinerary
         tours = TourDetailsModel.objects.all()
-        itinaries = ItinatyModel.objects.all()
+        itinaries = ItinatyModel.objects.filter(tour=tour)  # Filter itineraries by tour
         form = ItinaryForm(request.POST, request.FILES, instance=itinary)
         if form.is_valid():
             form.save()
-            return redirect('admin_itinary')
+            # Redirect to the edit_tour_itinary view with the appropriate activity_id
+            return redirect(reverse('edit_tour_itinary', kwargs={'activity_id': tour.activity_id}))
         
-        return render(request, self.template_name, {'form': form,  'tours':tours, 'itinaries':itinaries})
+        return render(request, self.template_name, {'form': form, 'tours': tours, 'itinaries': itinaries})
+
+
 
 class DeleteItinary(View):
-        def get(self, request, itinary_id):
-            itinary = ItinatyModel.objects.get(itinary_id=itinary_id)
-            itinary.delete()
-            messages.success(request, "Itinary Deleted Successfully")
-            return redirect('admin_itinary')
+    def get(self, request, itinary_id):
+        itinary = get_object_or_404(ItinatyModel, pk=itinary_id)
+        tour = itinary.tour  # Get the tour associated with the itinerary
+        itinary.delete()
+        messages.success(request, "Itinerary Deleted Successfully")
+        # Redirect to the edit_tour_itinary view with the appropriate activity_id
+        return redirect(reverse('edit_tour_itinary', kwargs={'activity_id': tour.activity_id}))
+
+
+class EditTourItinary(View):
+    template_name ='admin_itinary.html'
     
+    def get(self, request, activity_id):
+        form = ItinaryForm()
+        toors = get_object_or_404(TourDetailsModel, activity_id=activity_id)
+        tours = TourDetailsModel.objects.all()
+        itinaries = ItinatyModel.objects.filter(tour=toors)
+        return render(request, self.template_name, {'form': form, 'toors': toors, 'tours': tours, 'itinaries': itinaries})
+
+    def post(self, request, activity_id):
+        toors = get_object_or_404(TourDetailsModel, activity_id=activity_id)
+        tours = TourDetailsModel.objects.all()
+        itinaries = ItinatyModel.objects.filter(tour=toors)
+        form = ItinaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Itinary saved Successfully')
+            # Redirect with the activity_id parameter
+            return redirect(reverse('edit_tour_itinary', kwargs={'activity_id': activity_id}))
+        return render(request, self.template_name, {'form': form, 'tours': tours, 'toors': toors, 'itinaries': itinaries})
+
 class Gallary(View):
     template_name ='admin_gallary.html'
     def get(self, request):

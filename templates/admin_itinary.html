@@ -67,6 +67,7 @@
 
 
 <div class="container-fluid">
+
     <h4> Itinaries </h4>
     <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
         <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
@@ -128,7 +129,7 @@
         {% endfor %}
         
         </table>
-<h4>List Of Host Users </h4><br>
+<h4>List Of Tours </h4><br>
 
 <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
 <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
@@ -153,7 +154,7 @@
 <td>{{tour.price}} $</td>
 <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
 <td>
-<a type="button" href="" class="btn btn-link btn-sm btn-rounded">
+<a type="button" href="{% url 'edit_tour_itinary' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">
 Edit
 </a>
 <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
