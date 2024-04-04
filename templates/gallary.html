@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 
 <style>
   * {
@@ -66,7 +67,7 @@
   }
 </style>
 
-<section class="page-title style-two centred" style="background-image: url({{company.home_image.url}});" >
+<section class="page-title style-two centred" style=" height: 200px; background-image: url({% static 'assets/images/gallary_pano.jpg' %}); " >
   <div class="auto-container">
       <div class="content-box">
           <p style="position:absolute">Home/Gallary</p>

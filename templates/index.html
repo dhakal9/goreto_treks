@@ -121,12 +121,13 @@
                     <div class="sec-title text-center">
                         <p>Namaste</p>
                         <hr>
-                        <h2>We welcome you all.</h2>
+                        <h2>Welcome to Goreto Treks!</h2>
                     </div>
-                    <p>{{company.about_us|truncatewords:100}}</p><br>
-                    <div class="btn-box">
+                    <p align="justify">{{company.about_us}}</p> <br>
+                    <p>Once again, a warm welcome to Goreto Treks !!!</p><br>
+                    {% comment %} <div class="btn-box">
                         <a href="{% url 'about_us'%}" class="theme-btn">Read More</a>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
             <div class="col-lg-6">
@@ -137,8 +138,9 @@
             </div>
         </div>
     </div>
+    
 </section>
-
+<hr>
 <style>
     .feature-section {
         background: #f8f8f8;

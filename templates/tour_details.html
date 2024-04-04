@@ -104,7 +104,7 @@
                                                 <h3>{{ itinary.name }}
                                                     <button class="toggle-btn" onclick="toggleParagraph('{{ itinary.itinary_id }}')">▼</button>
                                                 </h3>
-                                                <p id="paragraph{{ itinary.itinary_id  }}" class="paragraph" style="display: none;">{{ itinary.description }}</p>
+                                                <p align="justify" id="paragraph{{ itinary.itinary_id  }}" class="paragraph" style="display: none;">{{ itinary.description }}</p>
                                             </div>
                                         {% endif %}
                                     {% endfor %}
@@ -304,97 +304,12 @@
     
                                 </ul>
                             </div>
-                        <div class="review-box mt-5">
+
+                        <div class="comment-box mt-5">
                             <div class="text">
-                                <div class="total-rating">
-                                    <h2>4.8</h2>
-                                    <span>Superb</span>
-                                </div>
-                            </div>
-                            <div class="progress-content">
-                                <div class="progress-box">
-                                    <p>Accommodation</p>
-                                    <div class="bar">
-                                        <div class="bar-inner count-bar" data-percent="70%"></div>
-                                        <div class="count-text">70%</div>
-                                    </div>
-                                </div>
-                                <div class="progress-box">
-                                    <p>Transport</p>
-                                    <div class="bar">
-                                        <div class="bar-inner count-bar" data-percent="80%"></div>
-                                        <div class="count-text">80%</div>
-                                    </div>
-                                </div>
-                                <div class="progress-box">
-                                    <p>Comfort</p>
-                                    <div class="bar">
-                                        <div class="bar-inner count-bar" data-percent="100%"></div>
-                                        <div class="count-text">100%</div>
-                                    </div>
-                                </div>
-                                <div class="progress-box">
-                                    <p>Food</p>
-                                    <div class="bar">
-                                        <div class="bar-inner count-bar" data-percent="90%"></div>
-                                        <div class="count-text">90%</div>
-                                    </div>
-                                </div>
-                                <div class="progress-box">
-                                    <p>Hospitality</p>
-                                    <div class="bar">
-                                        <div class="bar-inner count-bar" data-percent="70%"></div>
-                                        <div class="count-text">70%</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-box">
-                            <div class="text">
-                                <h2>Leave Your Comments</h2>
-                                <p>See what our travelers have to say about their incredible journeys with Goreto Treks!</p>
-                                <ul class="list clearfix">
-                                    <li>
-                                        <h5>Accommodation:</h5>
-                                        <i id="A1" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="A2" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="A3" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="A4" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="A5" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                    </li>
-                                    <li>
-                                        <h5>Transport:</h5>
-                                        <i id="T1" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="T2" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="T3" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="T4" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="T5" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                    </li>
-                                    <li>
-                                        <h5>Comfort:</h5>
-                                        <i id="C1" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="C2" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="C3" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="C4" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="C5" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                    </li>
-                                    <li>
-                                        <h5>Food:</h5>
-                                        <i id="F1" onclick="setRatingCss(this)" class="fa-star far "></i>
-                                        <i id="F2" onclick="setRatingCss(this)" class="fa-star far "></i>
-                                        <i id="F3" onclick="setRatingCss(this)" class="fa-star far "></i>
-                                        <i id="F4" onclick="setRatingCss(this)" class="fa-star far "></i>
-                                        <i id="F5" onclick="setRatingCss(this)" class="fa-star far "></i>
-                                    </li>
-                                    <li>
-                                        <h5>Hospitality:</h5>
-                                        <i id="H1" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="H2" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="H3" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="H4" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                        <i id="H5" onclick="setRatingCss(this)" class="fa-star far"></i>
-                                    </li>
-                                </ul>
+                                <h2>Similar Trips</h2>
+                                <p>Goreto provides wide varities of travell options.</p>
+                               
                             </div>
                             <form method="post" class="comment-form" id="comment-form">
                                 <div class="row clearfix">

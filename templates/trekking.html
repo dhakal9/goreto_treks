@@ -1,130 +1,402 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
 {%load static%}
-
-<!-- Page Title -->
-
-<!-- Page Title -->
-
-<section class="page-title centred" style="background-image: url({{company.home_image.url}}); ">
-    <div class="auto-container">
-        <div class="content-box">
-            <h1>Trekkings</h1>
-            <p>Get Ready For Adventure</p>
-            <p style="position:absolute">Home/Trekking</p>
+    
+    <!-- Page Title -->
+    <section class="page-title style-two centred" style="background-image: url({{company.home_image.url}}); ">
+        <div class="auto-container">
+            <div class="content-box">
+                <h1>Trekkings</h1>
+                <p style="position:absolute">Home/Trekking</p>
+            </div>
+            <div class="form-inner">
+                <form action="#" method="post" class="booking-form clearfix">
+                    <div class="form-group">
+                        <input class="col-12 col-lg-12 col-md-6 col-sm-12" type="text" name="service" placeholder="Where to go?" required="">
+                    </div>
+                    <div class="message-btn">
+                        <button type="submit" class="theme-btn"><i class="far fa-search"></i>Find Now</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
-<!-- End Page Title -->
-
-<section class="tour-section sec-pad">
-    <div class="auto-container">
+    </section>
+    <!-- End Page Title -->
+    <!-- tours-page-section -->
+    <section class="tours-page-section">
+        <div class="auto-container">
             <div class="row clearfix">
-                {%for trekking in trekkings %}
-                <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
-                    <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                
+    
+                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                    <div class="destination-details-content">
                         <div class="inner-box">
+                            <div class="text">
+                                <h2>Trekking</h2>
+                                <p align="justify"> Trekking in Nepal is a thrilling and immersive experience that allows you to explore the breathtaking landscapes and remote regions of the country. During the trek you will experience diverse terrains, from lush valleys and dense forests to high mountain passes and awe-inspiring glaciers. Whether you're an experienced trekker seeking a challenging expedition or a novice adventurer looking for a memorable journey, Nepal offers a wide range of trekking options to suit every level of fitness and interest. With trekking options ranging from 5 to 20 days, you have the opportunity to embark on epic adventures to various iconic destinations. </p>
+                            </div>
+                        </div>    
+                    </div>
+                    <div class="item-shorting clearfix">
+                        <div class="left-column pull-left">
+                            <h3>Showing 1-3 of 3 Results</h3>
+                        </div>
+                        <div class="right-column pull-right clearfix">
+                            <div class="short-box clearfix">
+                                <div class="select-box">
+                                    <select class="wide">
+                                        <option data-display="Sort by">Sort by</option>
+                                        <option value="1">Sort 01</option>
+                                        <option value="2">Sort 02</option>
+                                        <option value="3">Sort 03</option>
+                                        <option value="3">Sort 04</option>
+                                    </select>
+                                </div>
+                            </div>
                             
-                            <figure class="image-box">
-                                <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{trekking.image.url}}" alt="10 Days Annapurna Base Camp Trek">
-                                <div class="bottom-left">
-                                    <div class="rating">
-                                        <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
+                        </div>
+                    </div>
+                    <div class="wrapper grid">
+                        <div class="tour-grid-content">
+                            <div class="row clearfix">
+                                {%for trekking in trekkings %}
+                                    <div class="col-lg-6 col-md-6 col-sm-12 tour-block">
+                                        <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                            <div class="inner-box">
+                                                
+                                                <figure class="image-box">
+                                                    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{trekking.image.url}}" alt="10 Days Annapurna Base Camp Trek">
+                                                    <div class="bottom-left">
+                                                        <div class="rating">
+                                                            <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bottom-right">
+                                                        <h5 class="middleclass"><i class="far fa-clock"></i> {{trekking.days}} Day</h5>
+                                                    </div>
+                                                    <a href="{% url 'tour_details' trekking.activity_id %}"><i class="fas fa-link"></i></a>
+                                                    <div class="price-overlay">Starting From {{trekking.price}}
+                        
+                                                    </div>
+                                                </figure>
+                                                
+                                                <style>
+                                                    .price-overlay {
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        {% comment %} background-color: rgba(0, 0, 0, 0.5); {% endcomment %}
+                                                        color: white;
+                                                        font-size: 24px;
+                                                        text-align: center;
+                                                        line-height: 250px; /* Adjust based on image height */
+                                                        opacity: 0;
+                                                        transition: opacity 0.3s;
+                                                    }
+                                                
+                                                    .image-box:hover .price-overlay {
+                                                        opacity: 1;
+                                                    }
+                                                </style>
+                                                <div class="lower-content">
+                                                   
+                                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trekking.activity_id %}">{{trekking.name}}</a></h3>
+                                                    {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
+                                                    <ul class="info clearfix">
+                                                        <li><i class="far fa-mountain"></i>{{trekking.altitude}}</li>
+                                                        <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
+                                                    </ul>
+                                                    {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
+                                                    {% comment %} <div class="btn-box">
+                                                        <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination-wrapper">
+                        <ul class="pagination clearfix">
+                                <li><a href="TourListec46.html?regionId=1&amp;skip=0&amp;take=3&amp;currentPage=1&amp;clickPage=1" class="current">1</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                    <div class="default-sidebar tour-sidebar ml-20">
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Category</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">Adventure Tours</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input" checked="checked">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">City Tours</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">Couple Tours</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">Group Tours</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">Hosted Tours</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget price-filter">
+                            <div class="widget-title">
+                                <h3>Price Range</h3>
+                            </div>
+                            <div class="range-slider clearfix">
+                                <div class="value-box clearfix">
+                                    <div class="min-value pull-left">
+                                        <p>$50.00</p>
+                                    </div>
+                                    <div class="max-value pull-right">
+                                        <p>$100.00</p>
                                     </div>
                                 </div>
-                                <div class="bottom-right">
-                                    <h5 class="middleclass"><i class="far fa-clock"></i> {{trekking.days}} Day</h5>
-                                </div>
-                                <a href="{% url 'tour_details' trekking.activity_id %}"><i class="fas fa-link"></i></a>
-                                <div class="price-overlay">Starting From {{trekking.price}}
-    
-                                </div>
-                            </figure>
-                            
-                            <style>
-                                .price-overlay {
-                                    position: absolute;
-                                    top: 0;
-                                    left: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    {% comment %} background-color: rgba(0, 0, 0, 0.5); {% endcomment %}
-                                    color: white;
-                                    font-size: 24px;
-                                    text-align: center;
-                                    line-height: 250px; /* Adjust based on image height */
-                                    opacity: 0;
-                                    transition: opacity 0.3s;
-                                }
-                            
-                                .image-box:hover .price-overlay {
-                                    opacity: 1;
-                                }
-                            </style>
-                            <div class="lower-content">
-                               
-                                <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trekking.activity_id %}">{{trekking.name}}</a></h3>
-                                {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
-                                <ul class="info clearfix">
-                                    <li><i class="far fa-mountain"></i>{{trekking.altitude}}</li>
-                                    <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
+                                <div class="price-range-slider"></div>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget duration-widget">
+                            <div class="widget-title">
+                                <h3>Durations</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">0 - 24 hours</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">1 - 2 days</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">2 - 3 days</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">3 - 4 days</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">4 - 5 days</span>
+                                            </label>
+                                        </div>
+                                    </li>
                                 </ul>
-                                {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
-                                {% comment %} <div class="btn-box">
-                                    <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
-                                </div> {% endcomment %}
+                            </div>
+                        </div>
+                        <div class="sidebar-widget review-widget">
+                            <div class="widget-title">
+                                <h3>Review Score</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star light"></i>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star light"></i>
+                                                    <i class="icon-Star light"></i>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star light"></i>
+                                                    <i class="icon-Star light"></i>
+                                                    <i class="icon-Star light"></i>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <label class="custom-control material-checkbox">
+                                                <input type="checkbox" class="material-control-input">
+                                                <span class="material-control-indicator"></span>
+                                                <span class="description">
+                                                    <i class="icon-Star"></i>
+                                                    <i class="icon-Star light"></i>
+                                                    <i class="icon-Star light"></i>
+                                                    <i class="icon-Star light"></i>
+                                                    <i class="icon-Star light"></i>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget downloads-widget">
+                            <div class="widget-title">
+                                <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
+                            </div>
+                            <div class="widget-content">
+                                <img src="{% static 'assets/images/recommended-tripadvisor.png' %}" />
+                                <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
                             </div>
                         </div>
                     </div>
                 </div>
-                    {%endfor%}
+            </div>
         </div>
-    </div>
     </section>
+    <!-- tours-page-section end -->
     
-<style>
-    .tour-block-one .inner-box .lower-content .info li {
-        position: relative;
-        float: left;
-        display: inline-block;
-        font-size: 13px;
-        color: #808080;
-        font-weight: 500;
-        padding-left: 24px;
-        margin-right: 35px;
-    }
-
-    .tour-block-one .inner-box .lower-content h3 {
-        display: block;
-        font-size: 18px;
-        line-height: 30px;
-        font-weight: 700;
-        margin-bottom: 5px;
-    }
+    <style>
+        .tour-block-one .inner-box .lower-content .info li {
+            position: relative;
+            float: left;
+            display: inline-block;
+            font-size: 13px;
+            color: #808080;
+            font-weight: 500;
+            padding-left: 24px;
+            margin-right: 35px;
+        }
     
-    .bottom-right {
-        position: absolute;
-        bottom: 8px;
-        right: 16px;
-            
-    }
-    .middleclass{
-        font-family: 'Work Sans', sans-serif;
-        font-weight: 500;
-        opacity: 1;
-        color: #fff;
-        z-index:1;
-    }
-    .bottom-left {
-        position: absolute;
-        bottom: 8px;
-        left: 16px;
+        .tour-block-one .inner-box .lower-content h3 {
+            display: block;
+            font-size: 18px;
+            line-height: 30px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
         
-      }
-      .bottom-left .rating{
-        color: #ffab01;
-      }
-</style>
-
-<!--Enhanced later End-->    
-{% endblock content %}
+        .bottom-right {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+                
+        }
+        .middleclass{
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 500;
+            opacity: 1;
+            color: #fff;
+            z-index:1;
+        }
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            
+          }
+          .bottom-left .rating{
+            color: #ffab01;
+          }
+    </style>
+    
+    
+    
+    {%endblock content%}
