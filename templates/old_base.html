@@ -79,7 +79,7 @@
 			top: 0; 
 		} {% endcomment %}
 
-			{% comment %} .dropdown ul ul {
+			.dropdown ul ul {
 				top: 0;
 				left: 100%; 
 			} 
@@ -96,104 +96,9 @@
 			top: 0;
 			left: 100%;
 			margin-left: -120%;
-		} {% endcomment %}
-
-		.main-navigation {
-			list-style: none;
-			padding: 0;
-			margin: 0;
-			{% comment %} background: white; {% endcomment %}
 		}
 
-		.main-navigation ul{
-			background: white;
-			border-radius: 10px;
-			border-top: 3px solid orange;
-			min-width: 150px;
-			max-width: 250px;
-			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-			text-align: center;
-		}
-		
-		.main-navigation li {
-			display: block;
-			position: relative;
-			float: left;
-			{% comment %} background: white; {% endcomment %}
-		}
-		
-		.main-navigation li ul {
-			display: none;
-		}
-		
-		.main-navigation li a {
-			display: block;
-			padding: 0.7em;
-			text-decoration: none;
-			white-space: nowrap;
-			{% comment %} color: #fff; {% endcomment %}
-			color: black;
-			font-weight: 500;
-			font-size: 16px;
-		}
-		
-		.main-navigation li a:hover {
-			{% comment %} background: #2c3e50; {% endcomment %}
-			color: orange;
-		}
-		
-		.main-navigation li:hover > ul {
-			display: block;
-			position: absolute;
-		}
-		
-		.main-navigation li:hover li {
-			float: none;
-		}
-		
-		.main-navigation li:hover a {
-			{% comment %} background: #1bc2a2; {% endcomment %}
-		}
-		
-		.main-navigation li:hover li a:hover {
-			{% comment %} background: #2c3e50; {% endcomment %}
-		}
-		
-		.main-navigation .sub-menu li {
-			border-top: 0;
-		}
-		
-		
-		.main-navigation .sub-sub-menu {
-			left: 100%;
-			top: 0;
-		}
 
-		.main-navigation .sub-sub-sub-menu {
-			left: 100%;
-			top: 0;
-		}
-		
-		.main-navigation:before,
-		.main-navigation:after {
-			content: " ";
-			display: table;
-		}
-		
-		.main-navigation:after {
-			clear: both;
-		}
-
-		{% comment %} for scroll navbar {% endcomment %}
-		#next-nav li a{
-			color:white;
-		}
-
-		
-		#next-nav li ul li a{
-			color:black;
-		}
-		
 		
 		
 {% comment %}
@@ -263,59 +168,122 @@
 								</div>
 								<nav class="main-menu navbar-expand-md navbar-light">
 									<div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
-										<ul class="main-navigation" id="main-navigation">
-											{% comment %} Destinations
-Activities
-About Us
-Blogs
-CSR
-Gallary {% endcomment %}
-<li><a href="{% url 'destination' %}">Destinations</a>
-	<ul class="sub-menu">
-		{% for destination in destinations %}
-		<li>
-			<a href="{% url 'one_destination' destination.destination_id %}">{{ destination.name }}</a>
-			<ul class="sub-sub-menu">
-				{% for nep_reg in nepal_regions %}
-				{% if nep_reg.destination_id == destination.destination_id %}
-				<li class="dropdown"><a href="{% url 'tour_list' nep_reg.region_id %}">{{ nep_reg.name }}</a>
-				<ul class="sub-sub-sub-menu">
-					{% for trekking in trekkings %}
-					{% if nep_reg.region_id == trekking.region.region_id %}
-					<li><a href="#">{{trekking.name}}</a></li>
-					{% endif %}
-					{% endfor %}
-				</ul>
-				</li>
-				{% endif %}
-				{% endfor %}
-			</ul>
-		</li>
-		{% endfor %}
-	</ul>
-</li>
-<li>
-	<a href="{% url 'activities' %}"> Activities </a>
-	<ul class="sub-menu">
-		<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
-		<li>{% for activity in activities %} <a style="cursor:pointer" href="{% url 'tour_list' activity.region_id %}">{{activity.name}}</a>{% endfor %}</li>
-	</ul>
-</li>
-<li>
-	<a href="{%url 'about_us'%}"> About Us </a>
+										<ul class="navigation clearfix">
+	
+													{% comment %} <li class="dropdown">
+														<a href="{% url 'destination'%}"> Destinations </a>
+																																		
+																				 <ul>
+																					<li class="dropdown">
+																						{% for destination in destinations %}
+																						<a style="cursor:pointer" href="{% url 'one_destination' destination.destination_id %}">{{destination.name}}</a>
+																						
+																																									
+																						<ul>
+																							
+																							{% for nep_reg in nepal_regions %}
+																							{%if nep_reg.destination_id == destination.destination_id%}
+																							
+																							<li class="dropdown" ><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">{{nep_reg.name}}</a>
+																								<ul>
+																									
+																										
+																									<li class="dropdown"><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">Ghandruk</a></li>
+																									<li class="dropdown"><a style="cursor:pointer" href="#">Poonhill</a></li>	
+																									<li class="dropdown"><a style="cursor:pointer" href="a">Mardi</a></li>	
+																									
 
-	<ul class="sub-menu">
-		<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
-		<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
-		<li><a style="cursor:pointer" href="{% url 'why_us'%}"> Why Gotero </a></li>
-		<li><a style="cursor:pointer" href="#"> Our Motto </a></li>
-	</ul>
-</li>
-<li><a href="{%url 'blogs'%}">Blogs</a></li>
-<li><a href="{% url 'csr'%}">CSR</a></li>
-<li><a href="{% url 'gallary'%}">Gallary</a></li>
+																								</ul> 
+
+																							</li>
+																							{%endif%}
+																							{%endfor%}
+																							
+																						</ul>
+																						
+																							
+																						<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+																						
+																						
+																						{% endfor %}
+																					</li>
+																					<li class="dropdown"><a href="index.html">Nepal</a>
+																						<ul>
+																							<li><a href="index.html">Annapurna Region</a></li>
+																							<li><a href="index-2.html">Everest Region</a></li>
+																							<li><a href="index-3.html">Langtang Region</a></li>
+																						</ul>
+																						<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+																					</li>
+																				</ul>
+																			
+															
+													</li> {% endcomment %}
+
+													<li class="dropdown">
+														<a href="{% url 'destination' %}">Destinations</a>
+														<ul class="submenu">
+															{% for destination in destinations %}
+															<li class="dropdown">
+																<a href="{% url 'one_destination' destination.destination_id %}">{{ destination.name }}</a>
+																<ul class="sub-submenu">
+																	{% for nep_reg in nepal_regions %}
+																	{% if nep_reg.destination_id == destination.destination_id %}
+																	<li class="dropdown"><a href="{% url 'tour_list' nep_reg.region_id %}">{{ nep_reg.name }}</a>
+																	<ul class="sub-submenu">
+																		{% for trekking in trekkings %}
+																		{% if nep_reg.region_id == trekking.region.region_id %}
+																		<li><a href="#">{{trekking.name}}</a></li>
+																		{% endif %}
+																		{% endfor %}
+																	</ul>
+																	</li>
+																	{% endif %}
+																	{% endfor %}
+																</ul>
+															</li>
+															{% endfor %}
+														</ul>
+													</li>
+
+													<li class="dropdown">
+														<a href="{% url 'activities' %}"> Activities </a>
+														
+																
+																			<ul>
+																			
+																				<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
+																					<li>{% for activity in activities %} <a style="cursor:pointer" href="{% url 'tour_list' activity.region_id %}">{{activity.name}}</a>{% endfor %}</li>
+																			</ul>
+																		
+																
+													</li>
+	
+													<li class="dropdown">
+														<a href="{%url 'about_us'%}"> About Us </a>
+														{% comment %} <div class="megamenu"> {% endcomment %}
+																			<ul>
+																				
+																					<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
+																					<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
+																					<li><a style="cursor:pointer" href="{% url 'why_us'%}"> Why Gotero </a></li>
+																					<li><a style="cursor:pointer" href="#"> Our Motto </a></li>
+																			</ul>
+																		
+														{% comment %} </div> {% endcomment %}
+													</li>
+											<li class="dropdown">
+												<a href="{%url 'blogs'%}">Blogs</a>
+											</li>
+
+											<li class="dropdown">
+												<a href="{% url 'csr'%}">CSR</a>
+											</li>
+											
+											<li class="dropdown">
+												<a href="{% url 'gallary'%}">Gallary</a>
+											</li>
 										</ul>
-										
 									</div>
 								</nav>
 							</div>
@@ -337,7 +305,7 @@ Gallary {% endcomment %}
 								<figure class="logo"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
 							</div>
 							<div class="menu-area">
-								<nav class="main-menu clearfix" id="next-nav">
+								<nav class="main-menu clearfix">
 									<!--Keep This Empty / Menu will come through Javascript-->
 								</nav>
 							</div>

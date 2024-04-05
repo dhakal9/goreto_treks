@@ -1,11 +1,14 @@
 from django import forms
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel
-
+from ckeditor.widgets import CKEditorWidget
+from ckeditor.fields import RichTextFormField
 
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
     slogan = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Where culture meets nature', 'class': 'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    # description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    # description = forms.CharField(widget=CKEditorWidget())
+    description = forms.CharField(widget=forms.Textarea(attrs={'id': 'editor'}))
     is_active = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
 
@@ -44,7 +47,7 @@ class TourDetailsForm(forms.ModelForm):
                                      widget=forms.Select(attrs={'class': 'form-control'}))
     
     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=forms.Textarea(attrs={'id': 'editor'}))
     depature = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     time = forms.TimeField(required=False, widget=forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}))
     start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))

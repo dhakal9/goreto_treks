@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class DestinationModel(models.Model):
@@ -32,7 +33,8 @@ class TourDetailsModel(models.Model):
     destination = models.ForeignKey(DestinationModel, null=False, on_delete=models.CASCADE)
     region = models.ForeignKey(RegionModel, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=False, blank=False)
-    description =  models.TextField()
+    # description =  models.TextField()
+    description = models.TextField()
     depature = models.CharField(max_length=100, null=True, blank=True)
     time = models.TimeField(null=True)
     start_end = models.CharField(max_length=200, null=True, blank=True)
@@ -49,6 +51,10 @@ class TourDetailsModel(models.Model):
     is_activity = models.BooleanField(default=False)
     is_acttraction = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+    
 
 class ItinatyModel(models.Model):
     itinary_id = models.AutoField(primary_key=True)
