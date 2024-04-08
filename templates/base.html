@@ -93,6 +93,10 @@
 			width: 120%;
 			height: auto;
 			position: absolute;
+			{% comment %} position: relative; {% endcomment %}
+			{% comment %} display: inline-block; {% endcomment %}
+			border-radius: inherit;
+  			box-shadow: inherit;
 			top: 0;
 			left: 100%;
 			margin-left: -120%;
@@ -256,7 +260,7 @@
 																		  {% endif %}
 																		  {% endfor %}
 																		</ul>
-																	  </li>
+																	</li>
 																	{% endif %}
 																	{% endfor %}
 																</ul>
