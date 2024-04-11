@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def get_regions(request):
     destination_id = request.GET.get('destination_id')
@@ -104,6 +105,14 @@ class DeleteRegion(View):
         regions.delete()
         messages.success(request, "Region Deleted Successfully")
         return redirect('admin_region')
+
+class ToggleRegionStatus(View):
+    def get(self, request, region_id):
+        region = get_object_or_404(RegionModel, pk=region_id)
+        region.is_nav = not region.is_nav
+        region.save()
+        messages.success(request, 'Region status toggled successfully')
+        return redirect('admin_region')
     
 
 class Tourlist(View):
@@ -154,6 +163,15 @@ class DeleteTour(View):
         tours.delete()
         messages.success(request, "Tour Deleted Successfully")
         return redirect('admin_tour')
+    
+class ToggleAttractionStatus(View):
+    def get(self, request, activity_id):
+        tour = get_object_or_404(TourDetailsModel, pk=activity_id)
+        tour.is_attraction = not tour.is_attraction
+        tour.save()
+        messages.success(request, 'Attraction status toggled successfully')
+        return redirect('admin_tour')
+
     
 class TourDeatails(View):
     template_name = 'tour_details.html'
@@ -368,3 +386,4 @@ class EditIncludeExclude(View):
             form.save()
             return redirect('admin_include_exclude')
         return render(request, self.template_name, {'form':form, 'details':details})
+    

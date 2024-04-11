@@ -47,7 +47,7 @@ class TourDetailsModel(models.Model):
     map_overview = models.TextField()
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     is_activity = models.BooleanField(default=False)
-    is_acttraction = models.BooleanField(default=False)
+    is_attraction = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
 
 class ItinatyModel(models.Model):

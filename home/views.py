@@ -1,5 +1,6 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -18,7 +19,7 @@ class Index(View):
         reviews =  Review.objects.all()
         destinations = DestinationModel.objects.all()
         funfact = FunfactModel.objects.first()
-        tours = TourDetailsModel.objects.all()
+        tours = TourDetailsModel.objects.filter(is_attraction=True)
         return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours})
     
 

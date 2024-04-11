@@ -82,7 +82,13 @@
         <td> {{region.description}}</td>
         <td>{{region.destination.name}} </td>
         <td><img src="{{region.destination.image.url}}" style="width: 50px; height: 45px;"></td>
-        <td> {%if region.is_nav is True%}<span class="badge badge-success rounded-pill d-inline">Activity</span>{%else%}<span class="badge badge-danger rounded-pill d-inline">Trekking</span>{%endif%} </td>
+        <td>
+            {% if region.is_nav %}
+                <button type="button" class="toggle-btn btn btn-primary" data-region-id="{{ region.region_id }}">Activity</button>
+            {% else %}
+                <button type="button" class="toggle-btn btn btn-success" data-region-id="{{ region.region_id }}">Trekking</button>
+            {% endif %}
+        </td>        
         <td>
         <a type="button" href="{% url 'update_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
         Edit
@@ -121,4 +127,29 @@
     
         </table>
     <div>
+    <!-- Add JavaScript for handling the button click event -->
+
+    {% block scripts %} 
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const regionId = this.getAttribute('data-region-id');
+                fetch(`/toggle-region-status/${regionId}/`)
+                    .then(response => {
+                        if (response.ok) {
+                            // Reload the page after successful status update
+                            window.location.reload();
+                        } else {
+                            throw new Error('Network response was not ok.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error toggling region status:', error);
+                    });
+            });
+        });
+    </script>
+{% endblock %}
+
+        
 {% endblock content%}
