@@ -93,6 +93,35 @@
         </table>
     </div>
 
+    <div class="container-fluid">
+        <h4>List Of Tours </h4><br>
+        
+        <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+        <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+        <thead class="bt-5">
+        <tr>
+        <th>Destination</th>
+        <th>Regions</th>
+        <th>Name</th>
+        <th>Actions</th>
+        </tr>
+        </thead>
+        
+         {% for tour in tours %} 
+        <tr>
+        <td>{{tour.destination.name}} </td>
+        <td> {{tour.region.name}}</td>
+        <td>{{tour.name}} </td>
+        <td>
+            <a type="button" href="{% url 'assign_include_exclude' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">
+                Edit
+            </a>        
+        </td>
+        </tr>
+        {% endfor %}
+    
+        </table>
+    <div>
 {%endblock content%}
 
 

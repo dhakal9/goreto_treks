@@ -74,3 +74,6 @@ class TourIncludeExcludeModel(models.Model):
     tour = models.ForeignKey(TourDetailsModel, on_delete=models.CASCADE)
     sentence = models.ForeignKey(IncludeExcludeModel, on_delete=models.CASCADE)
     is_included = models.BooleanField(default=True)
+
+    class Meta:
+        unique_together = ('tour', 'sentence')

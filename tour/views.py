@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm
+
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -349,18 +350,20 @@ class Trekking(View):
 class AdminIncludeExclude(View):
     template_name = 'admin_include_exclude.html'
     def get(self, request):
+        tours = TourDetailsModel.objects.all()
         details = IncludeExcludeModel.objects.all()
         form = IncludeExcludeForm()
-        return render(request, self.template_name, {'form':form, 'details':details})
+        return render(request, self.template_name, {'form':form, 'details':details, 'tours':tours})
     
     def post(self, request):
+        tours = TourDetailsModel.objects.all()
         details = IncludeExcludeModel.objects.all()
         form = IncludeExcludeForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Include/Exclude Added Successfully')
             return redirect('admin_include_exclude') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
-        return render(request, self.template_name, {'form': form, 'details':details})
+        return render(request, self.template_name, {'form': form, 'details':details, 'tours':tours})
 
 class DeleteIncludeExclude(View):
     def get(self, request, id):
@@ -373,17 +376,48 @@ class EditIncludeExclude(View):
     template_name = 'admin_include_exclude.html'
 
     def get(self, request, id):
+        tours = TourDetailsModel.objects.all()
         details = IncludeExcludeModel.objects.all()
         det = get_object_or_404(IncludeExcludeModel, pk=id)
         form = IncludeExcludeForm(instance=det)
-        return render(request, self.template_name, {'form':form, 'details':details})
+        return render(request, self.template_name, {'form':form, 'details':details, 'tours':tours})
 
     def post(self, request, id):
+        tours = TourDetailsModel.objects.all()
         det = get_object_or_404(IncludeExcludeModel, pk=id)
         details = IncludeExcludeModel.objects.all()
         form = IncludeExcludeForm(request.POST, instance=det)
         if form.is_valid():
             form.save()
             return redirect('admin_include_exclude')
-        return render(request, self.template_name, {'form':form, 'details':details})
+        return render(request, self.template_name, {'form':form, 'details':details, 'tours':tours})
     
+
+
+class AssignIncludeExcludeView(View):
+    def get(self, request, tour_id):
+        tour = TourDetailsModel.objects.get(pk=tour_id)
+        form = TourIncludeExcludeForm()
+        return render(request, 'admin_assign_include_exclude.html', {'tour': tour, 'form': form})
+    
+    def post(self, request, tour_id):
+        tour = TourDetailsModel.objects.get(pk=tour_id)
+        form = TourIncludeExcludeForm(request.POST)
+        if form.is_valid():
+            includes = form.cleaned_data.get('includes', [])
+            excludes = form.cleaned_data.get('excludes', [])
+
+            # Clear existing includes/excludes for the tour
+            TourIncludeExcludeModel.objects.filter(tour=tour).delete()
+
+            # Assign new includes
+            for include_item in includes:
+                TourIncludeExcludeModel.objects.create(tour=tour, sentence=include_item, is_included=True)
+
+            # Assign new excludes
+            for exclude_item in excludes:
+                TourIncludeExcludeModel.objects.create(tour=tour, sentence=exclude_item, is_included=False)
+
+            return redirect('assign_include_exclude', tour_id=tour_id)  # Redirect to tour detail page or wherever you want
+
+        return render(request, 'admin_assign_include_exclude.html', {'tour': tour, 'form': form})

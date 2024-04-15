@@ -140,4 +140,27 @@ class IncludeExcludeForm(forms.ModelForm):
     class Meta:
         model = IncludeExcludeModel
         fields ="__all__"
-    
+
+
+class TourIncludeExcludeForm(forms.ModelForm):
+    class Meta:
+        model = TourDetailsModel
+        fields = ['includes', 'excludes']
+
+    includes = forms.ModelChoiceField(
+        queryset=IncludeExcludeModel.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+    excludes = forms.ModelChoiceField(
+        queryset=IncludeExcludeModel.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Set the label field for each choice
+        self.fields['includes'].label_from_instance = lambda obj: obj.name
+        self.fields['excludes'].label_from_instance = lambda obj: obj.name
+
