@@ -396,8 +396,22 @@ class EditIncludeExclude(View):
 
 class AssignIncludeExcludeView(View):
     def get(self, request, tour_id):
-        tour = TourDetailsModel.objects.get(pk=tour_id)
-        form = TourIncludeExcludeForm()
+        tour = get_object_or_404(TourDetailsModel, pk=tour_id)
+        
+        # Retrieve the TourIncludeExcludeModel instance for the tour
+        inc_exc_instance = TourIncludeExcludeModel.objects.filter(tour=tour).first()
+
+        # Get the selected includes and excludes from the instance if it exists
+        includes = []
+        excludes = []
+        if inc_exc_instance:
+            includes = IncludeExcludeModel.objects.filter(tourincludeexcludemodel__tour=tour, tourincludeexcludemodel__is_included=True)
+            excludes = IncludeExcludeModel.objects.filter(tourincludeexcludemodel__tour=tour, tourincludeexcludemodel__is_included=False)
+
+        # Pass the selected includes and excludes as initial data to the form
+        initial_data = {'includes': includes, 'excludes': excludes}
+        form = TourIncludeExcludeForm(initial=initial_data)
+
         return render(request, 'admin_assign_include_exclude.html', {'tour': tour, 'form': form})
     
     def post(self, request, tour_id):

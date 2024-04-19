@@ -147,12 +147,12 @@ class TourIncludeExcludeForm(forms.ModelForm):
         model = TourDetailsModel
         fields = ['includes', 'excludes']
 
-    includes = forms.ModelChoiceField(
+    includes = forms.ModelMultipleChoiceField(
         queryset=IncludeExcludeModel.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
     )
-    excludes = forms.ModelChoiceField(
+    excludes = forms.ModelMultipleChoiceField(
         queryset=IncludeExcludeModel.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
@@ -164,3 +164,7 @@ class TourIncludeExcludeForm(forms.ModelForm):
         self.fields['includes'].label_from_instance = lambda obj: obj.name
         self.fields['excludes'].label_from_instance = lambda obj: obj.name
 
+        # Pre-select the items based on the instance being edited
+        if self.instance.pk:
+            self.fields['includes'].initial = self.instance.includes.all()
+            self.fields['excludes'].initial = self.instance.excludes.all()
