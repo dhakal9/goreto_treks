@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel, FaqModels, TourFaqModels
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm, FaqForm, AssignFaqsToTourForm
 
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -435,3 +435,89 @@ class AssignIncludeExcludeView(View):
             return redirect('assign_include_exclude', tour_id=tour_id)  # Redirect to tour detail page or wherever you want
 
         return render(request, 'admin_assign_include_exclude.html', {'tour': tour, 'form': form})
+    
+
+class Faqs(View):
+    template_name = 'admin_faq.html'
+    def get(self, request):
+        tours = TourDetailsModel.objects.all()
+        faqs = FaqModels.objects.all()
+        form = FaqForm()
+        return render(request, self.template_name, {'form':form, 'faqs':faqs, 'tours':tours})
+    
+    def post(self, request):
+        tours = TourDetailsModel.objects.all()
+        faqs = FaqModels.objects.all()
+        form = FaqForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "FAQs Added Successfully")
+            return redirect('admin_faq')
+        return render(request, self.template_name, {'form':form, 'faqs':faqs, 'tours':tours})
+    
+class EditFaqs(View):
+    template_name = 'admin_faq.html'
+
+    def get(self, request, id):
+        faqs = FaqModels.objects.all()
+        singlefaq = get_object_or_404(FaqModels, pk=id)
+        form = FaqForm(instance=singlefaq)
+        return render(request, self.template_name, {'form':form, 'faqs':faqs})
+
+    def post(self, request, id):
+        faqs = FaqModels.objects.all()
+        singlefaq = get_object_or_404(FaqModels, pk=id)
+        form = FaqForm(request.POST, instance=singlefaq)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_faq')
+        return render(request, self.template_name, {'form':form, 'faqs':faqs})
+    
+class DeleteFaqs(View):
+    def get(self, request, id):
+        faqs = FaqModels.objects.get(pk=id)
+        faqs.delete()
+        messages.success(request, "Faqs Deleted Successfully Successfully")
+        return redirect('admin_faq')  
+
+class ToggleFaqsStatus(View):
+    def get(self, request, id):
+        faqs = get_object_or_404(FaqModels, pk=id)
+        faqs.is_global = not faqs.is_global
+        faqs.save()
+        messages.success(request, 'Faq Status Changes Successfully')
+        return redirect('admin_faq')
+  
+class AssignFaqsToTourView(View):
+    template_name = 'admin_assign_faq.html'
+
+    def get(self, request, tour_id):
+        tour = get_object_or_404(TourDetailsModel, activity_id=tour_id)
+        faqs = FaqModels.objects.all()
+        assigned_faqs = TourFaqModels.objects.filter(tour_id= tour_id)
+        form = AssignFaqsToTourForm()
+        return render(request, self.template_name, {'tour': tour, 'faqs': faqs, 'form': form, 'assigned_faqs':assigned_faqs})
+
+    def post(self, request, tour_id):
+        tour = get_object_or_404(TourDetailsModel, activity_id=tour_id)
+        faqs = FaqModels.objects.all()
+        assigned_faqs = TourFaqModels.objects.filter(tour_id= tour_id)
+        form = AssignFaqsToTourForm(request.POST)
+        if form.is_valid():
+            question_id = form.cleaned_data['question'].id
+            if not TourFaqModels.objects.filter(tour_id=tour_id, question_id=question_id).exists():
+                form.instance.tour_id = tour_id
+                form.save()
+                messages.success(request, 'FAQs assigned successfully')
+                return redirect('assign_faqs_to_tour', tour_id=tour_id)  # Redirect to tour detail page or any other page
+            else:
+                messages.error(request, 'This FAQ is already assigned to the tour.')
+        return render(request, self.template_name, {'tour': tour, 'faqs': faqs, 'form': form, 'assigned_faqs':assigned_faqs})
+
+class UnassignFaqsToTourView(View):
+    def get(self, request, id):
+        assigned_faq = get_object_or_404(TourFaqModels, pk=id)
+        tour_id = assigned_faq.tour_id
+        assigned_faq.delete()
+        messages.success(request, 'FAQ unassigned successfully')
+        return redirect('assign_faqs_to_tour', tour_id=tour_id)

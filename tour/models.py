@@ -77,3 +77,15 @@ class TourIncludeExcludeModel(models.Model):
 
     class Meta:
         unique_together = ('tour', 'sentence')
+
+class FaqModels(models.Model):
+    id = models.AutoField(primary_key=True)
+    question = models.CharField(max_length=250, null=False, blank=False)
+    answer = models.TextField()
+    is_global = models.BooleanField(default=False)
+
+class TourFaqModels(models.Model):
+    id = models.AutoField(primary_key=True)
+    tour = models.ForeignKey(TourDetailsModel, on_delete=models.CASCADE)
+    question = models.ForeignKey(FaqModels, on_delete=models.CASCADE)
+    

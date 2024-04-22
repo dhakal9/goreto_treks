@@ -1,5 +1,5 @@
 from django import forms
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels
 
 
 class DestinationForm(forms.ModelForm):
@@ -168,3 +168,21 @@ class TourIncludeExcludeForm(forms.ModelForm):
         if self.instance.pk:
             self.fields['includes'].initial = self.instance.includes.all()
             self.fields['excludes'].initial = self.instance.excludes.all()
+
+class FaqForm(forms.ModelForm):
+    question = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    answer = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    class Meta:
+        model = FaqModels
+        fields ="__all__"
+        
+    def __str__(self):
+        return self.question
+    
+class AssignFaqsToTourForm(forms.ModelForm):
+    class Meta:
+        model = TourFaqModels
+        fields = ['question']
+
+    def label_from_instance(self, obj):
+        return obj.question

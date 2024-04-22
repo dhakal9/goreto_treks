@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView
+from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView
 urlpatterns = [
     path('admindestination/', AdminDestination.as_view(), name="admin_destination"),
     path('destination/', Destination.as_view(), name="destination"),
@@ -31,5 +31,11 @@ urlpatterns = [
     path('delete_include_exclude/<int:id>/', DeleteIncludeExclude.as_view(), name='delete_include_exclude'),
     path('edit_include_exclude/<int:id>/', EditIncludeExclude.as_view(), name='edit_include_exclude'),
     path('assign-include-exclude/<int:tour_id>/', AssignIncludeExcludeView.as_view(), name='assign_include_exclude'),
+    path('adminfaq/', Faqs.as_view(), name='admin_faq'),
+    path('deletefaqs/<int:id>/', DeleteFaqs.as_view(), name='delete_faq'),
+    path('editfaqs/<int:id>/', EditFaqs.as_view(), name='edit_faq'),
+    path('changefaqsstatus/<int:id>/', ToggleFaqsStatus.as_view(), name='change_faq'),
+    path('assign-faqs-to-tour/<int:tour_id>/', AssignFaqsToTourView.as_view(), name='assign_faqs_to_tour'),
+    path('remove-faqs-to-tour/<int:id>/', UnassignFaqsToTourView.as_view(), name='unassign_faqs_to_tour'),
  ]
  

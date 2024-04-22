@@ -1,0 +1,104 @@
+{% extends 'admin_base.html'%}
+{% block content %}
+<div class="content container-fluid">
+    <form method='POST'>
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label> Question <span class="text-danger">*</span></label>
+                    {{ form.question }}
+                </div>
+                <div class="form-group"> <!-- Add form-group class -->
+                    <label> Answer <span class="text-danger">*</span></label><br>
+                    {{ form.answer }}
+                </div>
+            </div>
+        </div> <!-- Move the closing div inside the row -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+<!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+<thead class="bt-5">
+<tr>
+<th>Questions</th>
+<th>Answers</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+</thead>
+
+{% for faq in faqs %} 
+<tr>
+<td>{{faq.question}} </td>
+<td> {{faq.answer}}</td>
+
+<td><a href="{% url 'change_faq' faq.id %}">{% if faq.is_global is True %} <span class="badge badge-success rounded-pill d-inline">Global</span> {%else%}<span class="badge badge-secondary rounded-pill d-inline">Local</span> {%endif%} </a>  </td>
+<td>
+<a type="button" href="{% url 'edit_faq' faq.id %}" class="btn btn-link btn-sm btn-rounded">
+Edit
+</a>
+<a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{faq.id}}">
+Delete
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal{{faq.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel{{faq.id}}">Delete Priority Level</h5>
+<button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+</div>
+<div class="modal-body"> Are You Sure want to delete ? </div>
+<div class="modal-footer">
+<button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+<a type="action" href="{% url 'delete_faq' faq.id %}" class="btn btn-link btn-sm btn-rounded">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+Delete
+</button>
+</a>
+</div>
+</div>
+</div>
+</a>
+
+</td>
+</tr>
+{% endfor %}
+
+</table>
+<div class="container-fluid">
+    <h4>List Of Tours </h4><br>
+    
+    <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+    <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+    <thead class="bt-5">
+    <tr>
+    <th>Destination</th>
+    <th>Regions</th>
+    <th>Name</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    
+     {% for tour in tours %} 
+    <tr>
+    <td>{{tour.destination.name}} </td>
+    <td> {{tour.region.name}}</td>
+    <td>{{tour.name}} </td>
+    <td>
+        <a type="button" href="{% url 'assign_faqs_to_tour' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">
+            Edit
+        </a>        
+    </td>
+    </tr>
+    {% endfor %}
+
+    </table>
+<div>
+{% endblock content %}
