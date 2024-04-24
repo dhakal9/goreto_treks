@@ -183,13 +183,19 @@ class TourDeatails(View):
         tour_details = TourDetailsModel.objects.get(pk=pk)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
-        return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form})
+        inc_excs = TourIncludeExcludeModel.objects.filter(tour=pk)
+        faqs = TourFaqModels.objects.filter(tour=pk)
+        similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
+        return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form, 'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
     def post(self, request, pk):
         tour_details = TourDetailsModel.objects.get(pk=pk)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
-
+        inc_excs = TourIncludeExcludeModel.objects.all()
+        faqs = TourFaqModels.objects.all()
+        similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
+        
         if request.method == 'POST':
             if 'booking_form_submit' in request.POST:
                 booking_form = BookingForm(request.POST)
@@ -235,7 +241,7 @@ class TourDeatails(View):
         # If neither booking nor inquiry form is submitted, render the template with the forms
         booking_form = BookingForm()
         inquiry_form = InqueryForm()
-        return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form})
+        return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
 
 class ItinaryAdmin(View):

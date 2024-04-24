@@ -1,6 +1,7 @@
 # models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
@@ -95,7 +96,8 @@ class OurTeamModel(models.Model):
     team_id =  models.AutoField(primary_key=True)
     name = models.CharField(max_length = 200) 
     position = models.CharField(max_length = 200)
-    message = models.TextField(default='hello nepal')
+    message=CKEditor5Field('Text', config_name='extends')
+    # message = models.TextField(default='hello nepal')
     team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     facebook_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
     instagram_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )

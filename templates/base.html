@@ -252,14 +252,17 @@
 																<ul class="sub-submenu">
 																	{% for nep_reg in nepal_regions %}
 																	{% if nep_reg.destination_id == destination.destination_id %}
-																	<li class="dropdown sub-sub-item"><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id %}">{{nep_reg.name}}</a>
-																		<ul class="sub-submenu">
-																		  {% for trekking in trekkings %}
-																		  {% if nep_reg.region_id == trekking.region.region_id %}
-																		  <li class="sub-sub-item"><a href="#">{{trekking.name}}</a></li>
-																		  {% endif %}
-																		  {% endfor %}
-																		</ul>
+																	<li class="dropdown sub-sub-item">
+																		<a href="{% url 'tour_list' nep_reg.region_id %}">{{nep_reg.name}}</a>
+																			<ul class="sub-submenu">
+																			{% for trekking in trekkings %}
+																				{% if nep_reg.region_id == trekking.region.region_id %}
+																				<li class="sub-sub-item">
+																					<a href="#">{{trekking.name}}</a>
+																				</li>
+																				{% endif %}
+																			{% endfor %}
+																			</ul>
 																	</li>
 																	{% endif %}
 																	{% endfor %}
@@ -289,7 +292,7 @@
 																				
 																					<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
 																					<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
-																					<li><a style="cursor:pointer" href="{% url 'why_us'%}"> Why Gotero </a></li>
+																					<li><a style="cursor:pointer" href="{%url 'about_us'%}"> Why Goreto </a></li>
 																					
 																			</ul>
 																		
