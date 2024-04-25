@@ -70,7 +70,14 @@ class FunfactForm(forms.ModelForm):
 
 class OurTeamForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    message = forms.CharField(widget=CKEditor5Widget(config_name='extends', attrs={'class': 'form-control', 'rows': 5}))
+    message = forms.CharField(
+        widget=CKEditor5Widget(
+            config_name='extends',  # Use your desired CKEditor 5 configuration
+            attrs={'class': 'form-control', 'rows': 5}
+        )
+    )
+    # message = forms.CharField(widget=CKEditor5Widget(config_name='extends', attrs={'class': 'form-control', 'rows': 5}))
+    #django_ckeditor_5
     # message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
     position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})

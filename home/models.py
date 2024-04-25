@@ -103,6 +103,10 @@ class OurTeamModel(models.Model):
     instagram_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
     is_active = models.BooleanField(default=True)
     
+    def __str__(self):
+        return self.name
+    
+    
 class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
     team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)

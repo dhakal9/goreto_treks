@@ -31,7 +31,9 @@
 		
 		<!-- Main CSS -->
         <link rel="stylesheet" href="{% static 'admin_assets/css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'ck_editor/build/ckeditor.css' %}">
+        {% comment %} <link rel="stylesheet" href="{% static 'ck_editor/build/ckeditor.css' %}"> {% endcomment %}
+    
+
     <!--Durga sir's Recommendation-->
   </head>
   <body>
@@ -197,15 +199,16 @@
     </script>
 
     <!--CK Editor -->
-    <script src="{% static 'ck_editor/ckeditor.js' %}"></script>
-    <script>
+
+
+    {% comment %} <script>
       // Initialize CKEditor 5
       ClassicEditor
           .create( document.querySelector( '#editor' ) )
           .catch( error => {
               console.error( error );
           });
-    </script>
+    </script> {% endcomment %}
 <!--Durga sir's Recommendation -->
 <script src="{% static 'admin_assets/js/jquery-3.5.1.min.js' %}"></script>
 		
