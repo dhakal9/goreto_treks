@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load static %}
 <style>
     .review {
         display: flex;
@@ -50,8 +51,10 @@
             <h4>Travell Guide</h4>
         </div>
     </div>
-    <div class="content">
-        <p align="justify"> {{ team.message }}</p>
+    <div class="content" align="justify">
+            {% autoescape off %}
+            {{ team.message }}
+            {% endautoescape %}
     </div>
 </div>
 <hr>

@@ -2,7 +2,7 @@
 from django import forms
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
-from django_ckeditor_5.widgets import CKEditor5Widget
+from django_summernote.widgets import SummernoteWidget
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField(max_length=50, required=True, widget=forms.EmailInput(attrs={'placeholder':'abc@email.com', 'class':'form-control'}))
@@ -70,15 +70,7 @@ class FunfactForm(forms.ModelForm):
 
 class OurTeamForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    message = forms.CharField(
-    widget=CKEditor5Widget(
-        config_name='default',  # Use your desired CKEditor 5 configuration
-        attrs={'class': 'django_ckeditor_5', 'rows': 20, 'cols': 20}
-    )
-)
-
-    # message = forms.CharField(widget=CKEditor5Widget(config_name='extends', attrs={'class': 'form-control', 'rows': 5}))
-    #django_ckeditor_5
+    message = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     # message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
     position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
