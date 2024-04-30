@@ -1,12 +1,12 @@
 from django import forms
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels
+from django_summernote.widgets import SummernoteWidget
 
 
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
     slogan = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Where culture meets nature', 'class': 'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
-    is_active = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
 
     class Meta:
@@ -14,11 +14,9 @@ class DestinationForm(forms.ModelForm):
         fields = '__all__'
 
 
-
 class RegionForm(forms.ModelForm):
-    
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     destination = forms.ModelChoiceField(queryset=DestinationModel.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
 
@@ -44,7 +42,7 @@ class TourDetailsForm(forms.ModelForm):
                                      widget=forms.Select(attrs={'class': 'form-control'}))
     
     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     depature = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     time = forms.TimeField(required=False, widget=forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}))
     start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -56,7 +54,7 @@ class TourDetailsForm(forms.ModelForm):
     age = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     days = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     map = forms.URLField(max_length=2048, required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
-    map_overview = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    map_overview = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     is_activity = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_acttraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
@@ -86,9 +84,9 @@ class ItinaryForm(forms.ModelForm):
     tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
                                      widget=forms.Select(attrs={'class': 'form-control'}))
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    day = forms.IntegerField(required=True, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    day = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
 
     
     def __init__(self, *args, **kwargs):
@@ -171,7 +169,7 @@ class TourIncludeExcludeForm(forms.ModelForm):
 
 class FaqForm(forms.ModelForm):
     question = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    answer = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    answer = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     class Meta:
         model = FaqModels
         fields ="__all__"

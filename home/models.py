@@ -73,7 +73,8 @@ class CompanyProfile(models.Model):
     about_sub_heading = models.CharField(max_length = 200)
     about_heading = models.CharField(max_length = 200)
     about_thumbnail = models.ImageField(upload_to='company_images', blank=True, null=True)
-    about_us = models.TextField()
+    about_us = SummernoteTextField()
+    why_us = SummernoteTextField(default="about us")
     home_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner1_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner2_image = models.ImageField(upload_to='company_images', blank=True, null=True)
@@ -99,7 +100,7 @@ class OurTeamModel(models.Model):
     message=SummernoteTextField()
     # message=CKEditor5Field('Text', config_name='extends')
     # message = models.TextField(default='hello nepal')
-    team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
+    team_image =  models.ImageField(upload_to='images', blank=True, null=True)
     facebook_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
     instagram_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
     is_active = models.BooleanField(default=True)
@@ -110,7 +111,7 @@ class OurTeamModel(models.Model):
     
 class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
-    team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
+    team_image =  models.ImageField(upload_to='blog_images', blank=False, null=True)
     name = models.CharField(max_length = 200)
     position = models.CharField(max_length = 200)
     message = models.TextField(max_length=500)
@@ -126,7 +127,7 @@ class FunfactModel(models.Model):
 class BlogsModel(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length = 200, blank=False, null=False)
-    description =  models.TextField(max_length=3000, blank=False, null=False)
+    description =  SummernoteTextField()
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
@@ -135,7 +136,7 @@ class BlogsModel(models.Model):
 class CsrModel(models.Model):
     id = models.AutoField(primary_key=True)
     title =models.CharField(max_length = 200, blank=False, null=False)
-    description =  models.TextField(max_length=3000, blank=False, null=False)
+    description =  SummernoteTextField()
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)

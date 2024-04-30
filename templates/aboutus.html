@@ -16,10 +16,11 @@
                             <h2>{{company.about_heading}}</h2>
                         </div>
                         <div class="text">
-                            <p align="justify">{{company.about_us}}</p>
-                        </div>
-                        <div class="btn-box">
-                            <a href="about.html" class="theme-btn">Find Now</a>
+                            <p>
+                            {% autoescape off %}
+                            {{company.why_us}}
+                            {% endautoescape %}
+                            </p>
                         </div>
                     </div>
                 </div>

@@ -159,11 +159,14 @@
 							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
 								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f" style="font-size: 20px"></i></a></li>
 								<li class="mx-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram" style="font-size: 20px"></i></a></li>
-								<li class="mr-3"><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://wa.me/+9779851316017"><i class="fab fa-whatsapp" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://twitter.com/goretotreks"><i class="fab fa-twitter" style="font-size: 20px;"></i></a></li>
+							
+								{% comment %} <li class="mr-3"><a href="https://twitter.com/goretotreks"><img src="{% static "assets/images/twitter.png"%}" alt="Twitter X" style="width: 30px; height: 20px;"></a></li> {% endcomment %}
 								<li class="mr-3"><a href="https://www.youtube.com/@goretotreks1606"><i class="fab fa-youtube" style="font-size: 20px;"></i></a></li>
 								<li class="mr-3"><a href="#"><i class="fab fa-linkedin" style="font-size: 20px;"></i></a></li>
+								<li class="mr-3"><a href="https://www.reddit.com/user/GoretoTreks/?share_id=nlU8UWIw5H_gHjoR_z3GI&utm_content=1&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=5"><i class="fab fa-reddit" style="font-size: 20px;"></i></a></li>
 						
 							</ul>
 							{% comment %} <div class="btn-box pull-right">
@@ -314,9 +317,15 @@
 								</nav>
 							</div>
 							<ul class="menu-right-content clearfix">
-								{% comment %} <li class="user-link">
-									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
-								</li> {% endcomment %}
+								<li class="nav-item">
+									<div class="nav-item__contact">
+										<span><i class="fa fab-whatsapp"></i> Talk to an expert </span>
+										<p id="phone-number"><span class="fab fa-whatsapp" style="margin-right:5px">24 Hours Chat Avilable</span> <a href="https://twitter.com/goretotreks"></a></p>
+									</div>
+								</li>
+								{% comment %} <li style="">
+									<i class="fa fa-phone fa-rotate-90" style="margin-right:5px"></i><a href="tel:+977 15915493">24*7 Live chat</a>
+								</li>  {% endcomment %}
 							</ul>
 						</div>
 					</div>
@@ -337,9 +346,9 @@
 							</div>
 							<ul class="menu-right-content clearfix">
 								
-								{% comment %} <li class="user-link">
+								<li class="user-link">
 									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
-								</li> {% endcomment %}
+								</li> 
 							</ul>
 						</div>
 					</div>

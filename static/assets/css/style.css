@@ -1713,14 +1713,14 @@ div#mCSB_1_container{
 
 .booking-form .form-group{
   position: relative;
-  float: left;
-  width: 33.333%;
+  float: none;
+  width: 50.333%;
   margin: 0px;
 }
 
 .booking-form .form-group input[type='text']{
   position: relative;
-  max-width: 286px;
+  max-width: 500px;
   width: 100%;
   height: 64px;
   background: #fff;

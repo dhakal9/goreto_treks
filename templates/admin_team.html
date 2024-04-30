@@ -55,7 +55,7 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label> Image</label><br>
-                                    {{ form.team_image }}
+                                    {{ form.team_image.url }}
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -98,7 +98,7 @@
     <td> {{team.position}}</td>
     <td>{{team.facebook_link}} </td>
     <td>{{team.instagram_link}} </td>
-    <td><img src="{{team.team_image.url}}" style="width: 20px; height: 45px;"></td>
+    <td><img src="{{team.team_image}}" style="width: 20px; height: 45px;"></td>
     <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
     <td>
     <a type="button" href="{% url 'update_team' team.team_id%}" class="btn btn-link btn-sm btn-rounded">

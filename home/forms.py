@@ -32,7 +32,8 @@ class CompanyProfileForm(forms.ModelForm):
         about_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_sub_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_thumbnail = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
-        about_us = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+        about_us = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
+        why_us = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
         home_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
         banner1_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
         banner2_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
@@ -90,7 +91,7 @@ class ContactUs(forms.Form):
     
 class BlogsForm(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     
     class Meta:
@@ -99,7 +100,7 @@ class BlogsForm(forms.ModelForm):
 
 class CsrForm(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     
     class Meta:
@@ -115,7 +116,7 @@ class MainGallaryForm(forms.ModelForm):
 
 class WhyUsForms(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    description = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
+    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control'}))
     
     class Meta:
         model = WhyUsModel

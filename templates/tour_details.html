@@ -55,7 +55,10 @@
                         <div class="inner-box">
                             <div class="text">
                                 <h2>Overview</h2>
-                                <p>{{tour_details.description}}</p>
+                                {% autoescape off %}
+                                {{tour_details.description}}
+                                {% endautoescape %}
+                                {% comment %} <p>{{tour_details.description}}</p> {% endcomment %}
                                 <ul class="info-list clearfix">
                                     <li><i class="far fa-clock"></i>{{tour_details.days}}: Days</li>
                                     <li><i class="far fa-user"></i>Age: {{tour_details.age}}+</li>
@@ -109,20 +112,15 @@
                                                 <span>{{ itinary.day }}</span>
                                                 <h4>{{ itinary.start_end }}</h4>
                                                 <h3>{{ itinary.name }}
-                                                    <button class="toggle-btn" onclick="toggleParagraph('{{ itinary.itinary_id }}')">▼</button>
+                                                        <button class="toggle-btn" onclick="toggleParagraph('{{ itinary.itinary_id }}')">▼</button>
                                                 </h3>
-                                                <p align="justify" id="paragraph{{ itinary.itinary_id  }}" class="paragraph" style="display: none;">{{ itinary.description }}</p>
                                             </div>
+                                                {% autoescape off %} <div align="justify" id="paragraph{{ itinary.itinary_id }}" class="paragraph" style="display: none;"> {{ itinary.description}}</div> {% endautoescape %}
+                                                
+                                            
                                         {% endif %}
                                     {% endfor %}
                                 
-
-                                <div class="single-box">
-                                        <span>01</span>
-                                        <h4>Pokhara  830 m / 2,723 ft – 7hrs</h4>
-                                        <h3>Day 1 Kathmandu to Pokhara (Drive)</h3>
-                                        <p>We will collect you from your hotel and take you to the bus departure stop.  If you are traveling by air or private jeep, we will organize this for you.   Overnight in Pokhara at a hotel is included in the cost. Dinner, however, is not included in the package price. </p>
-                                </div>
                             </div>
                         </div>
                         <div class="location-map">

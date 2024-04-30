@@ -2,6 +2,8 @@
 from .models import CompanyProfile, MainGallaryModel
 from tour.models import DestinationModel, RegionModel,TourDetailsModel
 from random import sample
+
+
 # import requests
 
 def additional_context(request):
@@ -15,6 +17,7 @@ def additional_context(request):
     trekkings = TourDetailsModel.objects.filter(is_activity = False)
     additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images, 'footer_activities':footer_activities}
     return additional_data
+
 
 # def get_tripadvisor_reviews(company_name):
 #     # Make request to TripAdvisor API to get reviews for ABC company
