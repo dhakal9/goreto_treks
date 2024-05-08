@@ -318,18 +318,48 @@
 							</div>
 							<ul class="menu-right-content clearfix">
 								<li class="nav-item">
-									<div class="nav-item__contact">
-										<span><i class="fa fab-whatsapp"></i> Talk to an expert </span>
-										<p id="phone-number"><span class="fab fa-whatsapp" style="margin-right:5px">24 Hours Chat Avilable</span> <a href="https://twitter.com/goretotreks"></a></p>
-									</div>
+									<a href="#" class="theme-btn">Plan Your Trip</a>
 								</li>
-								{% comment %} <li style="">
-									<i class="fa fa-phone fa-rotate-90" style="margin-right:5px"></i><a href="tel:+977 15915493">24*7 Live chat</a>
-								</li>  {% endcomment %}
-							</ul>
+							</ul>							
 						</div>
 					</div>
 				</div>
+				<style>
+					.menu-right-content {
+						display: flex;
+						align-items: center;
+						justify-content: flex-end;
+						list-style: none;
+					}
+					
+					.nav-item {
+						margin-left: 20px; /* Adjust spacing between items */
+					}
+					
+					.nav-link {
+						text-decoration: none;
+						color: #333; /* Link color */
+						padding: 10px 15px;
+						border-radius: 5px;
+						background-color: #007bff; /* Button color */
+						font-weight: bold;
+						transition: background-color 0.3s ease; /* Smooth transition */
+					}
+					
+					.nav-link:hover {
+						background-color: #00000; /* Darker shade on hover */
+						color: #000000;
+					}
+					
+					/* Media query to hide navigation in mobile view */
+					@media screen and (max-width: 768px) {
+						.menu-right-content {
+							display: none;
+						}
+					}
+							
+
+				</style>
 	
 				<!--sticky Header-->
 				<div class="sticky-header">
@@ -345,10 +375,9 @@
 								</nav>
 							</div>
 							<ul class="menu-right-content clearfix">
-								
-								<li class="user-link">
-									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
-								</li> 
+								<li class="nav-item">
+									<a href="#" class="theme-btn">Plan Your Trip</a>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -731,7 +760,7 @@ function toggleChatbox() {
         appendMessage(replyText);
         document.getElementById('whatsapp-reply').value = '';  // Clear the reply textarea
         // Redirect to WhatsApp with the replyText
-        window.open('https://api.whatsapp.com/send?phone=1234567890&text=' + encodeURIComponent(replyText), '_blank');
+        window.open('https://api.whatsapp.com/send?phone=+9779851316017&text=' + encodeURIComponent(replyText), '_blank');
     }
 
     function appendMessage(message) {

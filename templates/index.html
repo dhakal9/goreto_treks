@@ -5,39 +5,73 @@
 	
 
 		<!-- banner-section -->
+{% comment %} <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>{{company.slogan1}}</h2>
+            <p>{{company.slogan2}}</p>
+        </div>
+    </div>
+</section> {% endcomment %}
+
+
 <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
     <div class="auto-container">
         <div class="content-box">
             <h2>{{company.slogan1}}</h2>
             <p>{{company.slogan2}}</p>
-            <div class="form-inner">
-                <form action="#" method="get" class="booking-form clearfix">
-                    <div class="form-group">
-                        <input type="text" name="service" placeholder="Where to?" required="">
-                    </div>
-                     {% comment %} <div class="form-group input-date"> 
-                        <i class="far fa-angle-down"></i>
-                        <input type="text" name="date" placeholder="When?" id="datepicker">
-                    </div>  {% endcomment %}
-                    {% comment %} <div class="form-group">
-                        <div class="select-box">
-                            <select class="wide">
-                                <option data-display="Travel Type">Travel Type</option>
-                                <option value="1">Adventure Tours</option>
-                                <option value="2">City Tours</option>
-                                <option value="3">Couple Tours</option>
-                                <option value="4">Group Tours</option>
-                            </select>
-                        </div>
-                    </div> {% endcomment %}
-                    <div class="message-btn">
-                        <button type="submit" class="theme-btn"><i class="far fa-search"></i>Find Now</button>
-                    </div>
-                </form>
+            <!-- Search bar -->
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Search Your Destination...">
+                <div class="message-btn">
+                    <button type="submit" class="theme-btn"><i class="far fa-search"></i>Find Now</button>
+                </div>
             </div>
         </div>
     </div>
 </section>
+
+<style>
+    .search-bar {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center the search bar */
+    }
+    
+    .search-input {
+        width: 70%; /* Adjust width as needed */
+        max-width: 400px; /* Set maximum width */
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    
+    .theme-btn {
+        padding: 12px 20px;
+        margin-left: 10px;
+        background-color: #072063; /* Button color */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    .theme-btn:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+    
+    /* Media query for responsiveness */
+    @media screen and (max-width: 768px) {
+        .search-input {
+            width: 80%; /* Adjust width for smaller screens */
+        }
+    }
+    
+    
+</style>
 <!-- banner-section end -->
 
 <!-- tour-section -->
@@ -549,6 +583,9 @@
                             <div class="counter-block-two">
                                 <div class="inner-box">
                                     <div class="count-outer count-box">
+                                        
+                                            <img style="float: left; width: 100px; height: 100px; object-fit: cover; z-index: 1000" src="{% static '/assets/images/semifooter/adventurer.png'%}" alt="10 Days Annapurna Base Camp Trek"><img >
+                                       
                                         <span class="count-text" data-speed="1500">{{ funfact.travellers }}</span>
                                     </div>
                                     <p>Awesome Hikers</p>
@@ -559,6 +596,7 @@
                             <div class="counter-block-two">
                                 <div class="inner-box">
                                     <div class="count-outer count-box">
+                                        <img style="float: left; width: 100px; height: 100px; object-fit: cover; z-index: 1000" src="{% static '/assets/images/semifooter/place.png'%}" alt="10 Days Annapurna Base Camp Trek"><img >
                                         <span class="count-text" data-speed="1500">{{funfact.places}}</span>
                                     </div>
                                     <p>Stunning Places</p>
@@ -569,6 +607,7 @@
                             <div class="counter-block-two">
                                 <div class="inner-box">
                                     <div class="count-outer count-box">
+                                        <img style="float: left; width: 100px; height: 100px; object-fit: cover; z-index: 1000" src="{% static '/assets/images/semifooter/tour-guide.png'%}" alt="10 Days Annapurna Base Camp Trek"><img >
                                         <span class="count-text" data-speed="1500">{{funfact.miles}}</span>
                                     </div>
                                     <p>Expert Advisor</p>
@@ -579,6 +618,7 @@
                             <div class="counter-block-two">
                                 <div class="inner-box">
                                     <div class="count-outer count-box">
+                                        <img style="float: left; width: 100px; height: 100px; object-fit: cover; z-index: 1000" src="{% static '/assets/images/semifooter/schedule.png'%}" alt="10 Days Annapurna Base Camp Trek"><img >
                                         <span class="count-text" data-speed="1500">{{funfact.years}}</span>
                                     </div>
                                     <p>Years in Service</p>
