@@ -66,12 +66,12 @@ class Login(View):
         
 
     
-class AdminIndex(View):
+class AdminIndex(LoginRequiredMixin, View):
     template_name = "admin_index.html"
     def get(self, request):
         return render(request, self.template_name)
 
-class AdminHome(View):
+class AdminHome(LoginRequiredMixin, View):
     template_name = 'admin_home.html'
     form = CompanyProfileForm
 
@@ -89,7 +89,7 @@ class AdminHome(View):
 
         return render(request, self.template_name, {'form': form})
 
-class Funfact(View):
+class Funfact(LoginRequiredMixin, View):
     template_name = 'admin_funfact.html'
     form = FunfactForm
     
@@ -107,7 +107,7 @@ class Funfact(View):
 
         return render(request, self.template_name, {'form': form, 'funfact': funfact})
     
-class Review_function(View):
+class Review_function(LoginRequiredMixin, View):
     template_name = 'admin_review.html'
 
     def get(self, request):
@@ -124,14 +124,14 @@ class Review_function(View):
 
         return render(request, self.template_name, {'form': form, 'reviews':reviews})
     
-class DeleteReview(View):
+class DeleteReview(LoginRequiredMixin, View):
     def get(self, request, review_id):
         reviews = Review.objects.get(review_id=review_id)
         reviews.delete()
         messages.success(request, "Review Deleted Successfully")
         return redirect('admin_review')
 
-class UpdateReview(View):
+class UpdateReview(LoginRequiredMixin, View):
     template_name = 'admin_review.html'
 
     def get(self, request, review_id):
@@ -182,7 +182,7 @@ class ContactUs(View):
             messages.success(request, 'Message sent Successfully')
         return render(request, self.template_name, {'form': form})
 
-class OurTeamAdmin(View):
+class OurTeamAdmin(LoginRequiredMixin, View):
     template_name = 'admin_team.html'
     def get(self, request):
         form = OurTeamForm()
@@ -198,14 +198,14 @@ class OurTeamAdmin(View):
 
         return render(request, self.template_name, {'form': form, 'teams':teams})
     
-class DeleteTeam(View):
+class DeleteTeam(LoginRequiredMixin, View):
     def get(self, request, team_id):
         teams = OurTeamModel.objects.get(team_id=team_id)
         teams.delete()
         messages.success(request, "Team Deleted Successfully")
         return redirect('admin_team')
     
-class UpdateTeam(View):
+class UpdateTeam(LoginRequiredMixin, View):
     template_name = 'admin_team.html'
     def get(self, request, team_id):
         teams = OurTeamModel.objects.all()
@@ -240,7 +240,7 @@ class Logout(LoginRequiredMixin, View):
         logout(request)
         return redirect('login')
 
-class AdminBlogs(View):
+class AdminBlogs(LoginRequiredMixin, View):
     template_name = 'admin_blogs.html'
     def get(self, request):
         blogs = BlogsModel.objects.all()
@@ -255,7 +255,7 @@ class AdminBlogs(View):
             return redirect('admin_blogs')
         return render(request, self.template_name, {'form':form})
     
-class UpdateBlogs(View):
+class UpdateBlogs(LoginRequiredMixin, View):
     template_name = 'admin_blogs.html'
     def get(self, request, id):
         blogs = BlogsModel.objects.all()
@@ -272,7 +272,7 @@ class UpdateBlogs(View):
             return redirect('admin_blogs')
         return render(request, self.template_name, {'form': form,  'blog':blog})
 
-class DeleteBlogs(View):
+class DeleteBlogs(LoginRequiredMixin, View):
     def get(self, request, id):
         blogs = BlogsModel.objects.get(pk=id)
         blogs.delete()
@@ -300,7 +300,7 @@ class AboutUs(View):
     
 
 
-class WhyUsAdmin(View):
+class WhyUsAdmin(LoginRequiredMixin, View):
     template_name ='admin_whyus.html'
     def get(self, request):
         form = WhyUsForms() 
@@ -322,7 +322,7 @@ class WhyUs(View):
         return render(request, self.template_name, {'whyuss':whyuss})
     
 
-class CsrAdmin(View):
+class CsrAdmin(LoginRequiredMixin, View):
     template_name = 'admin_csr.html'
     def get(self, request):
         csrs = CsrModel.objects.all()
@@ -338,7 +338,7 @@ class CsrAdmin(View):
             return redirect('csr_admin')
         return render(request, self.template_name, {'form':form, 'csrs':csrs})
     
-class UpdateCsr(View):
+class UpdateCsr(LoginRequiredMixin, View):
     template_name = 'admin_csr.html'
     def get(self, request, id):
         csrs = CsrModel.objects.all()
@@ -355,7 +355,7 @@ class UpdateCsr(View):
             return redirect('csr_admin')
         return render(request, self.template_name, {'form': form,  'csr':csr})
 
-class DeleteCsr(View):
+class DeleteCsr(LoginRequiredMixin, View):
     def get(self, request, id):
         csrs = CsrModel.objects.get(pk=id)
         csrs.delete()
@@ -374,7 +374,7 @@ class CsrDetails(View):
         csrs = CsrModel.objects.get(pk=pk)
         return render(request, self.template_name, {'csrs':csrs})
     
-class MainGallaryAdmin(View):
+class MainGallaryAdmin(LoginRequiredMixin, View):
     template_name = 'admin_main_gallary.html'
     def get(self, request):
         form = MainGallaryForm()
@@ -395,7 +395,7 @@ class Gallary(View):
         images = MainGallaryModel.objects.all()
         return render(request, self.tempale_name, {'images':images})
     
-class DeleteGallary(View):
+class DeleteGallary(LoginRequiredMixin, View):
     def get(self, request, id):
         images = MainGallaryModel.objects.get(id=id)
         images.delete()

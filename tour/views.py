@@ -15,7 +15,7 @@ def get_regions(request):
     regions = RegionModel.objects.filter(destination_id=destination_id).values('region_id', 'name')
     return JsonResponse({'regions': list(regions)})
 
-class AdminDestination(View):
+class AdminDestination(LoginRequiredMixin, View):
     template_name = "admin_destination.html"
     form_class = DestinationForm
 
@@ -33,7 +33,7 @@ class AdminDestination(View):
 
         return render(request, self.template_name, {'form': form, 'destinations': destinations})
 
-class UpdateDestination(View):
+class UpdateDestination(LoginRequiredMixin, View):
     template_name = 'admin_destination.html'
 
     def get(self, request, destination_id):
@@ -65,7 +65,7 @@ class OneDestination(View):
         return render(request, self.template_name, {'country': countries, 'regions':regions})
 
         
-class Region(View):
+class Region(LoginRequiredMixin, View):
     template_name = "admin_region.html"
     form_class = RegionForm
 
@@ -83,7 +83,7 @@ class Region(View):
 
         return render(request, self.template_name, {'form': form, 'regions':regions})
     
-class UpdateRegion(View):
+class UpdateRegion(LoginRequiredMixin, View):
     template_name = 'admin_region.html'
     def get(self, request, region_id):
         regions = RegionModel.objects.all()
@@ -100,14 +100,14 @@ class UpdateRegion(View):
             return redirect('admin_region')
         return render(request, self.template_name, {'form': form,  'region':region})
 
-class DeleteRegion(View):
+class DeleteRegion(LoginRequiredMixin, View):
     def get(self, request, region_id):
         regions = RegionModel.objects.get(region_id=region_id)
         regions.delete()
         messages.success(request, "Region Deleted Successfully")
         return redirect('admin_region')
 
-class ToggleRegionStatus(View):
+class ToggleRegionStatus(LoginRequiredMixin, View):
     def get(self, request, region_id):
         region = get_object_or_404(RegionModel, pk=region_id)
         region.is_nav = not region.is_nav
@@ -124,7 +124,7 @@ class Tourlist(View):
         tours = TourDetailsModel.objects.all()
         return render(request, self.template_name, {'region':region, 'tours':tours})
         
-class AdminTour(View):
+class AdminTour(LoginRequiredMixin, View):
     template_name = 'admin_tour.html'
 
     def get(self, request):
@@ -141,7 +141,7 @@ class AdminTour(View):
         
         return render(request, self.template_name, {'form': form, 'tours':tours})
     
-class EditTour(View):
+class EditTour(LoginRequiredMixin, View):
     template_name = 'admin_tour.html'
 
     def get(self, request, tour_id):
@@ -158,14 +158,14 @@ class EditTour(View):
             return redirect('admin_tour')
         return render(request, self.template_name, {'form': form,  'tour':tour})
 
-class DeleteTour(View):
+class DeleteTour(LoginRequiredMixin, View):
     def get(self, request, tour_id):
         tours = TourDetailsModel.objects.get(pk=tour_id)
         tours.delete()
         messages.success(request, "Tour Deleted Successfully")
         return redirect('admin_tour')
     
-class ToggleAttractionStatus(View):
+class ToggleAttractionStatus(LoginRequiredMixin, View):
     def get(self, request, activity_id):
         tour = get_object_or_404(TourDetailsModel, pk=activity_id)
         tour.is_attraction = not tour.is_attraction
@@ -244,7 +244,7 @@ class TourDeatails(View):
         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
 
-class ItinaryAdmin(View):
+class ItinaryAdmin(LoginRequiredMixin, View):
     template_name ='admin_itinary.html'
     def get(self, request):
         form = ItinaryForm()
@@ -260,7 +260,7 @@ class ItinaryAdmin(View):
             return redirect('admin_itinary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
         return render(request, self.template_name, {'form': form, 'tours':tours})
 
-class EditItinary(View):
+class EditItinary(LoginRequiredMixin, View):
     template_name = 'admin_itinary.html'
 
     def get(self, request, itinary_id):
@@ -286,7 +286,7 @@ class EditItinary(View):
 
 
 
-class DeleteItinary(View):
+class DeleteItinary(LoginRequiredMixin, View):
     def get(self, request, itinary_id):
         itinary = get_object_or_404(ItinatyModel, pk=itinary_id)
         tour = itinary.tour  # Get the tour associated with the itinerary
@@ -296,7 +296,7 @@ class DeleteItinary(View):
         return redirect(reverse('edit_tour_itinary', kwargs={'activity_id': tour.activity_id}))
 
 
-class EditTourItinary(View):
+class EditTourItinary(LoginRequiredMixin, View):
     template_name ='admin_itinary.html'
     
     def get(self, request, activity_id):
@@ -318,7 +318,7 @@ class EditTourItinary(View):
             return redirect(reverse('edit_tour_itinary', kwargs={'activity_id': activity_id}))
         return render(request, self.template_name, {'form': form, 'tours': tours, 'toors': toors, 'itinaries': itinaries})
 
-class Gallary(View):
+class Gallary(LoginRequiredMixin, View):
     template_name ='admin_gallary.html'
     def get(self, request):
         form = GallaryForm()
@@ -336,7 +336,7 @@ class Gallary(View):
             return redirect('admin_gallary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
         return render(request, self.template_name, {'form': form, 'tours':tours, 'images':images})
 
-class DeleteImage(View):
+class DeleteImage(LoginRequiredMixin, View):
     def get(self, request, image_id):
         images = GallaryModel.objects.get(image_id=image_id)
         images.delete()
@@ -353,7 +353,7 @@ class Trekking(View):
     def get(self, request):
         return render(request, self.template_name)
 
-class AdminIncludeExclude(View):
+class AdminIncludeExclude(LoginRequiredMixin, View):
     template_name = 'admin_include_exclude.html'
     def get(self, request):
         tours = TourDetailsModel.objects.all()
@@ -371,14 +371,14 @@ class AdminIncludeExclude(View):
             return redirect('admin_include_exclude') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
         return render(request, self.template_name, {'form': form, 'details':details, 'tours':tours})
 
-class DeleteIncludeExclude(View):
+class DeleteIncludeExclude(LoginRequiredMixin, View):
     def get(self, request, id):
         details = IncludeExcludeModel.objects.get(pk=id)
         details.delete()
         messages.success(request, "Include/Exclude Successfully")
         return redirect('admin_include_exclude')
 
-class EditIncludeExclude(View):
+class EditIncludeExclude(LoginRequiredMixin, View):
     template_name = 'admin_include_exclude.html'
 
     def get(self, request, id):
@@ -400,7 +400,7 @@ class EditIncludeExclude(View):
     
 
 
-class AssignIncludeExcludeView(View):
+class AssignIncludeExcludeView(LoginRequiredMixin, View):
     def get(self, request, tour_id):
         tour = get_object_or_404(TourDetailsModel, pk=tour_id)
         
@@ -443,7 +443,7 @@ class AssignIncludeExcludeView(View):
         return render(request, 'admin_assign_include_exclude.html', {'tour': tour, 'form': form})
     
 
-class Faqs(View):
+class Faqs(LoginRequiredMixin, View):
     template_name = 'admin_faq.html'
     def get(self, request):
         tours = TourDetailsModel.objects.all()
@@ -461,7 +461,7 @@ class Faqs(View):
             return redirect('admin_faq')
         return render(request, self.template_name, {'form':form, 'faqs':faqs, 'tours':tours})
     
-class EditFaqs(View):
+class EditFaqs(LoginRequiredMixin, View):
     template_name = 'admin_faq.html'
 
     def get(self, request, id):
@@ -479,14 +479,14 @@ class EditFaqs(View):
             return redirect('admin_faq')
         return render(request, self.template_name, {'form':form, 'faqs':faqs})
     
-class DeleteFaqs(View):
+class DeleteFaqs(LoginRequiredMixin, View):
     def get(self, request, id):
         faqs = FaqModels.objects.get(pk=id)
         faqs.delete()
         messages.success(request, "Faqs Deleted Successfully Successfully")
         return redirect('admin_faq')  
 
-class ToggleFaqsStatus(View):
+class ToggleFaqsStatus(LoginRequiredMixin, View):
     def get(self, request, id):
         faqs = get_object_or_404(FaqModels, pk=id)
         faqs.is_global = not faqs.is_global
@@ -494,7 +494,7 @@ class ToggleFaqsStatus(View):
         messages.success(request, 'Faq Status Changes Successfully')
         return redirect('admin_faq')
   
-class AssignFaqsToTourView(View):
+class AssignFaqsToTourView(LoginRequiredMixin, View):
     template_name = 'admin_assign_faq.html'
 
     def get(self, request, tour_id):
@@ -520,7 +520,7 @@ class AssignFaqsToTourView(View):
                 messages.error(request, 'This FAQ is already assigned to the tour.')
         return render(request, self.template_name, {'tour': tour, 'faqs': faqs, 'form': form, 'assigned_faqs':assigned_faqs})
 
-class UnassignFaqsToTourView(View):
+class UnassignFaqsToTourView(LoginRequiredMixin, View):
     def get(self, request, id):
         assigned_faq = get_object_or_404(TourFaqModels, pk=id)
         tour_id = assigned_faq.tour_id
