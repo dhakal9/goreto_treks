@@ -59,8 +59,9 @@ class Destination(View):
 class OneDestination(View):
     template_name = 'one_destination.html'
 
-    def get(self, request, destination_id):
-        countries = DestinationModel.objects.get(destination_id=destination_id)
+    def get(self, request, destination_name):
+        countries  = get_object_or_404(DestinationModel, name=destination_name)
+        # countries = DestinationModel.objects.get(name=name)
         regions = RegionModel.objects.all()
         return render(request, self.template_name, {'country': countries, 'regions':regions})
 
@@ -116,13 +117,20 @@ class ToggleRegionStatus(LoginRequiredMixin, View):
         return redirect('admin_region')
     
 
+# class Tourlist(View):
+#     template_name = 'tourlist.html'
+#     def get(self, request, pk):
+#         region = RegionModel.objects.get(pk=pk)
+#         tours = TourDetailsModel.objects.all()
+#         return render(request, self.template_name, {'region':region, 'tours':tours})
+
 class Tourlist(View):
     template_name = 'tourlist.html'
-    def get(self, request, pk):
-        region = RegionModel.objects.get(pk=pk)
-        print(pk)
+    
+    def get(self, request, region_name):
+        region = get_object_or_404(RegionModel, name=region_name)
         tours = TourDetailsModel.objects.all()
-        return render(request, self.template_name, {'region':region, 'tours':tours})
+        return render(request, self.template_name, {'region': region, 'tours': tours})
         
 class AdminTour(LoginRequiredMixin, View):
     template_name = 'admin_tour.html'
@@ -173,28 +181,27 @@ class ToggleAttractionStatus(LoginRequiredMixin, View):
         messages.success(request, 'Attraction status toggled successfully')
         return redirect('admin_tour')
 
-    
 class TourDeatails(View):
     template_name = 'tour_details.html'
 
-    def get(self, request, pk):
+    def get(self, request, tour_name):
         inquiry_form = InqueryForm()
         booking_form = BookingForm()
-        tour_details = TourDetailsModel.objects.get(pk=pk)
+        tour_details = get_object_or_404(TourDetailsModel, name=tour_name)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
-        inc_excs = TourIncludeExcludeModel.objects.filter(tour=pk)
-        faqs = TourFaqModels.objects.filter(tour=pk)
-        similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
+        inc_excs = TourIncludeExcludeModel.objects.filter(tour=tour_details)
+        faqs = TourFaqModels.objects.filter(tour=tour_details)
+        similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=tour_details.pk)
         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form, 'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
-    def post(self, request, pk):
-        tour_details = TourDetailsModel.objects.get(pk=pk)
+    def post(self, request, tour_name):
+        tour_details = get_object_or_404(TourDetailsModel, name=tour_name)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
         inc_excs = TourIncludeExcludeModel.objects.all()
         faqs = TourFaqModels.objects.all()
-        similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
+        similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=tour_details.pk)
         
         if request.method == 'POST':
             if 'booking_form_submit' in request.POST:
@@ -216,7 +223,7 @@ class TourDeatails(View):
                         fail_silently=False
                     )
                     messages.success(request, 'Booking Inquiry sent Successfully')
-                    return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
+                    return redirect('tour_details', tour_name=tour_name)  # Redirect to a success URL after form submission
 
             elif 'inquiry_form_submit' in request.POST:
                 inquiry_form = InqueryForm(request.POST)
@@ -236,12 +243,80 @@ class TourDeatails(View):
                         fail_silently=False
                     )
                     messages.success(request, 'General Inquiry sent Successfully')
-                    return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
+                    return redirect('tour_details', tour_name=tour_name)  # Redirect to a success URL after form submission
 
         # If neither booking nor inquiry form is submitted, render the template with the forms
         booking_form = BookingForm()
         inquiry_form = InqueryForm()
         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
+# class TourDeatails(View):
+#     template_name = 'tour_details.html'
+
+#     def get(self, request, pk):
+#         inquiry_form = InqueryForm()
+#         booking_form = BookingForm()
+#         tour_details = TourDetailsModel.objects.get(pk=pk)
+#         images = GallaryModel.objects.all()
+#         itinaries = ItinatyModel.objects.all()
+#         inc_excs = TourIncludeExcludeModel.objects.filter(tour=pk)
+#         faqs = TourFaqModels.objects.filter(tour=pk)
+#         similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
+#         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form, 'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
+
+#     def post(self, request, pk):
+#         tour_details = TourDetailsModel.objects.get(pk=pk)
+#         images = GallaryModel.objects.all()
+#         itinaries = ItinatyModel.objects.all()
+#         inc_excs = TourIncludeExcludeModel.objects.all()
+#         faqs = TourFaqModels.objects.all()
+#         similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
+        
+#         if request.method == 'POST':
+#             if 'booking_form_submit' in request.POST:
+#                 booking_form = BookingForm(request.POST)
+#                 if booking_form.is_valid():
+#                     name = booking_form.cleaned_data['username']
+#                     email = booking_form.cleaned_data['email']
+#                     phone = booking_form.cleaned_data['phone']
+#                     message = booking_form.cleaned_data['message']
+#                     subject = "Booking Inquiry"
+
+#                     message_body = f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
+
+#                     send_mail(
+#                         subject,  # Title
+#                         message_body,  # Message
+#                         settings.EMAIL_HOST_USER,  # Sender email
+#                         ['dhakalamrit19@gmail.com'],  # Receiver email
+#                         fail_silently=False
+#                     )
+#                     messages.success(request, 'Booking Inquiry sent Successfully')
+#                     return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
+
+#             elif 'inquiry_form_submit' in request.POST:
+#                 inquiry_form = InqueryForm(request.POST)
+#                 if inquiry_form.is_valid():
+#                     name = inquiry_form.cleaned_data['username']
+#                     email = inquiry_form.cleaned_data['email']
+#                     message = inquiry_form.cleaned_data['message']
+#                     subject = "General Inquiry"
+
+#                     message_body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
+
+#                     send_mail(
+#                         subject,  # Title
+#                         message_body,  # Message
+#                         settings.EMAIL_HOST_USER,  # Sender email
+#                         ['dhakalamrit19@gmail.com'],  # Receiver email
+#                         fail_silently=False
+#                     )
+#                     messages.success(request, 'General Inquiry sent Successfully')
+#                     return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
+
+#         # If neither booking nor inquiry form is submitted, render the template with the forms
+#         booking_form = BookingForm()
+#         inquiry_form = InqueryForm()
+#         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
 
 class ItinaryAdmin(LoginRequiredMixin, View):

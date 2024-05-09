@@ -24,7 +24,7 @@
             <div class="search-bar">
                 <input type="text" class="search-input" placeholder="Search Your Destination...">
                 <div class="message-btn">
-                    <button type="submit" class="theme-btn"><i class="far fa-search"></i>Find Now</button>
+                    <button type="submit" class="theme-btn"><i class="far fa-search"></i>Search</button>
                 </div>
             </div>
         </div>
@@ -67,11 +67,20 @@
     @media screen and (max-width: 768px) {
         .search-input {
             width: 80%; /* Adjust width for smaller screens */
+            margin-bottom: 10px; /* Add margin between input and button */
+        }
+
+        .search-bar {
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center items horizontally */
+        }
+
+        .theme-btn {
+            margin-left: 0; /* Remove left margin */
         }
     }
-    
-    
 </style>
+
 <!-- banner-section end -->
 
 <!-- tour-section -->
@@ -344,7 +353,7 @@
                         <div class="inner-box">
                             <figure class="image-box"><img src="{{ destination.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
                             <div class="text">
-                                <h3><a href="{% url 'one_destination' destination.destination_id %}">{{ destination.name }}</a></h3>
+                                <h3><a href="{% url 'one_destination' destination.name %}">{{ destination.name }}</a></h3>
                             </div>
                         </div>
                     </div>
@@ -391,7 +400,7 @@
                                     <figure class="image-box"><img style="float: left; width: 400px; height: 200px; object-fit: cover;" src="{{ activity.image.url }}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"></figure>
                                     <div class="content-box">
                                         {% comment %} <span>Get 30% Off</span> {% endcomment %}
-                                        <h3><a href="{% url 'tour_list' activity.region_id %}">{{ activity.name }}</a></h3>
+                                        <h3><a href="{% url 'tour_list' activity.name %}">{{ activity.name }}</a></h3>
                                         {% comment %} <h4>$560.00 <del style="color:#808080!important">$800.00</del></h4> {% endcomment %}
                                     </div>
                                 </div>

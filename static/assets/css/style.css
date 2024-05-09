@@ -533,7 +533,8 @@ img {
   display: block;
   font-size: 50px;
   line-height: 60px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Work Sans', sans-serif;
+  /* font-family: 'Playfair Display', serif; */
   font-weight: 900;
 }
 
@@ -5882,7 +5883,7 @@ div#mCSB_1_container{
 .tour-details-content .tour-plan .single-box{
   position: relative;
   padding-left: 110px;
-  padding-bottom: 62px;
+  padding-bottom: 20px;
 }
 
 .tour-details-content .tour-plan .single-box:last-child{
