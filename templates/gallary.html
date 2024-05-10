@@ -25,21 +25,22 @@
     overflow: hidden;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    cursor: pointer; /* Add cursor pointer for clickable effect */
-    width: calc(33.333% - 20px); /* Adjust width for 3-column grid */
-    flex: 1 0 calc(33.333% - 20px); /* Ensure equal spacing */
-    max-width: 300px; /* Set max width to prevent stretching */
+    cursor: pointer;
+    width: calc(33.333% - 20px);
+    flex: 1 0 calc(33.333% - 20px);
+    max-width: 300px;
   }
 
   .gallery-item img {
     width: 100%;
-    height: auto; /* Ensure proper aspect ratio */
+    height: 100%; /* Make the image cover the container */
+    object-fit: cover; /* Ensure the aspect ratio is maintained */
     display: block;
-    transition: transform 0.3s ease; /* Add transition effect */
+    transition: transform 0.3s ease;
   }
 
   .gallery-item:hover img {
-    transform: scale(1.05); /* Add scaling effect on hover */
+    transform: scale(1.05);
   }
 
   .popup {
@@ -65,20 +66,29 @@
     max-width: 90%;
     max-height: 90%;
   }
+
+  /* Media query for mobile devices */
+  @media (max-width: 768px) {
+    .gallery-item {
+      width: 100%;
+      max-width: none;
+    }
+  }
 </style>
 
 <section class="page-title style-two centred" style=" height: 200px; background-image: url({% static 'assets/images/gallary_pano.jpg' %}); " >
   <div class="auto-container">
       <div class="content-box">
-          <p style="position:absolute">Home/Gallary</p>
-          <h1>Gallary</h1>
+          <p style="position:absolute">Home/Gallery</p>
+          <h1>Gallery</h1>
       </div>
   </div>
 </section>
+
 <div class="gallery" onclick="openPopup(event)">
   {% for image in images %}
   <div class="gallery-item">
-    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{ image.image.url }}" alt="">
+    <img src="{{ image.image.url }}" alt="">
   </div>
   {% endfor %}
 </div>
@@ -95,13 +105,13 @@
       var imageUrl = event.target.src;
       document.getElementById('popup-image').src = imageUrl;
       document.getElementById('popup').style.display = 'block';
-      document.body.style.overflow = 'hidden'; // Disable scrolling when popup is open
+      document.body.style.overflow = 'hidden';
     }
   }
 
   function closePopup() {
     document.getElementById('popup').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Enable scrolling when popup is closed
+    document.body.style.overflow = 'auto';
   }
 </script>
 

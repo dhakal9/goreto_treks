@@ -106,23 +106,42 @@
                                 
                             </div>
                             <div class="content-box" id="itinerary">
-                                {% for itinary in itinaries %}
+                                    {% for itinary in itinaries %}
                                         {% if itinary.tour_id == tour_details.activity_id %}
                                             <div class="single-box">
                                                 <span>{{ itinary.day }}</span>
                                                 <h4>{{ itinary.start_end }}</h4>
-                                                <h3>{{ itinary.name }}
-                                                        <button class="toggle-btn" onclick="toggleParagraph('{{ itinary.itinary_id }}')">▼</button>
+                                                <h3 style='font-size: 21px;'>{{ itinary.name }}
+                                                    <button class="toggle-btn" onclick="toggleParagraph('{{ itinary.itinary_id }}')">▼</button>
                                                 </h3>
-                                            </div>
-                                                {% autoescape off %} <div align="justify" id="paragraph{{ itinary.itinary_id }}" class="paragraph mr-6" style="display: none;"> {{ itinary.description}}</div> {% endautoescape %}
-                                                
-                                            
+                                          </div>
+                                          <div class="summernote" id="paragraph{{ itinary.itinary_id }}" style="display: none;">
+                                            {{ itinary.description|safe }}
+                                        </div>
                                         {% endif %}
                                     {% endfor %}
+
                                 
                             </div>
+                            
                         </div>
+                        <style>
+                            .summernote{
+                                margin-left:90px;
+                                margin-top:0px;
+                                margin-bottom: 30px;
+                            }
+
+                    
+                            .summernote .p .span{
+                                position: relative;
+                                font-family: 'Work Sans', sans-serif;
+                                color: #808080;
+                                font-weight: 400;
+                                margin: 0px;
+                                transition: all 500ms ease;
+                            }
+                        </style>
                         <div class="location-map">
                             <div class="text">
                                 <h2>View On Map</h2>
@@ -199,6 +218,7 @@
                                                             </figure>
                                                             
                                                             <style>
+                                                                
                                                                 .price-overlay {
                                                                     position: absolute;
                                                                     top: 0;
@@ -522,11 +542,12 @@
         var paragraph = document.getElementById("paragraph" + itinaryId);
         console.log("Paragraph ID:", itinaryId);
         if (paragraph) {
+            // Use innerHTML to render HTML content
             paragraph.style.display = paragraph.style.display === "none" ? "block" : "none";
         } else {
             console.error("Paragraph not found with ID:", itinaryId);
         }
-    }
+    }    
 </script>
     <script>
         // Function to scroll to a specific section

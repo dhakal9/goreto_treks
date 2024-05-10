@@ -177,7 +177,7 @@ class ContactUs(View):
                 subject,            # Title
                 message_body,       # Message
                 settings.EMAIL_HOST_USER,  # Sender email
-                ['dhakalamrit19@gmail.com'],  # Receiver email
+                ['goretotreks@gmail.com'],  # Receiver email
                 fail_silently=False
             )
             messages.success(request, 'Message sent Successfully')
@@ -402,3 +402,8 @@ class DeleteGallary(LoginRequiredMixin, View):
         images.delete()
         messages.success(request, "Image Deleted Successfully")
         return redirect('main_admin_gallary')
+
+class PlanTrip(View):
+    template_name = 'plan_trip.html'
+    def get(self, request):
+        return render(request, self.template_name)

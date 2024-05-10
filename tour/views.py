@@ -219,7 +219,7 @@ class TourDeatails(View):
                         subject,  # Title
                         message_body,  # Message
                         settings.EMAIL_HOST_USER,  # Sender email
-                        ['dhakalamrit19@gmail.com'],  # Receiver email
+                        ['goretotreks@gmail.com'],  # Receiver email
                         fail_silently=False
                     )
                     messages.success(request, 'Booking Inquiry sent Successfully')
@@ -239,7 +239,7 @@ class TourDeatails(View):
                         subject,  # Title
                         message_body,  # Message
                         settings.EMAIL_HOST_USER,  # Sender email
-                        ['dhakalamrit19@gmail.com'],  # Receiver email
+                        ['goretotreks@gmail.com'],  # Receiver email
                         fail_silently=False
                     )
                     messages.success(request, 'General Inquiry sent Successfully')

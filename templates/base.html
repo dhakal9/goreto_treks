@@ -133,14 +133,14 @@
 						<div class="top-inner clearfix d-flex">
 							<ul class="top-info pull-left d-flex justify-content-start w-75 social-links">
 							  <!-- Email Icon and Address -->
-							  <li>
+							  <li  class="mr-4">
 								<a href="mailto:{{company.email}}" target="_blank">
 								  <i class="fas fa-envelope"></i>
 								  <span class="d-none d-md-inline">{{company.email}}</span>
 								</a>
 							  </li>
 							  <!-- Phone Icon and Number -->
-							  <li class="mx-5">
+							  <li class="mr-4">
 								<a href="tel:{{company.contact}}" target="_blank">
 								  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
 									<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
@@ -149,7 +149,7 @@
 								</a>
 							  </li>
 							  <!-- Location Icon and Address -->
-							  <li>
+							  <li class="mr-4">
 								<a href="https://maps.app.goo.gl/ua15KsG7UcuBbr6V6" target="_blank">
 								  <i class="fas fa-map-marker-alt"></i>
 								  <span class="d-none d-md-inline">{{company.address}}</span>
@@ -157,8 +157,8 @@
 							  </li>
 							</ul>
 							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
-								<li><a href="https://www.facebook.com/goretotrek"  target="_blank"><i class="fab fa-facebook-f" style="font-size: 20px"></i></a></li>
-								<li class="mx-3"><a href="https://www.instagram.com/goretotreks/" target="_blank"><i class="fab fa-instagram" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://www.facebook.com/goretotrek"  target="_blank"><i class="fab fa-facebook-f" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://www.instagram.com/goretotreks/" target="_blank"><i class="fab fa-instagram" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://wa.me/+9779851316017" target="_blank"><i class="fab fa-whatsapp" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank"><i class="fab fa-tripadvisor" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://twitter.com/goretotreks" target="_blank"><i class="fab fa-twitter" style="font-size: 20px;"></i></a></li>
@@ -166,7 +166,7 @@
 								{% comment %} <li class="mr-3"><a href="https://twitter.com/goretotreks"><img src="{% static "assets/images/twitter.png"%}" alt="Twitter X" style="width: 30px; height: 20px;"></a></li> {% endcomment %}
 								<li class="mr-3"><a href="https://www.youtube.com/@goretotreks1606" target="_blank"><i class="fab fa-youtube" style="font-size: 20px;"></i></a></li>
 								<li class="mr-3"><a href="#" target="_blank"><i class="fab fa-linkedin" style="font-size: 20px;"></i></a></li>
-								<li class="mr-3 mr-3"><a href="https://www.reddit.com/user/GoretoTreks/?share_id=nlU8UWIw5H_gHjoR_z3GI&utm_content=1&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=5" target="_blank"><i class="fab fa-reddit" style="font-size: 20px;"></i></a></li>
+								<li class="mr-3"><a href="https://www.reddit.com/user/GoretoTreks/?share_id=nlU8UWIw5H_gHjoR_z3GI&utm_content=1&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=5" target="_blank"><i class="fab fa-reddit" style="font-size: 20px;"></i></a></li>
 						
 							</ul>
 							{% comment %} <div class="btn-box pull-right">
@@ -318,7 +318,7 @@
 							</div>
 							<ul class="menu-right-content clearfix">
 								<li class="nav-item">
-									<a href="#" class="theme-btn">Plan Your Trip</a>
+									<a href="{% url 'plan_trip'%}" class="theme-btn">Plan Your Trip</a>
 								</li>
 							</ul>							
 						</div>
@@ -355,6 +355,8 @@
 					@media screen and (max-width: 768px) {
 						.menu-right-content {
 							display: none;
+	
+							
 						}
 					}
 							
@@ -376,7 +378,7 @@
 							</div>
 							<ul class="menu-right-content clearfix">
 								<li class="nav-item">
-									<a href="#" class="theme-btn">Plan Your Trip</a>
+									<a href="{% url 'plan_trip'%}" class="theme-btn">Plan Your Trip</a>
 								</li>
 							</ul>
 						</div>
