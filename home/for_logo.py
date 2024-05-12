@@ -2,7 +2,7 @@
 from .models import CompanyProfile, MainGallaryModel
 from tour.models import DestinationModel, RegionModel,TourDetailsModel
 from random import sample
-
+from django.template.defaultfilters import slugify
 
 # import requests
 
@@ -37,3 +37,6 @@ def additional_context(request):
 #     company_name = 'ABC_company'
 #     num_reviews = get_tripadvisor_reviews(company_name)
 #     return render(request, 'company_reviews.html', {'num_reviews': num_reviews})
+
+
+

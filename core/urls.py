@@ -26,10 +26,10 @@ from django.contrib.staticfiles.views import serve
 urlpatterns = [
     re_path(r'^media/(?P<path>.#)$', serve, {'document_root':settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.#)$', serve, {'document_root':settings.STATIC_ROOT}),
-    path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('', include('tour.urls')),
-    path('summernote/', include('django_summernote.urls')),
+    re_path('admin/', admin.site.urls),
+    re_path('', include('home.urls')),
+    re_path('', include('tour.urls')),
+    re_path('summernote/', include('django_summernote.urls')),
     
 ]
 # if settings.DEBUG:

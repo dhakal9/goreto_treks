@@ -10,6 +10,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 def get_regions(request):
     destination_id = request.GET.get('destination_id')
     regions = RegionModel.objects.filter(destination_id=destination_id).values('region_id', 'name')
@@ -59,8 +60,8 @@ class Destination(View):
 class OneDestination(View):
     template_name = 'one_destination.html'
 
-    def get(self, request, destination_name):
-        countries  = get_object_or_404(DestinationModel, name=destination_name)
+    def get(self, request, destination_slug):
+        countries  = get_object_or_404(DestinationModel, slug=destination_slug)
         # countries = DestinationModel.objects.get(name=name)
         regions = RegionModel.objects.all()
         return render(request, self.template_name, {'country': countries, 'regions':regions})
@@ -127,8 +128,8 @@ class ToggleRegionStatus(LoginRequiredMixin, View):
 class Tourlist(View):
     template_name = 'tourlist.html'
     
-    def get(self, request, region_name):
-        region = get_object_or_404(RegionModel, name=region_name)
+    def get(self, request, region_slug):
+        region = get_object_or_404(RegionModel, slug=region_slug)
         tours = TourDetailsModel.objects.all()
         return render(request, self.template_name, {'region': region, 'tours': tours})
         
@@ -184,10 +185,10 @@ class ToggleAttractionStatus(LoginRequiredMixin, View):
 class TourDeatails(View):
     template_name = 'tour_details.html'
 
-    def get(self, request, tour_name):
+    def get(self, request, tour_slug):
         inquiry_form = InqueryForm()
         booking_form = BookingForm()
-        tour_details = get_object_or_404(TourDetailsModel, name=tour_name)
+        tour_details = get_object_or_404(TourDetailsModel, slug=tour_slug)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
         inc_excs = TourIncludeExcludeModel.objects.filter(tour=tour_details)
@@ -195,8 +196,8 @@ class TourDeatails(View):
         similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=tour_details.pk)
         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form, 'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
-    def post(self, request, tour_name):
-        tour_details = get_object_or_404(TourDetailsModel, name=tour_name)
+    def post(self, request, tour_slug):
+        tour_details = get_object_or_404(TourDetailsModel, name=tour_slug)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
         inc_excs = TourIncludeExcludeModel.objects.all()
@@ -223,7 +224,7 @@ class TourDeatails(View):
                         fail_silently=False
                     )
                     messages.success(request, 'Booking Inquiry sent Successfully')
-                    return redirect('tour_details', tour_name=tour_name)  # Redirect to a success URL after form submission
+                    return redirect('tour_details', tour_slug=tour_slug)  # Redirect to a success URL after form submission
 
             elif 'inquiry_form_submit' in request.POST:
                 inquiry_form = InqueryForm(request.POST)
@@ -243,7 +244,7 @@ class TourDeatails(View):
                         fail_silently=False
                     )
                     messages.success(request, 'General Inquiry sent Successfully')
-                    return redirect('tour_details', tour_name=tour_name)  # Redirect to a success URL after form submission
+                    return redirect('tour_details', tour_slug=tour_slug)  # Redirect to a success URL after form submission
 
         # If neither booking nor inquiry form is submitted, render the template with the forms
         booking_form = BookingForm()

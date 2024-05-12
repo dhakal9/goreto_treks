@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django_summernote.fields import SummernoteTextField
-
+from autoslug import AutoSlugField
 # Create your models here.
 class DestinationModel(models.Model):
     destination_id = models.AutoField(primary_key=True)
@@ -10,7 +10,8 @@ class DestinationModel(models.Model):
     description = SummernoteTextField()
     is_active = models.BooleanField(default=True)
     image = models.ImageField(upload_to='blog_images', blank=True, null=True)
-    slug = models.SlugField(default="default")
+    # slug = models.SlugField(default="default")
+    slug = AutoSlugField(populate_from='name', default='', unique=True)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -27,6 +28,7 @@ class RegionModel(models.Model):
     description =  SummernoteTextField()
     is_active = models.BooleanField(default=True)
     is_nav = models.BooleanField(default=False)
+    slug = AutoSlugField(populate_from='name', default='', unique=True)
     
 class TourDetailsModel(models.Model):
     activity_id = models.AutoField(primary_key=True)
@@ -50,6 +52,7 @@ class TourDetailsModel(models.Model):
     is_activity = models.BooleanField(default=False)
     is_attraction = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    slug = AutoSlugField(populate_from='name', default='', unique=True)
 
 class ItinatyModel(models.Model):
     itinary_id = models.AutoField(primary_key=True)

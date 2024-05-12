@@ -106,7 +106,7 @@
                             <div class="bottom-right">
                                 <h5 class="middleclass"><i class="far fa-clock"></i> {{tour.days}} Day</h5>
                             </div>
-                            <a href="{% url 'tour_details' tour.name %}"><i class="fas fa-link"></i></a>
+                            <a href="{% url 'tour_details' tour.slug %}"><i class="fas fa-link"></i></a>
                             <div class="price-overlay">Starting From {{tour.price}}
 
                             </div>
@@ -134,7 +134,7 @@
                         </style>
                         <div class="lower-content">
                            
-                            <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
+                            <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.slug %}">{{tour.name}}</a></h3>
                             {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
                             <ul class="info clearfix">
                                 <li><i class="far fa-mountain"></i>{{tour.altitude}}</li>
@@ -353,7 +353,7 @@
                         <div class="inner-box">
                             <figure class="image-box"><img src="{{ destination.image.url }}" alt="Nepal Where Culture Meets Mountains!" loading="eager"></figure>
                             <div class="text">
-                                <h3><a href="{% url 'one_destination' destination.name %}">{{ destination.name }}</a></h3>
+                                <h3><a href="{% url 'one_destination' destination.slug %}">{{ destination.name }}</a></h3>
                             </div>
                         </div>
                     </div>
@@ -400,7 +400,7 @@
                                     <figure class="image-box"><img style="float: left; width: 400px; height: 200px; object-fit: cover;" src="{{ activity.image.url }}" alt="10 Days Annapurna Base Camp Trekkk" loading="eager"></figure>
                                     <div class="content-box">
                                         {% comment %} <span>Get 30% Off</span> {% endcomment %}
-                                        <h3><a href="{% url 'tour_list' activity.name %}">{{ activity.name }}</a></h3>
+                                        <h3><a href="{% url 'tour_list' activity.slug %}">{{ activity.name }}</a></h3>
                                         {% comment %} <h4>$560.00 <del style="color:#808080!important">$800.00</del></h4> {% endcomment %}
                                     </div>
                                 </div>
