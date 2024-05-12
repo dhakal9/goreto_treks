@@ -74,7 +74,7 @@
                                                     <div class="bottom-right">
                                                         <h5 class="middleclass"><i class="far fa-clock"></i> {{trekking.days}} Day</h5>
                                                     </div>
-                                                    <a href="{% url 'tour_details' trekking.name %}"><i class="fas fa-link"></i></a>
+                                                    <a href="{% url 'tour_details' trekking.slug %}"><i class="fas fa-link"></i></a>
                                                     <div class="price-overlay">Starting From {{trekking.price}}
                         
                                                     </div>
@@ -102,8 +102,8 @@
                                                 </style>
                                                 <div class="lower-content">
                                                    
-                                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trekking.activity_id %}">{{trekking.name}}</a></h3>
-                                                    {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
+                                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a></h3>
+                                        
                                                     <ul class="info clearfix">
                                                         <li><i class="far fa-mountain"></i>{{trekking.altitude}}</li>
                                                         <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>

@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms, PlanningTripForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
@@ -404,6 +404,38 @@ class DeleteGallary(LoginRequiredMixin, View):
         return redirect('main_admin_gallary')
 
 class PlanTrip(View):
-    template_name = 'plan_trip.html'
+    template_name = 'plan_trip.html'  # Replace 'your_template_name.html' with your actual template name
+
     def get(self, request):
-        return render(request, self.template_name)
+        form = PlanningTripForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = PlanningTripForm(request.POST)
+        if form.is_valid():
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
+            email = form.cleaned_data['email']
+            tour_name = form.cleaned_data['tour_name']
+            address1 = form.cleaned_data['address1']
+            address2 = form.cleaned_data['address2']
+            city = form.cleaned_data['city']
+            zip_code = form.cleaned_data['zip_code']
+            state = form.cleaned_data['state']
+            country = form.cleaned_data['country']
+            message = form.cleaned_data['message']
+
+            message_body = f"First Name: {firstname}\n Last Name: {lastname}\nEmail: {email}\nTour Name: {tour_name}\nAddress 1: {address1}\nAddress 2: {address2}\nCity: {city}\nZip Code: {zip_code}\nState: {state}\nCountry: {country}\nMessage: {message}"
+
+            send_mail(
+                "Trip Inquiry",     # Title
+                message_body,       # Message
+                settings.EMAIL_HOST_USER,  # Sender email
+                ['goretotreks@gmail.com'],  # Receiver email
+                fail_silently=False
+            )
+            messages.success(request, 'Message sent successfully')
+            return redirect('plan_trip')  # Redirect to a success URL after form submission
+        else:
+            messages.error(request, 'Failed to send message. Please check the form data.')
+            return render(request, self.template_name, {'form': form})

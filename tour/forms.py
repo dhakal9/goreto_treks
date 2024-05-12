@@ -184,3 +184,4 @@ class AssignFaqsToTourForm(forms.ModelForm):
 
     def label_from_instance(self, obj):
         return obj.question
+

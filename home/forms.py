@@ -121,3 +121,16 @@ class WhyUsForms(forms.ModelForm):
     class Meta:
         model = WhyUsModel
         fields = '__all__'
+
+class PlanningTripForm(forms.Form):
+    firstname = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    lastname = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'email', 'placeholder':'Your Email', 'name':'email'}))
+    tour_name= forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    address1 = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    address2 = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    city = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    zip_code = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text' }))
+    state = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    country = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2, "placeholder":"Message"}))

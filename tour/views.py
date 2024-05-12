@@ -197,7 +197,7 @@ class TourDeatails(View):
         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form, 'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
     def post(self, request, tour_slug):
-        tour_details = get_object_or_404(TourDetailsModel, name=tour_slug)
+        tour_details = get_object_or_404(TourDetailsModel, slug=tour_slug)
         images = GallaryModel.objects.all()
         itinaries = ItinatyModel.objects.all()
         inc_excs = TourIncludeExcludeModel.objects.all()
@@ -224,7 +224,7 @@ class TourDeatails(View):
                         fail_silently=False
                     )
                     messages.success(request, 'Booking Inquiry sent Successfully')
-                    return redirect('tour_details', tour_slug=tour_slug)  # Redirect to a success URL after form submission
+                    return redirect('tour_details', tour_slug=tour_details.slug)  # Redirect to a success URL after form submission
 
             elif 'inquiry_form_submit' in request.POST:
                 inquiry_form = InqueryForm(request.POST)
@@ -244,7 +244,7 @@ class TourDeatails(View):
                         fail_silently=False
                     )
                     messages.success(request, 'General Inquiry sent Successfully')
-                    return redirect('tour_details', tour_slug=tour_slug)  # Redirect to a success URL after form submission
+                    return redirect('tour_details', tour_slug=tour_details.slug)  # Redirect to a success URL after form submission
 
         # If neither booking nor inquiry form is submitted, render the template with the forms
         booking_form = BookingForm()
@@ -423,6 +423,8 @@ class Activities(View):
     template_name = 'activities.html'
     def get(self, request):
         return render(request, self.template_name)
+    
+    
 
 class Trekking(View):
     template_name ='trekking.html'

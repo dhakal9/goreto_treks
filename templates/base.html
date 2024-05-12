@@ -196,57 +196,6 @@
 								<nav class="main-menu navbar-expand-md navbar-light">
 									<div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
 										<ul class="navigation clearfix">
-	
-													{% comment %} <li class="dropdown">
-														<a href="{% url 'destination'%}"> Destinations </a>
-																																		
-																				 <ul>
-																					<li class="dropdown">
-																						{% for destination in destinations %}
-																						<a style="cursor:pointer" href="{% url 'one_destination' destination.destination_id %}">{{destination.name}}</a>
-																						
-																																									
-																						<ul>
-																							
-																							{% for nep_reg in nepal_regions %}
-																							{%if nep_reg.destination_id == destination.destination_id%}
-																							
-																							<li class="dropdown" ><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">{{nep_reg.name}}</a>
-																								<ul>
-																									
-																										
-																									<li class="dropdown"><a style="cursor:pointer" href="{% url 'tour_list' nep_reg.region_id%}">Ghandruk</a></li>
-																									<li class="dropdown"><a style="cursor:pointer" href="#">Poonhill</a></li>	
-																									<li class="dropdown"><a style="cursor:pointer" href="a">Mardi</a></li>	
-																									
-
-																								</ul> 
-
-																							</li>
-																							{%endif%}
-																							{%endfor%}
-																							
-																						</ul>
-																						
-																							
-																						<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-																						
-																						
-																						{% endfor %}
-																					</li>
-																					<li class="dropdown"><a href="index.html">Nepal</a>
-																						<ul>
-																							<li><a href="index.html">Annapurna Region</a></li>
-																							<li><a href="index-2.html">Everest Region</a></li>
-																							<li><a href="index-3.html">Langtang Region</a></li>
-																						</ul>
-																						<div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-																					</li>
-																				</ul>
-																			
-															
-													</li> {% endcomment %}
-
 													<li class="dropdown">
 														<a href="{% url 'destination' %}">Destinations</a>
 														<ul class="submenu">
@@ -532,7 +481,9 @@
 		.hidden {
 			opacity: 0;
 		}
-		</style>
+
+	
+	</style>
 		{% comment %} <img class="custom-logo" style="cursor:pointer" src="{% static 'assets/images/squarelogo.jpeg'%}" alt="Logo" width="500"> {% endcomment %}
 		<script>
 			// JavaScript to hide logo on scroll
@@ -545,6 +496,52 @@
 				}
 			});
 		</script>
+
+		{% if messages %}
+			<div id="customToast" class="custom-toast">
+				<div class="toast-body">
+					{% for message in messages %}
+						{{ message }}
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+
+		<style>
+			.custom-toast {
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				background-color: #4CAF50;
+				color: white;
+				padding: 16px;
+				border-radius: 5px;
+				box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+				z-index: 1000;
+				visibility: hidden;
+				opacity: 0;
+				transition: visibility 0s, opacity 0.5s linear;
+			}
+
+			.custom-toast.show {
+				visibility: visible;
+				opacity: 1;
+			}
+		</style>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var customToast = document.getElementById('customToast');
+				if (customToast) {
+					customToast.classList.add('show');
+					setTimeout(function() {
+						customToast.classList.remove('show');
+					}, 5000); // 10 seconds
+				}
+			});
+		</script>
+
+
     {% block content %}
 
 
