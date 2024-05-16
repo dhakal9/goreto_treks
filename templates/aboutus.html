@@ -16,11 +16,11 @@
                             <h2>{{company.about_heading}}</h2>
                         </div>
                         <div class="text">
-                            <p>
+                            
                             {% autoescape off %}
-                            {{company.why_us}}
+                            {{company.about_us|safe}}
                             {% endautoescape %}
-                            </p>
+                            
                         </div>
                     </div>
                 </div>
@@ -42,6 +42,21 @@
 </section>
 <!-- about-style-two end -->
 
+<!-- Why Us Section-->
+<section class="place-section style-two sec-pad bg-color-1">
+    <div class="auto-container">
+        <div class="sec-title">
+            <h2>Why Us ?</h2>
+        </div>
+        <div class="text">
+                            
+            {% autoescape off %}
+            {{company.why_us|safe}}
+            {% endautoescape %}
+            
+        </div>
+    </div>
+</section>
 
 
 <!-- team-section -->

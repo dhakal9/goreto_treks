@@ -6,11 +6,11 @@ from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, O
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
-from tour.models import DestinationModel, TourDetailsModel
+from tour.models import DestinationModel, TourDetailsModel, RegionModel
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.core.serializers import serialize
 # Create your views here.
 
 class Index(View):
@@ -21,7 +21,13 @@ class Index(View):
         destinations = DestinationModel.objects.all()
         funfact = FunfactModel.objects.first()
         tours = TourDetailsModel.objects.filter(is_attraction=True)
-        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours})
+        reg_reg = RegionModel.objects.all()
+        
+        destinations_json = serialize('json', destinations)
+        tours_json = serialize('json', tours)
+        regions_json = serialize('json', reg_reg)
+        
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json,})
     
 
     
@@ -52,10 +58,9 @@ class Login(View):
                 user = authenticate(request, email=email, password=password)
                 # remember_me = request.POST.get("remember_me") == "on"
                 if user is not None:
-                    # login(request, user)
-                    # if remember_me:
-                    #     request.session.set_expiry(1209600)
-                    #     request.session.set_expiry(0)
+                    login(request, user)
+                    request.session.set_expiry(12090)
+                    request.session.set_expiry(0)
                     return redirect("admin_home")
                 else:
                     if not CustomUser.objects.filter(email=email).exists():

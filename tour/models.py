@@ -37,7 +37,6 @@ class TourDetailsModel(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
     description =  SummernoteTextField()
     depature = models.CharField(max_length=100, null=True, blank=True)
-    time = models.TimeField(null=True)
     start_end = models.CharField(max_length=200, null=True, blank=True)
     max_price = models.CharField(max_length=200, null=True, blank=True)
     price =  models.CharField(max_length=200, null=False, blank=False)
@@ -59,7 +58,7 @@ class ItinatyModel(models.Model):
     tour = models.ForeignKey(TourDetailsModel, null= False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=False, blank=False)
     day = models.CharField(max_length=2, null=False, blank=False )
-    start_end = models.CharField(max_length=200, null=True, blank=True)
+    # start_end = models.CharField(max_length=200, null=True, blank=True)
     description = SummernoteTextField()
 
 class GallaryModel(models.Model):

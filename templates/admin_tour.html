@@ -38,23 +38,8 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label> Description </label><br>
-                                        {{ form.description }}
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
                                         <label> Departure </label>
                                         {{ form.depature }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Time </label>
-                                        {{ form.time }}
                                     </div>
                                 </div>
                             </div>
@@ -126,12 +111,7 @@
                                         {{ form.map }}
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Map Overview </label><br>
-                                        {{ form.map_overview }}
-                                    </div>
-                                </div>
+                                
                             </div>
                     
                             <div class="row">
@@ -149,6 +129,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group mr-3">
+                                        <label> Description </label><br>
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group mr-3">
+                                        <label> Map Overview </label><br>
+                                        {{ form.map_overview }}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="submit-section">
                                 <button class="btn btn-primary submit-btn" type="submit">Submit</button>
                             </div>
@@ -156,53 +151,7 @@
                     </div>
                 
 
-                    <div class="tab-pane" id="top-tab2">
-                        <form method='POST' enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Tour Name <span class="text-danger">*</span></label>
-                                        {{ form1.tour }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Plan Name <span class="text-danger">*</span></label>
-                                        {{ form1.name }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Day Sequence <span class="text-danger">*</span></label>
-                                        {{ form1.day }}
-                                    </div>
-                                </div>
-                            </div>    
-                            <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> Start And End  <span class="text-danger">*</span></label>
-                                            {{ form1.start_end }}
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> Description <span class="text-danger">*</span></label><br>
-                                            {{ form1.description }}
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="submit-section">
-                                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
-                                    </div>
-                        
-                        </form>
-                    </div>
-                </div>
-
-</div>
-
+                    
 
 
 <div class="container-fluid">

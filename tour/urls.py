@@ -18,13 +18,12 @@ urlpatterns = [
     path('get_regions/',get_regions,name="get_regions"),
     # path('tourlist/<int:pk>/', Tourlist.as_view(), name='tour_list'),
     path('activities/<str:region_slug>/', Tourlist.as_view(), name='tour_list'),
-    # gauley bhai
     path('tourdetails/<str:tour_slug>/', TourDeatails.as_view(), name='tour_details'),
     # path('tourdetails/<int:pk>/', TourDeatails.as_view(), name='tour_details'),
     path('activities/', Activities.as_view(), name='activities'),
     path('trekking/', Trekking.as_view(), name='trekking'),
-    path('itinaryadmin/', ItinaryAdmin.as_view(), name='admin_itinary'),
-    path('itinary_edit_admin/<int:itinary_id>/', EditItinary.as_view(), name='edit_itinary'),
+    path('adminitinary/', ItinaryAdmin.as_view(), name='admin_itinary'),
+    path('admin-edit-itinary/<int:itinary_id>/', EditItinary.as_view(), name='edit_itinary'),
     path('delete_itinary/<int:itinary_id>', DeleteItinary.as_view(), name='delete_itinary'),
     path('edit_tour_itinary/<int:activity_id>/', EditTourItinary.as_view(), name='edit_tour_itinary'),
     path('singlegallary/', Gallary.as_view(), name='admin_gallary'),
@@ -40,4 +39,4 @@ urlpatterns = [
     path('assign-faqs-to-tour/<int:tour_id>/', AssignFaqsToTourView.as_view(), name='assign_faqs_to_tour'),
     path('remove-faqs-to-tour/<int:id>/', UnassignFaqsToTourView.as_view(), name='unassign_faqs_to_tour'),
  ]
- 
+ # gauley bhai

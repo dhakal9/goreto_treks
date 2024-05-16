@@ -171,7 +171,16 @@
                 {% endfor %}
             {% endfor %}
             {% endif %}
-
+            <style>
+            
+              {% comment %} #id_description_iframe{
+                width: 600px;
+              } {% endcomment %}
+              .summernote-div iframe{
+                width: 550px !important;
+              } 
+              
+            </style>
 
     {% block content %}
    
@@ -199,6 +208,7 @@
       $(a).fadeOut(5000)
       var y = document.getElementById("chatview")
       y.scrollTop = y.scrollHeight;
+      
     </script>
 
 

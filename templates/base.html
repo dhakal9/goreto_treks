@@ -104,6 +104,11 @@
 		}
 
 	
+		.dropdown sub-sub-item {
+			font-size: 16px;
+			margin-left: 20px;
+			text-transform: capitalize;
+		}
 
 		
 		
@@ -166,7 +171,7 @@
 							
 								{% comment %} <li class="mr-3"><a href="https://twitter.com/goretotreks"><img src="{% static "assets/images/twitter.png"%}" alt="Twitter X" style="width: 30px; height: 20px;"></a></li> {% endcomment %}
 								<li class="mr-3"><a href="https://www.youtube.com/@goretotreks1606" target="_blank"><i class="fab fa-youtube" style="font-size: 20px;"></i></a></li>
-								<li class="mr-3"><a href="#" target="_blank"><i class="fab fa-linkedin" style="font-size: 20px;"></i></a></li>
+								<li class="mr-3"><a href="https://www.linkedin.com/in/goreto-treks-501788305/" target="_blank"><i class="fab fa-linkedin" style="font-size: 20px;"></i></a></li>
 								<li class="mr-3"><a href="https://www.reddit.com/user/GoretoTreks/?share_id=nlU8UWIw5H_gHjoR_z3GI&utm_content=1&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=5" target="_blank"><i class="fab fa-reddit" style="font-size: 20px;"></i></a></li>
 						
 							</ul>
@@ -552,16 +557,20 @@
 
 	<script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
  <!-- main-footer -->
+
  <footer class="main-footer bg-color-2" id="leg">
 	<div class="footer-top pt-130">
 		<div class="vector-bg" style="background-image: url({%static 'assets/images/shape/1212.png'%}); "></div>
-		<div class="auto-container">
+		<div class="auto-container" style="margin-top:2px; margin-bottom:2px;">
 			<div class="row clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12 footer-column">
 					<div class="footer-widget logo-widget">
-						<figure class="footer-logo" style="margin-bottom: 5px;"><a href="{% url 'index' %}"> <h3 style="color:#008fd6">GORETO TREK</h3> </a></figure>
+						{% comment %} <figure class="footer-logo" style="margin-bottom: 5px;"><a href="{% url 'index' %}"> <h3 style="color:#008fd6">Goreto Treks</h3> </a></figure> {% endcomment %}
+						<div class="widget-title">
+							<h3>Goreto Treks</h3>
+						</div>
 						<div class="text">
-							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure </p>
+							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure with us.</p>
 						</div>
 						<ul class="social-links clearfix">
 							<li><a href="https://www.facebook.com/goretotrek" target="_blank"><i class="fab fa-facebook-f" style="font-size: 30px; padding:10px;"></i></a></li>
@@ -612,7 +621,7 @@
 						<div class="widget-content">
 							<ul class="info-list clearfix">
 								<li><i class="fas fa-map-marker-alt"></i><a href="https://maps.app.goo.gl/ua15KsG7UcuBbr6V6" target="_blank">{{company.address}}</li>
-								<li><i class="fas fa-microphone"></i><a href="tel:{{company.contact}}" target="_blank">{{company.contact}}</a></li>
+								<li><i class="fab fa-whatsapp" style="font-size: 25px"></i><a href="tel:{{company.contact}}" target="_blank">{{company.contact}}</a></li>
 								<li><i class="fas fa-envelope"></i><a href="mailto:{{company.email}}" target="_blank">{{company.email}}</a></li>
 								<li><i class="fa fa-phone fa-rotate-90"></i><a href="tel:+977 15915493" target="_blank">+977 15915493</a></li>
 							</ul>
@@ -828,5 +837,4 @@ window.fbAsyncInit = function () {
 <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 
 </html>
-
 

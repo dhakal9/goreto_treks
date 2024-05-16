@@ -3,12 +3,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel, FaqModels, TourFaqModels
 from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm, FaqForm, AssignFaqsToTourForm
-
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
+
 
 
 def get_regions(request):
@@ -319,7 +320,25 @@ class TourDeatails(View):
 #         inquiry_form = InqueryForm()
 #         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
+class ItinaryAdmin(LoginRequiredMixin, View):
+    template_name ='admin_itinary.html'
+    def get(self, request):
+        form = ItinaryForm()
+        tours = TourDetailsModel.objects.all()
+        return render(request, self.template_name, {'form': form, 'tours':tours})
+    
+    def post(self, request):
+        tours = TourDetailsModel.objects.all()
+        form = ItinaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Itinary saved Successfully')
+            return redirect('admin_itinary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
+        return render(request, self.template_name, {'form': form, 'tours':tours})
 
+
+
+    
 class ItinaryAdmin(LoginRequiredMixin, View):
     template_name ='admin_itinary.html'
     def get(self, request):

@@ -211,7 +211,7 @@
                                                                 <div class="bottom-right">
                                                                     <h5 class="middleclass"><i class="far fa-clock"></i> {{trekking.days}} Day</h5>
                                                                 </div>
-                                                                <a href="{% url 'tour_details' trekking.activity_id %}"><i class="fas fa-link"></i></a>
+                                                                <a href="{% url 'tour_details' trekking.slug %}"><i class="fas fa-link"></i></a>
                                                                 <div class="price-overlay">Starting From {{trekking.price}}
                                     
                                                                 </div>
@@ -284,7 +284,7 @@
                                                             </style>
                                                             <div class="lower-content">
                                                                
-                                                                <h3></i> <a href="{% url 'tour_details' trekking.activity_id %}">{{trekking.name}}</a></h3>
+                                                                <h3></i> <a href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a></h3>
                                                                 {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
                         
                                                             </div>
@@ -376,6 +376,23 @@
                 </div>
             </div>
         </div>
+        <div class="card" id="bookingCard">
+            <!-- Your booking card content goes here -->
+                <h2>Make an Inquiry</h2>
+                <form method='POST'>
+                    {% csrf_token %}
+                    <label for="name">Name:</label>
+                    {{inquiry_form.username}}
+                    <label for="email">Email:</label>
+                    {{inquiry_form.email}}
+                    <label for="destination">Message:</label>
+                    {{inquiry_form.message}}
+                    <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+                    
+                    </div>
+                    <button type="submit" name ="inquiry_form_submit">Send</button>
+                </form>
+            </div>
     </section>
 
      <div id="fixed-bar">
@@ -387,23 +404,23 @@
         <button onclick="scrollToSection('include-exclude')">Include/Exclude</button>
     </div> 
 {% comment %} booking Card {% endcomment %}
-<div class="card" id="bookingCard">
+    <div class="card" id="bookingCard">
     <!-- Your booking card content goes here -->
-    <h2>Make an Inquiry</h2>
-    <form method='POST'>
-        {% csrf_token %}
-        <label for="name">Name:</label>
-        {{inquiry_form.username}}
-        <label for="email">Email:</label>
-        {{inquiry_form.email}}
-        <label for="destination">Message:</label>
-        {{inquiry_form.message}}
-        <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
-        
-        </div>
-        <button type="submit" name ="inquiry_form_submit">Send</button>
-    </form>
-</div>
+        <h2>Make an Inquiry</h2>
+        <form method='POST'>
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            {{inquiry_form.username}}
+            <label for="email">Email:</label>
+            {{inquiry_form.email}}
+            <label for="destination">Message:</label>
+            {{inquiry_form.message}}
+            <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
+            
+            </div>
+            <button type="submit" name ="inquiry_form_submit">Send</button>
+        </form>
+    </div>
 {% comment %} booking Card {% endcomment %}
 <style>
     .card {
@@ -417,7 +434,7 @@
         right: 10px;
         transform: translate(-50%, -50%);
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 999;
+        z-index: 9;
       }
       
       .card h2 {

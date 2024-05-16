@@ -183,7 +183,7 @@
 }
 
 .funfact-style-two .pattern-layer:before{
-	background: #ff7c5b;
+	background: #808080;
 }
 
 .banner-carousel .owl-nav .owl-prev:hover,
@@ -401,7 +401,7 @@
 }
 
 .accordion-box .block .acc-btn.active{
-  background: #ff7c5b;
+  background: #008fd6;
 }
 
 .faq-sidebar .sidebar-inner .faq-form .form-group input:focus,
