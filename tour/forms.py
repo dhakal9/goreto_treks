@@ -95,10 +95,34 @@ class ItinaryForm(forms.ModelForm):
     
     def get_tour_name(self, instance):
         return instance.name   
+
         
     class Meta:
         model = ItinatyModel
         fields ="__all__"
+
+# from django import forms
+# from .models import TourDetailsModel, ItinatyModel
+# from django_summernote.widgets import SummernoteWidget
+
+# class ItinaryForm(forms.ModelForm):
+#     tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
+#                                      widget=forms.Select(attrs={'class': 'form-control'}))
+#     number_of_days = forms.IntegerField(min_value=1, widget=forms.NumberInput(attrs={'class': 'form-control'}))
+#     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '300px', 'width': '100%'}}))
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.fields['tour'].queryset = TourDetailsModel.objects.all()
+#         self.fields['tour'].label_from_instance = self.get_tour_name
+
+#     def get_tour_name(self, instance):
+#         return instance.name   
+
+#     class Meta:
+#         model = ItinatyModel
+#         fields = ['tour', 'number_of_days', 'description']
+
 
 
         
