@@ -10,7 +10,7 @@
         <div class="content-box">
             <h1>{{country.name}}</h1>
             <p>Where Culture Meets Mountains!</p>
-            <p style="position:absolute">Home/Destination/{{country.name}}</p>
+            <p style="position:absolute"><a href="{% url 'index' %}">Home</a> / <a href="{% url 'destination' %}">Destination</a> / {{country.name}}</p>
         </div>
     </div>
 </section>

@@ -13,25 +13,18 @@
         </div>
     </div>
 </section> {% endcomment %}
-
-
 <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
     <div class="auto-container">
         <div class="content-box">
             <h2>{{company.slogan1}}</h2>
             <p>{{company.slogan2}}</p>
-            <!-- Search bar -->
-            {% comment %} <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Search Your Destination...">
-                <div class="message-btn">
-                    <button type="submit" class="theme-btn"><i class="far fa-search"></i>Search</button>
-                </div>
-            </div> {% endcomment %}
-            <!-- Your existing HTML code for the search input -->
-            <input type="text" class="search-input" id="searchInput" placeholder="Search Your Destination...">
 
-            <!-- Container to display the filtered results -->
-            <div class="search-results" id="searchResults" background='white'></div>
+            <!-- Search bar -->
+            <div class="search-bar" id="searchBarContainer">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search Your Destination...">
+                <!-- Container to display the filtered results -->
+                <div class="search-results" id="searchResults"></div>
+            </div>
         </div>
     </div>
 </section>
@@ -40,7 +33,7 @@
     // Parse destinations, tours, and regions JSON data
     const destinations = JSON.parse('{{ destinations_json | escapejs }}');
     const tours = JSON.parse('{{ tours_json | escapejs }}');
-    const regions = JSON.parse('{{ regions_json | escapejs }}'); // Changed from reg_json to regions_json
+    const regions = JSON.parse('{{ regions_json | escapejs }}'); 
 
     // Get references to the input and result container
     const searchInput = document.getElementById('searchInput');
@@ -54,22 +47,35 @@
         // Clear previous results
         searchResults.innerHTML = '';
 
+        if (query.length === 0) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
         // Filter destinations, tours, and regions based on the query
-        const filteredDestinations = destinations.filter(destination => destination.fields.name.toLowerCase().startsWith(query));
-        const filteredTours = tours.filter(tour => tour.fields.name.toLowerCase().startsWith(query));
-        const filteredRegions = regions.filter(region => region.fields.name.toLowerCase().startsWith(query));
+        const filteredDestinations = destinations.filter(destination => destination.fields.name.toLowerCase().includes(query));
+        const filteredTours = tours.filter(tour => tour.fields.name.toLowerCase().includes(query));
+        const filteredRegions = regions.filter(region => region.fields.name.toLowerCase().includes(query));
 
         // Combine all filtered results
         const allResults = filteredDestinations.concat(filteredTours, filteredRegions);
 
+        if (allResults.length === 0) {
+            searchResults.innerHTML = '<div class="no-results">No results found</div>';
+            searchResults.style.display = 'block';
+            return;
+        }
+
         // Display up to three filtered results
-        for (let i = 0; i < Math.min(3, allResults.length); i++) {
+        for (let i = 0; i < Math.min(9, allResults.length); i++) {
             const result = allResults[i];
             const resultElement = document.createElement('a');
             resultElement.textContent = result.fields.name;
+            resultElement.classList.add('result-item');
+
             // Set different href based on the result type
             if (filteredDestinations.includes(result)) {
-                resultElement.setAttribute('href', '/destination/' + result.fields.slug  + '/'); // Destination URL
+                resultElement.setAttribute('href', '/destination/' + result.fields.slug + '/'); // Destination URL
             } else if (filteredTours.includes(result)) {
                 resultElement.setAttribute('href', '/tourdetails/' + result.fields.slug + '/'); // Tour URL
             } else {
@@ -79,16 +85,27 @@
         }
 
         // Add scrollbar to search results if necessary
-        searchResults.style.overflowY = allResults.length > 3 ? 'scroll' : 'hidden';
+        searchResults.style.overflowY = allResults.length > 9 ? 'scroll' : 'hidden';
+        searchResults.style.display = 'block'; // Ensure the results are displayed
     }
 
     // Listen for input event on the search input
     searchInput.addEventListener('input', filterResults);
+
+    // Close results when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.style.display = 'none';
+        }
+    });
+
+    // Show results container when input is focused
+    searchInput.addEventListener('focus', () => {
+        if (searchInput.value.length > 0) {
+            searchResults.style.display = 'block';
+        }
+    });
 </script>
-
-
-
-
 
 <style>
     .search-bar {
@@ -96,6 +113,7 @@
         display: flex;
         align-items: center;
         justify-content: center; /* Center the search bar */
+        position: relative; /* Added to position search-results correctly */
     }
     
     .search-input {
@@ -109,17 +127,47 @@
     
     .theme-btn {
         padding: 12px 20px;
-        margin-left: 10px;
         background-color: #072063; /* Button color */
         color: white;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
+        display: flex;
+        align-items: center;
     }
     
     .theme-btn:hover {
         background-color: #0056b3; /* Darker shade on hover */
+    }
+    
+    .search-results {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-top: none;
+        border-radius: 0 0 5px 5px;
+        max-height: 200px;
+        overflow-y: hidden;
+        width: 70%; /* Same width as search input */
+        max-width: 400px; /* Set maximum width */
+        position: absolute;
+        top: 100%; /* Position the results below the input */
+        left: 50%; /* Position relative to left */
+        transform: translateX(-50%); /* Center horizontally */
+        z-index: 1000;
+        display: none; /* Initially hidden */
+    }
+    
+    .result-item {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+        border-bottom: 1px solid #ccc;
+    }
+    
+    .result-item:hover {
+        background-color: #f0f0f0;
     }
     
     /* Media query for responsiveness */
@@ -128,17 +176,26 @@
             width: 80%; /* Adjust width for smaller screens */
             margin-bottom: 10px; /* Add margin between input and button */
         }
-
+    
         .search-bar {
             flex-direction: column; /* Stack items vertically */
             align-items: center; /* Center items horizontally */
         }
-
+    
         .theme-btn {
             margin-left: 0; /* Remove left margin */
+            border-radius: 5px; /* Adjust button radius */
+        }
+    
+        .search-results {
+            width: 80%; /* Adjust width for smaller screens */
+            max-width: none;
         }
     }
+    
+    
 </style>
+
 
 <!-- banner-section end -->
 

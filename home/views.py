@@ -12,6 +12,37 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.serializers import serialize
 # Create your views here.
+from django.db.models import F
+
+
+# class Index(View):
+#     template_name = "index.html"
+
+#     def get(self, request):
+#         company_profile = CompanyProfile.objects.first()
+#         reviews = Review.objects.all()
+#         destinations = DestinationModel.objects.values(name=F('name'), slug=F('slug'))
+#         funfact = FunfactModel.objects.first()
+#         tours = TourDetailsModel.objects.filter(is_attraction=True)
+#         tur_tur = TourDetailsModel.objects.values(name=F('name'), slug=F('slug'))
+#         reg_reg = RegionModel.objects.values(name=F('name'), slug=F('slug'))
+
+#         destinations_json = serialize('json', destinations)
+#         tours_json = serialize('json', tur_tur)
+#         regions_json = serialize('json', reg_reg)
+
+#         context = {
+#             'company': company_profile,
+#             'reviews': reviews,
+#             'funfact': funfact,
+#             'destinations': destinations,
+#             'tours': tours,
+#             'destinations_json': destinations_json,
+#             'tours_json': tours_json,
+#             'regions_json': regions_json,
+#         }
+#         return render(request, self.template_name, context)
+
 
 class Index(View):
     template_name = "index.html"
@@ -22,10 +53,12 @@ class Index(View):
         funfact = FunfactModel.objects.first()
         tours = TourDetailsModel.objects.filter(is_attraction=True)
         reg_reg = RegionModel.objects.all()
+        tor_tor = TourDetailsModel.objects.all()
         
         destinations_json = serialize('json', destinations)
-        tours_json = serialize('json', tours)
+        tours_json = serialize('json', tor_tor)
         regions_json = serialize('json', reg_reg)
+        
         
         return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json,})
     
