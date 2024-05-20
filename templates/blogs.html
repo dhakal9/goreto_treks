@@ -1,21 +1,21 @@
 {% extends 'base.html'%}
 {%block content%}
 <!-- Page Title -->
-<section class="page-title style-two centred" style="background-image: url({{company.home_image.url}}); ">
+<section class="page-title style-two centred" style="height: 200px; background-image: url({{company.home_image.url}});">
     <div class="auto-container">
-        <div class="content-box">
-            <h1>Blogs</h1>
-            {% comment %} <p>{{region.description}}</p> {% endcomment %}
-        </div>
+      <div class="content-box">
+          <h1>Blogs</h1>
+          <p style="position:absolute"><a href="{% url 'index' %}">Blogs</a> / Gallary </p>
+      </div>
     </div>
-</section>
+  </section>
 <!-- End Page Title -->
 
 
 
 <!-- Blogs Section -->
 
-<section class="sidebar-page-container" style="padding-top:10px">
+<section class="sidebar-page-container" style="padding-top:100px">
     <div class="auto-container">
         <div class="row clearfix">
             <div class="col-lg-8 col-md-12 col-sm-12 content-side">

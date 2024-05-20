@@ -1,6 +1,7 @@
 from django import forms
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels
 from django_summernote.widgets import SummernoteWidget
+from django.forms import inlineformset_factory
 
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
@@ -100,6 +101,8 @@ class ItinaryForm(forms.ModelForm):
     class Meta:
         model = ItinatyModel
         fields ="__all__"
+
+ItineraryFormSet = inlineformset_factory(TourDetailsModel, ItinatyModel, form=ItinaryForm, extra=1)
 
 # from django import forms
 # from .models import TourDetailsModel, ItinatyModel
