@@ -26,39 +26,13 @@
                     {{ form.tour }}
                 </div>
             </div>
-            
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label> Plan Name <span class="text-danger">*</span></label>
-                    {{ form.name }}
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label> Day Sequence <span class="text-danger">*</span></label>
-                    {{ form.day }}
-                </div>
-            </div>
-        </div>    
-        <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label> Start And End  <span class="text-danger">*</span></label>
-                        {{ form.start_end }}
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label> Description <span class="text-danger">*</span></label><br>
-                        {{ form.description }}
-                    </div>
-                </div>
-            </div>
-                <div class="submit-section">
-                    <button class="btn btn-primary submit-btn" type="submit">Submit</button>
-                </div>
-    
+        </div>  
+        <div class="dynamic-fields"></div>
+        <div class="submit-section">
+            <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+        </div>
     </form>
+    
 </div>
 
 </div>
@@ -194,5 +168,55 @@ Delete
 <div>
 </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('#id_tour').change(function(){
+            var tourId = $(this).val();
+            $.ajax({
+                url: '/get_tour_days/',
+                data: {
+                    'tour_id': tourId
+                },
+                dataType: 'json',
+                success: function(data){
+                    $('#id_tour_days').val(data.days);
+
+                    // Clear existing fields
+                    $('.dynamic-fields').empty();
+
+                    // Generate fields for Plan Name, Description, and Day Sequence
+                    var numDays = parseInt(data.days);
+                    for (var i = 1; i <= numDays; i++) {
+                        $('.dynamic-fields').append(
+                            '<div class="row border my-2 p-3 shadow">' +
+                                '<div class="col-sm-6">' +
+                                    '<div class="form-group">' +
+                                        '<label>Day Sequence Day ' + i + ' <span class="text-danger">*</span></label>' +
+                                        '<input type="text" name="day_sequence_' + i + `" class="form-control" value=${i}>` +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="col-sm-6">' +
+                                    '<div class="form-group">' +
+                                        '<label>Plan Name Day ' + i + ' <span class="text-danger">*</span></label>' +
+                                        '<input type="text" name="plan_name_' + i + '" class="form-control">' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="col-sm-12">' +
+                                    '<div class="form-group">' +
+                                        '<label>Description Day ' + i + ' <span class="text-danger">*</span></label><br>' +
+                                        '<textarea name="description_' + i + '" class="form-control"></textarea>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>'
+                        );
+                    }
+                }
+            });
+        });
+    });
+</script>
+
 
 {%endblock content%}

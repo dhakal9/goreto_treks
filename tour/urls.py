@@ -1,6 +1,8 @@
 
 from django.urls import path
 from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView
+from . import views
+
 urlpatterns = [
     path('admindestination/', AdminDestination.as_view(), name="admin_destination"),
     path('destination/', Destination.as_view(), name="destination"),
@@ -38,5 +40,6 @@ urlpatterns = [
     path('changefaqsstatus/<int:id>/', ToggleFaqsStatus.as_view(), name='change_faq'),
     path('assign-faqs-to-tour/<int:tour_id>/', AssignFaqsToTourView.as_view(), name='assign_faqs_to_tour'),
     path('remove-faqs-to-tour/<int:id>/', UnassignFaqsToTourView.as_view(), name='unassign_faqs_to_tour'),
+    path('get_tour_days/',views.get_tour_days,name="tour_days")
  ]
  # gauley bhai

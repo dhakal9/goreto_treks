@@ -9,7 +9,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
-
+import json
 
 
 def get_regions(request):
@@ -336,6 +336,17 @@ class ItinaryAdmin(LoginRequiredMixin, View):
             return redirect('admin_itinary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
         return render(request, self.template_name, {'form': form, 'tours':tours})
 
+def get_tour_days(request):
+    if request.method=="GET":
+        tour_id = request.GET.get('tour_id')
+        try:
+            tour = TourDetailsModel.objects.get(pk=tour_id)
+            return JsonResponse({'days': tour.days})
+        except TourDetailsModel.DoesNotExist:
+            return JsonResponse({'error': 'Tour not found'}, status=404)
+    return JsonResponse({'error': 'Invalid request'}, status=400)
+
+
 
 
     
@@ -349,8 +360,17 @@ class ItinaryAdmin(LoginRequiredMixin, View):
     def post(self, request):
         tours = TourDetailsModel.objects.all()
         form = ItinaryForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        if request.POST:
+            print(request.POST)
+            tour = TourDetailsModel(activity_id=request.POST["tour"])
+            for key in request.POST:
+                if key.startswith("plan_name_"):
+                    index = key.split("_")[-1]
+                    name = request.POST.get(f"plan_name_{index}")
+                    day = request.POST.get(f"day_sequence_{index}")
+                    description = request.POST.get(f"description_{index}")
+
+                    obj = ItinatyModel.objects.create(tour=tour, name=name, day=day, description=description)
             messages.success(request, 'Itinary saved Successfully')
             return redirect('admin_itinary') # Replace 'your_redirect_url' with the actual URL to redirect after form submission
         return render(request, self.template_name, {'form': form, 'tours':tours})
