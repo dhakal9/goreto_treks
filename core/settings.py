@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-import environ
+# import environ
 from django.contrib.messages import constants as messages
-env = environ.Env()
-environ.Env.read_env()
+# env = environ.Env()
+# environ.Env.read_env()
 
 
 MESSAGE_TAGS = {
@@ -176,9 +176,12 @@ AUTH_USER_MODEL = 'home.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = env('EMAIL_PORT')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER="dhakalamrit19@gmail.com"
+EMAIL_HOST_PASSWORD="alaw nggs jrkm nkbl"
+EMAIL_PORT=587
 EMAIL_USE_TLS = True
 
 
