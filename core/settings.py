@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
 from pathlib import Path
-# import environ
+import environ
 from django.contrib.messages import constants as messages
-# env = environ.Env()
-# environ.Env.read_env()
+env = environ.Env()
+environ.Env.read_env()
 
 
 MESSAGE_TAGS = {
@@ -37,7 +37,7 @@ SECRET_KEY = 'django-insecure-bs4h3ep9-t*(j%-hh%ad_b0s_zt=&_wzdyw&z!#gm4z8#y2oeg
 
 #inline fomset factory
 #nginx
-#
+
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = False
 DEBUG = True
