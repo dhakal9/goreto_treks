@@ -209,13 +209,13 @@
 																<ul class="sub-submenu">
 																	{% for nep_reg in nepal_regions %}
 																	{% if nep_reg.destination_id == destination.destination_id %}
-																	<li class="dropdown sub-sub-item">
+																	<li class="dropdown">
 																		<a href="{% url 'tour_list' nep_reg.slug %}">{{nep_reg.name}}</a>
-																			<ul class="sub-submenu">
+																			<ul class="submenu">
 																			{% for trekking in trekkings %}
 																				{% if nep_reg.region_id == trekking.region.region_id %}
-																				<li class="sub-sub-item">
-																					<a href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a>
+																				<li>
+																					<a style="cursor:pointer" href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a>
 																				</li>
 																				{% endif %}
 																			{% endfor %}
@@ -278,7 +278,42 @@
 						</div>
 					</div>
 				</div>
+				<script>
+					document.querySelectorAll('.mobile-menu.navigation li').forEach(function(li) {
+						li.addEventListener('click', function() {
+							// Toggle the submenu visibility
+							var submenu = li.querySelector('ul');
+							if (submenu.style.display === 'none') {
+								submenu.style.display = 'block'; // Or whatever method you're using to show the submenu
+							} else {
+								submenu.style.display = 'none';
+							}
+						});
+					});
+				</script>
+				
 				<style>
+
+					
+
+					.mobile-menu .navigation li > ul, .mobile-menu .navigation li > ul > li > ul, .mobile-menu .navigation > li.dropdown > .megamenu {
+						position: relative;
+						display: none;
+						border-top: 1px solid rgba(255, 255, 255, 0.10);
+					}
+
+					@media screen and (max-width: 768px) {
+						.dropdown ul ul {
+							top: 0;
+							left: 0;
+						}
+						.dropdown ul ul ul {
+							top: 0;
+							left: 125%;
+						}
+					}
+					
+					
 					
 					.fa.fa-twitter::before{
 						content:"𝕏";
@@ -730,7 +765,7 @@
 <!-- main-js -->
 <script src="{% static 'assets/js/script.js' %}"></script>
 <script src="{% static 'js/knockout-3.5.1.js' %}"></script>
-<script src="{% static 'js/Techyatra.Globals.kof9e3.js?v=1.1' %}"></script>
+
 <script src="{% static 'js/toastr.js' %}"></script>
 <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
 <script src="{% static 'js/jquery-ui.mim.js' %}"></script>
