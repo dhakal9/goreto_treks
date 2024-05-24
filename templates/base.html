@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-    <title>Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company</title>
-    <meta name="description" content="Welcome Nepal Treks Pvt. Ltd is the leading local Trekking Agency in Nepal. We are professional Nepal Trekking Company based in Thamel, Kathmandu Nepal. Nepal Trekking Company specialized for trekking in Nepal, Nepal Trekking, family trekking &amp; Private Trek. Book directly with local trekking operator, and pay less." />
+    <title>Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company, {{seo_content.discription}}</title>
+    <meta name="description" content="Welcome Goreto Treks Pvt. Ltd is the leading local Trekking Agency in Nepal. We are professional Nepal Trekking Company based in Balaju, Kathmandu Nepal. Nepal Trekking Company specialized for trekking in Nepal, Nepal Trekking, family trekking &amp; Private Trek. Book directly with local trekking operator, and pay less." />
         <!-- Fav Icon -->
 	{% load static %}
     <link rel="icon"  href="{% static 'assets/images/favicon.ico' %}"/>
@@ -92,8 +92,6 @@
 			width: 120%;
 			height: auto;
 			position: absolute;
-			{% comment %} position: relative; {% endcomment %}
-			{% comment %} display: inline-block; {% endcomment %}
 			border-radius: inherit;
   			box-shadow: inherit;
 			top: 0;
@@ -109,12 +107,6 @@
 		}
 
 		
-		
-{% comment %}
-		.dropdown ul ul ul ul{
-			top: 0;
-			left: 100%; 
-		} {% endcomment %}
 
 		
 
@@ -302,16 +294,16 @@
 						border-top: 1px solid rgba(255, 255, 255, 0.10);
 					}
 
-					@media screen and (max-width: 768px) {
-						.dropdown ul ul {
+					
+					.mobile-menu .dropdown ul ul {
 							top: 0;
 							left: 0;
-						}
-						.dropdown ul ul ul {
-							top: 0;
-							left: 125%;
-						}
 					}
+					.mobile-menu .dropdown ul ul ul {
+						top: 0;
+						left: 125%;
+					}
+					
 					
 					
 					
@@ -385,7 +377,7 @@
 				<div class="close-btn"><i class="fas fa-times"></i></div>
 	
 				<nav class="menu-box">
-					<div class="nav-logo"><a href="index.html"><img src="Content/assets/images/logo-2.png" alt="" title=""></a></div>
+					<div class="nav-logo"><a href="index.html"></a></div>
 					<div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
 					<div class="contact-info">
 						<h4>Contact Info</h4>

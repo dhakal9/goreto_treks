@@ -1,5 +1,5 @@
 
-from .models import CompanyProfile, MainGallaryModel
+from .models import CompanyProfile, MainGallaryModel, SeoModel
 from tour.models import DestinationModel, RegionModel,TourDetailsModel
 from random import sample
 from django.template.defaultfilters import slugify
@@ -8,6 +8,7 @@ from django.template.defaultfilters import slugify
 
 def additional_context(request):
     company_profile = CompanyProfile.objects.first()
+    seo_content = SeoModel.objects.first()
     destinations = DestinationModel.objects.all()
     gallary_images = MainGallaryModel.objects.order_by('?')[:6]
     activities = RegionModel.objects.filter(is_nav = True)
@@ -15,7 +16,7 @@ def additional_context(request):
     all_activities = TourDetailsModel.objects.all()
     footer_activities = sample(list(activities), 5)
     trekkings = TourDetailsModel.objects.filter(is_activity = False)
-    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images, 'footer_activities':footer_activities}
+    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images, 'footer_activities':footer_activities, 'seo_content':seo_content}
     return additional_data
 
 

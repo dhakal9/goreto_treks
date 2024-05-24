@@ -149,3 +149,7 @@ class WhyUsModel(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length = 200, blank=False, null=False)
     description =  models.TextField(max_length=3000, blank=False, null=False)
+
+class SeoModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    discription = models.CharField(max_length = 250)

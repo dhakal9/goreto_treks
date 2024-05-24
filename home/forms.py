@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django_summernote.widgets import SummernoteWidget
 
@@ -134,3 +134,11 @@ class PlanningTripForm(forms.Form):
     state = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
     country = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2, "placeholder":"Message"}))
+
+
+class SeoForm(forms.ModelForm):
+    discription = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2}))
+
+    class Meta:
+        model = SeoModel
+        fields = '__all__'

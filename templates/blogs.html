@@ -5,7 +5,9 @@
     <div class="auto-container">
       <div class="content-box">
           <h1>Blogs</h1>
-          <p style="position:absolute"><a href="{% url 'index' %}">Blogs</a> / Gallary </p>
+          <p style="position:absolute"><a href="{% url 'index' %}" style="color: #ffffff; text-decoration: none;"
+            onmouseover="this.style.color='#000000'"
+            onmouseout="this.style.color='#ffffff'">Home</a> / Blogs </p>
       </div>
     </div>
   </section>
@@ -26,7 +28,7 @@
                             <div class="news-block-one wow fadeInUp animated animated animated" data-wow-delay="00ms" data-wow-duration="1500ms" style="visibility: visible; animation-duration: 1500ms; animation-delay: 0ms; animation-name: fadeInUp;">
                                 <div class="inner-box">
                                     <figure class="image-box">
-                                        <a href="{% url 'blogs_details' blog.id %}"><img src="{{blog.image.url}}" alt=""></a>
+                                        <a href="{% url 'blogs_details' blog.id %}"><img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{blog.image.url}}" alt=""></a>
                                         <span class="post-date"><i class="icon-Calendar"></i>{{ blog.created_at|date:"Y-m-d" }}</span>
                                     </figure>
                                     <div class="lower-content">
@@ -34,9 +36,11 @@
                                         <h3><a href="{% url 'blogs_details' blog.id %}">{{blog.title}}</a></h3>
                                         <ul class="post-info clearfix">
                                             {% comment %} <li><span>By</span> <a href="index.html">Eva Green</a></li> {% endcomment %}
-                                            <li> - October 20, 2020</li>
+                                            {% comment %} <li> - October 20, 2020</li> {% endcomment %}
                                         </ul>
-                                        <p>{{blog.description|wordwrap:"10"|slice:":150"}}....</p>
+                                        {% autoescape off %}
+                                            {{blog.description|wordwrap:"10"|slice:":150"}}...
+                                        {% endautoescape %}
                                         <div class="btn-box">
                                             <a href="{% url 'blogs_details' blog.id %}" class="theme-btn-two">See Details</a>
                                         </div>
@@ -46,61 +50,22 @@
                         </div>
                         {%endfor%}
                     </div>
-                    <div class="pagination-wrapper">
-                        <ul class="pagination clearfix">
-                            <li><a href="tour-1.html" class="current">1</a></li>
-                            <li><a href="tour-1.html">2</a></li>
-                            <li><a href="tour-1.html">3</a></li>
-                            <li><a href="tour-1.html"><i class="icon-Right-Arrow"></i></a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                 <div class="blog-sidebar default-sidebar ml-20">
-                    <div class="sidebar-widget sidebar-search">
-                        <div class="widget-title">
-                            <h3>Search</h3>
-                        </div>
-                        <form action="destination-details.html" method="post" class="search-form">
-                            <div class="form-group">
-                                <input type="search" name="search-field" placeholder="Search" required="">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="sidebar-widget category-widget">
-                        <div class="widget-title">
-                            <h3>Categories</h3>
-                        </div>
-                        <div class="widget-content">
-                            <ul class="category-list clearfix">
-                                <li><a href="blog-details"><i class="icon-Hover-Arrow"></i>Travel Direction</a></li>
-                                <li><a href="blog-details"><i class="icon-Hover-Arrow"></i>Documetation</a></li>
-                                <li><a href="blog-details"><i class="icon-Hover-Arrow"></i>Logo &amp; Assets</a></li>
-                            </ul>
-                        </div>
-                    </div>
                     <div class="sidebar-widget post-widget">
                         <div class="widget-title">
-                            <h3>Latest News</h3>
+                            <h3>Latest Blogs</h3>
                         </div>
                         <div class="post-inner">
+                            {% for blog in blogs %}
                             <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-1.png" alt=""></a></figure>
-                                <span class="post-date">April 18, 2020</span>
-                                <h4><a href="blog-details.html">Consequntur eos magni dolore.</a></h4>
+                                <figure class="post-thumb"><a href="{% url 'blogs_details' blog.id %}"><img style="width: 90px;  height: 90px; border-radius: 50%;"src="{{blog.image.url}}" alt=""></a></figure>
+                                <span class="post-date">{{ blog.created_at|date:"Y F d" }}</span>
+                                <h4><a href="{% url 'blogs_details' blog.id %}">{{blog.title}}</a></h4>
                             </div>
-                            <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-2.png" alt=""></a></figure>
-                                <span class="post-date">April 17, 2020</span>
-                                <h4><a href="blog-details.html">Magni dolore qui ratione seque.</a></h4>
-                            </div>
-                            <div class="post">
-                                <figure class="post-thumb"><a href="blog-details.html"><img src="assets/images/news/post-3.png" alt=""></a></figure>
-                                <span class="post-date">April 16, 2020</span>
-                                <h4><a href="blog-details.html">Ratone magni sed dolore eos.</a></h4>
-                            </div>
+                           {%endfor%}
                         </div>
                     </div>
                 </div>

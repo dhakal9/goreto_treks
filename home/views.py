@@ -2,10 +2,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms, PlanningTripForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms, PlanningTripForm, SeoForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel
 from tour.models import DestinationModel, TourDetailsModel, RegionModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -145,6 +145,23 @@ class Funfact(LoginRequiredMixin, View):
             return redirect('admin_funfact')  # Redirect to the same page after saving
 
         return render(request, self.template_name, {'form': form, 'funfact': funfact})
+    
+class SeoView(LoginRequiredMixin, View):
+    template_name = 'admin_seo.html'
+    form = SeoForm
+    def get(self, request):
+        seos = SeoModel.objects.first()
+        form = self.form(instance=seos)  # Pass instance to make it updateable
+        return render(request, self.template_name, {'form': form, 'seos': seos})
+    
+    def post(self, request):
+        seos = SeoModel.objects.first()
+        form = self.form(request.POST,  instance=seos)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_seo')  # Redirect to the same page after saving
+
+        return render(request, self.template_name, {'form': form, 'seos': seos})
     
 class Review_function(LoginRequiredMixin, View):
     template_name = 'admin_review.html'
@@ -321,14 +338,15 @@ class DeleteBlogs(LoginRequiredMixin, View):
 class Blogs(View):
     template_name = 'blogs.html'
     def get(self, request):
-        blogs = BlogsModel.objects.all()
+        blogs = BlogsModel.objects.all().order_by('-created_at')
         return render(request, self.template_name, {'blogs':blogs})
 
 class BlogsDetails(View):
     template_name = 'blogs_details.html'
     def get(self, request, pk):
         blogs = BlogsModel.objects.get(pk=pk)
-        return render(request, self.template_name, {'blogs':blogs})
+        vlogs = BlogsModel.objects.all().order_by('-created_at')
+        return render(request, self.template_name, {'blogs':blogs, 'vlogs':vlogs})
 
 class AboutUs(View):
     template_name = 'aboutus.html'
