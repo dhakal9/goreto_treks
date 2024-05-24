@@ -180,7 +180,7 @@
     <td>{{tour.price}} </td>
     <td>
         <button type="button" class="toggle-attraction-btn btn {% if tour.is_attraction %}btn-success{% else %}btn-danger{% endif %}" data-activity-id="{{ tour.activity_id }}">
-            {% if tour.is_attraction %}Active{% else %}Inactive{% endif %}
+            {% if tour.is_attraction %}Active in Home {% else %}Hidden in Home{% endif %}
         </button>
     </td>
     <td>

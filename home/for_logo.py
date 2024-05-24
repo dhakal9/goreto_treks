@@ -14,7 +14,10 @@ def additional_context(request):
     activities = RegionModel.objects.filter(is_nav = True)
     nepal_regions = RegionModel.objects.filter(is_nav = False)
     all_activities = TourDetailsModel.objects.all()
-    footer_activities = sample(list(activities), 5)
+    if all_activities.count() >= 5:
+        footer_activities = sample(list(activities), 5)
+    else:
+        footer_activities = []
     trekkings = TourDetailsModel.objects.filter(is_activity = False)
     additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images, 'footer_activities':footer_activities, 'seo_content':seo_content}
     return additional_data

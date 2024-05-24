@@ -5,14 +5,7 @@
 	
 
 		<!-- banner-section -->
-{% comment %} <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
-    <div class="auto-container">
-        <div class="content-box">
-            <h2>{{company.slogan1}}</h2>
-            <p>{{company.slogan2}}</p>
-        </div>
-    </div>
-</section> {% endcomment %}
+
 <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
     <div class="auto-container">
         <div class="content-box">
@@ -406,42 +399,7 @@
       }
 </style>
 
-{% comment %} <section class="about-style-two" style="padding-bottom:50px;">
-    <div class="pattern-layer" style="background-image: url({% static 'assets/images/shape/shape-2.png' %});"></div>
-    <div class="auto-container">
-        <div class="row clearfix">
-            <div class="col-lg-6 col-md-12 col-sm-12 content-column">
-                <div class="content_block_1">
-                    <div class="content-box">
-                        <div class="sec-title">
-                            <p>{{company.about_sub_heading}}</p>
-                            <h2>{{company.about_heading}}</h2>
-                        </div>
-                        <div class="text">
-                            <p>{{company.about_us}}</p>
-                        </div>
-                        <div class="btn-box">
-                            <a href="about.html" class="theme-btn">Find Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-12 col-sm-12 image-column">
-                <div class="image_block_2">
-                    <div class="image-box">
-                        <div class="shape">
-                            <div class="shape-1" style="background-image: url({% static 'assets/images/shape/shape-13.png' %});"></div>
-                            <div class="shape-2" style="background-image: url({% static 'assets/images/shape/shape-12.png' %});"></div>
-                            <div class="shape-3" style="background-image: url({% static 'assets/images/shape/shape-12.png' %});"></div>
-                        </div>
-                        <figure class="image"><img src="{{company.about_thumbnail.url}}" alt="Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company" loading="eager"></figure>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- about-style-two end -->  {% endcomment %}
+
 
 <style>
     .bottom-right {
@@ -526,68 +484,7 @@
                     </div>
                 </div>
             </section>
-        <!-- offer-section end -->
-
-            {% comment %} <style>
-                .tour-block-one .inner-box .lower-content .info li {
-                    position: relative;
-                    float: left;
-                    display: inline-block;
-                    font-size: 13px;
-                    color: #808080;
-                    font-weight: 500;
-                    padding-left: 24px;
-                    margin-right: 35px;
-                }
-
-                .tour-block-one .inner-box .lower-content h3 {
-                    display: block;
-                    font-size: 18px;
-                    line-height: 30px;
-                    font-weight: 700;
-                    margin-bottom: 5px;
-                }
-            </style>
-        <!-- tour-section -->
-        <section class="tour-section sec-pad">
-            <div class="auto-container">
-                <div class="sec-title text-center">
-                    <p>Modern & Beautiful</p>
-                    <h2>Our Most Popular Adventures</h2>
-                </div>
-                    <div class="row clearfix">
-                    {% for tour in tours %}
-                        <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
-                            <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
-                                <div class="inner-box">
-                                    
-                                    <figure class="image-box">
-                                        <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trekkk">
-                                        <a href="{% url 'tour_details' tour.activity_id %}"><i class="fas fa-link"></i></a>
-                                    </figure>
-                                    <div class="lower-content">
-                                        <div class="rating"><span><i class="fas fa-star"></i>5 based on 133 reviews</span></div>
-                                        <h3><a href="{% url 'tour_details' tour.activity_id %}">{{tour.name}}</a></h3>
-                                        <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4>
-                                        <ul class="info clearfix">
-                                            <li><i class="far fa-clock"></i>{{tour.days}} Days</li>
-                                            <li><i class="far fa-map"></i>Trip Grade,<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
-                                        </ul>
-                                        <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p>
-                                        <div class="btn-box">
-                                            <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                            {%endfor%}
-
-                </div>
-            </div>
-        </section>
-        <!-- tour-section end --> {% endcomment %}
-
+       
 
     <!-- video-style-two -->
     <section class="video-style-two centred sec-pad">
