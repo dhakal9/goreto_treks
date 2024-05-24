@@ -35,23 +35,23 @@
                     <div class="wrapper grid">
                         <div class="tour-grid-content">
                             <div class="row clearfix">
-                                {%for trekking in trekkings %}
+                                {%for trek in only_trekkings %}
                                     <div class="col-lg-6 col-md-6 col-sm-12 tour-block">
                                         <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                             <div class="inner-box">
                                                 
                                                 <figure class="image-box">
-                                                    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{trekking.image.url}}" alt="10 Days Annapurna Base Camp Trek">
+                                                    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{trek.image.url}}" alt="10 Days Annapurna Base Camp Trek">
                                                     <div class="bottom-left">
                                                         <div class="rating">
                                                             <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
                                                         </div>
                                                     </div>
                                                     <div class="bottom-right">
-                                                        <h5 class="middleclass"><i class="far fa-clock"></i> {{trekking.days}} Day</h5>
+                                                        <h5 class="middleclass"><i class="far fa-clock"></i> {{trek.days}} Day</h5>
                                                     </div>
-                                                    <a href="{% url 'tour_details' trekking.slug %}"><i class="fas fa-link"></i></a>
-                                                    <div class="price-overlay">Starting From {{trekking.price}}
+                                                    <a href="{% url 'tour_details' trek.slug %}"><i class="fas fa-link"></i></a>
+                                                    <div class="price-overlay">Starting From {{trek.price}}
                         
                                                     </div>
                                                 </figure>
@@ -78,10 +78,10 @@
                                                 </style>
                                                 <div class="lower-content">
                                                    
-                                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a></h3>
+                                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trek.slug %}">{{trek.name}}</a></h3>
                                         
                                                     <ul class="info clearfix">
-                                                        <li><i class="far fa-mountain"></i>{{trekking.altitude}}</li>
+                                                        <li><i class="far fa-mountain"></i>{{trek.altitude}}</li>
                                                         <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
                                                     </ul>
                                                     {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}

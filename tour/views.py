@@ -466,9 +466,12 @@ class Activities(View):
     
 
 class Trekking(View):
-    template_name ='trekking.html'
+    template_name = 'trekking.html'
+    
     def get(self, request):
-        return render(request, self.template_name)
+        nepali_regions = RegionModel.objects.filter(is_nav=False)
+        only_trekkings = TourDetailsModel.objects.filter(region__in=nepali_regions)
+        return render(request, self.template_name, {'only_trekkings': only_trekkings})
 
 class AdminIncludeExclude(LoginRequiredMixin, View):
     template_name = 'admin_include_exclude.html'
