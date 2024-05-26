@@ -130,7 +130,7 @@
                     </div>
                     <div class="sidebar-widget category-widget">
                         <div class="widget-title">
-                            <h3>Regions</h3>
+                            <h3>Trekking Regions</h3>
                         </div>
                         <div class="widget-content">
                             <ul class="category-list clearfix">
@@ -153,7 +153,7 @@
                                 {% for activity in destinations %} 
                                 <li class="custom-check-box">
                                     <div class="custom-controls-stacked">
-                                        <a class="activity-link"  href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        <a class="activity-link"  href="{% url 'one_destination' activity.slug %}"><span class="description">{{activity.name}}</span></a>
                                     </div>
                                 </li>
                                 {% endfor %}

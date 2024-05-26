@@ -402,7 +402,6 @@
     </div> 
 {% comment %} booking Card {% endcomment %}
     <div class="card" id="bookingCard">
-    <!-- Your booking card content goes here -->
         <h2>Make an Inquiry</h2>
         <form method='POST'>
             {% csrf_token %}
@@ -410,14 +409,13 @@
             {{inquiry_form.username}}
             <label for="email">Email:</label>
             {{inquiry_form.email}}
-            <label for="destination">Message:</label>
+            <label for="message">Message:</label>
             {{inquiry_form.message}}
-            <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i">
-            
-            </div>
-            <button type="submit" name ="inquiry_form_submit">Send</button>
+            <div class="form-group g-recaptcha" data-sitekey="6LfrFKQUAAAAAMzFobDZ7ZWy982lDxeps8cd1I2i"></div>
+            <button type="submit" name="inquiry_form_submit">Send</button>
         </form>
     </div>
+
 {% comment %} booking Card {% endcomment %}
 <style>
     .card {
@@ -496,13 +494,93 @@
     #fixed-bar button:hover {
         background-color: #2980b9;
     }
-
-    /* Media query for mobile devices */
-    @media (max-width: 768px) {
-        #fixed-bar {
-            display: none; /* Hide the fixed bar on smaller screens */
+    #bookingCard {
+        position: fixed;
+        right: 180px; /* Adjust distance from the right edge */
+        margin-top: 50px;
+        transform: translateY(-50%);
+        width: 300px; /* Adjust width as needed */
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        background-color: white;
+        display: none; /* Initially hidden */
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s ease-in-out; /* Smooth transition */
+        z-index: 1000; /* Ensure it appears above other content */
+    }
+    
+    #bookingCard form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    #bookingCard label {
+        margin-bottom: 5px;
+    }
+    
+    #bookingCard input {
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: calc(100% - 16px); /* Ensure full width with padding */
+    }
+    
+    #bookingCard button {
+        padding: 10px;
+        background-color: #072063;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+    }
+    
+    #bookingCard button:hover {
+        background-color: #0056b3;
+    }
+    
+    #bookingCard .form-group {
+        display: ruby;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    #bookingCard .g-recaptcha {
+        transform: scale(0.9); /* Adjust scale as needed */
+        transform-origin: 0 0;
+    }
+    
+    @media (max-width: 1300px) {
+        #bookingCard {
+            width: 80%; /* Adjust width to be responsive */
+            max-width: 250px; /* Ensure it doesn't get too wide */
+        }
+    
+        #bookingCard .g-recaptcha {
+            transform: scale(0.7); /* Scale down further for smaller screens */
+            transform-origin: 0 0;
         }
     }
+    
+    @media (max-width: 1193px) {
+        #bookingCard {
+            display: none !important; /* Hide on smaller screens */
+        }
+    }
+    
+    /* Adjustments for medium screens */
+    @media (max-width: 1300px) {
+        #bookingCard {
+            width: 80%; /* Adjust width to be responsive */
+            max-width: 250px; /* Ensure it doesn't get too wide */
+        }
+    }
+    
 </style>
 
    <script>
@@ -527,25 +605,26 @@
     {% comment %} Booking card {% endcomment %}
     <script>
         window.addEventListener('scroll', function() {
-          var bookingCard = document.getElementById('bookingCard');
-          var footer = document.getElementById('leg'); // Assuming you have a footer with the id 'footer'
-          var scrollPosition = window.pageYOffset;
-          var windowHeight = window.innerHeight;
-          var footerOffset = footer.offsetTop;
-      
-          // Hide the entire section on smaller devices
-          if (window.innerWidth <= 768) { // Adjust the width as needed for tablet devices
-            bookingCard.style.display = 'none';
-            return;
-          }
-      
-          // Show or hide the booking card based on scroll position
-          if (scrollPosition > windowHeight * 2.55 && scrollPosition < footerOffset - windowHeight) {
-            bookingCard.style.display = 'flex'; // Display the booking card
-          } else {
-            bookingCard.style.display = 'none'; // Hide the booking card
-          }
+            var bookingCard = document.getElementById('bookingCard');
+            var footer = document.getElementById('leg'); // Assuming you have a footer with the id 'footer'
+            var scrollPosition = window.pageYOffset;
+            var windowHeight = window.innerHeight;
+            var footerOffset = footer.offsetTop;
+        
+            // Hide the entire section on smaller devices
+            if (window.innerWidth <= 768) { // Adjust the width as needed for tablet devices
+                bookingCard.style.display = 'none';
+                return;
+            }
+        
+            // Show or hide the booking card based on scroll position
+            if (scrollPosition > windowHeight * 2.55 && scrollPosition < footerOffset - windowHeight) {
+                bookingCard.style.display = 'flex'; // Display the booking card
+            } else {
+                bookingCard.style.display = 'none'; // Hide the booking card
+            }
         });
+        
       </script>
       
     
