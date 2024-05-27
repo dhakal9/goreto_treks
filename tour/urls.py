@@ -44,3 +44,5 @@ urlpatterns = [
     path('delete_itinerary/', delete_itinerary, name='delete_itinerary')
  ]
  # gauley bhai
+ #pip uninstall bleach
+ #pip install bleach==3.3.1
