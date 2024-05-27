@@ -47,7 +47,7 @@ class TourDetailsModel(models.Model):
     days = models.CharField(max_length=200, null=True, blank=True)
     map = models.URLField(db_index=True, unique=True, blank=True )
     map_overview = SummernoteTextField()
-    image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
+    image =  models.ImageField(upload_to='blog_images', blank=False, null=True)
     is_activity = models.BooleanField(default=False)
     is_attraction = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
