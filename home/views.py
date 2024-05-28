@@ -14,7 +14,17 @@ from django.core.serializers import serialize
 # Create your views here.
 from django.db.models import F
 
+def error_404(request, exception):
+        return render(request,'404.html')
 
+def error_500(request):
+        return render(request,'500.html')
+        
+def error_403(request, exception):
+        return render(request,'403.html')
+
+def error_400(request,  exception):
+        return render(request,'400.html')
 # class Index(View):
 #     template_name = "index.html"
 

@@ -15,6 +15,7 @@ import environ
 from django.contrib.messages import constants as messages
 env = environ.Env()
 environ.Env.read_env()
+from datetime import timedelta
 
 
 MESSAGE_TAGS = {
@@ -39,8 +40,8 @@ SECRET_KEY = 'django-insecure-bs4h3ep9-t*(j%-hh%ad_b0s_zt=&_wzdyw&z!#gm4z8#y2oeg
 #nginx
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
+DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -68,9 +69,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_auto_logout.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'core.urls'
+
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(minutes=20),
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+}
 
 TEMPLATES = [
     {
@@ -84,6 +91,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'home.for_logo.additional_context',
+                'django_auto_logout.context_processors.auto_logout_client',
             ],
         },
     },

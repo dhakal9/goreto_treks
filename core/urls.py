@@ -21,7 +21,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.conf.urls.static import static
 from django.contrib.staticfiles.views import serve
-
+# from django.conf.urls import handler400, handler403, handler404, handler500
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
@@ -41,3 +41,8 @@ if not settings.DEBUG:
 else:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+handler404 = 'home.views.error_404'
+handler500 = 'home.views.error_500'
+handler403 = 'home.views.error_403'
+handler400 = 'home.views.error_400'
