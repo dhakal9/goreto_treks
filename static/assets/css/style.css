@@ -971,7 +971,7 @@ img {
 
 .main-menu .navigation > li > ul > li > ul{
   position:absolute;
-  right:100%;
+  left:100%;
   top:0%;
   width:230px;
   z-index:100;
@@ -1016,25 +1016,15 @@ img {
 }
 /* added later for sub-sub-Nav */
 /* Updated CSS for sub-sub menu */
-.main-menu .navigation > li > ul > li > ul > li > ul {
-  /* border-radius: inherit;
-  box-shadow: inherit; */
-  /* box-shadow: 0px 4px 4px 1px rgba(0,0,0,0.2);
-  border-radius: 10px; */
-}
-
 
 .main-menu .navigation > li > ul > li > ul > li > ul > li {
-  position: relative;
-  width:100%;
+
   top: 5%;
-  left: 100%; /* Position it to the right of the parent */
-  display: none; /* Initially hide the sub-sub menu */
-  background-color: #fff; /* Add desired background color */
-  /* border: 1px solid #ccc; Add desired border */
-  /* border-radius: 5px;  */
-  padding: 0px 30px; /* Add desired padding */
-  z-index: 999; /* Ensure it appears above other content */
+  left: 100%; 
+  /* display: none;  */
+  background-color: #fff;
+  padding: 0px 5px;
+  z-index: 999;
 }
 
 /* Show sub-sub menu when parent li is hovered */

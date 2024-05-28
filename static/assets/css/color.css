@@ -36,10 +36,20 @@
 	border-top: 3px solid #ff7c5b
 }
 
+.main-menu .navigation > li > ul, 
+.main-menu .navigation > li > .megamenu,
+.main-menu .navigation > li > ul > li > ul > li > ul{
+	border-top: 3px solid #ff7c5b
+}
+
+
 .main-menu .navigation > li > ul > li > ul > li > a:hover{
   color: #ff7c5b;
 }
-
+.main-menu .navigation > li > ul > li > ul > li >  ul > li > a:hover{
+	color: #ff7c5b;
+  }
+  
 .main-header .search-box-outer .dropdown-menu{
 	background: #ff7c5b;
 }
