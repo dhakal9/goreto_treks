@@ -1,4 +1,5 @@
 {% extends "admin_base.html" %}
+{% load static %}
 {% block content %}
 
 <div class="content container-fluid">
@@ -51,7 +52,7 @@
                         <td>{{ itinary.tour.name }}</td>
                         <td>{{ itinary.day }}</td>
                         <td>{{ itinary.name }}</td>
-                        <td>{{ itinary.description }}</td>
+                        <td>{{ itinary.description|safe }}</td>
                         <td><span class="badge badge-success rounded-pill d-inline">Active</span></td>
                         <td>
                             <a type="button" href="{% url 'edit_itinary' itinary.itinary_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
@@ -64,9 +65,15 @@
     </div>
 </div>
 
+<!-- Include CKEditor 4 -->
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function(){
+        // Initialize CKEditor for existing form description field
+        CKEDITOR.replaceAll('ckeditor');
+
         $('#id_tour').change(function(){
             var tourId = $(this).val();
             $.ajax({
@@ -85,12 +92,17 @@
                         var itinerary = itineraries.find(it => it.day == i) || {itinary_id: '', name: '', description: ''};
                         addItineraryFields(i, itinerary.itinary_id, i, itinerary.name, itinerary.description);
                     }
+
+                    // Initialize CKEditor for all new textareas
+                    $('.ckeditor').each(function(){
+                        CKEDITOR.replace(this);
+                    });
                 }
             });
         });
 
         function addItineraryFields(index, itinary_id, day, name, description) {
-            $('.dynamic-fields').append(
+            var fieldHtml = 
                 '<div class="row border my-2 p-3 shadow" data-itinary-id="' + itinary_id + '">' +
                     '<div class="col-sm-6">' +
                         '<div class="form-group">' +
@@ -107,14 +119,14 @@
                     '<div class="col-sm-12">' +
                         '<div class="form-group">' +
                             '<label>Description Day ' + day + ' <span class="text-danger">*</span></label>' +
-                            '<textarea name="description_' + index + '" class="form-control">' + description + '</textarea>' +
+                            '<textarea name="description_' + index + '" class="form-control ckeditor">' + description + '</textarea>' +
                         '</div>' +
                     '</div>' +
                     '<div class="col-sm-12">' +
                         '<button type="button" class="btn btn-danger delete-itinerary" data-itinary-id="' + itinary_id + '">Delete</button>' +
                     '</div>' +
-                '</div>'
-            );
+                '</div>';
+            $('.dynamic-fields').append(fieldHtml);
         }
 
         $(document).on('click', '.delete-itinerary', function(){
@@ -129,15 +141,12 @@
                     },
                     success: function(){
                         var container = $('.row[data-itinary-id="' + itinaryId + '"]');
-                        container.find('input').val('');
-                        container.find('textarea').val('');
-                        container.data('itinary-id', ''); // Remove id to mark it as a new entry
+                        container.remove();
                     }
                 });
             } else {
                 var container = $(this).closest('.row');
-                container.find('input').val('');
-                container.find('textarea').val('');
+                container.remove();
             }
         });
     });
