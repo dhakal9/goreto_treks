@@ -142,16 +142,20 @@ class AdminTour(LoginRequiredMixin, View):
     def get(self, request):
         form = TourDetailsForm()
         tours = TourDetailsModel.objects.all()
-        return render(request, self.template_name, {'form': form, 'tours':tours})
+        return render(request, self.template_name, {'form': form, 'tours': tours})
 
     def post(self, request):
         tours = TourDetailsModel.objects.all()
         form = TourDetailsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            messages.success(request, "Tour Added Successfully")
             return redirect('admin_tour')
+        else:
+            # If form is not valid, show error messages
+            messages.error(request, "There were errors in the form. Please correct them and submit again.")
         
-        return render(request, self.template_name, {'form': form, 'tours':tours})
+        return render(request, self.template_name, {'form': form, 'tours': tours})
     
 class EditTour(LoginRequiredMixin, View):
     template_name = 'admin_tour.html'

@@ -7,7 +7,7 @@ class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
     slogan = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Where culture meets nature', 'class': 'form-control'}))
     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
-    image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
         model = DestinationModel
@@ -17,7 +17,7 @@ class DestinationForm(forms.ModelForm):
 class RegionForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control','summernote': {'height': '500px', 'width': '100%'}}))
-    image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     destination = forms.ModelChoiceField(queryset=DestinationModel.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
 
       
