@@ -31,27 +31,37 @@ class RegionModel(models.Model):
     slug = AutoSlugField(populate_from='name', default='', unique=True)
     
 class TourDetailsModel(models.Model):
+    DIFFICULTY_CHOICES = [
+        ('easy', 'Easy'),
+        ('moderate', 'Moderate'),
+        ('difficult', 'Difficult'),
+    ]
+
     activity_id = models.AutoField(primary_key=True)
     destination = models.ForeignKey(DestinationModel, null=False, on_delete=models.CASCADE)
     region = models.ForeignKey(RegionModel, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=False, blank=False)
-    description =  SummernoteTextField()
+    description = SummernoteTextField()
     depature = models.CharField(max_length=100, null=True, blank=True)
     start_end = models.CharField(max_length=200, null=True, blank=True)
     max_price = models.CharField(max_length=200, null=True, blank=True)
-    price =  models.CharField(max_length=200, null=False, blank=False)
+    price = models.CharField(max_length=200, null=False, blank=False)
     transport = models.CharField(max_length=200, null=True, blank=True)
     season = models.CharField(max_length=200, null=True, blank=True)
     altitude = models.CharField(max_length=200, null=True, blank=True)
     age = models.CharField(max_length=200, null=True, blank=True)
     days = models.CharField(max_length=200, null=True, blank=True)
-    map = models.URLField(db_index=True, unique=True, blank=True )
+    map = models.URLField(db_index=True, unique=True, blank=True)
     map_overview = SummernoteTextField()
-    image =  models.ImageField(upload_to='blog_images', blank=False, null=True)
+    image = models.ImageField(upload_to='blog_images', blank=False, null=True)
     is_activity = models.BooleanField(default=False)
     is_attraction = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='name', default='', unique=True)
+    difficulty_level = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default='moderate')
+
+    def __str__(self):
+        return self.name
 
 class ItinatyModel(models.Model):
     itinary_id = models.AutoField(primary_key=True)

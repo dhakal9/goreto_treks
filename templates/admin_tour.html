@@ -217,11 +217,11 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Active</label>
-                            {{ form.is_active }}
-                            {% if form.is_active.errors %}
+                            <label>Diffuculty Level</label>
+                            {{ form.difficulty_level }}
+                            {% if form.difficulty_level.errors %}
                                 <div class="text-danger">
-                                    {% for error in form.is_active.errors %}
+                                    {% for error in form.difficulty_level.errors %}
                                         <p>{{ error }}</p>
                                     {% endfor %}
                                 </div>

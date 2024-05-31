@@ -44,7 +44,6 @@ class TourDetailsForm(forms.ModelForm):
     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
     depature = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    # time = forms.TimeField(required=False, widget=forms.TimeInput(attrs={'class': 'form-control', 'type': 'time'}))
     start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     max_price = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     price = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -52,15 +51,15 @@ class TourDetailsForm(forms.ModelForm):
     season = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     altitude = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     age = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    days = forms.CharField(max_length=500,required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    days = forms.CharField(max_length=500, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     map = forms.URLField(max_length=2048, required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
     map_overview = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     is_activity = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
-    is_acttraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
+    is_attraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_active = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
-    
-    
+    difficulty_level = forms.ChoiceField(choices=TourDetailsModel.DIFFICULTY_CHOICES, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['region'].queryset = RegionModel.objects.all()

@@ -82,7 +82,7 @@
                                         
                                                     <ul class="info clearfix">
                                                         <li><i class="far fa-mountain"></i>{{trek.altitude}}</li>
-                                                        <li><i class="far fa-map"></i>Trip Grade:<a href="#" style="cursor:pointer" data-toggle="popover" data-trigger="hover focus" data-content="Moderate or Grade B trips include 1 week to 18 days itinerary. It can reach up to 5000 meters altitude range, but the trails will be moderate (nor easy, nor tough). High altitude may matter on walking speed and distance. You need to have acclimatization over 3000 meters. " data-bs-original-title="" title="Moderate">Moderate</a>  </li>
+                                                        <li><i class="far fa-map"></i>Trip Grade:<a> {{trek.difficulty_level}} </a>  </li>
                                                     </ul>
                                                     {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
                                                     {% comment %} <div class="btn-box">
