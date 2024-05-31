@@ -332,43 +332,29 @@ class ItinaryAdmin(LoginRequiredMixin, View):
     def get(self, request):
         form = ItinaryForm()
         tours = TourDetailsModel.objects.all()
-        return render(request, self.template_name, {'form': form, 'tours': tours})
+        itineraries = ItinatyModel.objects.all()  # Fetch all itineraries to display in the template
+        return render(request, self.template_name, {'form': form, 'tours': tours, 'itinaries': itineraries})
 
     def post(self, request):
         tour_id = request.POST.get("tour")
         tour = TourDetailsModel.objects.get(pk=tour_id)
-        print(request.FILES)
         
-        ItinatyModel.objects.filter(tour=tour).delete()  # Clear existing itineraries for the tour
+        # Clear existing itineraries for the tour
+        ItinatyModel.objects.filter(tour=tour).delete()
+        
+        # Iterate over the form data to save multiple itineraries
         for key in request.POST:
             if key.startswith("plan_name_"):
                 index = key.split("_")[-1]
                 name = request.POST.get(f"plan_name_{index}")
                 day = request.POST.get(f"day_sequence_{index}")
                 description = request.POST.get(f"description_{index}")
-                print(index, name, day, description)
                 if name and day and description:
                     ItinatyModel.objects.create(tour=tour, name=name, day=day, description=description)
-                break    
+        
         messages.success(request, 'Itinerary saved successfully')
         return redirect('admin_itinary')
 
-
-
-
-
-
-def get_tour_itineraries(request):
-    tour_id = request.GET.get('tour_id')
-    try:
-        tour = TourDetailsModel.objects.get(pk=tour_id)
-        itineraries = list(ItinatyModel.objects.filter(tour=tour).values('itinary_id', 'day', 'name', 'description'))
-        return JsonResponse({'tour_days': tour.days, 'itineraries': itineraries})
-    except TourDetailsModel.DoesNotExist:
-        return JsonResponse({'error': 'Tour not found'}, status=404)
-
-    
-    
 @csrf_exempt
 def delete_itinerary(request):
     itinary_id = request.POST.get('itinary_id')
@@ -378,6 +364,15 @@ def delete_itinerary(request):
         return JsonResponse({'success': True})
     except ItinatyModel.DoesNotExist:
         return JsonResponse({'error': 'Itinerary not found'}, status=404)
+
+def get_tour_itineraries(request):
+    tour_id = request.GET.get('tour_id')
+    try:
+        tour = TourDetailsModel.objects.get(pk=tour_id)
+        itineraries = list(ItinatyModel.objects.filter(tour=tour).values('itinary_id', 'day', 'name', 'description'))
+        return JsonResponse({'tour_days': tour.days, 'itineraries': itineraries})
+    except TourDetailsModel.DoesNotExist:
+        return JsonResponse({'error': 'Tour not found'}, status=404)
 
 class EditItinary(LoginRequiredMixin, View):
     template_name = 'admin_itinary.html'
