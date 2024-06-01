@@ -145,12 +145,13 @@
                         <div class="location-map">
                             <div class="text">
                                 <h2>View On Map</h2>
-                                <p>The Annapurna Base Camp Trek is situated in the Annapurna Sanctuary within the Annapurna Conservation Area of Nepal. Starting from Nayapul, this 10 day trek traverses picturesque villages like Ghorepani and Chhomrong, leading through lush forests, terraced fields, and bamboo groves. Trekkers are rewarded with a stunning sunrise at Poon Hill, panoramic vistas of the Annapurna and Dhaulagiri mountain ranges, and a close-up view of the Annapurna massif at an altitude of 4,130 meters at the base camp. The journey also offers relaxation in natural hot springs at Jhinu Danda. Proper permits are required, which can be arranged in Kathmandu or Pokhara for entry into the Annapurna Conservation Area.</p>
+                                {% autoescape off %}
+                                {{tour_details.map_overview}}
+                                {% endautoescape %}
                             </div>
                             <div class="map-inner" id="map">
                                 <div class="google-map">
-                                    <iframe src="https://www.google.com/maps/d/embed?mid=10xxqTVKlfTcli_NEBF3L4bUiiQM&amp;hl=en_US&amp;ehbc=2E312F" width="100%" height="600"></iframe>
-                                    
+                                    <iframe src="{{tour_details.map}}" width="100%" height="600"></iframe>
                                 </div>
                             </div>
                         </div>

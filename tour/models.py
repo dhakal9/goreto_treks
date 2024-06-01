@@ -51,7 +51,7 @@ class TourDetailsModel(models.Model):
     altitude = models.CharField(max_length=200, null=True, blank=True)
     age = models.CharField(max_length=200, null=True, blank=True)
     days = models.CharField(max_length=200, null=True, blank=True)
-    map = models.URLField(db_index=True, unique=True, blank=True)
+    map = models.URLField(db_index=True, unique=True, blank=True, max_length=2048)
     map_overview = SummernoteTextField()
     image = models.ImageField(upload_to='blog_images', blank=False, null=True)
     is_activity = models.BooleanField(default=False)
