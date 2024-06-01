@@ -1,12 +1,8 @@
 .summernote-div {
   display: inline-block;
   position: relative;
-  width:500px;
-  background-color: blue;
-  
 }
 
 form .summernote-div .dropdown-menu {
   margin-left: 0;
 }
-

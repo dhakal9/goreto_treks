@@ -73,16 +73,13 @@
                             <ul class="overview-list clearfix">
                                 <li><span>Destination:</span>{{tour_details.destination.name}}</li>
                                 <li><span>Start/End:</span>{{tour_details.start_end}}</li>
-                                <li><span>Departure Location:</span>{{tour_details.depature}}</li>
-                                <li><span>Departure Time:</span>{{tour_details.time}}</li>
-    
+                                <li><span>Departure Location:</span>{{tour_details.depature}}</li>    
                                 <li class="clearfix" id="include-exclude">
                                     <span>Included:</span>
                                     <ul class="included-list clearfix">
                                         {% for inc_exc in inc_excs %}
                                             {%if inc_exc.is_included is True %}
                                                 <li>{{inc_exc.sentence.name}}</li>
-                                                
                                             {%endif%}
                                         {%endfor%}
                                     </ul>
@@ -368,7 +365,16 @@
                                 <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
                             </div>
                         </div>
-                        
+                        <div class="widget-content">
+                            <img src="{% static 'assets/images/google.png' %}" alt="Google Recommendation" />
+                            <h5 class="text-center">
+                                <strong>
+                                    <a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.google.com/maps/place/Goreto+Treks+and+Expedition/@27.7298897,85.3012113,17z/data=!4m14!1m7!3m6!1s0x39eb19de17a79383:0x52118c7e3510d982!2sGoreto+Treks+and+Expedition!8m2!3d27.729885!4d85.3037862!16s%2Fg%2F11vcxt4mmt!3m5!1s0x39eb19de17a79383:0x52118c7e3510d982!8m2!3d27.729885!4d85.3037862!16s%2Fg%2F11vcxt4mmt?entry=ttu" target="_blank">
+                                        Goreto Treks and Expedition on Google Maps
+                                    </a>
+                                </strong>
+                            </h5>
+                        </div>
                     </div>
                 
                 </div>
@@ -509,7 +515,7 @@
         flex-direction: column;
         align-items: center;
         transition: all 0.3s ease-in-out; /* Smooth transition */
-        z-index: 1000; /* Ensure it appears above other content */
+        z-index: 90; /* Ensure it appears above other content */
     }
     
     #bookingCard form {

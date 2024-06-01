@@ -36,10 +36,20 @@
 	border-top: 3px solid #ff7c5b
 }
 
+.main-menu .navigation > li > ul, 
+.main-menu .navigation > li > .megamenu,
+.main-menu .navigation > li > ul > li > ul > li > ul{
+	border-top: 3px solid #ff7c5b
+}
+
+
 .main-menu .navigation > li > ul > li > ul > li > a:hover{
   color: #ff7c5b;
 }
-
+.main-menu .navigation > li > ul > li > ul > li >  ul > li > a:hover{
+	color: #ff7c5b;
+  }
+  
 .main-header .search-box-outer .dropdown-menu{
 	background: #ff7c5b;
 }
@@ -183,7 +193,7 @@
 }
 
 .funfact-style-two .pattern-layer:before{
-	background: #ff7c5b;
+	background: #808080;
 }
 
 .banner-carousel .owl-nav .owl-prev:hover,
@@ -367,7 +377,7 @@
 }
 
 .booking-process-content .process-label li.current{
-  background: #ff7c5b;
+  background: #008fd6;
 }
 
 .booking-process-content .processing-form .form-group input:focus,
@@ -401,7 +411,7 @@
 }
 
 .accordion-box .block .acc-btn.active{
-  background: #ff7c5b;
+  background: #008fd6;
 }
 
 .faq-sidebar .sidebar-inner .faq-form .form-group input:focus,
