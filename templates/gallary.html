@@ -123,6 +123,11 @@
     <img src="{{ image.image.url }}" alt="{{ image.description }}">
   </figure>
   {% endfor %}
+  {% for image in tour_images %}
+  <figure class="gallery-item" data-index="{{ forloop.counter0 }}" onclick="openPopup(event)">
+    <img src="{{ image.image.url }}" alt="{{ image.description }}">
+  </figure>
+  {% endfor %}
 </div>
 
 <div id="popup" class="popup">

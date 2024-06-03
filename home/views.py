@@ -6,7 +6,7 @@ from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, O
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel
-from tour.models import DestinationModel, TourDetailsModel, RegionModel
+from tour.models import DestinationModel, TourDetailsModel, RegionModel, GallaryModel
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -460,7 +460,8 @@ class Gallary(View):
     tempale_name = 'gallary.html'
     def get(self, request):
         images = MainGallaryModel.objects.all()
-        return render(request, self.tempale_name, {'images':images})
+        tour_images = GallaryModel.objects.all()
+        return render(request, self.tempale_name, {'images':images, 'tour_images':tour_images})
     
 class DeleteGallary(LoginRequiredMixin, View):
     def get(self, request, id):

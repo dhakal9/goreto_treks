@@ -131,7 +131,7 @@ ItineraryFormSet = inlineformset_factory(TourDetailsModel, ItinatyModel, form=It
 class GallaryForm(forms.ModelForm):
     tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
                                      widget=forms.Select(attrs={'class': 'form-control'}))
-    image = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
