@@ -287,9 +287,14 @@
                         <td>{{ tour.days }}</td>
                         <td>{{ tour.price }}</td>
                         <td>
-                            <button type="button" class="toggle-attraction-btn btn {% if tour.is_attraction %}btn-success{% else %}btn-danger{% endif %}" data-activity-id="{{ tour.activity_id }}">
+                            <a href="{% url 'toggle_attraction_status' tour.activity_id%}">
+                                <button type="button" class="{% if tour.is_attraction %}btn-success{% else %}btn-danger{% endif %}">
+                                    {% if tour.is_attraction %}Active in Home{% else %}Hidden in Home{% endif %}
+                                </button>
+                            </a>
+                            {% comment %} <button type="button" class="toggle-attraction-btn btn {% if tour.is_attraction %}btn-success{% else %}btn-danger{% endif %}" data-activity-id="{{ tour.activity_id }}">
                                 {% if tour.is_attraction %}Active in Home{% else %}Hidden in Home{% endif %}
-                            </button>
+                            </button> {% endcomment %}
                         </td>
                         <td>
                             <a type="button" href="{% url 'edit_tour' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
@@ -327,17 +332,22 @@
                 data: {'destination_id': destinationId},
                 dataType: 'json',
                 success: function(data) {
-                    var regionSelect = $('#id_region');
-                    regionSelect.empty();
-                    $.each(data.regions, function(key, value) {
-                        regionSelect.append($('<option>').text(value.name).attr('value', value.id));
-                    });
+                    const regionSelect = $('#id_region');
+            regionSelect.empty();
+
+                regionSelect.append(
+                data.regions.reduce((options, region) => (
+                options.concat($('<option>').text(region.name).attr('value', region.region_id))
+            ), [])
+);
                 },
                 error: function(error) {
                     console.log('Error fetching regions:', error);
                 }
             });
+
         });
+
 
         $(document).on('click', '.toggle-attraction-btn', function() {
             var button = $(this);
