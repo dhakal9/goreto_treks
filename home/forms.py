@@ -31,14 +31,14 @@ class CompanyProfileForm(forms.ModelForm):
         slogan2 = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_sub_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-        about_thumbnail = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+        about_thumbnail = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         about_us = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
         why_us = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
-        home_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
-        banner1_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
-        banner2_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
-        logo_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
-        video_thumbnail_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+        home_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+        banner1_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+        banner2_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+        logo_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+        video_thumbnail_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         video_link = forms.URLInput(attrs={'class':'form-control'})
     
         class Meta:
@@ -49,7 +49,7 @@ class CompanyProfileForm(forms.ModelForm):
     
 class ReviewForm(forms.ModelForm):
 
-    team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
+    team_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'})),
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     position = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),
@@ -72,12 +72,11 @@ class FunfactForm(forms.ModelForm):
 class OurTeamForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     message = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
-    # message = forms.Textarea(attrs={'class': 'form-control', 'rows': 5})
     position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
-    facebook_link = forms.URLInput(attrs={'class':'form-control'})
-    instagram_link = forms.URLInput(attrs={'class':'form-control'})
-    
+    team_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    # facebook_link = forms.URLInput(attrs={'class':'form-control'})
+    # instagram_link = forms.URLInput(attrs={'class':'form-control'})
+    # team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     class Meta:
         model = OurTeamModel
         fields = '__all__'
@@ -92,7 +91,7 @@ class ContactUs(forms.Form):
 class BlogsForm(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
-    image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     
     class Meta:
         model = BlogsModel
@@ -101,7 +100,7 @@ class BlogsForm(forms.ModelForm):
 class CsrForm(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
-    image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     
     class Meta:
         model = CsrModel

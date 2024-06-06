@@ -59,7 +59,7 @@ class TourDetailsModel(models.Model):
     is_active = models.BooleanField(default=True)
     slug = AutoSlugField(populate_from='name', default='', unique=True)
     difficulty_level = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default='moderate')
-
+    itinary_pdf = models.FileField(upload_to='documents', null=True, blank=True)
     def __str__(self):
         return self.name
 

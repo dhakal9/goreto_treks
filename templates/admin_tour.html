@@ -228,6 +228,20 @@
                             {% endif %}
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mr-3">
+                                <label>Itianary Pdf</label><br>
+                                {{ form.itinary_pdf }}
+                                {% if form.itinary_pdf.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.itinary_pdf.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-6">

@@ -132,6 +132,7 @@
                     
                             .summernote .p .span{
                                 position: relative;
+                                font-size: 18px;
                                 font-family: 'Work Sans', sans-serif;
                                 color: #808080;
                                 font-weight: 400;
@@ -352,7 +353,11 @@
                             </div>
                             <div class="widget-content">
                                 <ul class="download-links clearfix">
-                                    <li><a>Attachment not found</a></li>
+                                    {% if tour_details.itinary_pdf %}
+                                        <li><a href="{{ tour_details.itinary_pdf.url }}" download>Download Itinerary PDF</a></li>
+                                    {% else %}
+                                        <li><a>Attachment not found</a></li>
+                                    {% endif %}
                                 </ul>
                             </div>
                         </div>

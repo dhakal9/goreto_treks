@@ -59,7 +59,8 @@ class TourDetailsForm(forms.ModelForm):
     is_attraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_active = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     difficulty_level = forms.ChoiceField(choices=TourDetailsModel.DIFFICULTY_CHOICES, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
-
+    itinary_pdf = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+       
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['region'].queryset = RegionModel.objects.all()

@@ -33,15 +33,22 @@
 </style>
 
 <!-- Page Title -->
-<section class="page-title style-two centred">
+<section class="page-title style-two centred" style="height:200px; background-image: url({{company.home_image.url}}); ">
     <div class="auto-container">
         <div class="content-box">
             <h1>Message From Team Goreto</h1>
+            <p style="position:absolute">
+                <a href="{% url 'index' %}" style="color: #ffffff; text-decoration: none;"
+                   onmouseover="this.style.color='#000000'"
+                   onmouseout="this.style.color='#ffffff'">Home</a> / <a href="{% url 'our_team' %}" style="color: #ffffff; text-decoration: none;"
+                   onmouseover="this.style.color='#000000'"
+                   onmouseout="this.style.color='#ffffff'"> Our Team</a> / Team Details
+            </p>
         </div>
     </div>
 </section>
 <!-- End Page Title -->
-<div class="auto-container">
+<div class="auto-container" style='margin-top:20px;'>
 {% for team in teams %}
 <div class="review text-center">
     <div class="image">
