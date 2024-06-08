@@ -142,17 +142,19 @@
                         </style>
                         <div class="location-map">
                             <div class="text">
-                                <h2>View On Map</h2>
+                                <h2>Map Overview</h2>
                                 {% autoescape off %}
-                                {{tour_details.map_overview}}
+                                {{ tour_details.map_overview }}
                                 {% endautoescape %}
                             </div>
+                            <h2>Map</h2>
                             <div class="map-inner" id="map">
                                 <div class="google-map">
-                                    <iframe src="{{tour_details.map}}" width="100%" height="600"></iframe>
+                                    <iframe src="{{tour_details.map}}" width="640" height="480"></iframe>                                                   
                                 </div>
                             </div>
                         </div>
+                        
     
                             <div class="photo-gallery" id="gallery" >
                                 <div class="text">
