@@ -74,9 +74,6 @@ class OurTeamForm(forms.ModelForm):
     message = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
     position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     team_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
-    # facebook_link = forms.URLInput(attrs={'class':'form-control'})
-    # instagram_link = forms.URLInput(attrs={'class':'form-control'})
-    # team_image = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     class Meta:
         model = OurTeamModel
         fields = '__all__'

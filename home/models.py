@@ -99,8 +99,6 @@ class OurTeamModel(models.Model):
     position = models.CharField(max_length = 200)
     message=SummernoteTextField()
     team_image =  models.ImageField(upload_to='blog_images/', blank=True, null=True)
-    # facebook_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
-    # instagram_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
     is_active = models.BooleanField(default=True)
     
     def __str__(self):
