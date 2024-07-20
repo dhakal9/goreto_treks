@@ -12,6 +12,7 @@ def additional_context(request):
     destinations = DestinationModel.objects.all()
     gallary_images = MainGallaryModel.objects.order_by('?')[:6]
     activities = RegionModel.objects.filter(is_nav = True)
+    goreto_special = RegionModel.objects.filter(is_special = True)
     nepal_regions = RegionModel.objects.filter(is_nav = False)
     all_activities = TourDetailsModel.objects.all()
     if all_activities.count() >= 5:
@@ -19,7 +20,7 @@ def additional_context(request):
     else:
         footer_activities = []
     trekkings = TourDetailsModel.objects.filter(is_activity = False)
-    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images, 'footer_activities':footer_activities, 'seo_content':seo_content}
+    additional_data = {'company': company_profile, 'destinations': destinations, 'activities':activities, 'all_activities':all_activities, 'trekkings':trekkings, 'nepal_regions':nepal_regions, 'gallary_images':gallary_images, 'footer_activities':footer_activities, 'seo_content':seo_content, 'goreto_special':goreto_special}
     return additional_data
 
 

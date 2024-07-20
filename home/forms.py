@@ -133,7 +133,7 @@ class PlanningTripForm(forms.Form):
 
 
 class SeoForm(forms.ModelForm):
-    discription = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 2}))
+    discription = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 10}))
 
     class Meta:
         model = SeoModel

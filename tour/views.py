@@ -121,6 +121,15 @@ class ToggleRegionStatus(LoginRequiredMixin, View):
         return redirect('admin_region')
     
 
+class ToggleSpecialStatus(LoginRequiredMixin, View):
+    def get(self, request, region_id):
+        region = get_object_or_404(RegionModel, pk=region_id)
+        region.is_special = not region.is_special
+        region.save()
+        messages.success(request, 'Region status toggled successfully')
+        return redirect('admin_region')
+    
+
 # class Tourlist(View):
 #     template_name = 'tourlist.html'
 #     def get(self, request, pk):

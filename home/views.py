@@ -70,7 +70,7 @@ class Index(View):
         regions_json = serialize('json', reg_reg)
         
         
-        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json,})
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'tor_tor':tor_tor, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json,})
     
 
     

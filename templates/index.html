@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 {%load static%}
+
 <main>
 	
-
 		<!-- banner-section -->
-
+         
 <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
     <div class="auto-container">
         <div class="content-box">
@@ -21,6 +21,7 @@
         </div>
     </div>
 </section>
+
 
 <script>
     // Parse destinations, tours, and regions JSON data
@@ -264,6 +265,74 @@
 
 <!-- tour-section end -->
 
+<hr>
+
+<!-- Goreto Special -->
+<section class="place-section style-two sec-pad bg-color-1">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Giving to the People through Adventure</p>
+            <h2>Goreto Special</h2>
+        </div>
+        <div class="row clearfix">
+            
+            {% for tour in tor_tor %}
+                {% if tour.region.is_special %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
+                        <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                            <div class="inner-box">
+                                <figure class="image-box">
+                                    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{ tour.image.url }}" alt="{{ tour.name }}">
+                                    <div class="bottom-left">
+                                        <div class="rating">
+                                            <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
+                                        </div>
+                                    </div>
+                                    <div class="bottom-right">
+                                        <h5 class="middleclass"><i class="far fa-clock"></i> {{ tour.days }} Day</h5>
+                                    </div>
+                                    <a href="{% url 'tour_details' tour.slug %}"><i class="fas fa-link"></i></a>
+                                    <div class="price-overlay">Starting From {{ tour.price }}</div>
+                                </figure>
+
+                                <style>
+                                    .price-overlay {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                        color: white;
+                                        font-size: 24px;
+                                        text-align: center;
+                                        line-height: 250px; /* Adjust based on image height */
+                                        opacity: 0;
+                                        transition: opacity 0.3s;
+                                    }
+
+                                    .image-box:hover .price-overlay {
+                                        opacity: 1;
+                                    }
+                                </style>
+
+                                <div class="lower-content">
+                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.slug %}">{{ tour.name }}</a></h3>
+                                    <ul class="info clearfix">
+                                        <li><i class="far fa-mountain"></i>{{ tour.altitude }}</li>
+                                        <li><i class="far fa-map"></i>Trip Grade:<a> {{ tour.difficulty_level }} </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+                
+        </div>
+    </div>
+</section>
+<hr>
 <!--Enhanced later -->
 <section class="feature-section centred bg-color-1 sec-pad">
     <div class="auto-container">
@@ -537,9 +606,14 @@
 
     <!-- video-style-two -->
     <section class="video-style-two centred sec-pad">
-        <div class="anim-icon">
-            <div class="icon anim-icon-1" style="background-image: url({% static 'assets/images/shape/shape-3.png' %});"></div>
-            <div class="icon anim-icon-2" style="background-image: url({% static 'assets/images/shape/shape-3.png' %});"></div>
+        <div class="auto-container">
+             
+                <video  autoplay muted>
+                    <source src="{% static 'assets/videos/clip.mp4' %}" type="video/mp4">
+                    {% comment %} <source src="{% static 'assets/videos/manaslu_clip.ogg' %}" type="video/ogg">
+                    Your browser does not support the video tag. {% endcomment %}
+                </video>
+            <
         </div>
         <div class="auto-container">
             <div class="inner-container">

@@ -4,152 +4,160 @@
 <br>
 <h1 class="text-center">Region </h1>
 
-    <!-- Page Content -->
-    <div class="content container-fluid">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-            
-                <!-- Page Header -->
-                <div class="page-header">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h3 class="page-title">Region Settings</h3>
+<!-- Page Content -->
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+        
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Region Settings</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+           <!-- Inside your form tag -->
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label> Destination <span class="text-danger">*</span></label>
+                            {{ form.destination }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label> Name</label>
+                            {{ form.name }}
                         </div>
                     </div>
                 </div>
-                <!-- /Page Header -->
-               <!-- Inside your form tag -->
-                <form method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label> Destination <span class="text-danger">*</span></label>
-                                {{ form.destination }}
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label> Name</label>
-                                {{ form.name }}
-                            </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label> Image </label>
+                            {{ form.image }}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label> Image </label>
-                                {{ form.image }}
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label> Description </label>
-                                {{ form.description }}
-                            </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label> Description </label>
+                            {{ form.description }}
                         </div>
                     </div>
-                    <!-- Add other form fields as needed -->
-                    <div class="submit-section">
-                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
-                    </div>
-                </form>
+                </div>
+                <!-- Add other form fields as needed -->
+                <div class="submit-section">
+                    <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                </div>
+            </form>
 
-            </div>
         </div>
     </div>
+</div>
 
-    
-    <div class="container-fluid">
-        <h4>List Of Host Users </h4><br>
-        
-        <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
-        <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
-        <thead class="bt-5">
-        <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Status</th>
-        <th>Actions</th>
-        </tr>
-        </thead>
-        
-         {% for region in regions %} 
-        <tr>
-        <td>{{region.name}} </td>
-        <td> {{region.description}}</td>
-        <td>{{region.destination.name}} </td>
-        <td><img src="{{region.destination.image.url}}" style="width: 50px; height: 45px;"></td>
-        <td>
-            {% if region.is_nav %}
-                <button type="button" class="toggle-btn btn btn-primary" data-region-id="{{ region.region_id }}">Activity</button>
-            {% else %}
-                <button type="button" class="toggle-btn btn btn-success" data-region-id="{{ region.region_id }}">Trekking</button>
-            {% endif %}
-        </td>        
-        <td>
-        <a type="button" href="{% url 'update_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
-        Edit
-        </a>
-        <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{region.region_id}}">
-        Delete
-        </button>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal{{region.region_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel{{region.region_id}}">Delete Priority Level</h5>
-        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body"> Are You Sure want to delete ? </div>
-        <div class="modal-footer">
-        <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-        <a type="action" href="{% url 'delete_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-        Delete
-        </button>
-        </a>
-        </div>
-        </div>
-        </div>
-        </a>
-        
-        </td>
-        </tr>
-        {% endfor %}
-    
-        </table>
-    <div>
-    <!-- Add JavaScript for handling the button click event -->
 
-    {% block scripts %} 
-    <script>
-        document.querySelectorAll('.toggle-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const regionId = this.getAttribute('data-region-id');
-                fetch(`/toggle-region-status/${regionId}/`)
-                    .then(response => {
-                        if (response.ok) {
-                            // Reload the page after successful status update
-                            window.location.reload();
-                        } else {
-                            throw new Error('Network response was not ok.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error toggling region status:', error);
-                    });
-            });
+<div class="container-fluid">
+    <h4>List Of Host Users </h4><br>
+    
+    <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+    <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+    <thead class="bt-5">
+    <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Destination</th>
+    <th>Image</th>
+    <th>Status</th>
+    <th>Goreto Special</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    
+     {% for region in regions %} 
+    <tr>
+    <td>{{region.name}} </td>
+    <td> {{region.description}}</td>
+    <td>{{region.destination.name}} </td>
+    <td><img src="{{region.destination.image.url}}" style="width: 50px; height: 45px;"></td>
+    <td>
+        {% if region.is_nav %}
+            <button type="button" class="toggle-btn btn btn-primary" data-url="{% url 'toggle_region_status' region.region_id %}">Activity</button>
+        {% else %}
+            <button type="button" class="toggle-btn btn btn-success" data-url="{% url 'toggle_region_status' region.region_id %}">Trekking</button>
+        {% endif %}
+    </td>
+    <td>
+        {% if region.is_special %}
+            <button type="button" class="toggle-btn btn btn-primary" data-url="{% url 'toggle_special_status' region.region_id %}">Goreto Special</button>
+        {% else %}
+            <button type="button" class="toggle-btn btn btn-success" data-url="{% url 'toggle_special_status' region.region_id %}">Normal</button>
+        {% endif %}
+    </td> 
+            
+    <td>
+    <a type="button" href="{% url 'update_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
+    Edit
+    </a>
+    <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{region.region_id}}">
+    Delete
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{region.region_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel{{region.region_id}}">Delete Priority Level</h5>
+    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body"> Are You Sure want to delete ? </div>
+    <div class="modal-footer">
+    <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+    <a type="action" href="{% url 'delete_region' region.region_id%}" class="btn btn-link btn-sm btn-rounded">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+    Delete
+    </button>
+    </a>
+    </div>
+    </div>
+    </div>
+    </a>
+    
+    </td>
+    </tr>
+    {% endfor %}
+
+    </table>
+<div>
+<!-- Add JavaScript for handling the button click event -->
+
+{% block scripts %} 
+<script>
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            fetch(url)
+                .then(response => {
+                    if (response.ok) {
+                        // Reload the page after successful status update
+                        window.location.reload();
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error toggling region status:', error);
+                });
         });
-    </script>
+    });
+</script>
 {% endblock %}
 
-        
-{% endblock content%}
+{% endblock content %}

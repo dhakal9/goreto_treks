@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView
+from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView
 from . import views
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path('updateregion/<int:region_id>', UpdateRegion.as_view(), name='update_region'),
     path('deleteregion/<int:region_id>', DeleteRegion.as_view(), name='delete_region'),
     path('toggle-region-status/<int:region_id>/', ToggleRegionStatus.as_view(), name='toggle_region_status'),
+    path('toggle-special-status/<int:region_id>/', ToggleSpecialStatus.as_view(), name='toggle_special_status'),
     path('admintour/', AdminTour.as_view(), name="admin_tour"),
     path('edit_tour/<int:tour_id>/', EditTour.as_view(), name="edit_tour"),
     path('delete_tour/<int:tour_id>/', DeleteTour.as_view(), name='delete_tour'),

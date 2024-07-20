@@ -28,6 +28,7 @@ class RegionModel(models.Model):
     description =  SummernoteTextField()
     is_active = models.BooleanField(default=True)
     is_nav = models.BooleanField(default=False)
+    is_special = models.BooleanField(default=False)
     slug = AutoSlugField(populate_from='name', default='', unique=True)
     
 class TourDetailsModel(models.Model):
