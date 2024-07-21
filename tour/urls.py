@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView
+from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView, GoretoSpecial
 from . import views
 
 urlpatterns = [
@@ -24,6 +24,7 @@ urlpatterns = [
     path('tourdetails/<str:tour_slug>/', TourDeatails.as_view(), name='tour_details'),
     # path('tourdetails/<int:pk>/', TourDeatails.as_view(), name='tour_details'),
     path('activities/', Activities.as_view(), name='activities'),
+    path('goretospecial/', GoretoSpecial.as_view(), name='goreto_special'),
     path('trekking/', Trekking.as_view(), name='trekking'),
     path('adminitinary/', ItinaryAdmin.as_view(), name='admin_itinary'),
     path('admin-edit-itinary/<int:itinary_id>/', EditItinary.as_view(), name='edit_itinary'),

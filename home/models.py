@@ -2,7 +2,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django_summernote.fields import SummernoteTextField
-
+from tinymce.models import HTMLField
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         """
@@ -76,6 +76,9 @@ class CompanyProfile(models.Model):
     about_us = SummernoteTextField()
     why_us = SummernoteTextField(default="about us")
     home_image = models.ImageField(upload_to='company_images', blank=True, null=True)
+    home_image1 = models.ImageField(upload_to='company_images', blank=True, null=True)
+    home_image2 = models.ImageField(upload_to='company_images', blank=True, null=True)
+    home_image3 = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner1_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner2_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     logo_image =  models.ImageField(upload_to='company_images', blank=True, null=True)

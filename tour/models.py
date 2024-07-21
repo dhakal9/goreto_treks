@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django_summernote.fields import SummernoteTextField
 from autoslug import AutoSlugField
+from tinymce.models import HTMLField
 # Create your models here.
 class DestinationModel(models.Model):
     destination_id = models.AutoField(primary_key=True)
@@ -20,12 +21,14 @@ class DestinationModel(models.Model):
     def __str__(self):
         return self.name
     
+    
+    
 class RegionModel(models.Model):
     region_id = models.AutoField(primary_key=True)
     destination = models.ForeignKey(DestinationModel, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=False, blank=False)
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
-    description =  SummernoteTextField()
+    description =  HTMLField()
     is_active = models.BooleanField(default=True)
     is_nav = models.BooleanField(default=False)
     is_special = models.BooleanField(default=False)

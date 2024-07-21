@@ -471,7 +471,13 @@ class Activities(View):
     def get(self, request):
         return render(request, self.template_name)
     
+
+class GoretoSpecial(View):
+    template_name="goreto_special.html"
     
+    def get(self, request):
+        goreto_special = RegionModel.objects.filter(is_special = True)
+        return render(request, self.template_name, {'goreto_special': goreto_special})
 
 class Trekking(View):
     template_name = 'trekking.html'

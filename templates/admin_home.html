@@ -72,7 +72,6 @@
                         </div>
                     </div>    
                 </div>
-    
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -82,6 +81,31 @@
                         </div>
                     </div>
                 
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Home Page Image 1</label>
+                            {{form.home_image1}}
+                            <img class="card-img-top" src="{{ company.home_image1.url }}" style="width: 50%; height: 100px;"  alt="Card image cap"> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Home Page Image 2</label>
+                                {{ form.home_image2 }}
+                                <img class="card-img-top" src="{{ company.home_image2.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                            </div>
+                        </div>
+                    
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Home Page Image 3</label>
+                                {{form.home_image3}}
+                                <img class="card-img-top" src="{{ company.home_image2.url }}" style="width: 50%; height: 100px;"  alt="Card image cap">
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
                             <label>Banner 1:</label>

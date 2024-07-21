@@ -4,9 +4,8 @@
 
 <main>
 	
-		<!-- banner-section -->
-         
-<section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
+<!-- banner-section --> 
+{% comment %} <section class="banner-section style-two centred" style="background-image: url({{company.home_image.url}});">
     <div class="auto-container">
         <div class="content-box">
             <h2>{{company.slogan1}}</h2>
@@ -20,9 +19,149 @@
             </div>
         </div>
     </div>
+</section>  {% endcomment %}
+
+
+<style>
+    .banner-section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        transition: background-image 0.5s ease-in-out;
+    }
+
+    {% comment %} .carousel-control-prev,
+    .carousel-control-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+    } {% endcomment %}
+
+    .carousel-control-prev {
+        left: 100%;
+    }
+
+    .carousel-control-next {
+        right: 100%;
+    }
+
+    .search-bar {
+        position: absolute;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+</style>
+
+
+<section class="banner-section style-two centred" id="bannerSection" style="background-image: url('{{ company.home_image.url }}');">
+    <div class="auto-container">
+        <div class="content-box">
+            <h2>{{ company.slogan1 }}</h2>
+            <p>{{ company.slogan2 }}</p>
+
+            <!-- Search bar -->
+            <div class="search-bar" id="searchBarContainer">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search Your Destination...">
+                <!-- Container to display the filtered results -->
+                <div class="search-results" id="searchResults"></div>
+            </div>
+
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" href="#" role="button" id="prevControl">
+            
+                <button class="nav-button left" onclick="slideImage(-1)"></button>
+            </a>
+            <a class="carousel-control-next" href="#" role="button" id="nextControl">
+                
+                <button class="nav-button left" onclick="slideImage(-1)"></button>
+            </a>
+        </div>
+    </div>
 </section>
 
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const bannerSection = document.getElementById('bannerSection');
+        const images = [
+            '{{ company.home_image.url }}', 
+            '{{ company.home_image1.url }}', 
+            '{{ company.home_image2.url }}', 
+            '{{ company.home_image3.url }}'
+        ];
+        const prevControl = document.getElementById('prevControl');
+        const nextControl = document.getElementById('nextControl');
+        let currentIndex = 0;
+
+        function updateBanner() {
+            bannerSection.style.backgroundImage = `url(${images[currentIndex]})`;
+        }
+
+        prevControl.addEventListener('click', function (event) {
+            event.preventDefault();
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            updateBanner();
+        });
+
+        nextControl.addEventListener('click', function (event) {
+            event.preventDefault();
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateBanner();
+        });
+
+        setInterval(() => {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateBanner();
+        }, 5000); // Change slide every 5 seconds
+    });
+</script>
+
+
+
+
+
+{% comment %} 
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+      <div class="carousel-item active">
+        <img style="float: left; width: 1550px; height:650px; object-fit: cover;" class="d-block" src="{{company.home_image.url}}" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img style="float: left; width: 1550px; height:650px; object-fit: cover;" class="d-block" src="{{company.home_image.url}}" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img style="float: left; width: 1550px; height:650px; object-fit: cover;" class="d-block" src="{{company.home_image.url}}" alt="Third slide">
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div> {% endcomment %}
+
+    
+<script>
+    $('.carousel').carousel({
+        interval: 5000
+      })
+</script>
 <script>
     // Parse destinations, tours, and regions JSON data
     const destinations = JSON.parse('{{ destinations_json | escapejs }}');
@@ -109,19 +248,25 @@
         justify-content: center; /* Center the search bar */
         position: relative; /* Added to position search-results correctly */
     }
-    
+
     .search-input {
         width: 70%; /* Adjust width as needed */
         max-width: 400px; /* Set maximum width */
         padding: 12px;
-        border: 1px solid #ccc;
+        background: rgba(255, 255, 255, 0.2); /* Set background to semi-transparent white */
+        border: 1px solid rgba(255, 255, 255, 0.2); /* Make border semi-transparent */
         border-radius: 5px;
         font-size: 16px;
+        color: #000; /* Set text color to black for better readability */
     }
-    
+
+    .search-input::placeholder {
+        color: rgba(0, 0, 0, 0.7); /* Adjust placeholder text color for readability */
+    }
+
     .theme-btn {
         padding: 12px 20px;
-        background-color: #072063; /* Button color */
+        background-color: rgba(7, 32, 99, 0.8); /* Button color with transparency */
         color: white;
         border: none;
         border-radius: 5px;
@@ -130,14 +275,14 @@
         display: flex;
         align-items: center;
     }
-    
+
     .theme-btn:hover {
-        background-color: #0056b3; /* Darker shade on hover */
+        background-color: rgba(255, 255, 255, 0.2); /* Darker shade on hover with transparency */
     }
-    
+
     .search-results {
-        background-color: white;
-        border: 1px solid #ccc;
+        background: rgba(255, 255, 255, 0.2); /* Set background to semi-transparent white */
+        border: 1px solid rgba(204, 204, 204, 0.5); /* Make border semi-transparent */
         border-top: none;
         border-radius: 0 0 5px 5px;
         max-height: 200px;
@@ -151,44 +296,43 @@
         z-index: 1000;
         display: none; /* Initially hidden */
     }
-    
+
     .result-item {
         display: block;
         padding: 10px;
         text-decoration: none;
         color: black;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.5); /* Make border semi-transparent */
     }
-    
+
     .result-item:hover {
-        background-color: #f0f0f0;
+        background-color: rgba(255, 255, 255, 0.2);; /* Hover background with transparency */
     }
-    
+
     /* Media query for responsiveness */
     @media screen and (max-width: 768px) {
         .search-input {
             width: 80%; /* Adjust width for smaller screens */
             margin-bottom: 10px; /* Add margin between input and button */
         }
-    
+
         .search-bar {
             flex-direction: column; /* Stack items vertically */
             align-items: center; /* Center items horizontally */
         }
-    
+
         .theme-btn {
             margin-left: 0; /* Remove left margin */
             border-radius: 5px; /* Adjust button radius */
         }
-    
+
         .search-results {
             width: 80%; /* Adjust width for smaller screens */
             max-width: none;
         }
     }
-    
-    
 </style>
+
 
 
 <!-- banner-section end -->
@@ -244,8 +388,8 @@
                         </style>
                         <div class="lower-content">
                            
-                            <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' tour.slug %}">{{tour.name}}</a></h3>
-                            {% comment %} <h4>{{tour.price}}$<span> / Per person</span> <del>{{tour.max_price}}$</del> </h4> {% endcomment %}
+                            <h3><i class="fas fa-map-marker-alt"></i><a href="{% url 'tour_details' tour.slug %}">{{tour.name}}</a></h3>
+                            
                             <ul class="info clearfix">
                                 <li><i class="far fa-mountain"></i>{{tour.altitude}}</li>
                                 <li><i class="far fa-map"></i>Trip Grade:<a> {{tour.difficulty_level}} </a>  </li>

@@ -31,7 +31,10 @@
 	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}"/>
 	<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/toastr.css' %}"/>
-	
+
+
+
+
 
     {% comment %} <link href="Content/assets/css/font-awesome-all.css" rel="stylesheet">
     <link href="Content/assets/css/flaticon.css" rel="stylesheet">
@@ -153,9 +156,6 @@
 								<li class="mr-3"><a href="https://wa.me/+9779851316017" target="_blank"><i class="fab fa-whatsapp" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank"><i class="fab fa-tripadvisor" style="font-size: 20px"></i></a></li>
 								<li class="mr-3"><a href="https://twitter.com/goretotreks" target="_blank"><i class="fa fa-twitter" style="font-size: 20px;"></i></a></li>
-								{% comment %} <li class="mr-3"><a href="https://twitter.com/twitter?ref_src=twsrc%5Etfw" class="twitter" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></li> {% endcomment %}
-							
-								{% comment %} <li class="mr-3"><a href="https://twitter.com/goretotreks"><img src="{% static "assets/images/twitter.png"%}" alt="Twitter X" style="width: 30px; height: 20px;"></a></li> {% endcomment %}
 								<li class="mr-3"><a href="https://www.youtube.com/@goretotreks1606" target="_blank"><i class="fab fa-youtube" style="font-size: 20px;"></i></a></li>
 								<li class="mr-3"><a href="https://www.linkedin.com/in/goreto-treks-501788305/" target="_blank"><i class="fab fa-linkedin" style="font-size: 20px;"></i></a></li>
 								<li class="mr-3"><a href="https://www.reddit.com/user/GoretoTreks/?share_id=nlU8UWIw5H_gHjoR_z3GI&utm_content=1&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=5" target="_blank"><i class="fab fa-reddit" style="font-size: 20px;"></i></a></li>
@@ -255,7 +255,12 @@
 											</li>
 											
 											<li class="dropdown">
-												<a href="#">Goreto Special</a>
+												<a href="{%url 'goreto_special'%}">Goreto Special</a>
+												{% comment %} <ul>
+																				
+													<li>{% for special in goreto_special %}<a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
+																							
+												</ul> {% endcomment %}
 											</li>
 										</ul>
 									</div>

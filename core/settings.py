@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'home',
     'tour',
     'django_summernote',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -194,4 +195,6 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 SUMMERNOTE_THEME = 'bs4'
 
+TINYMCE_JS_URL = 'https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js'
+TINYMCE_COMPRESSOR = False
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
