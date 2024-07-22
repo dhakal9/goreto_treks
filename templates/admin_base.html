@@ -8,8 +8,10 @@
 
     <link  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    {% comment %} <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css" /> {% endcomment %}
     
-
+   
     {% load static %}
 
     
@@ -250,6 +252,42 @@
   var y = document.getElementById("chatview")
   y.scrollTop = y.scrollHeight;
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      CKEDITOR.replaceAll('ckeditor');
+  });
+</script> 
+{% comment %} <script type="importmap">
+  {
+      "imports": {
+          "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
+          "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
+      }
+  }
+</script>
+<script type="module">
+  import {
+      ClassicEditor,
+      Essentials,
+      Bold,
+      Italic,
+      Font,
+      Paragraph
+  } from 'ckeditor5';
+
+  ClassicEditor
+      .create( document.querySelector( '#editor' ), {
+          plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
+          toolbar: {
+              items: [
+                  'undo', 'redo', '|', 'bold', 'italic', '|', 
+                  'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
+              ]
+          }
+      } )
+      .then( /* ... */ )
+      .catch( /* ... */ );
+</script> {% endcomment %}
 
 </body>
 </html>

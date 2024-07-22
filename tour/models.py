@@ -2,13 +2,15 @@ from django.db import models
 from django.utils.text import slugify
 from django_summernote.fields import SummernoteTextField
 from autoslug import AutoSlugField
-from tinymce.models import HTMLField
+# from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
+
 # Create your models here.
 class DestinationModel(models.Model):
     destination_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     slogan = models.CharField(max_length=255, null=False, blank=False)
-    description = SummernoteTextField()
+    description = RichTextField()
     is_active = models.BooleanField(default=True)
     image = models.ImageField(upload_to='blog_images', blank=True, null=True)
     # slug = models.SlugField(default="default")
@@ -28,7 +30,7 @@ class RegionModel(models.Model):
     destination = models.ForeignKey(DestinationModel, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=False, blank=False)
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
-    description =  HTMLField()
+    description =  RichTextField()
     is_active = models.BooleanField(default=True)
     is_nav = models.BooleanField(default=False)
     is_special = models.BooleanField(default=False)
@@ -45,7 +47,7 @@ class TourDetailsModel(models.Model):
     destination = models.ForeignKey(DestinationModel, null=False, on_delete=models.CASCADE)
     region = models.ForeignKey(RegionModel, null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=False, blank=False)
-    description = SummernoteTextField()
+    description = RichTextField()
     depature = models.CharField(max_length=100, null=True, blank=True)
     start_end = models.CharField(max_length=200, null=True, blank=True)
     max_price = models.CharField(max_length=200, null=True, blank=True)
@@ -56,7 +58,7 @@ class TourDetailsModel(models.Model):
     age = models.CharField(max_length=200, null=True, blank=True)
     days = models.CharField(max_length=200, null=True, blank=True)
     map = models.URLField(db_index=True, unique=True, blank=True, max_length=2048)
-    map_overview = SummernoteTextField()
+    map_overview = RichTextField()
     image = models.ImageField(upload_to='blog_images', blank=False, null=True)
     is_activity = models.BooleanField(default=False)
     is_attraction = models.BooleanField(default=False)
@@ -73,7 +75,7 @@ class ItinatyModel(models.Model):
     name = models.CharField(max_length=200, null=False, blank=False)
     day = models.CharField(max_length=2, null=False, blank=False )
     # start_end = models.CharField(max_length=200, null=True, blank=True)
-    description = SummernoteTextField()
+    description = RichTextField()
 
 class GallaryModel(models.Model):
     image_id = models.AutoField(primary_key=True)
@@ -98,7 +100,7 @@ class TourIncludeExcludeModel(models.Model):
 class FaqModels(models.Model):
     id = models.AutoField(primary_key=True)
     question = models.CharField(max_length=250, null=False, blank=False)
-    answer = SummernoteTextField()
+    answer = RichTextField()
     is_global = models.BooleanField(default=False)
 
 class TourFaqModels(models.Model):

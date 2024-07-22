@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 from django.db import models
 from django_summernote.fields import SummernoteTextField
 from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         """
@@ -73,7 +75,7 @@ class CompanyProfile(models.Model):
     about_sub_heading = models.CharField(max_length = 200)
     about_heading = models.CharField(max_length = 200)
     about_thumbnail = models.ImageField(upload_to='company_images', blank=True, null=True)
-    about_us = SummernoteTextField()
+    about_us = RichTextField()
     why_us = SummernoteTextField(default="about us")
     home_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     home_image1 = models.ImageField(upload_to='company_images', blank=True, null=True)
@@ -100,7 +102,7 @@ class OurTeamModel(models.Model):
     team_id =  models.AutoField(primary_key=True)
     name = models.CharField(max_length = 200) 
     position = models.CharField(max_length = 200)
-    message=SummernoteTextField()
+    message=RichTextField()
     team_image =  models.ImageField(upload_to='blog_images/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
     
@@ -126,7 +128,7 @@ class FunfactModel(models.Model):
 class BlogsModel(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length = 200, blank=False, null=False)
-    description =  SummernoteTextField()
+    description =  RichTextField()
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
@@ -135,7 +137,7 @@ class BlogsModel(models.Model):
 class CsrModel(models.Model):
     id = models.AutoField(primary_key=True)
     title =models.CharField(max_length = 200, blank=False, null=False)
-    description =  SummernoteTextField()
+    description =  RichTextField()
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)

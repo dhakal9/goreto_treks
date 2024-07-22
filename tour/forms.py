@@ -2,11 +2,13 @@ from django import forms
 from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels
 from django_summernote.widgets import SummernoteWidget
 from django.forms import inlineformset_factory
+# from tinymce.widgets import TinyMCE
+from ckeditor.widgets import CKEditorWidget
 
 class DestinationForm(forms.ModelForm):
     name = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Country Name', 'class': 'form-control'}))
     slogan = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'placeholder': 'Where culture meets nature', 'class': 'form-control'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    description = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
@@ -16,7 +18,7 @@ class DestinationForm(forms.ModelForm):
 
 class RegionForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control','summernote': {'height': '500px', 'width': '100%'}}))
+    description = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     destination = forms.ModelChoiceField(queryset=DestinationModel.objects.all(), widget=forms.Select(attrs={'class': 'form-control'}))
 
@@ -42,7 +44,7 @@ class TourDetailsForm(forms.ModelForm):
                                      widget=forms.Select(attrs={'class': 'form-control'}))
     
     name = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    description = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     depature = forms.CharField(max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     max_price = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -53,7 +55,7 @@ class TourDetailsForm(forms.ModelForm):
     age = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     days = forms.CharField(max_length=500, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     map = forms.URLField(max_length=2048, required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
-    map_overview = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    map_overview = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     is_activity = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_attraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
@@ -197,7 +199,7 @@ class TourIncludeExcludeForm(forms.ModelForm):
 
 class FaqForm(forms.ModelForm):
     question = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    answer = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    answer = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     class Meta:
         model = FaqModels
         fields ="__all__"

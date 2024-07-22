@@ -32,7 +32,7 @@ urlpatterns = [
     re_path('', include('home.urls')),
     re_path('', include('tour.urls')),
     re_path('summernote/', include('django_summernote.urls')),
-    re_path('tinymce/', include('tinymce.urls')),
+    re_path('ckeditor/', include('ckeditor_uploader.urls')),
     
 ]
 if settings.DEBUG:

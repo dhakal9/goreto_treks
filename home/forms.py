@@ -3,6 +3,7 @@ from django import forms
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django_summernote.widgets import SummernoteWidget
+from ckeditor.widgets import CKEditorWidget
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField(max_length=50, required=True, widget=forms.EmailInput(attrs={'placeholder':'abc@email.com', 'class':'form-control'}))
@@ -32,8 +33,8 @@ class CompanyProfileForm(forms.ModelForm):
         about_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_sub_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_thumbnail = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
-        about_us = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
-        why_us = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+        about_us = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
+        why_us = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
         home_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         home_image1 = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         home_image2 = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
@@ -74,7 +75,7 @@ class FunfactForm(forms.ModelForm):
 
 class OurTeamForm(forms.ModelForm):
     name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    message = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    message = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     position = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
     team_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     class Meta:
@@ -90,7 +91,7 @@ class ContactUs(forms.Form):
     
 class BlogsForm(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    description = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     
     class Meta:
@@ -99,7 +100,7 @@ class BlogsForm(forms.ModelForm):
 
 class CsrForm(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    description = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     
     class Meta:
@@ -115,7 +116,7 @@ class MainGallaryForm(forms.ModelForm):
 
 class WhyUsForms(forms.ModelForm):
     title = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '500px', 'width': '100%'}}))
+    description = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
     
     class Meta:
         model = WhyUsModel
