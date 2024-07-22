@@ -64,13 +64,17 @@ class Index(View):
         tours = TourDetailsModel.objects.filter(is_attraction=True)
         reg_reg = RegionModel.objects.all()
         tor_tor = TourDetailsModel.objects.all()
+        blogs = BlogsModel.objects.all()
+        csr = CsrModel.objects.all()
         
         destinations_json = serialize('json', destinations)
         tours_json = serialize('json', tor_tor)
         regions_json = serialize('json', reg_reg)
+        blogs_json = serialize('json', blogs)
+        csr_json = serialize('json', csr)
         
         
-        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'tor_tor':tor_tor, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json,})
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'tor_tor':tor_tor, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json, 'blogs_json':blogs_json, 'csr_json':csr_json })
     
 
     

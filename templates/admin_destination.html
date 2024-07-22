@@ -82,7 +82,7 @@
         <tr>
         <td>{{destination.name}} </td>
         <td> {{designation.slogan}}</td>
-        <td>{{destination.description}} </td>
+        <td>{{destination.description|slice:":300"|safe  }}....... </td>
         <td><img src="{{destination.image.url}}" style="width: 50px; height: 45px;"></td>
         <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
         <td>

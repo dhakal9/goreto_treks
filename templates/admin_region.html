@@ -81,7 +81,7 @@
      {% for region in regions %} 
     <tr>
     <td>{{region.name}} </td>
-    <td> {{region.description}}</td>
+    <td>{{ region.description|slice:":300"|safe  }}.......</td>
     <td>{{region.destination.name}} </td>
     <td><img src="{{region.destination.image.url}}" style="width: 50px; height: 45px;"></td>
     <td>

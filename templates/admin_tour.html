@@ -271,6 +271,34 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Total Reviews</label><br>
+                            {{ form.total_reviews }}
+                            {% if form.total_reviews.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.star_rating.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Rating out of 5</label><br>
+                            {{ form.star_rating }}
+                            {% if form.star_rating.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.star_rating.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
 
                 <div class="submit-section">
                     <button class="btn btn-primary submit-btn" type="submit">Submit</button>

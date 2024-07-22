@@ -32,7 +32,7 @@
 {% for faq in faqs %} 
 <tr>
 <td>{{faq.question}} </td>
-<td> {{faq.answer}}</td>
+<td> {{faq.answer|slice:":300"|safe  }}.......</td>
 
 <td><a href="{% url 'change_faq' faq.id %}">{% if faq.is_global is True %} <span class="badge badge-success rounded-pill d-inline">Global</span> {%else%}<span class="badge badge-secondary rounded-pill d-inline">Local</span> {%endif%} </a>  </td>
 <td>

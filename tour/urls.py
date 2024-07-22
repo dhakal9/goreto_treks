@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView, GoretoSpecial
+from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView, GoretoSpecial, SpecialView
 from . import views
 
 urlpatterns = [
@@ -43,7 +43,8 @@ urlpatterns = [
     path('assign-faqs-to-tour/<int:tour_id>/', AssignFaqsToTourView.as_view(), name='assign_faqs_to_tour'),
     path('remove-faqs-to-tour/<int:id>/', UnassignFaqsToTourView.as_view(), name='unassign_faqs_to_tour'),
     path('get_tour_itineraries/', get_tour_itineraries, name='get_tour_itineraries'),
-    path('delete_itinerary/', delete_itinerary, name='delete_itinerary')
+    path('delete_itinerary/', delete_itinerary, name='delete_itinerary'),
+    path('adminspecial/', SpecialView.as_view(), name="admin_special"),
  ]
  # gauley bhai
  #pip uninstall bleach

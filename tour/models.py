@@ -66,6 +66,8 @@ class TourDetailsModel(models.Model):
     slug = AutoSlugField(populate_from='name', default='', unique=True)
     difficulty_level = models.CharField(max_length=10, choices=DIFFICULTY_CHOICES, default='moderate')
     itinary_pdf = models.FileField(upload_to='documents', null=True, blank=True)
+    total_reviews = models.CharField(max_length=200, null=True, blank=True, default='79')
+    star_rating = models.CharField(max_length=200, null=True, blank=True,default='5' )
     def __str__(self):
         return self.name
 
@@ -108,3 +110,7 @@ class TourFaqModels(models.Model):
     tour = models.ForeignKey(TourDetailsModel, on_delete=models.CASCADE)
     question = models.ForeignKey(FaqModels, on_delete=models.CASCADE)
     
+class SpecialModels(models.Model):
+    id = models.AutoField(primary_key=True)
+    trekking_des = RichTextField()
+    goreto_special_des = RichTextField()

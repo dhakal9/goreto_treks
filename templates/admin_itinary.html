@@ -52,7 +52,7 @@
                         <td>{{ itinary.tour.name }}</td>
                         <td>{{ itinary.day }}</td>
                         <td>{{ itinary.name }}</td>
-                        <td>{{ itinary.description|safe }}</td>
+                        <td>{{ itinary.description|slice:":300"|safe  }}.......</td>
                         <td><span class="badge badge-success rounded-pill d-inline">Active</span></td>
                         <td>
                             <a type="button" href="{% url 'edit_itinary' itinary.itinary_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
@@ -66,7 +66,7 @@
 </div>
 
 <!-- Include CKEditor 4 -->
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+{% comment %} <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script> {% endcomment %}
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

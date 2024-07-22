@@ -34,7 +34,7 @@ class CompanyProfileForm(forms.ModelForm):
         about_sub_heading = forms.CharField(max_length=50, required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
         about_thumbnail = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         about_us = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
-        why_us = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
+        why_us = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor'}))
         home_image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         home_image1 = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
         home_image2 = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))

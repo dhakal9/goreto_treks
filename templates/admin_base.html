@@ -9,6 +9,7 @@
     <link  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.0/mdb.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
     <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    {% comment %} <script src="https://cdn.ckeditor.com/4.24.0-lts/standard/ckeditor.js"></script> {% endcomment %}
     {% comment %} <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.css" /> {% endcomment %}
     
    
@@ -156,7 +157,12 @@
                 <li><a href="{% url 'admin_seo' %}">Write SEO</a></li>
               </ul>
             </li>
-
+            <li>
+              <a href="#"><i class="la la-plane"></i> <span>Special & Trekking </span> <span class="menu-arrow"></span></a>
+              <ul style="display: none;">
+                <li><a href="{% url 'admin_special' %}">Treks & Special </a></li>
+              </ul>
+            </li>
           </ul>
         </div>
               </div>
@@ -190,6 +196,12 @@
               } 
               
             </style>
+            <style>
+              /* Hide the entire CKEditor notification section */
+              .cke_notifications_area {
+                  display: none !important;
+              }
+          </style>
 
     {% block content %}
    
@@ -252,42 +264,14 @@
   var y = document.getElementById("chatview")
   y.scrollTop = y.scrollHeight;
 </script>
-<script>
+
+ <script>
   document.addEventListener("DOMContentLoaded", function() {
       CKEDITOR.replaceAll('ckeditor');
   });
 </script> 
-{% comment %} <script type="importmap">
-  {
-      "imports": {
-          "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/42.0.1/ckeditor5.js",
-          "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/42.0.1/"
-      }
-  }
-</script>
-<script type="module">
-  import {
-      ClassicEditor,
-      Essentials,
-      Bold,
-      Italic,
-      Font,
-      Paragraph
-  } from 'ckeditor5';
 
-  ClassicEditor
-      .create( document.querySelector( '#editor' ), {
-          plugins: [ Essentials, Bold, Italic, Font, Paragraph ],
-          toolbar: {
-              items: [
-                  'undo', 'redo', '|', 'bold', 'italic', '|', 
-                  'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
-              ]
-          }
-      } )
-      .then( /* ... */ )
-      .catch( /* ... */ );
-</script> {% endcomment %}
+
 
 </body>
 </html>

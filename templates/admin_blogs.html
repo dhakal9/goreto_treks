@@ -39,7 +39,7 @@
         <tr>
         <td>{{blog.title}} </td>
         <td><img src="{{blog.image.url}}" style="width: 50px; height: 45px;"></td>
-        <td>{{blog.description|wordwrap:"10"|slice:":100"}}....... </td>
+        <td>{{blog.description|slice:":300"|safe  }}........ </td>
         <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
         <td>
         <a type="button" href="{% url 'update_blogs' blog.id%}" class="btn btn-link btn-sm btn-rounded">

@@ -1,5 +1,5 @@
 from django import forms
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels, SpecialModels
 from django_summernote.widgets import SummernoteWidget
 from django.forms import inlineformset_factory
 # from tinymce.widgets import TinyMCE
@@ -55,13 +55,15 @@ class TourDetailsForm(forms.ModelForm):
     age = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     days = forms.CharField(max_length=500, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     map = forms.URLField(max_length=2048, required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
-    map_overview = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
+    map_overview = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor'}))
     image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
     is_activity = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_attraction = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     is_active = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={'class': 'my-checkbox-class'}))
     difficulty_level = forms.ChoiceField(choices=TourDetailsModel.DIFFICULTY_CHOICES, required=True, widget=forms.Select(attrs={'class': 'form-control'}))
     itinary_pdf = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    total_reviews = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    star_rating = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -215,3 +217,10 @@ class AssignFaqsToTourForm(forms.ModelForm):
     def label_from_instance(self, obj):
         return obj.question
 
+class SpecialForm(forms.ModelForm):
+    trekking_des = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor', 'id':'editor1'}))
+    goreto_special_des = forms.CharField(widget=CKEditorWidget(attrs={'class': 'ckeditor'}))
+    class Meta:
+        model = SpecialModels
+        fields ="__all__"
+        

@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel, FaqModels, TourFaqModels
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm, FaqForm, AssignFaqsToTourForm
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel, FaqModels, TourFaqModels, SpecialModels
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm, FaqForm, AssignFaqsToTourForm, SpecialForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -477,7 +477,8 @@ class GoretoSpecial(View):
     
     def get(self, request):
         goreto_special = RegionModel.objects.filter(is_special = True)
-        return render(request, self.template_name, {'goreto_special': goreto_special})
+        descriptions = SpecialModels.objects.first()
+        return render(request, self.template_name, {'goreto_special': goreto_special, 'descriptions':descriptions})
 
 class Trekking(View):
     template_name = 'trekking.html'
@@ -485,7 +486,8 @@ class Trekking(View):
     def get(self, request):
         nepali_regions = RegionModel.objects.filter(is_nav=False)
         only_trekkings = TourDetailsModel.objects.filter(region__in=nepali_regions)
-        return render(request, self.template_name, {'only_trekkings': only_trekkings})
+        descriptions = SpecialModels.objects.first()
+        return render(request, self.template_name, {'only_trekkings': only_trekkings, 'descriptions':descriptions})
 
 class AdminIncludeExclude(LoginRequiredMixin, View):
     template_name = 'admin_include_exclude.html'
@@ -661,3 +663,21 @@ class UnassignFaqsToTourView(LoginRequiredMixin, View):
         assigned_faq.delete()
         messages.success(request, 'FAQ unassigned successfully')
         return redirect('assign_faqs_to_tour', tour_id=tour_id)
+
+class SpecialView(LoginRequiredMixin, View):
+    template_name = 'admin_special.html'
+    form = SpecialForm
+
+    def get(self, request):
+        company_profile = SpecialModels.objects.first()
+        form = self.form(instance=company_profile)  # Pass instance to make it updateable
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        company_profile = SpecialModels.objects.first()
+        form = self.form(request.POST, request.FILES, instance=company_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_special')  # Redirect to the same page after saving
+
+        return render(request, self.template_name, {'form': form})

@@ -162,83 +162,92 @@
         interval: 5000
       })
 </script>
-<script>
-    // Parse destinations, tours, and regions JSON data
-    const destinations = JSON.parse('{{ destinations_json | escapejs }}');
-    const tours = JSON.parse('{{ tours_json | escapejs }}');
-    const regions = JSON.parse('{{ regions_json | escapejs }}'); 
-
+<script type="module">
+    // Parse destinations, tours, regions, blogs, and csr JSON data
+    const destinations = JSON.parse('{{ destinations_json|escapejs }}');
+    const tours = JSON.parse('{{ tours_json|escapejs }}');
+    const regions = JSON.parse('{{ regions_json|escapejs }}');
+    const blogs = JSON.parse('{{ blogs_json|escapejs }}');
+    const csr = JSON.parse('{{ csr_json|escapejs }}');
+  
     // Get references to the input and result container
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
-
+  
     // Function to filter results
     function filterResults() {
-        // Get the search query
-        const query = searchInput.value.toLowerCase();
-
-        // Clear previous results
-        searchResults.innerHTML = '';
-
-        if (query.length === 0) {
-            searchResults.style.display = 'none';
-            return;
+      // Get the search query
+      const query = searchInput.value.toLowerCase();
+  
+      // Clear previous results
+      searchResults.innerHTML = '';
+  
+      if (query.length === 0) {
+        searchResults.style.display = 'none';
+        return;
+      }
+  
+      // Filter destinations, tours, regions, blogs, and csr based on the query
+      const filteredDestinations = destinations.filter(destination => destination.fields.name.toLowerCase().includes(query));
+      const filteredTours = tours.filter(tour => tour.fields.name.toLowerCase().includes(query));
+      const filteredRegions = regions.filter(region => region.fields.name.toLowerCase().includes(query));
+      const filteredBlogs = blogs.filter(blog => blog.fields.title.toLowerCase().includes(query));
+      const filteredCsr = csr.filter(csrItem => csrItem.fields.title.toLowerCase().includes(query));
+  
+      // Combine all filtered results
+      const allResults = filteredDestinations.concat(filteredTours, filteredRegions, filteredBlogs, filteredCsr);
+  
+      if (allResults.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">No results found</div>';
+        searchResults.style.display = 'block';
+        return;
+      }
+  
+      // Display up to nine filtered results
+      for (let i = 0; i < Math.min(9, allResults.length); i++) {
+        const result = allResults[i];
+        const resultElement = document.createElement('a');
+        resultElement.textContent = result.fields.name || result.fields.title;
+        resultElement.classList.add('result-item');
+  
+        // Set different href based on the result type
+        if (filteredDestinations.includes(result)) {
+          resultElement.setAttribute('href', '/destination/' + result.fields.slug + '/'); // Destination URL
+        } else if (filteredTours.includes(result)) {
+          resultElement.setAttribute('href', '/tourdetails/' + result.fields.slug + '/'); // Tour URL
+        } else if (filteredRegions.includes(result)) {
+          resultElement.setAttribute('href', '/activities/' + result.fields.slug + '/'); // Region URL
+        } else if (filteredBlogs.includes(result)) {
+          resultElement.setAttribute('href', '/blogs/' + result.pk); // Blog URL
+        } else if (filteredCsr.includes(result)) {
+          resultElement.setAttribute('href', '/csr/' + result.pk); // CSR URL
         }
-
-        // Filter destinations, tours, and regions based on the query
-        const filteredDestinations = destinations.filter(destination => destination.fields.name.toLowerCase().includes(query));
-        const filteredTours = tours.filter(tour => tour.fields.name.toLowerCase().includes(query));
-        const filteredRegions = regions.filter(region => region.fields.name.toLowerCase().includes(query));
-
-        // Combine all filtered results
-        const allResults = filteredDestinations.concat(filteredTours, filteredRegions);
-
-        if (allResults.length === 0) {
-            searchResults.innerHTML = '<div class="no-results">No results found</div>';
-            searchResults.style.display = 'block';
-            return;
-        }
-
-        // Display up to three filtered results
-        for (let i = 0; i < Math.min(9, allResults.length); i++) {
-            const result = allResults[i];
-            const resultElement = document.createElement('a');
-            resultElement.textContent = result.fields.name;
-            resultElement.classList.add('result-item');
-
-            // Set different href based on the result type
-            if (filteredDestinations.includes(result)) {
-                resultElement.setAttribute('href', '/destination/' + result.fields.slug + '/'); // Destination URL
-            } else if (filteredTours.includes(result)) {
-                resultElement.setAttribute('href', '/tourdetails/' + result.fields.slug + '/'); // Tour URL
-            } else {
-                resultElement.setAttribute('href', '/activities/' + result.fields.slug + '/'); // Region URL
-            }
-            searchResults.appendChild(resultElement);
-        }
-
-        // Add scrollbar to search results if necessary
-        searchResults.style.overflowY = allResults.length > 9 ? 'scroll' : 'hidden';
-        searchResults.style.display = 'block'; // Ensure the results are displayed
+        searchResults.appendChild(resultElement);
+      }
+  
+      // Add scrollbar to search results if necessary
+      searchResults.style.overflowY = allResults.length > 9 ? 'scroll' : 'hidden';
+      searchResults.style.display = 'block'; // Ensure the results are displayed
     }
-
+  
     // Listen for input event on the search input
     searchInput.addEventListener('input', filterResults);
-
+  
     // Close results when clicking outside
     document.addEventListener('click', (e) => {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.style.display = 'none';
-        }
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
     });
-
+  
     // Show results container when input is focused
     searchInput.addEventListener('focus', () => {
-        if (searchInput.value.length > 0) {
-            searchResults.style.display = 'block';
-        }
+      if (searchInput.value.length > 0) {
+        searchResults.style.display = 'block';
+      }
     });
-</script>
+  </script>
+  
 
 <style>
     .search-bar {
@@ -346,6 +355,7 @@
     </div>
         <div class="row clearfix">
         {% for tour in tours %}
+        {%if tour.region.is_special is False%}
             <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
                 <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                     <div class="inner-box">
@@ -354,7 +364,7 @@
                             <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{tour.image.url}}" alt="10 Days Annapurna Base Camp Trek">
                             <div class="bottom-left">
                                 <div class="rating">
-                                    <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
+                                    <span class="middleclass"><i class="fas fa-star"></i>{{tour.star_rating}} based on {{tour.total_reviews}} reviews</span>
                                 </div>
                             </div>
                             <div class="bottom-right">
@@ -402,6 +412,7 @@
                     </div>
                 </div>
             </div>
+                {%endif%}
                 {%endfor%}
     </div>
 </div>
@@ -420,7 +431,7 @@
         </div>
         <div class="row clearfix">
             
-            {% for tour in tor_tor %}
+            {% for tour in tours %}
                 {% if tour.region.is_special %}
                     <div class="col-lg-4 col-md-6 col-sm-12 tour-block">
                         <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
@@ -429,7 +440,7 @@
                                     <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{ tour.image.url }}" alt="{{ tour.name }}">
                                     <div class="bottom-left">
                                         <div class="rating">
-                                            <span class="middleclass"><i class="fas fa-star"></i>5 based on 133 reviews</span>
+                                            <span class="middleclass"><i class="fas fa-star"></i>{{tour.star_rating}} based on {{tour.total_reviews}} reviews</span>
                                         </div>
                                     </div>
                                     <div class="bottom-right">
