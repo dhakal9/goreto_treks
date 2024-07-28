@@ -39,9 +39,9 @@
     <section class="page-title style-three" style="background-image: url({{tour_details.image.url}}); ">
         <div class="auto-container">
             <div class="inner-box">
-                <div class="rating"><span><i class="fas fa-star"></i>8.0  based on 133 reviews</span></div>
+                <div class="rating"><span><i class="fas fa-star"></i>{{tour_details.star_rating}} based on {{tour_details.total_reviews}}  reviews</span></div>
                 <h2>{{tour_details.name}}</h2>
-                <h3>{{tour_details.price}}$<span> / Per person</span></h3>
+                <h3>{{tour_details.price}}<span> / Per person</span></h3>
             </div>
         </div>
     </section>
@@ -61,7 +61,7 @@
                                 {% comment %} <p>{{tour_details.description}}</p> {% endcomment %}
                                 <ul class="info-list clearfix">
                                     <li><i class="far fa-clock"></i>{{tour_details.days}}: Days</li>
-                                    <li><i class="far fa-user"></i>Age: {{tour_details.age}}+</li>
+                                    <li><i class="far fa-user"></i>Age: {{tour_details.age}}</li>
                                     <li><i class="far fa-map"></i>Trip Grade: {{tour_details.difficulty_level}}<li> 
                                     <li><i class="far fa-mountain"></i>Max. Altitude: {{tour_details.altitude}} </li>
                                     <li><i class="far fa-bus-school"></i>Transport: {{tour_details.transport}}</li>
@@ -97,6 +97,7 @@
                                 </li>
                             </ul>
                         </div>
+                        {% if tour_details.days <= 1 %}
                         <div class="tour-plan">
                             <div class="text">
                                 <h2>Tour Plan / Itinerary</h2>
@@ -140,6 +141,7 @@
                                 transition: all 500ms ease;
                             }
                         </style>
+                        {% endif %}
                         <div class="location-map">
                             <div class="text">
                                 <h2>Map Overview</h2>
@@ -155,7 +157,7 @@
                             </div>
                         </div>
                         
-    
+                        {% if images %}
                             <div class="photo-gallery" id="gallery" >
                                 <div class="text">
                                     <h2>Photo Gallery</h2>
@@ -171,6 +173,8 @@
                                     {% endfor%}
                                 </div>
                             </div>
+                        {% endif %}
+                        {%if faqs%}
                             <div class="faq-content" id="faq">
                                 <div class="sec-title">
                                     <h2>Frequently Asked <br>Question</h2>
@@ -194,7 +198,7 @@
                                                 
                                 </ul>
                             </div>
-
+                        {% endif %}
                         <div class="comment-box mt-5">
                             <div class="text">
                                 <h2>Similar Trips</h2>
@@ -416,8 +420,12 @@
         <button onclick="scrollToSection('overview')">Overview</button>
         <button onclick="scrollToSection('gallery')">Gallery</button>
         <button onclick="scrollToSection('map')">Map</button>
+        {%if faqs%}
         <button onclick="scrollToSection('faq')">FAQ</button>
+        {%endif%}
+        {% if tour_details.days <= 1 %}
         <button onclick="scrollToSection('itinerary')">Itinerary</button>
+        {% endif %}
         <button onclick="scrollToSection('include-exclude')">Include/Exclude</button>
     </div> 
 {% comment %} booking Card {% endcomment %}

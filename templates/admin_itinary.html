@@ -19,12 +19,38 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Tour Name <span class="text-danger">*</span></label>
+                                <label>Tour Name <span class="text-danger">*</span></label>
                                 {{ form.tour }}
                             </div>
                         </div>
                     </div>  
-                    <div class="dynamic-fields"></div>
+                    <div class="dynamic-fields">
+                        {% for itinary in itinaries %}
+                            <div class="row border my-2 p-3 shadow" data-itinary-id="{{ itinary.itinary_id }}">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Day Sequence <span class="text-danger">*</span></label>
+                                        <input type="text" name="day_sequence_{{ forloop.counter }}" class="form-control" value="{{ itinary.day }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Plan Name <span class="text-danger">*</span></label>
+                                        <input type="text" name="plan_name_{{ forloop.counter }}" class="form-control" value="{{ itinary.name }}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Description <span class="text-danger">*</span></label>
+                                        <textarea name="description_{{ forloop.counter }}" class="form-control ckeditor">{{ itinary.description }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-danger delete-itinerary" data-itinary-id="{{ itinary.itinary_id }}">Delete</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <div class="submit-section">
                         <button class="btn btn-primary submit-btn" type="submit">Submit</button>
                     </div>
@@ -52,7 +78,7 @@
                         <td>{{ itinary.tour.name }}</td>
                         <td>{{ itinary.day }}</td>
                         <td>{{ itinary.name }}</td>
-                        <td>{{ itinary.description|slice:":300"|safe  }}.......</td>
+                        <td>{{ itinary.description|slice:":300"|safe }}.......</td>
                         <td><span class="badge badge-success rounded-pill d-inline">Active</span></td>
                         <td>
                             <a type="button" href="{% url 'edit_itinary' itinary.itinary_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
@@ -65,15 +91,9 @@
     </div>
 </div>
 
-<!-- Include CKEditor 4 -->
-{% comment %} <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script> {% endcomment %}
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function(){
-        // Initialize CKEditor for existing form description field
-        CKEDITOR.replaceAll('ckeditor');
-
         $('#id_tour').change(function(){
             var tourId = $(this).val();
             $.ajax({
@@ -85,13 +105,11 @@
                 success: function(data){
                     $('.dynamic-fields').empty();
 
-                    var numDays = parseInt(data.tour_days);
                     var itineraries = data.itineraries;
 
-                    for (var i = 1; i <= numDays; i++) {
-                        var itinerary = itineraries.find(it => it.day == i) || {itinary_id: '', name: '', description: ''};
-                        addItineraryFields(i, itinerary.itinary_id, i, itinerary.name, itinerary.description);
-                    }
+                    itineraries.forEach(function(itinerary, index) {
+                        addItineraryFields(index + 1, itinerary.itinary_id, itinerary.day, itinerary.name, itinerary.description);
+                    });
 
                     // Initialize CKEditor for all new textareas
                     $('.ckeditor').each(function(){
@@ -106,19 +124,19 @@
                 '<div class="row border my-2 p-3 shadow" data-itinary-id="' + itinary_id + '">' +
                     '<div class="col-sm-6">' +
                         '<div class="form-group">' +
-                            '<label>Day Sequence Day ' + day + ' <span class="text-danger">*</span></label>' +
+                            '<label>Day Sequence <span class="text-danger">*</span></label>' +
                             '<input type="text" name="day_sequence_' + index + '" class="form-control" value="' + day + '">' +
                         '</div>' +
                     '</div>' +
                     '<div class="col-sm-6">' +
                         '<div class="form-group">' +
-                            '<label>Plan Name Day ' + day + ' <span class="text-danger">*</span></label>' +
+                            '<label>Plan Name <span class="text-danger">*</span></label>' +
                             '<input type="text" name="plan_name_' + index + '" class="form-control" value="' + name + '">' +
                         '</div>' +
                     '</div>' +
                     '<div class="col-sm-12">' +
                         '<div class="form-group">' +
-                            '<label>Description Day ' + day + ' <span class="text-danger">*</span></label>' +
+                            '<label>Description <span class="text-danger">*</span></label>' +
                             '<textarea name="description_' + index + '" class="form-control ckeditor">' + description + '</textarea>' +
                         '</div>' +
                     '</div>' +

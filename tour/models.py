@@ -74,8 +74,8 @@ class TourDetailsModel(models.Model):
 class ItinatyModel(models.Model):
     itinary_id = models.AutoField(primary_key=True)
     tour = models.ForeignKey(TourDetailsModel, null= False, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200, null=False, blank=False)
-    day = models.CharField(max_length=2, null=False, blank=False )
+    name = models.CharField(max_length=200, null=True, blank=True)
+    day = models.CharField(max_length=8, null=True, blank=True )
     # start_end = models.CharField(max_length=200, null=True, blank=True)
     description = RichTextField()
 

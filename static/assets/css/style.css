@@ -2144,7 +2144,7 @@ div#mCSB_1_container{
 
 .tour-block-one .inner-box .lower-content{
   position: relative;
-  padding: 33px 35px 40px 40px;
+  padding: 33px 10px 40px 15px;
 }
 
 .tour-block-one .inner-box .lower-content .rating span{
@@ -6212,7 +6212,7 @@ div#mCSB_1_container{
 
 .tour-details .tour-sidebar{
   position: relative;
-  margin-top: -163px;
+  margin-top: 25px;
   z-index: 1;
 }
 

@@ -371,9 +371,7 @@
                                 <h5 class="middleclass"><i class="far fa-clock"></i> {{tour.days}} Day</h5>
                             </div>
                             <a href="{% url 'tour_details' tour.slug %}"><i class="fas fa-link"></i></a>
-                            <div class="price-overlay">Starting From {{tour.price}}
-
-                            </div>
+                            <div class="price-overlay">Starting From {{tour.price}} </div>
                         </figure>
                         
                         <style>
@@ -447,7 +445,7 @@
                                         <h5 class="middleclass"><i class="far fa-clock"></i> {{ tour.days }} Day</h5>
                                     </div>
                                     <a href="{% url 'tour_details' tour.slug %}"><i class="fas fa-link"></i></a>
-                                    <div class="price-overlay">Starting From {{ tour.price }}</div>
+                                    <div class="price-overlay">Starting From {{ tour.price }} $ </div>
                                 </figure>
 
                                 <style>
@@ -468,6 +466,8 @@
                                     .image-box:hover .price-overlay {
                                         opacity: 1;
                                     }
+
+                                    
                                 </style>
 
                                 <div class="lower-content">
@@ -493,17 +493,16 @@
     <div class="auto-container">
         <div class="row clearfix">
             <div class="col-lg-6">
-                <div class="about-description">
+                <div class="about-description text-justify ">
                     <div class="sec-title text-center">
                         <p>Namaste</p>
                         <hr>
                         <h2>Welcome to Goreto Treks!</h2>
                     </div>
-                    <p align="justify">{{company.about_us}}</p> <br>
-                    <p>Once again, a warm welcome to Goreto Treks !!!</p><br>
-                    {% comment %} <div class="btn-box">
-                        <a href="{% url 'about_us'%}" class="theme-btn">Read More</a>
-                    </div> {% endcomment %}
+                    {{company.about_us|safe}}
+                    <br>
+                    <p class='text-center'>Once again, a warm welcome to Goreto Treks !!!</p><br>
+                    
                 </div>
             </div>
             <div class="col-lg-3 mt-5">
@@ -539,7 +538,6 @@
                                 <li><i class="icon-Star"></i></li>
                             </ul>
                         </div>
-                        <br>
                     </div> 
                 </div>
             </div>
@@ -553,7 +551,7 @@
     .stars {
         list-style-type: none;
         padding: 0;
-        margin: 0;
+        margin: 5px;
         display: flex;
         justify-content: center;
     }
@@ -642,8 +640,8 @@
 
     .tour-block-one .inner-box .lower-content h3 {
         display: block;
-        font-size: 18px;
-        line-height: 30px;
+        font-size: 17px;
+        line-height: 25px;
         font-weight: 700;
         margin-bottom: 5px;
     }
@@ -768,7 +766,7 @@
                     {% comment %} <source src="{% static 'assets/videos/manaslu_clip.ogg' %}" type="video/ogg">
                     Your browser does not support the video tag. {% endcomment %}
                 </video>
-            <
+            
         </div>
         <div class="auto-container">
             <div class="inner-container">

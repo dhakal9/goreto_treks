@@ -87,8 +87,8 @@ class TourDetailsForm(forms.ModelForm):
 class ItinaryForm(forms.ModelForm):
     tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
                                      widget=forms.Select(attrs={'class': 'form-control'}))
-    name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    day = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    name = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    day = forms.CharField(max_length=6, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     # start_end = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(widget=SummernoteWidget(attrs={'class': 'form-control', 'summernote': {'height': '300px', 'width': '100%'}}))
 
