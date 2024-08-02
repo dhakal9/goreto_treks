@@ -6212,7 +6212,7 @@ div#mCSB_1_container{
 
 .tour-details .tour-sidebar{
   position: relative;
-  margin-top: 25px;
+  margin-top: -125px;
   z-index: 1;
 }
 

@@ -266,74 +266,6 @@ class TourDeatails(View):
         booking_form = BookingForm()
         inquiry_form = InqueryForm()
         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
-# class TourDeatails(View):
-#     template_name = 'tour_details.html'
-
-#     def get(self, request, pk):
-#         inquiry_form = InqueryForm()
-#         booking_form = BookingForm()
-#         tour_details = TourDetailsModel.objects.get(pk=pk)
-#         images = GallaryModel.objects.all()
-#         itinaries = ItinatyModel.objects.all()
-#         inc_excs = TourIncludeExcludeModel.objects.filter(tour=pk)
-#         faqs = TourFaqModels.objects.filter(tour=pk)
-#         similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
-#         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form, 'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
-
-#     def post(self, request, pk):
-#         tour_details = TourDetailsModel.objects.get(pk=pk)
-#         images = GallaryModel.objects.all()
-#         itinaries = ItinatyModel.objects.all()
-#         inc_excs = TourIncludeExcludeModel.objects.all()
-#         faqs = TourFaqModels.objects.all()
-#         similar_trips = TourDetailsModel.objects.filter(region=tour_details.region).exclude(pk=pk)
-        
-#         if request.method == 'POST':
-#             if 'booking_form_submit' in request.POST:
-#                 booking_form = BookingForm(request.POST)
-#                 if booking_form.is_valid():
-#                     name = booking_form.cleaned_data['username']
-#                     email = booking_form.cleaned_data['email']
-#                     phone = booking_form.cleaned_data['phone']
-#                     message = booking_form.cleaned_data['message']
-#                     subject = "Booking Inquiry"
-
-#                     message_body = f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
-
-#                     send_mail(
-#                         subject,  # Title
-#                         message_body,  # Message
-#                         settings.EMAIL_HOST_USER,  # Sender email
-#                         ['dhakalamrit19@gmail.com'],  # Receiver email
-#                         fail_silently=False
-#                     )
-#                     messages.success(request, 'Booking Inquiry sent Successfully')
-#                     return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
-
-#             elif 'inquiry_form_submit' in request.POST:
-#                 inquiry_form = InqueryForm(request.POST)
-#                 if inquiry_form.is_valid():
-#                     name = inquiry_form.cleaned_data['username']
-#                     email = inquiry_form.cleaned_data['email']
-#                     message = inquiry_form.cleaned_data['message']
-#                     subject = "General Inquiry"
-
-#                     message_body = f"Name: {name}\nEmail: {email}\nMessage: {message}"
-
-#                     send_mail(
-#                         subject,  # Title
-#                         message_body,  # Message
-#                         settings.EMAIL_HOST_USER,  # Sender email
-#                         ['dhakalamrit19@gmail.com'],  # Receiver email
-#                         fail_silently=False
-#                     )
-#                     messages.success(request, 'General Inquiry sent Successfully')
-#                     return redirect('tour_details', pk=pk)  # Redirect to a success URL after form submission
-
-#         # If neither booking nor inquiry form is submitted, render the template with the forms
-#         booking_form = BookingForm()
-#         inquiry_form = InqueryForm()
-#         return render(request, self.template_name, {'tour_details': tour_details, 'images': images, 'itinaries': itinaries, 'booking_form': booking_form, 'inquiry_form': inquiry_form,  'inc_excs':inc_excs, 'faqs':faqs, 'similar_trips':similar_trips})
 
 class ItinaryAdmin(LoginRequiredMixin, View):
     template_name = 'admin_itinary.html'
@@ -352,17 +284,21 @@ class ItinaryAdmin(LoginRequiredMixin, View):
         ItinatyModel.objects.filter(tour=tour).delete()
         
         # Iterate over the form data to save multiple itineraries
-        for key in request.POST:
-            if key.startswith("plan_name_"):
-                index = key.split("_")[-1]
-                name = request.POST.get(f"plan_name_{index}")
-                day = request.POST.get(f"day_sequence_{index}")
-                description = request.POST.get(f"description_{index}")
-                if name and day and description:
-                    ItinatyModel.objects.create(tour=tour, name=name, day=day, description=description)
+        index = 1
+        while True:
+            name = request.POST.get(f"plan_name_{index}")
+            day = request.POST.get(f"day_sequence_{index}")
+            description = request.POST.get(f"description_{index}")
+            if name and day and description:
+                ItinatyModel.objects.create(tour=tour, name=name, day=day, description=description)
+                index += 1
+            else:
+                break
         
         messages.success(request, 'Itinerary saved successfully')
         return redirect('admin_itinary')
+
+
 
 @csrf_exempt
 def delete_itinerary(request):

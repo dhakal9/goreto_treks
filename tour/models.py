@@ -68,6 +68,11 @@ class TourDetailsModel(models.Model):
     itinary_pdf = models.FileField(upload_to='documents', null=True, blank=True)
     total_reviews = models.CharField(max_length=200, null=True, blank=True, default='79')
     star_rating = models.CharField(max_length=200, null=True, blank=True,default='5' )
+    price_1 = models.CharField(max_length=200, null=True, blank=True, default='20$')
+    price_2 = models.CharField(max_length=200, null=True, blank=True, default='20$')
+    price_35 = models.CharField(max_length=200, null=True, blank=True, default='20$')
+    price_510 = models.CharField(max_length=200, null=True, blank=True, default='20$')
+    
     def __str__(self):
         return self.name
 

@@ -24,37 +24,14 @@
                             </div>
                         </div>
                     </div>  
-                    <div class="dynamic-fields">
-                        {% for itinary in itinaries %}
-                            <div class="row border my-2 p-3 shadow" data-itinary-id="{{ itinary.itinary_id }}">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Day Sequence <span class="text-danger">*</span></label>
-                                        <input type="text" name="day_sequence_{{ forloop.counter }}" class="form-control" value="{{ itinary.day }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Plan Name <span class="text-danger">*</span></label>
-                                        <input type="text" name="plan_name_{{ forloop.counter }}" class="form-control" value="{{ itinary.name }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label>Description <span class="text-danger">*</span></label>
-                                        <textarea name="description_{{ forloop.counter }}" class="form-control ckeditor">{{ itinary.description }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <button type="button" class="btn btn-danger delete-itinerary" data-itinary-id="{{ itinary.itinary_id }}">Delete</button>
-                                </div>
-                            </div>
-                        {% endfor %}
+                    <div class="dynamic-fields" style="display: none;">
+                        <!-- Itinerary fields will be dynamically added here -->
                     </div>
-                    <div class="submit-section">
+                    <div class="submit-section mt-12" style="display: none;">
                         <button class="btn btn-primary submit-btn" type="submit">Submit</button>
                     </div>
                 </form>
+                <button id="add-more" class="btn btn-success mt-3" style="display: none;">Add More</button>
             </div>
         </div>
     </div>
@@ -94,29 +71,50 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function(){
+        var itineraryCount = {{ itinaries|length }};
+        
+        // Hide dynamic fields and submit button initially
+        $('.dynamic-fields').hide();
+        $('.submit-section').hide();
+        $('#add-more').hide();
+
         $('#id_tour').change(function(){
             var tourId = $(this).val();
-            $.ajax({
-                url: '{% url "get_tour_itineraries" %}',
-                data: {
-                    'tour_id': tourId
-                },
-                dataType: 'json',
-                success: function(data){
-                    $('.dynamic-fields').empty();
+            if (tourId) {
+                $.ajax({
+                    url: '{% url "get_tour_itineraries" %}',
+                    data: {
+                        'tour_id': tourId
+                    },
+                    dataType: 'json',
+                    success: function(data){
+                        $('.dynamic-fields').empty();
+                        itineraryCount = 0;
 
-                    var itineraries = data.itineraries;
+                        var itineraries = data.itineraries;
 
-                    itineraries.forEach(function(itinerary, index) {
-                        addItineraryFields(index + 1, itinerary.itinary_id, itinerary.day, itinerary.name, itinerary.description);
-                    });
+                        itineraries.forEach(function(itinerary, index) {
+                            addItineraryFields(index + 1, itinerary.itinary_id, itinerary.day, itinerary.name, itinerary.description);
+                            itineraryCount++;
+                        });
 
-                    // Initialize CKEditor for all new textareas
-                    $('.ckeditor').each(function(){
-                        CKEDITOR.replace(this);
-                    });
-                }
-            });
+                        // Initialize CKEditor for all new textareas
+                        $('.ckeditor').each(function(){
+                            CKEDITOR.replace(this);
+                        });
+
+                        // Show dynamic fields and submit button
+                        $('.dynamic-fields').show();
+                        $('.submit-section').show();
+                        $('#add-more').show();
+                    }
+                });
+            } else {
+                // Hide dynamic fields and submit button if no tour is selected
+                $('.dynamic-fields').hide();
+                $('.submit-section').hide();
+                $('#add-more').hide();
+            }
         });
 
         function addItineraryFields(index, itinary_id, day, name, description) {
@@ -146,6 +144,13 @@
                 '</div>';
             $('.dynamic-fields').append(fieldHtml);
         }
+
+        $('#add-more').click(function(){
+            itineraryCount++;
+            addItineraryFields(itineraryCount, '', '', '', '');
+            // Initialize CKEditor for the new textarea
+            CKEDITOR.replace('description_' + itineraryCount);
+        });
 
         $(document).on('click', '.delete-itinerary', function(){
             var itinaryId = $(this).data('itinary-id');

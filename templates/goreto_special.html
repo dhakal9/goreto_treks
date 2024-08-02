@@ -32,10 +32,13 @@
                         </div>    
                     </div>
                     
+                    
                     <div class="wrapper grid">
                         <div class="tour-grid-content">
                             <div class="row clearfix">
-                                {%for trek in goreto_special %}
+                                
+                                {%for trek in all_activities  %}
+                                {% if trek.region.is_special %}
                                     <div class="col-lg-6 col-md-6 col-sm-12 tour-block">
                                         <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                                             <div class="inner-box">
@@ -92,16 +95,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {% endif %}
                                 {% endfor %}
     
                             </div>
                         </div>
                     </div>
-                    <div class="pagination-wrapper">
-                        <ul class="pagination clearfix">
-                                <li><a href="TourListec46.html?regionId=1&amp;skip=0&amp;take=3&amp;currentPage=1&amp;clickPage=1" class="current">1</a></li>
-                        </ul>
-                    </div>
+                    
                 </div>
                 <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                     <div class="default-sidebar tour-sidebar ml-20">

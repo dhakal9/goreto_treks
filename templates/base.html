@@ -191,8 +191,10 @@
 														<a href="{% url 'destination' %}">Destinations</a>
 														<ul class="submenu">
 															{% for destination in destinations %}
+															
 															<li class="dropdown">
 																<a href="{% url 'one_destination' destination.slug %}">{{ destination.name }}</a>
+																{% if destination.destination_id == 3 %}
 																<ul class="sub-submenu">
 																	{% for nep_reg in nepal_regions %}
 																	{% if nep_reg.destination_id == destination.destination_id %}
@@ -211,8 +213,25 @@
 																	{% endif %}
 																	{% endfor %}
 																</ul>
+																{%else%}
+																<ul class="sub-submenu">
+																	{% for nep_reg in nepal_regions %}
+																	{% if nep_reg.destination_id == destination.destination_id %}
+																	{% for trekking in trekkings %}
+																		{% if nep_reg.region_id == trekking.region.region_id %}
+																		<li>
+																			<a style="cursor:pointer" href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a>
+																		</li>
+																		{% endif %}
+																	{% endfor %}
+																	{%endif%}
+																	{%endfor%}
+																</ul>
+																
 															</li>
-															{% endfor %}
+															
+															{%endif%}
+															{%endfor%}
 														</ul>
 													</li>
 

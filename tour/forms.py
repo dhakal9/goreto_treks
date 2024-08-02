@@ -64,6 +64,11 @@ class TourDetailsForm(forms.ModelForm):
     itinary_pdf = forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     total_reviews = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
     star_rating = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    price_1 = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    price_2 = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    price_35 = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    price_510 = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+     
        
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
