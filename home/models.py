@@ -154,3 +154,11 @@ class WhyUsModel(models.Model):
 class SeoModel(models.Model):
     id = models.AutoField(primary_key=True)
     discription = models.TextField()
+    
+class WorldWideRepModels(models.Model):
+    id=models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 200, blank=False, null=False)
+    country = models.CharField(max_length = 200, blank=False, null=False, default="none")
+    phone = models.CharField(max_length = 200, blank=False, null=False)
+    image =  models.ImageField(upload_to='blog_images', blank=False, null=False)
+    flag =  models.ImageField(upload_to='blog_images', blank=False, null=False)

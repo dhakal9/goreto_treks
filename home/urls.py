@@ -3,7 +3,7 @@ from django.urls import path
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import views as auth_views
-from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Reviews, DeleteReview, UpdateReview, Funfact, ContactUs, OurTeamAdmin, DeleteTeam, UpdateTeam, OurTeam, OurTeamDetails, AdminBlogs, UpdateBlogs, DeleteBlogs, Blogs, BlogsDetails, AboutUs, WhyUsAdmin, WhyUs, CsrAdmin, Csr, UpdateCsr, DeleteCsr, CsrDetails, Gallary, MainGallaryAdmin, DeleteGallary, PlanTrip, SeoView
+from .views import Index, Explore, Login, Logout, AdminIndex, AdminHome, Review_function, Reviews, DeleteReview, UpdateReview, Funfact, ContactUs, OurTeamAdmin, DeleteTeam, UpdateTeam, OurTeam, OurTeamDetails, AdminBlogs, UpdateBlogs, DeleteBlogs, Blogs, BlogsDetails, AboutUs, WhyUsAdmin, WhyUs, CsrAdmin, Csr, UpdateCsr, DeleteCsr, CsrDetails, Gallary, MainGallaryAdmin, DeleteGallary, PlanTrip, SeoView, AdminWorldwiderepView, DeleteRepresentative, UpdateRepresentative
 urlpatterns = [
      path('', Index.as_view(), name="index"),
      path('explore/', Explore.as_view(), name="explore"),
@@ -39,6 +39,9 @@ urlpatterns = [
      path('gallary/', Gallary.as_view(), name='gallary'),
      path('admingallary/', MainGallaryAdmin.as_view(), name='main_admin_gallary'),
      path('deleteimage/<int:id>', DeleteGallary.as_view(), name='delete_image'),
-     path('plantrip/', PlanTrip.as_view(), name='plan_trip')
+     path('plantrip/', PlanTrip.as_view(), name='plan_trip'),
+     path('representative/', AdminWorldwiderepView.as_view(), name='admin_rep'),
+     path('representative/<int:id>', DeleteRepresentative.as_view(), name="delete_rep"),
+     path('update-representative/<int:id>', UpdateRepresentative.as_view(), name="update_rep"),
  ]
  

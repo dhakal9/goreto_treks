@@ -1,0 +1,128 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<br>
+<br>
+<h1 class="text-center">Add Country Representative</h1>
+
+    <!-- Page Content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">Add Representative Here</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Full Name<span class="text-danger">*</span></label>
+                                {{ form.name }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Country <span class="text-danger">*</span></label>
+                                {{ form.country }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Phone Number <span class="text-danger">*</span></label>
+                                {{ form.phone }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Profile Image <span class="text-danger">*</span></label>
+                                {{ form.image }}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Country Flag <span class="text-danger">*</span></label>
+                                {{ form.flag }}
+                            </div>
+                        </div>
+                    </div> 
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% comment %} Tables {% endcomment %}
+<div class="container-fluid">
+ 
+    <h4>List Of Representatives </h4><br>
+    <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+        <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+        <thead class="bt-5">
+        <tr>
+        <th>Full Name</th>
+        <th>Country</th>
+        <th>Phone</th>
+        <th>Images</th>
+        <th>Flag</th>
+        <th>Actions</th>
+        </tr>
+        </thead>
+        
+        {% for rep in representatives %} 
+        <tr>
+        <td>{{rep.name}}</td>
+        <td>{{rep.country}}</td>
+        <td>{{rep.phone}}</td>
+        <td><img src="{{rep.image.url}}" style="width: 50px; height: 45px;"></td>
+        <td><img src="{{rep.flag.url}}" style="width: 50px; height: 45px;"></td>
+        <td>
+        <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{rep.id}}">
+        Delete
+        </button>
+        <a type="button" href="{% url 'update_rep' rep.id %}" class="btn btn-link btn-sm btn-rounded">
+            Edit
+        </a>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal{{rep.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Image</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> Are You Sure want to delete ? </div>
+        <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        <a type="action" href="{% url 'delete_rep' rep.id %}" class="btn btn-link btn-sm btn-rounded">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+        Delete
+        </button>
+        </a>
+        </div>
+        </div>
+        </div>
+        </a>
+        
+        </td>
+        </tr>
+        {% endfor %}
+        
+        </table>
+    </div>
+{% endblock content%}

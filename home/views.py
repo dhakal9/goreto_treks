@@ -2,10 +2,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms, PlanningTripForm, SeoForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms, PlanningTripForm, SeoForm, WorldWideRepForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel, WorldWideRepModels
 from tour.models import DestinationModel, TourDetailsModel, RegionModel, GallaryModel
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -296,7 +296,8 @@ class OurTeam(View):
     template_name='our_team.html'
     def get(self, request):
         teams = OurTeamModel.objects.all()
-        return render(request, self.template_name, {'teams':teams})
+        representatives = WorldWideRepModels.objects.all()
+        return render(request, self.template_name, {'teams':teams, 'representatives':representatives})
     
 class OurTeamDetails(View):
     template_name = 'our_team_details.html'
@@ -510,3 +511,45 @@ class PlanTrip(View):
         else:
             messages.error(request, 'Failed to send message. Please check the form data.')
             return render(request, self.template_name, {'form': form})
+
+class AdminWorldwiderepView(LoginRequiredMixin, View):
+    template_name = 'admin_representative.html'
+    def get(self, request):
+        form = WorldWideRepForm()
+        representatives = WorldWideRepModels.objects.all()
+        return render(request, self.template_name, {'form': form, 'representatives':representatives})
+    
+    def post(self, request):
+        representatives = WorldWideRepModels.objects.all()
+        form = WorldWideRepForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Representative Added successfully')
+            return redirect('admin_rep')
+        return render(request, self.template_name, {'form':form, 'representatives':representatives})
+    
+class UpdateRepresentative(LoginRequiredMixin, View):
+    template_name = 'admin_representative.html'
+    def get(self, request, id):
+        representatives = WorldWideRepModels.objects.all()
+        repss = get_object_or_404(WorldWideRepModels, pk=id)
+        form = WorldWideRepForm(instance=repss)
+        return render(request, self.template_name, {'form': form, 'repss':repss, 'representatives':representatives })
+
+    def post(self, request, id):
+        representatives = WorldWideRepModels.objects.all()
+        repss = get_object_or_404(WorldWideRepModels, pk=id)
+        form = WorldWideRepForm(request.POST, request.FILES, instance=repss)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Representative Updated Successfully')
+            return redirect('admin_rep')
+        return render(request, self.template_name, {'form': form,  'representatives':representatives})
+    
+
+class DeleteRepresentative(LoginRequiredMixin, View):
+    def get(self, request, id):
+        representative = WorldWideRepModels.objects.get(pk=id)
+        representative.delete()
+        messages.success(request, "Representative Deleted Successfully")
+        return redirect('admin_rep')

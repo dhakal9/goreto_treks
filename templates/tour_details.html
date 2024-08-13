@@ -335,42 +335,54 @@
                         
                     <div class="default-sidebar tour-sidebar ml-20 booking-sticky">
                         <div class="sidebar-widget downloads-widget">
-                            <div class="widget-title">
-                                <h3>Price</h3>
-                            </div>
-                            
-                            <div class="widget-content">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th style="padding: 10px;">Number of Groups</th>
-                                            <th style="padding: 10px;">Price</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="padding: 10px; text-align: center;"> 1</td>
-                                            <td style="padding: 10px;">{{tour_details.price_1}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 10px; text-align: center;"> 2</td>
-                                            <td style="padding: 10px;">{{tour_details.price_2}}</td>
-                                        </tr
-                                        <tr>
-                                            <td style="padding: 10px; text-align: center;"> 3-5</td>
-                                            <td style="padding: 10px;">{{tour_details.price_35}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding: 10px; text-align: center;"> 5-10</td>
-                                            <td style="padding: 10px;">{{tour_details.price_510}}</td>
-                                        </tr>
-                                        <!-- Add more rows as needed -->
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-                           
+                            <div class="price-widget">
+                                <div class="price-header">
+                                    <p class="price-start" style='color:white'>Start from</p>
+                                    <p class="price-amount" style='color:white'>USD {{tour_details.price}}</p>
+                                </div>
+                                <div class="group-price">
+                                    <p class="group-price-title">WE OFFER GROUP PRICE</p>
+                                    <table class="price-table">
+                                        <tbody>
+                                            <tr>
+                                                <td>1 pax</td>
+                                                <td>USD {{tour_details.price}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2 pax</td>
+                                                <td>USD {{tour_details.price_2}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3 - 5 pax</td>
+                                                <td>USD {{tour_details.price_35}} </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5 - 10 pax</td>
+                                                <td>USD {{tour_details.price_510}} </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="why-book-with-us">
+                                    <p>WHY BOOK WITH US?</p>
+                                    <ul>
+                                        <li>Best Price Offer</li>
+                                        <li>Instant Online Booking Confirmation</li>
+                                        <li>Extend and Customize Trip Itineraries</li>
+                                    </ul>
+                                </div>
+                                <div class="book-trip">
+                                    <a href="{% url 'plan_trip'%}">
+                                    <button class="book-trip-button">BOOK THIS TRIP</button>
+                                    </a>
+                                </div>
+                                <div class="contact-us">
+                                    <p>Need Help? Call/Text us on WhatsApp</p>
+                                    <p>+977 9851316017 </p>
+                                </div>
+                            </div>  
                         </div>
+
                         <div class="form-widget">
                             <div class="widget-title">
                                 <h3>Book This Tour</h3>
@@ -502,6 +514,99 @@
 
 {% comment %} booking Card {% endcomment %}
 <style>
+    .price-widget {
+        border: 2px solid #007bff;
+        padding: 20px;
+        background-color: #f5f7fa;
+        border-radius: 8px;
+        font-family: Arial, sans-serif;
+    }
+    
+    .price-header {
+        background-color: #007bff;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .price-start {
+        font-size: 14px;
+        margin: 0;
+    }
+    
+    .price-amount {
+        font-size: 24px;
+        margin: 0;
+    }
+    
+    .group-price {
+        padding: 20px 0;
+    }
+    
+    .group-price-title {
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    
+    .price-table {
+        width: 100%;
+        text-align: left;
+    }
+    
+    .price-table td {
+        padding: 8px 0;
+        font-size: 16px;
+    }
+    
+    .why-book-with-us {
+        padding: 20px 0;
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .why-book-with-us p {
+        font-weight: bold;
+        margin: 0 0 10px 0;
+    }
+    
+    .why-book-with-us ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .why-book-with-us li {
+        padding: 5px 0;
+        font-size: 14px;
+    }
+    
+    .book-trip {
+        text-align: center;
+        padding: 20px 0;
+    }
+    
+    .book-trip-button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    
+    .contact-us {
+        text-align: center;
+        padding: 10px 0;
+        color: #007bff;
+        font-weight: bold;
+        font-size: 14px;
+    }
+    
+    .contact-us p {
+        margin: 5px 0;
+    }
+    
     .card {
         display: none;
         background-color: #fff;
@@ -670,7 +775,7 @@
    <script>
         window.addEventListener('scroll', function() {
             const fixedBar = document.getElementById('fixed-bar');
-            if (window.scrollY > window.innerHeight * 0.5) {
+            if (window.scrollY > window.innerHeight * 0.6) {
                 fixedBar.style.display = 'flex'; // Display the fixed bar
             } else {
                 fixedBar.style.display = 'none'; // Hide the fixed bar
@@ -702,7 +807,7 @@
             }
         
             // Show or hide the booking card based on scroll position
-            if (scrollPosition > windowHeight * 3.0 && scrollPosition < footerOffset - windowHeight) {
+            if (scrollPosition > windowHeight * 4.3 && scrollPosition < footerOffset - windowHeight) {
                 bookingCard.style.display = 'flex'; // Display the booking card
             } else {
                 bookingCard.style.display = 'none'; // Hide the booking card
@@ -736,142 +841,7 @@
         }
     </script>
     <!-- tour-details end -->
-    <script>
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-        });
-        var accommodation;
-        var transport;
-        var comfort;
-        var food;
-        var hospitality;
     
-        function setRatingCss(element) {
-            var letter = element.id.charAt(0);
-            var number = element.id.substr(1);
-            switch (letter) {
-                case "A":
-                    accommodation = number;
-                    break;
-                case "T":
-                    transport = number;
-                    break;
-                case "C":
-                    comfort = number;
-                    break;
-                case "F":
-                    food = number;
-                    break;
-                case "H":
-                    hospitality = number;
-                    break;
-                default:
-            }
-    
-            var starId = element.id;
-    
-            // Check if the clicked star already has the 'fas' class
-            var isSolid = element.classList.contains('fas');
-    
-            // Loop through all stars (A1 to A5)
-            for (var i = 1; i <= 5; i++) {
-                var star = document.getElementById(letter + i);
-    
-                // Check if the current star is less than or equal to the clicked star
-                if (star.id <= starId) {
-                    // Toggle the CSS class between 'far' and 'fas' based on the current state
-                    star.classList.toggle('far', isSolid);
-                    star.classList.toggle('fas', !isSolid);
-                } else {
-                    // Change the CSS class back to "far" for stars greater than the clicked star
-                    star.classList.remove('fas');
-                    star.classList.add('far');
-                }
-            }
-        }
-    
-    
-        let isFormSubmitting = false;
-    
-        document.getElementById("comment-form").addEventListener("submit", function (evt) {
-            evt.preventDefault(); // Prevent the default form submission
-    
-            if (isFormSubmitting) {
-                // If the form is already being submitted, do nothing
-                return;
-            }
-            debugger;
-            const commentName = document.getElementById("commentName").value;
-            const commentEmail = document.getElementById("commentEmail").value;
-            const commentTitle = document.getElementById("commentTitle").value;
-            const commentMessage = document.getElementById("commentMessage").value;
-            if (commentName == "") {
-                return Techyatra.UI.Toast("Please enter name: ", 1);
-            } else if (commentEmail == "") {
-                return Techyatra.UI.Toast("Please enter email: ", 1);
-            } else if (commentTitle == "") {
-                return Techyatra.UI.Toast("Please enter title: ", 1);
-            } else if (commentMessage == "") {
-                return Techyatra.UI.Toast("Please enter message: ", 1);
-            }
-            else if (accommodation == undefined || transport == undefined || comfort == undefined || food == undefined || hospitality == undefined) {
-                return Techyatra.UI.Toast("Please click star to give comment", 1);
-            }
-            else {
-                var response = grecaptcha.getResponse();
-                if (response.length == 0) {
-                    // reCaptcha not verified
-                    Techyatra.UI.Toast("Please verify you are human!");
-                } else {
-                    let data = {
-                        Name: commentName,
-                        Email: commentEmail,
-                        ReviewTitle: commentTitle,
-                        TourId: '1039',
-                        Accommodation: accommodation,
-                        Transport: transport,
-                        Comfort: comfort,
-                        Food: food,
-                        Hospitality: hospitality,
-                    };
-                    isFormSubmitting = true;
-                    subbmitTourComment(data);
-                }
-            }
-        });
-    
-        function subbmitTourComment(data) {
-            $.ajax({
-                type: "POST",
-                url: "/Chomolungma/TourComment",
-                contentType: "application/json",
-                data: JSON.stringify(data),
-                success: function (response) {
-                    Techyatra.UI.Toast(response.message, 4);
-    
-                },
-                error: function (error) {
-                    Techyatra.UI.Toast("Error sending data: " + error, 1);
-                },
-                complete: function () {
-                    // Reset the form submission flag after the AJAX request is complete
-                    isFormSubmitting = false;
-                    resetCommentForm();
-                }
-            });
-        };
-    
-        function resetCommentForm() {
-            document.getElementById("commentName").value = '';
-            document.getElementById("commentEmail").value = '';
-            document.getElementById("commentTitle").value = '';
-            document.getElementById("commentMessage").value = '';
-            setTimeout(function () {
-                // Reload the page
-                location.reload();
-            }, 3000);
-        };
-    </script>
     
     
             </main>

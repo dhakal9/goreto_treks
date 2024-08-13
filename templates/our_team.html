@@ -10,7 +10,7 @@
     <div class="auto-container">
         <div class="sec-title">
             <p>Our Team</p>
-            <h2>Expert Tour Guides</h2>
+            <h2>Team of Experts </h2>
         </div>
         <div class="row clearfix">
             {%for team in teams %}
@@ -29,7 +29,135 @@
 
         </div>
     </div>
+
+</section>
+<!-- team-section end -->
+
+<!-- Worldwide Representatives Section -->
+<section class="worldwide-representatives">
+    <div class="container">
+        <div class="sec-title">
+            <h2>Our Worldwide Representatives</h2>
+        </div>
+        <div class="representatives-grid">
+            {% for rep in representatives %}
+            <div class="representative-card">
+                <div class="image-container">
+                    <img src="{{ rep.image.url }}" alt="{{ rep.name }}" class="rep-img">
+                    <img src="{{ rep.flag.url }}" alt="Flag" class="flag-img">
+                </div>
+                <div class="rep-info">
+                    <p>{{ rep.country }}</p>
+                    <h3 class>{{ rep.name }}</h3>
+                    <p class="phone">
+                        <a href="https://wa.me/{{ rep.phone }}" target="_blank">
+                            {{ rep.phone }}
+                        </a>
+                    </p>
+                    <img src="{% static 'assets/images/whatsapp.png' %}" alt="WhatsApp" style='width: 40; height: 40px; '>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </section>
 
-<!-- team-section end -->
+<style>
+    /* Responsive Worldwide Representatives Section */
+    .worldwide-representatives {
+        background-color: #f9f9f9;
+        padding: 50px 0;
+        text-align: center;
+    }
+
+    .sec-title h2 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 40px;
+    }
+
+    .representatives-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .representative-card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .representative-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .rep-img {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+
+    .flag-img {
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background-color: #fff;
+    }
+
+    .rep-info {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .rep-info h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 2px;
+    }
+
+    .phone a {
+        text-decoration: none;
+        color: #555;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .flag-img {
+            bottom: -5px;
+            right: -5px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+</style>
+
+
+
 {%endblock content%}

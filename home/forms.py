@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel, WorldWideRepModels
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django_summernote.widgets import SummernoteWidget
 from ckeditor.widgets import CKEditorWidget
@@ -141,4 +141,15 @@ class SeoForm(forms.ModelForm):
 
     class Meta:
         model = SeoModel
+        fields = '__all__'
+
+class WorldWideRepForm(forms.ModelForm):
+    name = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    country = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    phone = forms.CharField(max_length=200, required=True, widget=forms.TextInput(attrs={'class':'form-control', 'type':'text'}))
+    image = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+    flag = forms.ImageField(required=True, widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'}))
+
+    class Meta:
+        model = WorldWideRepModels
         fields = '__all__'
