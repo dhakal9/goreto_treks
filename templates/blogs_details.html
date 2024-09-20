@@ -61,23 +61,57 @@
                     </div> {% endcomment %}
                 </div>
             </div>
-            <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
-                <div class="blog-sidebar default-sidebar ml-20">
-                    <div class="sidebar-widget post-widget">
-                        <div class="widget-title">
-                            <h3>Latest Blogs</h3>
-                        </div>
-                        <div class="post-inner">
-                            {% for blog in vlogs %}
-                            <div class="post">
-                                <figure class="post-thumb"><a href="{% url 'blogs_details' blog.id %}"><img style="width: 90px;  height: 90px; border-radius: 50%;"src="{{blog.image.url}}" alt=""></a></figure>
-                                <span class="post-date">{{ blog.created_at|date:"Y F d" }}</span>
-                                <h4><a href="{% url 'blogs_details' blog.id %}">{{blog.title}}</a></h4>
+             <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                    <div class="default-sidebar tour-sidebar ml-20">
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Activities</h3>
                             </div>
-                           {%endfor%}
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    {% for activity in activities %} 
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="sidebar-widget downloads-widget">
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Trekking Regions</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    {% for activity in nepal_regions %} 
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Destinations</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    {% for activity in destinations %} 
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget downloads-widget">
                             <div class="widget-title">
                                 <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
                             </div>
@@ -101,9 +135,9 @@
                                 </h5>
                             </div>
                         </div>
-
+                    </div>
                 </div>
-            </div>
+                
                        
                     
         </div>

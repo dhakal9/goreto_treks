@@ -1,8 +1,6 @@
 {% extends 'base.html'%}
+{%load static%}
 {% block content%}
-<main>
-            
-
 
 
     <script src="../../code.jquery.com/jquery-3.7.1.min.js"
@@ -33,34 +31,121 @@
             left: 285px;
             top: 0px;
         }
+        .tour-details-content {
+            position: relative;
+            padding: 10px 0px 120px 0px;
+            margin-right: 20px;
+        }
     </style>
-    <!-- Page Title -->
-    <section class="page-title style-three" style="background-image: url({{csrs.image.url}}); ">
-        <div class="auto-container">
-            <div class="inner-box">
-                
-                <h2>{{ csrs.created_at|date:"Y F d" }}</h2>
+
+
+
+
+<section class="page-title style-three" style="background-image: url({{csrs.image.url}}); ">
+    <div class="auto-container">
+        <div class="inner-box">
             
-            </div>
+            <h2>{{ csrs.created_at|date:"Y F d" }}</h2>
+        
         </div>
-    </section>
-    <!-- End Page Title -->
-    <!-- tour-details -->
-    <section class="tour-details">
-        <div class="auto-container">
-            <div class="row clearfix">
-                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
-                    <div class="tour-details-content">
-                        <div class="inner-box">
-                            <div class="text">
-                                <h2>{{csrs.title}}</h2>
-                                <p>{{csrs.description}}</p>
-                            </div>
+    </div>
+</section>
+
+
+<section class="sidebar-page-container">
+    <div class="auto-container">
+        <div class="row clearfix">
+            <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                <div class="tour-details-content">
+                    <div class="inner-box">
+                        <div class="text">
+                            <h2>{{csrs.title}}</h2>
+                            <p>{{csrs.description}}</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                <div class="default-sidebar tour-sidebar ml-20">
+                    <div class="sidebar-widget category-widget">
+                        <div class="widget-title">
+                            <h3>Activities</h3>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="category-list clearfix">
+                                {% for activity in activities %} 
+                                <li class="custom-check-box">
+                                    <div class="custom-controls-stacked">
+                                        <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget category-widget">
+                        <div class="widget-title">
+                            <h3>Trekking Regions</h3>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="category-list clearfix">
+                                {% for activity in nepal_regions %} 
+                                <li class="custom-check-box">
+                                    <div class="custom-controls-stacked">
+                                        <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget category-widget">
+                        <div class="widget-title">
+                            <h3>Destinations</h3>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="category-list clearfix">
+                                {% for activity in destinations %} 
+                                <li class="custom-check-box">
+                                    <div class="custom-controls-stacked">
+                                        <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget downloads-widget">
+                        <div class="widget-title">
+                            <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
+                        </div>
+                        <div class="widget-content">
+                            <img src="{% static 'assets/images/recommended-tripadvisor.png' %}" />
+                            <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget downloads-widget">
+                        <div class="widget-title">
+                            <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
+                        </div>
+                        <div class="widget-content">
+                            <img src="{% static 'assets/images/google.png' %}" alt="Google Recommendation" />
+                            <h5 class="text-center">
+                                <strong>
+                                    <a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.google.com/maps/place/Goreto+Treks+and+Expedition/@27.7298897,85.3012113,17z/data=!4m14!1m7!3m6!1s0x39eb19de17a79383:0x52118c7e3510d982!2sGoreto+Treks+and+Expedition!8m2!3d27.729885!4d85.3037862!16s%2Fg%2F11vcxt4mmt!3m5!1s0x39eb19de17a79383:0x52118c7e3510d982!8m2!3d27.729885!4d85.3037862!16s%2Fg%2F11vcxt4mmt?entry=ttu" target="_blank">
+                                        Goreto Treks and Expedition 
+                                    </a>
+                                </strong>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                       
+                    
         </div>
-    </section>
-</main>
+    </div>
+</section>
+
 {%endblock content%}

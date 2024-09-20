@@ -303,7 +303,8 @@ class OurTeamDetails(View):
     template_name = 'our_team_details.html'
     def get(self, request):
         teams = OurTeamModel.objects.all()
-        return render(request, self.template_name, {'teams':teams})
+        representatives = WorldWideRepModels.objects.all()
+        return render(request, self.template_name, {'teams':teams,  'representatives':representatives})
     
 class Logout(LoginRequiredMixin, View):
     template_name = 'login.html'
@@ -553,3 +554,13 @@ class DeleteRepresentative(LoginRequiredMixin, View):
         representative.delete()
         messages.success(request, "Representative Deleted Successfully")
         return redirect('admin_rep')
+
+class PrivacyPolicy(View):
+    template_name = 'privacy_policy.html' 
+    def get(self, request):
+        return render(request, self.template_name)
+
+class TermsOfServices(View):
+    template_name = 'terms_of_services.html' 
+    def get(self, request):
+        return render(request, self.template_name)

@@ -67,4 +67,112 @@
 <hr>
 {% endfor %}
 </div>
+
+
+
+
+<section class="worldwide-representatives">
+    <div class="container">
+        <div class="sec-title">
+            <h2>Our Worldwide Representatives</h2>
+        </div>
+        <div class="representatives-grid">
+            {% for rep in representatives %}
+            <div class="representative-card" onclick="window.open('https://wa.me/{{ rep.phone }}', '_blank')">
+                <div class="image-container">
+                    <img src="{{ rep.image.url }}" alt="{{ rep.name }}" class="rep-img">
+                    <img src="{{ rep.flag.url }}" alt="Flag" class="flag-img">
+                    <div class="overlay">
+                        <div class="rep-info">
+                            <h3>{{ rep.name }}</h3>
+                            <p>{{ rep.phone }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<style>
+
+    .image-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    
+    .rep-img {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    
+    .flag-img {
+        position: absolute;
+        bottom: -10px;
+        right: -10px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid #fff;
+        background-color: #fff;
+    }
+    
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-color: rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s ease;
+        color: #fff;
+        text-align: center;
+        flex-direction: column;
+        border-radius: 50%;
+    }
+    
+    .image-container:hover .overlay {
+        opacity: 1;
+    }
+    
+    .image-container:hover .rep-img {
+        transform: scale(1.1);
+    }
+    
+    .rep-info h3 {
+        font-size: 1rem;
+        margin: 0;
+    }
+    
+    .rep-info p {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .flag-img {
+            bottom: -5px;
+            right: -5px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+    
+
+
+</style>
 {% endblock content %}

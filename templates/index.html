@@ -759,15 +759,15 @@
 
     <!-- video-style-two -->
     <section class="video-style-two centred sec-pad">
-        <div class="auto-container">
+        {% comment %} <div class="auto-container">
              
                 <video  autoplay muted>
                     <source src="{% static 'assets/videos/clip.mp4' %}" type="video/mp4">
                     {% comment %} <source src="{% static 'assets/videos/manaslu_clip.ogg' %}" type="video/ogg">
-                    Your browser does not support the video tag. {% endcomment %}
+                    Your browser does not support the video tag.
                 </video>
             
-        </div>
+        </div> {% endcomment %}
         <div class="auto-container">
             <div class="inner-container">
                 <div class="inner-box" style="background-image: url({{company.video_thumbnail_image.url}});">
