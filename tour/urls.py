@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView, GoretoSpecial, SpecialView
+from .views import AdminDestination, Region, UpdateRegion, DeleteRegion, ToggleRegionStatus, ToggleSpecialStatus, Destination, UpdateDestination, AdminTour, EditTour, DeleteTour, ToggleAttractionStatus, OneDestination, get_regions, Tourlist, TourDeatails, Activities, Trekking, ItinaryAdmin, get_tour_itineraries, delete_itinerary, DeleteItinary, EditItinary, EditTourItinary, Gallary, DeleteImage, AdminIncludeExclude, DeleteIncludeExclude, EditIncludeExclude, AssignIncludeExcludeView, Faqs, DeleteFaqs, EditFaqs, ToggleFaqsStatus, AssignFaqsToTourView, UnassignFaqsToTourView, GoretoSpecial, SpecialView, FeaturedTourViews, DeleteFeaturedTour
 from . import views
 
 urlpatterns = [
@@ -45,6 +45,8 @@ urlpatterns = [
     path('get_tour_itineraries/', get_tour_itineraries, name='get_tour_itineraries'),
     path('delete_itinerary/', delete_itinerary, name='delete_itinerary'),
     path('adminspecial/', SpecialView.as_view(), name="admin_special"),
+    path('admin_featured_tour/', FeaturedTourViews.as_view(), name='feature_tour'),
+    path('remove_featured_tour/<int:id>/', DeleteFeaturedTour.as_view(), name='remove_featured_tour'),
  ]
  # gauley bhai
  #pip uninstall bleach

@@ -119,3 +119,10 @@ class SpecialModels(models.Model):
     id = models.AutoField(primary_key=True)
     trekking_des = RichTextField()
     goreto_special_des = RichTextField()
+    
+class FeaturedTourModels(models.Model):
+    id = models.AutoField(primary_key=True)
+    tour = models.ForeignKey(TourDetailsModel, on_delete=models.CASCADE)
+    starting_date = models.DateField()
+    end_date = models.DateField()
+    

@@ -22,47 +22,47 @@
 <div class="container mt-9">
     <h1>Terms of Service</h1>
     <br>
-    <p><strong>Effective Date: [Insert Date]</strong></p>
+    <p><strong>Effective Date: 21 September 2024</strong></p>
     <br>
-    <p>Welcome to <strong>[Your Company Name]</strong>. By accessing and using our website, you agree to comply with and be bound by the following terms and conditions of use. Please read these Terms of Service carefully before using our services.</p>
+    <p>Welcome to <strong>{{company.name}}</strong>. By accessing and using our website, you agree to comply with and be bound by the following terms and conditions of use. Please read these Terms of Service carefully before using our services.</p>
     <br>
     <h2>1. Acceptance of Terms</h2>
     <p>By accessing or using our website and services, you agree to abide by these Terms of Service and our Privacy Policy. If you do not agree with any of these terms, you are prohibited from using or accessing this site.</p>
-
+    <br>
     <h2>2. Use of Services</h2>
     <p>Our travel services are intended for personal, non-commercial use. You agree to use our website and services only for lawful purposes and in accordance with these Terms of Service. Misuse of the services, such as fraudulent bookings or unauthorized access, is strictly prohibited.</p>
-
+    <br>
     <h2>3. Booking and Payments</h2>
     <p>All bookings made through our website are subject to availability and confirmation. Payments for travel services must be made in full as per the payment options provided during the booking process. We reserve the right to cancel or modify any booking if it violates our policies.</p>
-
+    <br>
     <h2>4. Cancellations and Refunds</h2>
     <p>Cancellation policies may vary depending on the service provider (hotels, airlines, etc.). It is the responsibility of the customer to read and understand the specific terms associated with their booking. Refunds will be processed as per the terms provided at the time of booking.</p>
-
+    <br>
     <h2>5. Changes to Services</h2>
     <p>We reserve the right to modify or discontinue, temporarily or permanently, any part of our services with or without notice. We shall not be liable to you or any third party for any changes or interruptions to the service.</p>
-
+    <br>
     <h2>6. Intellectual Property</h2>
-    <p>All content on this website, including text, images, logos, and graphics, is the property of <strong>[Your Company Name]</strong> and protected by intellectual property laws. You may not reproduce, distribute, or exploit any of the content for commercial purposes without our written consent.</p>
-
+    <p>All content on this website, including text, images, logos, and graphics, is the property of <strong>{{company.name}}</strong> and protected by intellectual property laws. You may not reproduce, distribute, or exploit any of the content for commercial purposes without our written consent.</p>
+    <br>
     <h2>7. Limitation of Liability</h2>
-    <p><strong>[Your Company Name]</strong> shall not be held liable for any indirect, incidental, or consequential damages arising from the use of our services. This includes but is not limited to loss of data, personal injury, or financial loss due to service interruptions or travel disruptions.</p>
-
+    <p><strong>{{company.name}}</strong> shall not be held liable for any indirect, incidental, or consequential damages arising from the use of our services. This includes but is not limited to loss of data, personal injury, or financial loss due to service interruptions or travel disruptions.</p>
+    <br>
     <h2>8. Indemnification</h2>
-    <p>You agree to indemnify and hold harmless <strong>[Your Company Name]</strong>, its affiliates, and staff from any claims, liabilities, damages, or costs arising out of your use of our services, violation of these terms, or infringement of any third-party rights.</p>
-
+    <p>You agree to indemnify and hold harmless <strong>{{company.name}}</strong>, its affiliates, and staff from any claims, liabilities, damages, or costs arising out of your use of our services, violation of these terms, or infringement of any third-party rights.</p>
+    <br>
     <h2>9. Governing Law</h2>
     <p>These Terms of Service shall be governed and construed in accordance with the laws of Nepal, without regard to its conflict of law provisions. Any disputes arising from the use of our services shall be subject to the exclusive jurisdiction of the courts located in Nepal.</p>
-
+    <br>
     <h2>10. Changes to These Terms</h2>
     <p>We reserve the right to update or modify these Terms of Service at any time without prior notice. Your continued use of our website and services following any changes signifies your acceptance of the revised terms.</p>
-
+    <br>
     <h2>11. Contact Us</h2>
     <p>If you have any questions or concerns about these Terms of Service, please contact us at:</p>
     <address>
-        [Your Company Name]<br>
-        [Your Address]<br>
-        Email: <a href="mailto:[Your Email]">[Your Email]</a><br>
-        Phone: [Your Phone Number]
+        {{company.name}}<br>
+        {{company.address}}<br>
+        Email: <a href="mailto:[{{company.emal}}">{{company.emal}}</a><br>
+        Phone: {{company.contact}}
     </address>
 </div>
 {%endblock content%}

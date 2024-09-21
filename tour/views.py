@@ -1,8 +1,8 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel, FaqModels, TourFaqModels, SpecialModels
-from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm, FaqForm, AssignFaqsToTourForm, SpecialForm
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, TourIncludeExcludeModel, FaqModels, TourFaqModels, SpecialModels, FeaturedTourModels
+from .forms import DestinationForm, RegionForm, TourDetailsForm, ItinaryForm, GallaryForm, BookingForm, InqueryForm, IncludeExcludeForm, TourIncludeExcludeForm, FaqForm, AssignFaqsToTourForm, SpecialForm, FeaturedTourForms
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -617,3 +617,29 @@ class SpecialView(LoginRequiredMixin, View):
             return redirect('admin_special')  # Redirect to the same page after saving
 
         return render(request, self.template_name, {'form': form})
+    
+class FeaturedTourViews(LoginRequiredMixin, View):
+    template_name = 'admin_featured_tour.html'
+    
+    # Handles the GET request
+    def get(self, request):
+        form = FeaturedTourForms()  # Initialize the form
+        featured_tours = FeaturedTourModels.objects.all()
+        return render(request, self.template_name, {'form': form, 'featured_tours':featured_tours})
+
+    # Handles the POST request
+    def post(self, request):
+        featured_tours = FeaturedTourModels.objects.all()
+        form = FeaturedTourForms(request.POST)  # Bind the form with POST data
+        if form.is_valid():
+            form.save()  # Save the form data if it's valid
+            messages.success(request, 'Tour Featured Successfully')
+            return redirect('feature_tour')  # Redirect after saving
+        return render(request, self.template_name, {'form': form, 'featured_tours':featured_tours})
+
+class DeleteFeaturedTour(LoginRequiredMixin, View):
+    def get(self, request, id):
+        faqs = FeaturedTourModels.objects.get(pk=id)
+        faqs.delete()
+        messages.success(request, "Featured Tour removed Successfully")
+        return redirect('feature_tour')

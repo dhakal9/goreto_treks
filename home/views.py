@@ -6,7 +6,7 @@ from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, O
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel, WorldWideRepModels
-from tour.models import DestinationModel, TourDetailsModel, RegionModel, GallaryModel
+from tour.models import DestinationModel, TourDetailsModel, RegionModel, GallaryModel, FeaturedTourModels
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -480,10 +480,12 @@ class PlanTrip(View):
     template_name = 'plan_trip.html'  # Replace 'your_template_name.html' with your actual template name
 
     def get(self, request):
+        featured_tours = FeaturedTourModels.objects.all()
         form = PlanningTripForm()
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {'form': form, 'featured_tours':featured_tours})
 
     def post(self, request):
+        featured_tours = FeaturedTourModels.objects.all()
         form = PlanningTripForm(request.POST)
         if form.is_valid():
             firstname = form.cleaned_data['firstname']
@@ -511,7 +513,7 @@ class PlanTrip(View):
             return redirect('plan_trip')  # Redirect to a success URL after form submission
         else:
             messages.error(request, 'Failed to send message. Please check the form data.')
-            return render(request, self.template_name, {'form': form})
+            return render(request, self.template_name, {'form': form, 'featured_tours':featured_tours})
 
 class AdminWorldwiderepView(LoginRequiredMixin, View):
     template_name = 'admin_representative.html'

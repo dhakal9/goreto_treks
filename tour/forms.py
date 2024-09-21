@@ -1,5 +1,5 @@
 from django import forms
-from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels, SpecialModels
+from .models import DestinationModel, RegionModel, TourDetailsModel, ItinatyModel, GallaryModel, IncludeExcludeModel, FaqModels, TourFaqModels, SpecialModels, FeaturedTourModels
 from django_summernote.widgets import SummernoteWidget
 from django.forms import inlineformset_factory
 # from tinymce.widgets import TinyMCE
@@ -229,3 +229,21 @@ class SpecialForm(forms.ModelForm):
         model = SpecialModels
         fields ="__all__"
         
+
+class FeaturedTourForms(forms.ModelForm):
+    tour = forms.ModelChoiceField(queryset=TourDetailsModel.objects.all(), 
+                                     widget=forms.Select(attrs={'class': 'form-control'}))
+    starting_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        label="Starting Date"
+    )
+    end_date = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+        label="End Date"
+    )
+    class Meta:
+        model = FeaturedTourModels
+        fields ="__all__"
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['tour'].queryset = TourDetailsModel.objects.all()

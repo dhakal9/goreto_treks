@@ -94,19 +94,48 @@
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
                 <div class="process-sidebar ml-20">
-                    <div class="content-box">
+                    {% for tour in featured_tours %}
+                    <div class="content-box tour-item" style="{% if forloop.first %}display: block;{% else %}display: none;{% endif %}">
                         <h3>Featured Tour</h3>
-                        <figure class="image-box"><img src="{% static 'assets/images/gal_pan.jpg'%}" alt=""></figure>
-                        <h4>Everest Volunteer Tour</h4>
+                        <figure class="image-box"><img src="{{ tour.tour.image.url }}" alt=""></figure> <!-- Adjust image field as per your model -->
+                        <h4>{{ tour.tour.name }}</h4> <!-- Assuming tour name is in related model -->
                         <ul class="info clearfix">
-                            <li><i class="far fa-calendar-alt"></i>From: <span>25 Oct, 2020</span></li>
-                            <li><i class="far fa-calendar-alt"></i>To: <span>29 Oct, 2020</span></li>
-                            {% comment %} <li><i class="far fa-user-alt"></i>Guests: <span>2 Adults, 1 Child</span></li> {% endcomment %}
+                            <li><i class="far fa-calendar-alt"></i>From: <span>{{ tour.starting_date }}</span></li>
+                            <li><i class="far fa-calendar-alt"></i>To: <span>{{ tour.end_date }}</span></li>
                         </ul>
                     </div>
-                </div>  
-            </div>
+                    {% endfor %}
+                </div>
+            </div>            
         </div>
     </div>
 </section>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentIndex = 0;
+        const tourItems = document.querySelectorAll('.tour-item');
+        const totalTours = tourItems.length;
+
+        // Function to show the current tour and hide others
+        function showTour(index) {
+            tourItems.forEach((tour, i) => {
+                tour.style.display = (i === index) ? 'block' : 'none';
+            });
+        }
+
+        // Automatically switch tours every 4 seconds
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalTours;
+            showTour(currentIndex);
+        }, 4000);  // 4000ms = 4 seconds
+    });
+    function showTour(index) {
+        tourItems.forEach((tour, i) => {
+            tour.style.opacity = (i === index) ? 1 : 0;
+            tour.style.transition = 'opacity 0.5s';  // Fade effect
+        });
+    }
+    
+</script>
+
 {%endblock content%}
