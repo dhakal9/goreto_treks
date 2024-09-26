@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+  }
+
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .gallery-item {
+    margin: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    width: calc(33.333% - 20px);
+    flex: 1 0 calc(33.333% - 20px);
+    max-width: 300px;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    overflow: auto;
+  }
+
+  .popup-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+  }
+
+  .popup img {
+    max-width: 90%;
+    max-height: 90%;
+  }
+
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  .nav-button.left {
+    left: 20px;
+  }
+
+  .nav-button.right {
+    right: 20px;
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .gallery-item {
+      width: 100%;
+      max-width: none;
+    }
+  }
+</style>
+
+<section class="page-title style-two centred" style="height: 200px; background-image: url({% static 'assets/images/gallary_pano.jpg' %});">
+  <div class="auto-container">
+    <div class="content-box">
+        <h1>Gallery</h1>
+        <p style="position:absolute"><a href="{% url 'index' %}"style="color: #ffffff; text-decoration: none;"
+          onmouseover="this.style.color='#000000'"
+          onmouseout="this.style.color='#ffffff'">Home</a> / Gallery </p>
+    </div>
+  </div>
+</section>
+
+<div class="gallery">
+  {% for image in images %}
+  <figure class="gallery-item" data-index="{{ forloop.counter0 }}" onclick="openPopup(event)">
+    <img src="{{ image.image.url }}" alt="{{ image.description }}">
+  </figure>
+  {% endfor %}
+  {% for image in tour_images %}
+  <figure class="gallery-item" data-index="{{ forloop.counter0 }}" onclick="openPopup(event)">
+    <img src="{{ image.image.url }}" alt="{{ image.description }}">
+  </figure>
+  {% endfor %}
+</div>
+
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <button class="close-button" onclick="closePopup()">✖</button>
+    <button class="nav-button left" onclick="slideImage(-1)">❮</button>
+    <img id="popup-image" src="" alt="Popup Image">
+    <button class="nav-button right" onclick="slideImage(1)">❯</button>
+  </div>
+</div>
+
+<script>
+  let currentImageIndex = 0;
+  const images = document.querySelectorAll('.gallery-item img');
+
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', openPopup);
+    });
+
+    document.getElementById('popup').addEventListener('click', function(event) {
+      if (event.target.id === 'popup') {
+        closePopup();
+      }
+    });
+  });
+
+  function openPopup(event) {
+    if (event.target.tagName === 'IMG') {
+      currentImageIndex = [...images].indexOf(event.target);
+      updatePopupImage();
+      document.getElementById('popup').style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  function slideImage(direction) {
+    currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+    updatePopupImage();
+  }
+
+  function updatePopupImage() {
+    const imageUrl = images[currentImageIndex].src;
+    document.getElementById('popup-image').src = imageUrl;
+  }
+</script>
+
+{% endblock content %}

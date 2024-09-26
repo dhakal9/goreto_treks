@@ -1,15 +1,58 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
-from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm
+from .forms import UserLoginForm, CompanyProfileForm, ReviewForm, FunfactForm, OurTeamForm, ContactUs, BlogsForm, CsrForm, MainGallaryForm, WhyUsForms, PlanningTripForm, SeoForm, WorldWideRepForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
-from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel
-from tour.models import DestinationModel, TourDetailsModel
+from .models import CustomUser, CompanyProfile, Review, FunfactModel, OurTeamModel, BlogsModel, CsrModel, MainGallaryModel, WhyUsModel, SeoModel, WorldWideRepModels
+from tour.models import DestinationModel, TourDetailsModel, RegionModel, GallaryModel, FeaturedTourModels
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.serializers import serialize
 # Create your views here.
+from django.db.models import F
+
+def error_404(request, exception):
+        return render(request,'404.html')
+
+def error_500(request):
+        return render(request,'500.html')
+        
+def error_403(request, exception):
+        return render(request,'403.html')
+
+def error_400(request,  exception):
+        return render(request,'400.html')
+# class Index(View):
+#     template_name = "index.html"
+
+#     def get(self, request):
+#         company_profile = CompanyProfile.objects.first()
+#         reviews = Review.objects.all()
+#         destinations = DestinationModel.objects.values(name=F('name'), slug=F('slug'))
+#         funfact = FunfactModel.objects.first()
+#         tours = TourDetailsModel.objects.filter(is_attraction=True)
+#         tur_tur = TourDetailsModel.objects.values(name=F('name'), slug=F('slug'))
+#         reg_reg = RegionModel.objects.values(name=F('name'), slug=F('slug'))
+
+#         destinations_json = serialize('json', destinations)
+#         tours_json = serialize('json', tur_tur)
+#         regions_json = serialize('json', reg_reg)
+
+#         context = {
+#             'company': company_profile,
+#             'reviews': reviews,
+#             'funfact': funfact,
+#             'destinations': destinations,
+#             'tours': tours,
+#             'destinations_json': destinations_json,
+#             'tours_json': tours_json,
+#             'regions_json': regions_json,
+#         }
+#         return render(request, self.template_name, context)
+
 
 class Index(View):
     template_name = "index.html"
@@ -18,8 +61,22 @@ class Index(View):
         reviews =  Review.objects.all()
         destinations = DestinationModel.objects.all()
         funfact = FunfactModel.objects.first()
-        tours = TourDetailsModel.objects.all()
-        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours})
+        tours = TourDetailsModel.objects.filter(is_attraction=True)
+        reg_reg = RegionModel.objects.all()
+        tor_tor = TourDetailsModel.objects.all()
+        blogs = BlogsModel.objects.all()
+        csr = CsrModel.objects.all()
+        
+        destinations_json = serialize('json', destinations)
+        tours_json = serialize('json', tor_tor)
+        regions_json = serialize('json', reg_reg)
+        blogs_json = serialize('json', blogs)
+        csr_json = serialize('json', csr)
+        
+        
+        return render(request, self.template_name, {'company': company_profile, 'reviews': reviews, 'funfact':funfact, 'destinations': destinations, 'tours':tours, 'tor_tor':tor_tor, 'destinations_json': destinations_json, 'tours_json': tours_json, 'regions_json': regions_json, 'blogs_json':blogs_json, 'csr_json':csr_json })
+    
+
     
 class Explore(View):
     template_name = "explore.html"
@@ -48,10 +105,9 @@ class Login(View):
                 user = authenticate(request, email=email, password=password)
                 # remember_me = request.POST.get("remember_me") == "on"
                 if user is not None:
-                    # login(request, user)
-                    # if remember_me:
-                    #     request.session.set_expiry(1209600)
-                    #     request.session.set_expiry(0)
+                    login(request, user)
+                    request.session.set_expiry(12090)
+                    request.session.set_expiry(0)
                     return redirect("admin_home")
                 else:
                     if not CustomUser.objects.filter(email=email).exists():
@@ -63,12 +119,12 @@ class Login(View):
         
 
     
-class AdminIndex(View):
+class AdminIndex(LoginRequiredMixin, View):
     template_name = "admin_index.html"
     def get(self, request):
         return render(request, self.template_name)
 
-class AdminHome(View):
+class AdminHome(LoginRequiredMixin, View):
     template_name = 'admin_home.html'
     form = CompanyProfileForm
 
@@ -86,7 +142,7 @@ class AdminHome(View):
 
         return render(request, self.template_name, {'form': form})
 
-class Funfact(View):
+class Funfact(LoginRequiredMixin, View):
     template_name = 'admin_funfact.html'
     form = FunfactForm
     
@@ -104,7 +160,24 @@ class Funfact(View):
 
         return render(request, self.template_name, {'form': form, 'funfact': funfact})
     
-class Review_function(View):
+class SeoView(LoginRequiredMixin, View):
+    template_name = 'admin_seo.html'
+    form = SeoForm
+    def get(self, request):
+        seos = SeoModel.objects.first()
+        form = self.form(instance=seos)  # Pass instance to make it updateable
+        return render(request, self.template_name, {'form': form, 'seos': seos})
+    
+    def post(self, request):
+        seos = SeoModel.objects.first()
+        form = self.form(request.POST,  instance=seos)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_seo')  # Redirect to the same page after saving
+
+        return render(request, self.template_name, {'form': form, 'seos': seos})
+    
+class Review_function(LoginRequiredMixin, View):
     template_name = 'admin_review.html'
 
     def get(self, request):
@@ -120,7 +193,38 @@ class Review_function(View):
             return redirect('admin_review')  # Redirect to a success page or another view
 
         return render(request, self.template_name, {'form': form, 'reviews':reviews})
+    
+class DeleteReview(LoginRequiredMixin, View):
+    def get(self, request, review_id):
+        reviews = Review.objects.get(review_id=review_id)
+        reviews.delete()
+        messages.success(request, "Review Deleted Successfully")
+        return redirect('admin_review')
 
+class UpdateReview(LoginRequiredMixin, View):
+    template_name = 'admin_review.html'
+
+    def get(self, request, review_id):
+        reviews = Review.objects.all()
+        review = get_object_or_404(Review, pk=review_id)
+        form = ReviewForm(instance=review)
+        return render(request, self.template_name, {'form': form, 'review':review, 'reviews':reviews })
+
+    def post(self, request, review_id):
+        review = get_object_or_404(Review, pk=review_id)
+        form = ReviewForm(request.POST, request.FILES, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reviews Updated Successfully')
+            return redirect('admin_review')
+        return render(request, self.template_name, {'form': form,  'review':review})
+            
+class Reviews(View):
+    template_name = 'reviews.html'
+    def get(self, request):
+        reviews = Review.objects.all()
+        return render(request, self.template_name, {'reviews':reviews})
+        
 class ContactUs(View):
     template_name = 'contactus.html'
     def get(self, request):
@@ -142,13 +246,13 @@ class ContactUs(View):
                 subject,            # Title
                 message_body,       # Message
                 settings.EMAIL_HOST_USER,  # Sender email
-                ['dhakalamrit19@gmail.com'],  # Receiver email
+                ['goretotreks@gmail.com'],  # Receiver email
                 fail_silently=False
             )
             messages.success(request, 'Message sent Successfully')
         return render(request, self.template_name, {'form': form})
 
-class OurTeamAdmin(View):
+class OurTeamAdmin(LoginRequiredMixin, View):
     template_name = 'admin_team.html'
     def get(self, request):
         form = OurTeamForm()
@@ -163,12 +267,44 @@ class OurTeamAdmin(View):
             return redirect('admin_team')  # Redirect to a success page or another view
 
         return render(request, self.template_name, {'form': form, 'teams':teams})
+    
+class DeleteTeam(LoginRequiredMixin, View):
+    def get(self, request, team_id):
+        teams = OurTeamModel.objects.get(team_id=team_id)
+        teams.delete()
+        messages.success(request, "Team Deleted Successfully")
+        return redirect('admin_team')
+    
+class UpdateTeam(LoginRequiredMixin, View):
+    template_name = 'admin_team.html'
+    def get(self, request, team_id):
+        teams = OurTeamModel.objects.all()
+        team = get_object_or_404(OurTeamModel, pk=team_id)
+        form = OurTeamForm(instance=team)
+        return render(request, self.template_name, {'form': form, 'team':team, 'teams':teams })
+
+    def post(self, request, team_id):
+        team = get_object_or_404(OurTeamModel, pk=team_id)
+        form = OurTeamForm(request.POST, request.FILES, instance=team)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Team Updated Successfully')
+            return redirect('admin_team')
+        return render(request, self.template_name, {'form': form,  'team':team})
 
 class OurTeam(View):
     template_name='our_team.html'
     def get(self, request):
         teams = OurTeamModel.objects.all()
-        return render(request, self.template_name, {'teams':teams})
+        representatives = WorldWideRepModels.objects.all()
+        return render(request, self.template_name, {'teams':teams, 'representatives':representatives})
+    
+class OurTeamDetails(View):
+    template_name = 'our_team_details.html'
+    def get(self, request):
+        teams = OurTeamModel.objects.all()
+        representatives = WorldWideRepModels.objects.all()
+        return render(request, self.template_name, {'teams':teams,  'representatives':representatives})
     
 class Logout(LoginRequiredMixin, View):
     template_name = 'login.html'
@@ -176,7 +312,7 @@ class Logout(LoginRequiredMixin, View):
         logout(request)
         return redirect('login')
 
-class AdminBlogs(View):
+class AdminBlogs(LoginRequiredMixin, View):
     template_name = 'admin_blogs.html'
     def get(self, request):
         blogs = BlogsModel.objects.all()
@@ -191,11 +327,42 @@ class AdminBlogs(View):
             return redirect('admin_blogs')
         return render(request, self.template_name, {'form':form})
     
+class UpdateBlogs(LoginRequiredMixin, View):
+    template_name = 'admin_blogs.html'
+    def get(self, request, id):
+        blogs = BlogsModel.objects.all()
+        blog = get_object_or_404(BlogsModel, pk=id)
+        form = BlogsForm(instance=blog)
+        return render(request, self.template_name, {'form': form, 'blog':blog, 'blogs':blogs })
+
+    def post(self, request, id):
+        blog = get_object_or_404(BlogsModel, pk=id)
+        form = BlogsForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Blogs Updated Successfully')
+            return redirect('admin_blogs')
+        return render(request, self.template_name, {'form': form,  'blog':blog})
+
+class DeleteBlogs(LoginRequiredMixin, View):
+    def get(self, request, id):
+        blogs = BlogsModel.objects.get(pk=id)
+        blogs.delete()
+        messages.success(request, "Blogs Deleted Successfully")
+        return redirect('admin_blogs')
+    
 class Blogs(View):
     template_name = 'blogs.html'
     def get(self, request):
-        blogs = BlogsModel.objects.all()
+        blogs = BlogsModel.objects.all().order_by('-created_at')
         return render(request, self.template_name, {'blogs':blogs})
+
+class BlogsDetails(View):
+    template_name = 'blogs_details.html'
+    def get(self, request, pk):
+        blogs = BlogsModel.objects.get(pk=pk)
+        vlogs = BlogsModel.objects.all().order_by('-created_at')
+        return render(request, self.template_name, {'blogs':blogs, 'vlogs':vlogs})
 
 class AboutUs(View):
     template_name = 'aboutus.html'
@@ -205,8 +372,197 @@ class AboutUs(View):
         return render(request, self.template_name, {'teams':teams, 'reviews':reviews})
     
 
+
+class WhyUsAdmin(LoginRequiredMixin, View):
+    template_name ='admin_whyus.html'
+    def get(self, request):
+        form = WhyUsForms() 
+        return render(request, self.template_name, {'form':form})
+
+        
+    def post(self, request):
+        form = WhyUsForms(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Why Added Successfully')
+            return redirect('admin_why_us')
+        return render(request, self.template_name, {'form':form})
+    
 class WhyUs(View):
     template_name ='why_us.html'
     def get(self, request):
-        return render(request, self.template_name)
+        whyuss = WhyUsModel.objects.all()
+        return render(request, self.template_name, {'whyuss':whyuss})
     
+
+class CsrAdmin(LoginRequiredMixin, View):
+    template_name = 'admin_csr.html'
+    def get(self, request):
+        csrs = CsrModel.objects.all()
+        form = CsrForm()
+        return render(request, self.template_name, {'form':form, 'csrs':csrs})
+    
+    def post(self, request):
+        csrs = CsrModel.objects.all()
+        form = CsrForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'CSR Added successfully')
+            return redirect('csr_admin')
+        return render(request, self.template_name, {'form':form, 'csrs':csrs})
+    
+class UpdateCsr(LoginRequiredMixin, View):
+    template_name = 'admin_csr.html'
+    def get(self, request, id):
+        csrs = CsrModel.objects.all()
+        csr = get_object_or_404(CsrModel, pk=id)
+        form = CsrForm(instance=csr)
+        return render(request, self.template_name, {'form': form, 'csr':csr, 'csrs':csrs })
+
+    def post(self, request, id):
+        csr = get_object_or_404(CsrModel, pk=id)
+        form = CsrForm(request.POST, request.FILES, instance=csr)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'CSR Updated Successfully')
+            return redirect('csr_admin')
+        return render(request, self.template_name, {'form': form,  'csr':csr})
+
+class DeleteCsr(LoginRequiredMixin, View):
+    def get(self, request, id):
+        csrs = CsrModel.objects.get(pk=id)
+        csrs.delete()
+        messages.success(request, "CSR Deleted Successfully")
+        return redirect('admin_blogs')
+    
+class Csr(View):
+    template_name = 'csr.html'
+    def get(self, request):
+        csrs = CsrModel.objects.all()
+        return render(request, self.template_name, {'csrs':csrs})
+    
+class CsrDetails(View):
+    template_name = 'csr_details.html'
+    def get(self, request, pk):
+        csrs = CsrModel.objects.get(pk=pk)
+        return render(request, self.template_name, {'csrs':csrs})
+    
+class MainGallaryAdmin(LoginRequiredMixin, View):
+    template_name = 'admin_main_gallary.html'
+    def get(self, request):
+        form = MainGallaryForm()
+        images = MainGallaryModel.objects.all()
+        return render(request, self.template_name, {'form':form, 'images':images})
+    def post(self, request):
+        images = MainGallaryModel.objects.all()
+        form = MainGallaryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Image Added successfully')
+            return redirect('main_admin_gallary')
+        return render(request, self.template_name, {'form':form, 'images':images})
+    
+class Gallary(View):
+    tempale_name = 'gallary.html'
+    def get(self, request):
+        images = MainGallaryModel.objects.all()
+        tour_images = GallaryModel.objects.all()
+        return render(request, self.tempale_name, {'images':images, 'tour_images':tour_images})
+    
+class DeleteGallary(LoginRequiredMixin, View):
+    def get(self, request, id):
+        images = MainGallaryModel.objects.get(id=id)
+        images.delete()
+        messages.success(request, "Image Deleted Successfully")
+        return redirect('main_admin_gallary')
+
+class PlanTrip(View):
+    template_name = 'plan_trip.html'  # Replace 'your_template_name.html' with your actual template name
+
+    def get(self, request):
+        featured_tours = FeaturedTourModels.objects.all()
+        form = PlanningTripForm()
+        return render(request, self.template_name, {'form': form, 'featured_tours':featured_tours})
+
+    def post(self, request):
+        featured_tours = FeaturedTourModels.objects.all()
+        form = PlanningTripForm(request.POST)
+        if form.is_valid():
+            firstname = form.cleaned_data['firstname']
+            lastname = form.cleaned_data['lastname']
+            email = form.cleaned_data['email']
+            tour_name = form.cleaned_data['tour_name']
+            address1 = form.cleaned_data['address1']
+            address2 = form.cleaned_data['address2']
+            city = form.cleaned_data['city']
+            zip_code = form.cleaned_data['zip_code']
+            state = form.cleaned_data['state']
+            country = form.cleaned_data['country']
+            message = form.cleaned_data['message']
+
+            message_body = f"First Name: {firstname}\n Last Name: {lastname}\nEmail: {email}\nTour Name: {tour_name}\nAddress 1: {address1}\nAddress 2: {address2}\nCity: {city}\nZip Code: {zip_code}\nState: {state}\nCountry: {country}\nMessage: {message}"
+
+            send_mail(
+                "Trip Inquiry",     # Title
+                message_body,       # Message
+                settings.EMAIL_HOST_USER,  # Sender email
+                ['goretotreks@gmail.com'],  # Receiver email
+                fail_silently=False
+            )
+            messages.success(request, 'Message sent successfully')
+            return redirect('plan_trip')  # Redirect to a success URL after form submission
+        else:
+            messages.error(request, 'Failed to send message. Please check the form data.')
+            return render(request, self.template_name, {'form': form, 'featured_tours':featured_tours})
+
+class AdminWorldwiderepView(LoginRequiredMixin, View):
+    template_name = 'admin_representative.html'
+    def get(self, request):
+        form = WorldWideRepForm()
+        representatives = WorldWideRepModels.objects.all()
+        return render(request, self.template_name, {'form': form, 'representatives':representatives})
+    
+    def post(self, request):
+        representatives = WorldWideRepModels.objects.all()
+        form = WorldWideRepForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Representative Added successfully')
+            return redirect('admin_rep')
+        return render(request, self.template_name, {'form':form, 'representatives':representatives})
+    
+class UpdateRepresentative(LoginRequiredMixin, View):
+    template_name = 'admin_representative.html'
+    def get(self, request, id):
+        representatives = WorldWideRepModels.objects.all()
+        repss = get_object_or_404(WorldWideRepModels, pk=id)
+        form = WorldWideRepForm(instance=repss)
+        return render(request, self.template_name, {'form': form, 'repss':repss, 'representatives':representatives })
+
+    def post(self, request, id):
+        representatives = WorldWideRepModels.objects.all()
+        repss = get_object_or_404(WorldWideRepModels, pk=id)
+        form = WorldWideRepForm(request.POST, request.FILES, instance=repss)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Representative Updated Successfully')
+            return redirect('admin_rep')
+        return render(request, self.template_name, {'form': form,  'representatives':representatives})
+    
+
+class DeleteRepresentative(LoginRequiredMixin, View):
+    def get(self, request, id):
+        representative = WorldWideRepModels.objects.get(pk=id)
+        representative.delete()
+        messages.success(request, "Representative Deleted Successfully")
+        return redirect('admin_rep')
+
+class PrivacyPolicy(View):
+    template_name = 'privacy_policy.html' 
+    def get(self, request):
+        return render(request, self.template_name)
+
+class TermsOfServices(View):
+    template_name = 'terms_of_services.html' 
+    def get(self, request):
+        return render(request, self.template_name)

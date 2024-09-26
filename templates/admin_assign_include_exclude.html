@@ -1,0 +1,14 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+
+  <h2>Assign Includes and Excludes for Tour: {{ tour.name }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    <h3>Includes:</h3>
+    {{ form.includes }}
+    <h3>Excludes:</h3>
+    {{ form.excludes }}
+    <button type="submit">Save</button>
+  </form>
+
+{% endblock content %}

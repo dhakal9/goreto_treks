@@ -2,9 +2,9 @@
 
 {%block content%}
 {%load static%}
-
         <!-- about-style-two -->
-<section class="about-style-two" style="padding-bottom:50px;">
+<section class="place-section style-two sec-pad bg-color-1">
+
     <div class="pattern-layer" style="background-image: url({% static 'assets/images/shape/shape-2.png' %});"></div>
     <div class="auto-container">
         <div class="row clearfix">
@@ -16,10 +16,11 @@
                             <h2>{{company.about_heading}}</h2>
                         </div>
                         <div class="text">
-                            <p>{{company.about_us}}</p>
-                        </div>
-                        <div class="btn-box">
-                            <a href="about.html" class="theme-btn">Find Now</a>
+                            
+                            {% autoescape off %}
+                            {{company.about_us|safe}}
+                            {% endautoescape %}
+                            
                         </div>
                     </div>
                 </div>
@@ -41,6 +42,22 @@
 </section>
 <!-- about-style-two end -->
 
+<!-- Why Us Section-->
+<section class="place-section style-two sec-pad bg-color-1">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <h2>Why Goreto ?</h2>
+        </div>
+        <div class='text'>
+              
+                {% autoescape off %}
+                {{company.why_us|safe}}
+                {% endautoescape %}
+           
+            
+        </div>
+    </div>
+</section>
 
 
 <!-- team-section -->
@@ -59,15 +76,10 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 team-block">
                     <div class="team-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{team.team_image.url}}" alt=""></figure>
+                            <figure class="image-box"><a href="{% url 'our_team_details'%}"><img style="width: 370px; height: 400px; object-fit: cover;" src="{{team.team_image.url}}" alt=""></a></figure>
                             <div class="lower-content">
-                                <h3><a>{{team.name}}</a></h3>
+                                <h3><a href="{% url 'our_team_details'%}">{{team.name}}</a></h3>
                                 <span class="designation">{{team.position}}</span>
-                                <ul class="social-links clearfix">
-                                    <li><a href="{{team.facebook_link}}"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a  href="{{team.instagram_link}}"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -82,39 +94,83 @@
 
 
 
-        <!-- testimonial-section -->
-        <section class="testimonial-section bg-color-1 sec-pad centred">
-            <div class="auto-container">
-                <div class="sec-title centred">
-                    <p>Review & Testimonials</p>
-                    <h2>Top Reviews for Goreto Treks</h2>
-                </div>
-                <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">
-					{% for review in reviews %}
-                        <div class="testimonial-block-one">
-                            <div class="inner-box" style="height:490px;">
-                                <ul class="rating-box clearfix">
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                    <li><i class="icon-Star"></i></li>
-                                </ul>
-                                <div class="text">
-                                    <div class="icon" style="background-image: url(Content/assets/images/icons/quote-1.png);"></div>
-                                    <p style="height:245px">{{ review.message }}</p>
-                                </div>
-                                <div class="author-box">
-                                    <h4>{{ review.name }}</h4>
-                                    <span class="designation">{{ review.position }}</span>
-                                    <figure class="thumb-box"><img src="{{ review.team_image.url }}" alt=""></figure>
-                                </div>
-                            </div>
-                        </div>
-					{% endfor %}
+<section class="testimonial-section bg-color-1 sec-pad centred">
+    <div class="auto-container">
+        <div class="sec-title centred">
+            <p>Review & Testimonials</p>
+            <h2>Top Reviews for Goreto Treks</h2>
+        </div>
+        <div class="three-item-carousel owl-carousel owl-theme owl-nav-none">   
+            {% for review in reviews %}
+            <div class="testimonial-block-one">
+                <a href="{% url 'reviews' %}" class="testimonial-link">
+                <div class="inner-box" style="height: 490px;">
+                    <br>
+                    <ul class="rating-box clearfix">
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                        <li><i class="icon-Star"></i></li>
+                    </ul>
+                    <div class="text">
                         
+                        <p style="color:#000000; height: 245px; z-index:1;">{{ review.message|truncatewords:50 }}</p>
+                        <div class="icon" style="float: left; width: 110px; height: 80px; object-fit: cover; background-image: url({% static  "assets/images/icons/trippicon.png" %});"></div>
+                    </div>
+                    <div class="author-box">
+                        <h4>{{ review.name }}</h4>
+                        <span class="designation">{{ review.position }}</span>
+                        <figure class="thumb-box"><img style="float: left; width: 110px; height: 80px; object-fit: cover;" src="{{ review.team_image.url }}" alt=""></figure>
+                    </div>
+                    <!-- Watermark -->
+                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.2;">
+                        <img src="{% static 'assets/images/recommended-tripadvisor.png'%}" alt="Watermark" style="max-width: 100%; max-height: 100%;">
+                    </div>
+                    <!-- Read More Button -->
+                    </a>
+                    <!-- Dark Overlay -->
+                    <div class="dark-overlay"></div>
+                    
                 </div>
             </div>
-        </section>
-        <!-- testimonial-section end -->
+            
+{% endfor %}
+                          
+        </div>
+    </div>
+</section>
+<!-- testimonial-section end -->
+<style>
+    .testimonial-block-one .dark-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(192,192,192); /* Adjust opacity as needed */
+        opacity: 0.6;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    
+    .testimonial-block-one:hover .dark-overlay {
+        opacity: 1;
+    }
+    
+    .testimonial-block-one .testimonial-link {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2; /* Ensure it's above the dark overlay */
+    }
+    
+    .testimonial-block-one:hover .testimonial-link {
+        cursor: pointer;
+    }
+    
+</style>
 {% endblock content%}

@@ -1,0 +1,117 @@
+{% extends 'admin_base.html'%}
+{%block content%}
+
+<br>
+<br>
+<h1 class="text-center">CSR</h1>
+
+    <!-- Page Content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">ADD CSR</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Title <span class="text-danger">*</span></label>
+                                {{ form.title }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Description </label>
+                                {{ form.description }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Upload Image </label><br>
+                                {{ form.image }}
+                            </div>
+                        </div>
+
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <h4>List Of Blogs </h4><br>
+        
+        <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+        <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+        <thead class="bt-5">
+        <tr>
+        <th>Title</th>
+        <th>Image</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+        </tr>
+        </thead>
+        
+         {% for csr in csrs %} 
+        <tr>
+        <td>{{csr.title}} </td>
+        <td><img src="{{csr.image.url}}" style="width: 50px; height: 45px;"></td>
+        <td>{{csr.description|wordwrap:"10"|slice:":100"}}....... </td>
+        <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
+        <td>
+        <a type="button" href="{% url 'update_csr' csr.id%}" class="btn btn-link btn-sm btn-rounded">
+        Edit
+        </a>
+        <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{csr.id}}">
+        Delete
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal{{csr.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel{{csr.id}}">Delete Priority Level</h5>
+        <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body"> Are You Sure want to delete ? </div>
+        <div class="modal-footer">
+        <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+        <a type="action" href="{% url 'delete_csr' csr.id %}" class="btn btn-link btn-sm btn-rounded">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+        Delete
+        </button>
+        </a>
+        </div>
+        </div>
+        </div>
+        </a>
+        
+        </td>
+        </tr>
+        {% endfor %}
+    
+        </table>
+    </div>
+
+
+{% endblock content%}

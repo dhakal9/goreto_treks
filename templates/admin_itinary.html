@@ -1,0 +1,177 @@
+{% extends "admin_base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Add Itinerary</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane" id="top-tab2">
+                <form method='POST' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Tour Name <span class="text-danger">*</span></label>
+                                {{ form.tour }}
+                            </div>
+                        </div>
+                    </div>  
+                    <div class="dynamic-fields" style="display: none;">
+                        <!-- Itinerary fields will be dynamically added here -->
+                    </div>
+                    <div class="submit-section mt-12" style="display: none;">
+                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                    </div>
+                </form>
+                <button id="add-more" class="btn btn-success mt-3" style="display: none;">Add More</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <h4>Itineraries</h4>
+        <table id="myTable" class="table align-middle mb-0 bg-white table-striped" width="100%">
+            <thead class="bt-5">
+                <tr>
+                    <th>Tour Name</th>
+                    <th>Day</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for itinary in itinaries %}
+                    <tr>
+                        <td>{{ itinary.tour.name }}</td>
+                        <td>{{ itinary.day }}</td>
+                        <td>{{ itinary.name }}</td>
+                        <td>{{ itinary.description|slice:":300"|safe }}.......</td>
+                        <td><span class="badge badge-success rounded-pill d-inline">Active</span></td>
+                        <td>
+                            <a type="button" href="{% url 'edit_itinary' itinary.itinary_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
+                            <button type="button" class="btn btn-danger delete-itinerary" data-itinary-id="{{ itinary.itinary_id }}">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var itineraryCount = {{ itinaries|length }};
+        
+        // Hide dynamic fields and submit button initially
+        $('.dynamic-fields').hide();
+        $('.submit-section').hide();
+        $('#add-more').hide();
+
+        $('#id_tour').change(function(){
+            var tourId = $(this).val();
+            if (tourId) {
+                $.ajax({
+                    url: '{% url "get_tour_itineraries" %}',
+                    data: {
+                        'tour_id': tourId
+                    },
+                    dataType: 'json',
+                    success: function(data){
+                        $('.dynamic-fields').empty();
+                        itineraryCount = 0;
+
+                        var itineraries = data.itineraries;
+
+                        itineraries.forEach(function(itinerary, index) {
+                            addItineraryFields(index + 1, itinerary.itinary_id, itinerary.day, itinerary.name, itinerary.description);
+                            itineraryCount++;
+                        });
+
+                        // Initialize CKEditor for all new textareas
+                        $('.ckeditor').each(function(){
+                            CKEDITOR.replace(this);
+                        });
+
+                        // Show dynamic fields and submit button
+                        $('.dynamic-fields').show();
+                        $('.submit-section').show();
+                        $('#add-more').show();
+                    }
+                });
+            } else {
+                // Hide dynamic fields and submit button if no tour is selected
+                $('.dynamic-fields').hide();
+                $('.submit-section').hide();
+                $('#add-more').hide();
+            }
+        });
+
+        function addItineraryFields(index, itinary_id, day, name, description) {
+            var fieldHtml = 
+                '<div class="row border my-2 p-3 shadow" data-itinary-id="' + itinary_id + '">' +
+                    '<div class="col-sm-6">' +
+                        '<div class="form-group">' +
+                            '<label>Day Sequence <span class="text-danger">*</span></label>' +
+                            '<input type="text" name="day_sequence_' + index + '" class="form-control" value="' + day + '">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-6">' +
+                        '<div class="form-group">' +
+                            '<label>Plan Name <span class="text-danger">*</span></label>' +
+                            '<input type="text" name="plan_name_' + index + '" class="form-control" value="' + name + '">' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-12">' +
+                        '<div class="form-group">' +
+                            '<label>Description <span class="text-danger">*</span></label>' +
+                            '<textarea name="description_' + index + '" class="form-control ckeditor">' + description + '</textarea>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-sm-12">' +
+                        '<button type="button" class="btn btn-danger delete-itinerary" data-itinary-id="' + itinary_id + '">Delete</button>' +
+                    '</div>' +
+                '</div>';
+            $('.dynamic-fields').append(fieldHtml);
+        }
+
+        $('#add-more').click(function(){
+            itineraryCount++;
+            addItineraryFields(itineraryCount, '', '', '', '');
+            // Initialize CKEditor for the new textarea
+            CKEDITOR.replace('description_' + itineraryCount);
+        });
+
+        $(document).on('click', '.delete-itinerary', function(){
+            var itinaryId = $(this).data('itinary-id');
+            if (itinaryId) {
+                $.ajax({
+                    url: '{% url "delete_itinerary" %}',
+                    method: 'POST',
+                    data: {
+                        'itinary_id': itinaryId,
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(){
+                        var container = $('.row[data-itinary-id="' + itinaryId + '"]');
+                        container.remove();
+                    }
+                });
+            } else {
+                var container = $(this).closest('.row');
+                container.remove();
+            }
+        });
+    });
+</script>
+{% endblock %}

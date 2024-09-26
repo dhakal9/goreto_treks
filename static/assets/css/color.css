@@ -1,7 +1,7 @@
 /* template-color */
 
 .scroll-top{
-  background-color: #ff7c5b;
+  background-color: #008fd6;
 }
 
 .handle-preloader{
@@ -36,16 +36,26 @@
 	border-top: 3px solid #ff7c5b
 }
 
+.main-menu .navigation > li > ul, 
+.main-menu .navigation > li > .megamenu,
+.main-menu .navigation > li > ul > li > ul > li > ul{
+	border-top: 3px solid #ff7c5b
+}
+
+
 .main-menu .navigation > li > ul > li > ul > li > a:hover{
   color: #ff7c5b;
 }
-
+.main-menu .navigation > li > ul > li > ul > li >  ul > li > a:hover{
+	color: #ff7c5b;
+  }
+  
 .main-header .search-box-outer .dropdown-menu{
 	background: #ff7c5b;
 }
 
 .theme-btn{
-	background: #ff7c5b;
+	background: #072063;
 }
 
 .feature-block-one .inner-box .lower-content .icon-box{
@@ -61,7 +71,7 @@
 }
 
 .tour-block-one .inner-box .image-box:before{
-	background: #ff7c5b;
+	background: #646464;
 }
 
 .tour-block-one .inner-box .lower-content .rating span i{
@@ -109,11 +119,11 @@
 }
 
 .news-block-one .inner-box .image-box{
-	background: #ff7c5b;
+	background: rgba(192,192,192);
 }
 
 .news-block-one .inner-box .image-box .post-date i{
-	background: #ff7c5b;
+	background: #072063;
 }
 
 .news-block-one .inner-box .lower-content .category a:hover{
@@ -140,9 +150,9 @@
 	background: #ff7c5b;
 }
 
-.footer-top .gallery-widget .image-list li .image-box{
-	background: #ff7c5b;
-}
+/* .footer-top .gallery-widget .image-list li .image-box{
+	background: 
+} */
 
 .footer-top .contact-widget .info-list li i{
 	color: #ff7c5b;
@@ -183,7 +193,7 @@
 }
 
 .funfact-style-two .pattern-layer:before{
-	background: #ff7c5b;
+	background: #808080;
 }
 
 .banner-carousel .owl-nav .owl-prev:hover,
@@ -313,7 +323,7 @@
 }
 
 .page-title.style-three .inner-box h3{
-	color: #ff7c5b;
+	color: #ffffff;
 }
 
 .tour-details-content .inner-box .text .info-list li i{
@@ -329,11 +339,11 @@
 }
 
 .tour-details-content .tour-plan .single-box span{
-	background: #ff7c5b;
+	background: #008fd6;
 }
 
 .tour-details-content .tour-plan .single-box h4{
-	color: #ff7c5b;
+	color: #008fd6;
 }
 
 .progress-box .bar-inner{
@@ -367,7 +377,7 @@
 }
 
 .booking-process-content .process-label li.current{
-  background: #ff7c5b;
+  background: #008fd6;
 }
 
 .booking-process-content .processing-form .form-group input:focus,
@@ -401,7 +411,7 @@
 }
 
 .accordion-box .block .acc-btn.active{
-  background: #ff7c5b;
+  background: #008fd6;
 }
 
 .faq-sidebar .sidebar-inner .faq-form .form-group input:focus,
@@ -501,5 +511,5 @@
 }
 
 .news-block-one .inner-box .lower-content .category a{
-	background: #ff7c5b;
+	background: #072063;
 }

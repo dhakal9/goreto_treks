@@ -1,6 +1,10 @@
 # models.py
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
+from django_summernote.fields import SummernoteTextField
+from tinymce.models import HTMLField
+from ckeditor.fields import RichTextField
+
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         """
@@ -65,13 +69,18 @@ class CompanyProfile(models.Model):
     email = models.EmailField(unique=True, max_length=255 )
     address = models.CharField(max_length=200)
     contact = models.CharField(max_length = 15)
+    telephone = models.CharField(max_length = 15, default="+977 14022020")
     slogan1 = models.CharField(max_length = 200)
     slogan2 = models.CharField(max_length = 200)
     about_sub_heading = models.CharField(max_length = 200)
     about_heading = models.CharField(max_length = 200)
     about_thumbnail = models.ImageField(upload_to='company_images', blank=True, null=True)
-    about_us = models.TextField(max_length=2000)
+    about_us = RichTextField()
+    why_us = SummernoteTextField(default="about us")
     home_image = models.ImageField(upload_to='company_images', blank=True, null=True)
+    home_image1 = models.ImageField(upload_to='company_images', blank=True, null=True)
+    home_image2 = models.ImageField(upload_to='company_images', blank=True, null=True)
+    home_image3 = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner1_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     banner2_image = models.ImageField(upload_to='company_images', blank=True, null=True)
     logo_image =  models.ImageField(upload_to='company_images', blank=True, null=True)
@@ -93,14 +102,17 @@ class OurTeamModel(models.Model):
     team_id =  models.AutoField(primary_key=True)
     name = models.CharField(max_length = 200) 
     position = models.CharField(max_length = 200)
-    team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
-    facebook_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
-    instagram_link = models.URLField(max_length=128, db_index=True, unique=True, blank=True )
+    message=RichTextField()
+    team_image =  models.ImageField(upload_to='blog_images/', blank=True, null=True)
     is_active = models.BooleanField(default=True)
+    
+    def __str__(self):
+        return self.name
+    
     
 class Review(models.Model):
     review_id = models.AutoField(primary_key=True)
-    team_image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
+    team_image =  models.ImageField(upload_to='blog_images', blank=False, null=True)
     name = models.CharField(max_length = 200)
     position = models.CharField(max_length = 200)
     message = models.TextField(max_length=500)
@@ -116,9 +128,37 @@ class FunfactModel(models.Model):
 class BlogsModel(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length = 200, blank=False, null=False)
-    description =  models.TextField(max_length=3000, blank=False, null=False)
+    description =  RichTextField()
     image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
     
-        
+
+class CsrModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    title =models.CharField(max_length = 200, blank=False, null=False)
+    description =  RichTextField()
+    image =  models.ImageField(upload_to='blog_images', blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+class MainGallaryModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    image =  models.ImageField(upload_to='blog_images', blank=False, null=False)
+
+class WhyUsModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    title = models.CharField(max_length = 200, blank=False, null=False)
+    description =  models.TextField(max_length=3000, blank=False, null=False)
+
+class SeoModel(models.Model):
+    id = models.AutoField(primary_key=True)
+    discription = models.TextField()
+    
+class WorldWideRepModels(models.Model):
+    id=models.AutoField(primary_key=True)
+    name = models.CharField(max_length = 200, blank=False, null=False)
+    country = models.CharField(max_length = 200, blank=False, null=False, default="none")
+    phone = models.CharField(max_length = 200, blank=False, null=False)
+    image =  models.ImageField(upload_to='blog_images', blank=False, null=False)
+    flag =  models.ImageField(upload_to='blog_images', blank=False, null=False)

@@ -1,0 +1,37 @@
+{% extends "admin_base.html" %}
+{% block content %}
+<br>
+<br>
+<h1 class="text-center">Add SEO key Words</h1>
+
+    <!-- Page Content -->
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+            
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="page-title">Add SEO Content</h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Page Header -->
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Content<span class="text-danger">*</span></label>
+                                {{ form.discription }}
+                            </div>
+                        </div>
+                        <div class="submit-section">
+                            <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content%}

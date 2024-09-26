@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% block content %}
+{%load static%}
+    
+    <!-- Page Title -->
+    <section class="page-title style-two centred" style="height:200px; background-image: url({{company.home_image.url}}); ">
+        <div class="auto-container">
+            <div class="content-box">
+                <h1>Goreto Special</h1>
+                <p style="position:absolute">
+                    <a href="{% url 'index' %}" style="color: #ffffff; text-decoration: none;"
+                       onmouseover="this.style.color='#000000'"
+                       onmouseout="this.style.color='#ffffff'">Home</a> / Goreto Special
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- End Page Title -->
+    <!-- tours-page-section -->
+    <section class="tours-page-section">
+        <div class="auto-container">
+            <div class="row clearfix">
+                
+    
+                <div class="col-lg-8 col-md-12 col-sm-12 content-side">
+                    <div class="destination-details-content">
+                        <div class="inner-box">
+                            <div class="text">
+                                <h2>Goreto Special</h2>
+                                <p align="justify">{{descriptions.goreto_special_des|safe}} </p>
+                            </div>
+                        </div>    
+                    </div>
+                    
+                    
+                    <div class="wrapper grid">
+                        <div class="tour-grid-content">
+                            <div class="row clearfix">
+                                
+                                {%for trek in all_activities  %}
+                                {% if trek.region.is_special %}
+                                    <div class="col-lg-6 col-md-6 col-sm-12 tour-block">
+                                        <div class="tour-block-one wow fadeInUp animated animated" data-wow-delay="00ms" data-wow-duration="1500ms">
+                                            <div class="inner-box">
+                                                
+                                                <figure class="image-box">
+                                                    <img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{trek.image.url}}" alt="10 Days Annapurna Base Camp Trek">
+                                                    <div class="bottom-left">
+                                                        <div class="rating">
+                                                            <span class="middleclass"><i class="fas fa-star"></i>{{tour.star_rating}} based on {{tour.total_reviews}} reviews</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bottom-right">
+                                                        <h5 class="middleclass"><i class="far fa-clock"></i> {{trek.days}} Day</h5>
+                                                    </div>
+                                                    <a href="{% url 'tour_details' trek.slug %}"><i class="fas fa-link"></i></a>
+                                                    <div class="price-overlay">Starting From {{trek.price}}
+                        
+                                                    </div>
+                                                </figure>
+                                                
+                                                <style>
+                                                    .price-overlay {
+                                                        position: absolute;
+                                                        top: 0;
+                                                        left: 0;
+                                                        width: 100%;
+                                                        height: 100%;
+                                                        {% comment %} background-color: rgba(0, 0, 0, 0.5); {% endcomment %}
+                                                        color: white;
+                                                        font-size: 24px;
+                                                        text-align: center;
+                                                        line-height: 250px; /* Adjust based on image height */
+                                                        opacity: 0;
+                                                        transition: opacity 0.3s;
+                                                    }
+                                                
+                                                    .image-box:hover .price-overlay {
+                                                        opacity: 1;
+                                                    }
+                                                </style>
+                                                <div class="lower-content">
+                                                   
+                                                    <h3><i class="fas fa-map-marker-alt"></i> <a href="{% url 'tour_details' trek.slug %}">{{trek.name}}</a></h3>
+                                        
+                                                    <ul class="info clearfix">
+                                                        <li><i class="far fa-mountain"></i>{{trek.altitude}}</li>
+                                                        <li><i class="far fa-map"></i>Trip Grade:<a> {{trek.difficulty_level}} </a>  </li>
+                                                    </ul>
+                                                    {% comment %} <p>{{tour.description|wordwrap:"10"|slice:":50"}}....</p> {% endcomment %}
+                                                    {% comment %} <div class="btn-box">
+                                                        <a href="{% url 'tour_details' tour.activity_id %}">See Details</a>
+                                                    </div> {% endcomment %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+    
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                    <div class="default-sidebar tour-sidebar ml-20">
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Activities</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    {% for activity in activities %} 
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Trekking Regions</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    {% for activity in nepal_regions %} 
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget category-widget">
+                            <div class="widget-title">
+                                <h3>Destinations</h3>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="category-list clearfix">
+                                    {% for activity in destinations %} 
+                                    <li class="custom-check-box">
+                                        <div class="custom-controls-stacked">
+                                            <a class="activity-link" href="{% url 'tour_list' activity.slug %}"><span class="description">{{activity.name}}</span></a>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget downloads-widget">
+                            <div class="widget-title">
+                                <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
+                            </div>
+                            <div class="widget-content">
+                                <img src="{% static 'assets/images/recommended-tripadvisor.png' %}" />
+                                <h5 class="text-center"> <strong><a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank">Goreto Treks and Expedition</a></strong></h5>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget downloads-widget">
+                            <div class="widget-title">
+                                <h3 class="text-center" style="color:#ff7c5b">WE ARE RECOMMENDED ON </h3>
+                            </div>
+                            <div class="widget-content">
+                                <img src="{% static 'assets/images/google.png' %}" alt="Google Recommendation" />
+                                <h5 class="text-center">
+                                    <strong>
+                                        <a style="color:black" onMouseOver="this.style.color='#000000'" onMouseOut="this.style.color='#000000'" href="https://www.google.com/maps/place/Goreto+Treks+and+Expedition/@27.7298897,85.3012113,17z/data=!4m14!1m7!3m6!1s0x39eb19de17a79383:0x52118c7e3510d982!2sGoreto+Treks+and+Expedition!8m2!3d27.729885!4d85.3037862!16s%2Fg%2F11vcxt4mmt!3m5!1s0x39eb19de17a79383:0x52118c7e3510d982!8m2!3d27.729885!4d85.3037862!16s%2Fg%2F11vcxt4mmt?entry=ttu" target="_blank">
+                                            Goreto Treks and Expedition 
+                                        </a>
+                                    </strong>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- tours-page-section end -->
+    
+    <style>
+        .activity-link:hover .description {
+            color: #008fd6;
+            text-decoration: underline;
+        }
+        .tour-block-one .inner-box .lower-content .info li {
+            position: relative;
+            float: left;
+            display: inline-block;
+            font-size: 13px;
+            color: #808080;
+            font-weight: 500;
+            padding-left: 24px;
+            margin-right: 35px;
+        }
+    
+        .tour-block-one .inner-box .lower-content h3 {
+            display: block;
+            font-size: 18px;
+            line-height: 30px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .bottom-right {
+            position: absolute;
+            bottom: 8px;
+            right: 16px;
+                
+        }
+        .middleclass{
+            font-family: 'Work Sans', sans-serif;
+            font-weight: 500;
+            opacity: 1;
+            color: #fff;
+            z-index:1;
+        }
+        .bottom-left {
+            position: absolute;
+            bottom: 8px;
+            left: 16px;
+            
+          }
+          .bottom-left .rating{
+            color: #ffab01;
+          }
+    </style>
+    
+    
+    
+    {%endblock content%}

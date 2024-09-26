@@ -1,0 +1,99 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+        
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Add Images</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+
+<div class="tab-pane" id="top-tab2">
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label> Image <span class="text-danger">*</span></label>
+                    {{ form.image }}
+                </div>
+            </div>
+            <div class="submit-section">
+                <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+        </div>
+        </div>   
+            
+    </form>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="container-fluid">
+ 
+<h4>List Of Images </h4><br>
+<table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
+    <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
+    <thead class="bt-5">
+    <tr>
+    <th>Images</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    
+    {% for image in images %} 
+    <tr>
+    <td><img src="{{image.image.url}}" style="width: 50px; height: 45px;"></td>
+    <td>
+    <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{image.id}}">
+    Delete
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal{{image.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Delete Image</h5>
+    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body"> Are You Sure want to delete ? </div>
+    <div class="modal-footer">
+    <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+    <a type="action" href="{% url 'delete_image' image.id %}" class="btn btn-link btn-sm btn-rounded">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+    Delete
+    </button>
+    </a>
+    </div>
+    </div>
+    </div>
+    </a>
+    
+    </td>
+    </tr>
+    {% endfor %}
+    
+    </table>
+
+
+
+
+</div>
+</div>
+
+{%endblock content%}

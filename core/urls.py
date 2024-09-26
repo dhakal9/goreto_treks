@@ -16,13 +16,34 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
+from django.urls import reverse
+from django.conf.urls.static import static
+from django.contrib.staticfiles.views import serve
+# from django.conf.urls import handler400, handler403, handler404, handler500
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('home.urls')),
-    path('', include('tour.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    # re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    re_path('admin/', admin.site.urls),
+    re_path('', include('home.urls')),
+    re_path('', include('tour.urls')),
+    re_path('summernote/', include('django_summernote.urls')),
+    re_path('ckeditor/', include('ckeditor_uploader.urls')),
+    
+]
 if settings.DEBUG:
-     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if not settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, view=serve, document_root=settings.STATIC_ROOT)
+else:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+handler404 = 'home.views.error_404'
+handler500 = 'home.views.error_500'
+handler403 = 'home.views.error_403'
+handler400 = 'home.views.error_400'

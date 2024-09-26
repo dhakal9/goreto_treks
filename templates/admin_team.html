@@ -1,6 +1,7 @@
 
 {% extends "admin_base.html" %}
 {% block content %}
+{% load static %}
 <br>
 <br>
 <h1 class="text-center">Our Team</h1>
@@ -35,26 +36,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label> Facebook Link </label><br>
-                                {{ form.facebook_link }}
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label>Instagram Link</label>
-                                {{ form.instagram_link }}
-                                {% comment %} <img class="card-img-top" src="{{ company.home_image.url }}" style="width: 50%; height: 100px;"  alt="Card image cap"> {% endcomment %}
-                            </div>
-                        </div>
+                        
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label> Image</label><br>
                                     {{ form.team_image }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label> Message </label>
+                                    {{ form.message }}
                                 </div>
                             </div>
                         </div>
@@ -77,10 +70,8 @@
     <tr>
     <th>Name</th>
     <th>Positione</th>
-    <th>Facebook</th>
-    <th>Instagram</th>
     <th>Image</th>
-    <th>Status</th>
+    <th>Message</th>
     <th>Actions</th>
     </tr>
     </thead>
@@ -89,32 +80,32 @@
     <tr>
     <td>{{team.name}} </td>
     <td> {{team.position}}</td>
-    <td>{{team.facebook_link}} </td>
-    <td>{{team.instagram_link}} </td>
-    <td><img src="{{team.team_image.url}}" style="width: 20px; height: 45px;"></td>
-    <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
+    {% comment %} <td>{{team.facebook_link}} </td>
+    <td>{{team.instagram_link}} </td> {% endcomment %}
+    <td><img src="{{team.team_image.url}}" style="width: 50px; height: 50px;"></td>
+    <td> {{team.message|slice:":300"|safe  }}...... </td>
     <td>
-    <a type="button" href="" class="btn btn-link btn-sm btn-rounded">
+    <a type="button" href="{% url 'update_team' team.team_id%}" class="btn btn-link btn-sm btn-rounded">
     Edit
     </a>
     <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal {{team.id}}">
+    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal{{team.team_id}}">
     Delete
     </button>
     
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal {{team.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal{{team.team_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
     <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Delete Priority Level</h5>
+    <h5 class="modal-title" id="exampleModalLabel{{team.team_id}}">Delete Priority Level</h5>
     <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
     </div>
     <div class="modal-body"> Are You Sure want to delete ? </div>
     <div class="modal-footer">
     <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-    <a type="action" href="" class="btn btn-link btn-sm btn-rounded">
+    <a type="action" href="{% url 'delete_team' team.team_id%}" class="btn btn-link btn-sm btn-rounded">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
     Delete

@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
-
-<!-- Mirrored from travel.zeniusnepal.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jan 2024 17:21:07 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-
-
-    <title>Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company</title>
-    <meta name="description" content="Welcome Nepal Treks Pvt. Ltd is the leading local Trekking Agency in Nepal. We are professional Nepal Trekking Company based in Thamel, Kathmandu Nepal. Nepal Trekking Company specialized for trekking in Nepal, Nepal Trekking, family trekking &amp; Private Trek. Book directly with local trekking operator, and pay less." />
+    <title>Goreto Treks - Nepal Trekking Company, Trekking Company in Nepal, Nepal Trekking Agency, Trekking Agency in Nepal, Local Nepal Trekking Company, Local Trekking Company in Nepal, Nepal Local Trekking Agency, Local Trekking Agency in Nepal, Best Nepal Trekking Company, Best Trekking Company in Nepal, Nepal Best Trekking Company, {{seo_content.discription}}</title>
+    <meta name="description" content="Welcome Goreto Treks Pvt. Ltd is the leading local Trekking Agency in Nepal. We are professional Nepal Trekking Company based in Balaju, Kathmandu Nepal. Nepal Trekking Company specialized for trekking in Nepal, Nepal Trekking, family trekking &amp; Private Trek. Book directly with local trekking operator, and pay less." />
         <!-- Fav Icon -->
 	{% load static %}
-    <link rel="icon"  href="{% static 'assets/images/favicon.ico' %}"/>
+	<link rel="canonical" href="https://goretotreks.com/"> <!-- Added for Redirect -->
+    <link rel="icon"  href="{% static 'assets/images/squarelogo.ico' %}"/>
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
 
     <!-- Stylesheets -->
@@ -34,7 +32,10 @@
 	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}"/>
 	<link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}"/>
 	<link rel="stylesheet" href="{% static 'css/toastr.css' %}"/>
-	
+
+
+
+
 
     {% comment %} <link href="Content/assets/css/font-awesome-all.css" rel="stylesheet">
     <link href="Content/assets/css/flaticon.css" rel="stylesheet">
@@ -50,7 +51,12 @@
     <link href="Content/css/toastr.css" rel="stylesheet" /> {% endcomment %}
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
 	<style>
+		.dark-header li a{
+			color:white;
+		}
 		.main-header.style-two .header-lower .logo-box .bg-layer {
 			position: absolute;
 			top: 0px;
@@ -66,12 +72,43 @@
 			right: 0px;
 			width: 5000px;
 			height: 100%;
-			background: #008fd6; !important;
+			background: #ffffff;  !important;
+		}
+		{% comment %}#008fd6; #c9e0f5 {% endcomment %}
+		.main-header.style-two .header-lower .main-menu .navigation > li > a {
+			color: #000000;
 		}
 
-		.main-header.style-two .header-lower .main-menu .navigation > li > a {
-			color: #ffffff;
+
+
+		.main-menu .navigation > li > ul > li > ul > li > ul {
+			position:absolute;
+			left:100%;
+			top:0%;
+			width:230px;
+			z-index:100;
+			{% comment %} display:none; {% endcomment %}
+			padding: 10px 0px;
+			filter: alpha(opacity=0);
+			background: #fff;
+			border-radius: 10px;
+			-webkit-transition: all 0.2s ease-out;
+			transition: all 0.2s ease-out;
+			-moz-transition: all 0.2s ease-out;
+			-ms-transition: all 0.2s ease-out;
+			-webkit-box-shadow: 0px 4px 4px 1px rgba(0,0,0,0.2);
+			box-shadow: 0px 4px 4px 1px rgba(0,0,0,0.2);
+			-webkit-transform: rotateX(-90deg);
+			transform: rotateX(-90deg);
+			-webkit-transform-origin: 0 0;
+			transform-origin: 0 0;
 		}
+
+	
+		
+
+		
+
 	</style>
 
 </head>
@@ -84,33 +121,61 @@
 			<!-- main header -->
 			<header class="main-header style-two">
 				<!-- header-top -->
-				<div class="header-top">
+				
+
+				<div class="dark-header" style="background-color:#008fd6;">
 					<div class="auto-container">
-						<div class="top-inner clearfix">
-							<ul class="top-info pull-left">
-								<li><a href="mailto:{{company.email}}">{{company.email}}</a></li>
-								<li><i class="fa fa-whatsapp"></i><a href="tel:{{company.contact}}"> {{company.contact}}</a></li>
-								<li>{{company.address}}</li>
+						<div class="top-inner clearfix d-flex">
+							<ul class="top-info pull-left d-flex justify-content-start w-75 social-links">
+							  <!-- Email Icon and Address -->
+							  <li  class="mr-4">
+								<a href="mailto:{{company.email}}" target="_blank">
+								  <i class="fas fa-envelope"></i>
+								  <span class="d-none d-md-inline">{{company.email}}</span>
+								</a>
+							  </li>
+							  <!-- Phone Icon and Number -->
+							  <li class="mr-4">
+								<a href="tel:{{company.contact}}" target="_blank">
+								  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+									<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"/>
+								  </svg>
+								  <span class="d-none d-md-inline">{{company.contact}}</span>
+								</a>
+							  </li>
+							  <!-- Location Icon and Address -->
+							  <li class="mr-4">
+								<a href="https://maps.app.goo.gl/ua15KsG7UcuBbr6V6" target="_blank">
+								  <i class="fas fa-map-marker-alt"></i>
+								  <span class="d-none d-md-inline">{{company.address}}</span>
+								</a>
+							  </li>
 							</ul>
-							<ul class="top-info pull-right social-links clearfix" style='margin-left:10px;'>
-								<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
-								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
-								<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-whatsapp"></i></a></li>
-								<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
+							<ul class="top-info pull-right social-links clearfix d-flex justify-content-end" style='margin-left:10px;'>
+								<li class="mr-3"><a href="https://www.facebook.com/goretotrek"  target="_blank"><i class="fab fa-facebook-f" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://www.instagram.com/goretotreks/" target="_blank"><i class="fab fa-instagram" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://wa.me/+9779851316017" target="_blank"><i class="fab fa-whatsapp" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank"><i class="fab fa-tripadvisor" style="font-size: 20px"></i></a></li>
+								<li class="mr-3"><a href="https://twitter.com/goretotreks" target="_blank"><i class="fa fa-twitter" style="font-size: 20px;"></i></a></li>
+								<li class="mr-3"><a href="https://www.youtube.com/@goretotreks1606" target="_blank"><i class="fab fa-youtube" style="font-size: 20px;"></i></a></li>
+								<li class="mr-3"><a href="https://www.linkedin.com/in/goreto-treks-501788305/" target="_blank"><i class="fab fa-linkedin" style="font-size: 20px;"></i></a></li>
+								<li class="mr-3"><a href="https://www.reddit.com/user/GoretoTreks/?share_id=nlU8UWIw5H_gHjoR_z3GI&utm_content=1&utm_medium=ios_app&utm_name=ioscss&utm_source=share&utm_term=5" target="_blank"><i class="fab fa-reddit" style="font-size: 20px;"></i></a></li>
+						
 							</ul>
-							<div class="btn-box pull-right">
+							{% comment %} <div class="btn-box pull-right">
 								<a href="{%url 'destination'%}" class="theme-btn">Book A Tour </a>
-							</div>
+							</div> {% endcomment %}
 						</div>
 					</div>
 				</div>
+				
 				<!-- header-lower -->
-				<div class="header-lower" style="background-color:#008fd6!important">
+				<div class="header-lower" style="background-color:#ffffff!important">
 					<div class="auto-container">
 						<div class="outer-box">
 							<div class="logo-box">
 								<div class="bg-layer"></div>
-								<figure class="logo"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
+								 <figure class="logo" style="float: left; object-fit: cover;"><a href="{% url 'index' %}"><img style="min-width: 150px" src="{{company.logo_image.url}}" alt=""></a></figure>
 								
 							</div>
 							<div class="menu-area clearfix">
@@ -123,91 +188,187 @@
 								<nav class="main-menu navbar-expand-md navbar-light">
 									<div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
 										<ul class="navigation clearfix">
-	
 													<li class="dropdown">
-														<a href="{% url 'destination'%}"> Destinations </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																	<div class="col-xl-6 column">
-																		<ul>
-																			
-																			{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
-																			
-
-
-																			<div class="col-xl-6 column">
-																				<ul>
-																					<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
-																						<li>{% for destination in destinations %}<a style="cursor:pointer" href="{% url 'one_destination' destination.destination_id %}">{{destination.name}}</a>{% endfor %}</li>
-																				</ul>
-																			</div>
-
-
-
-
-									
-																		</ul>
-																	</div>
-																	
-															</div>
-														</div>
+														<a href="{% url 'destination' %}">Destinations</a>
+														<ul class="submenu">
+															{% for destination in destinations %}
+															
+															<li class="dropdown">
+																<a href="{% url 'one_destination' destination.slug %}">{{ destination.name }}</a>
+																{% if destination.destination_id == 3 %}
+																<ul class="sub-submenu">
+																	{% for nep_reg in nepal_regions %}
+																	{% if nep_reg.destination_id == destination.destination_id %}
+																	<li class="dropdown">
+																		<a href="{% url 'tour_list' nep_reg.slug %}">{{nep_reg.name}}</a>
+																			<ul class="sub-submenu">
+																			{% for trekking in trekkings %}
+																				{% if nep_reg.region_id == trekking.region.region_id %}
+																				<li>
+																					<a style="cursor:pointer" href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a>
+																				</li>
+																				{% endif %}
+																			{% endfor %}
+																			</ul>
+																	</li>
+																	{% endif %}
+																	{% endfor %}
+																</ul>
+																{%else%}
+																<ul class="sub-submenu">
+																	{% for nep_reg in nepal_regions %}
+																	{% if nep_reg.destination_id == destination.destination_id %}
+																	{% for trekking in trekkings %}
+																		{% if nep_reg.region_id == trekking.region.region_id %}
+																		<li>
+																			<a style="cursor:pointer" href="{% url 'tour_details' trekking.slug %}">{{trekking.name}}</a>
+																		</li>
+																		{% endif %}
+																	{% endfor %}
+																	{%endif%}
+																	{%endfor%}
+																</ul>
+																
+															</li>
+															
+															{%endif%}
+															{%endfor%}
+														</ul>
 													</li>
+
 													<li class="dropdown">
 														<a href="{% url 'activities' %}"> Activities </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																<div class="col-xl-6 column">
-																	<ul>
-																		{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
-																		<div class="col-xl-6 column">
+														
+																
 																			<ul>
-																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
-																				<li><a style="cursor:pointer" href="#">Trekking</a></li>
-																					<li>{% for activity in activities %}<a style="cursor:pointer" href="{% url 'tour_list' activity.region_id%}">{{activity.name}}</a>{% endfor %}</li>
+																			
+																				<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
+																					<li>{% for activity in activities %} <a style="cursor:pointer" href="{% url 'tour_list' activity.slug %}">{{activity.name}}</a>{% endfor %}</li>
 																			</ul>
-																		</div>
-																	</ul>
-																</div>
-															<div>
+																		
+																
 													</li>
 	
 													<li class="dropdown">
 														<a href="{%url 'about_us'%}"> About Us </a>
-														<div class="megamenu">
-															<div class="row clearfix">
-																<div class="col-xl-6 column">
-																	<ul>
-																		{% comment %} <li>{% for destination in destinations %}<h5><a href="Chomolungma/TourList1c81.html?regionId=1" style="color:#ff7c5b">{{destination.name}}</a> </h5>{% endfor %}</li> {% endcomment %}
-																		<div class="col-xl-6 column">
+														{% comment %} <div class="megamenu"> {% endcomment %}
 																			<ul>
-																				<li><h5><a href="Chomolungma/TourList220b.html?regionId=3" style="color:#ff7c5b"></a> </h5></li>
+																				
 																					<li><a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
 																					<li><a style="cursor:pointer" href="{% url 'our_team'%}"> Our Team </a></li>
-																					<li><a style="cursor:pointer" href="{% url 'why_us'%}"> Why Gotero </a></li>
-																					<li><a style="cursor:pointer" href="#"> Our Motto </a></li>
+																					<li><a style="cursor:pointer" href="{%url 'about_us'%}"> Why Goreto </a></li>
+																					
 																			</ul>
-																		</div>
-																	</ul>
-																</div>
-															</div>
-														</div>
+																		
+														{% comment %} </div> {% endcomment %}
 													</li>
 											<li class="dropdown">
 												<a href="{%url 'blogs'%}">Blogs</a>
 											</li>
-											<li><a href="Chomolungma/Contact.html">CSR</a></li>
+
+											<li class="dropdown">
+												<a href="{% url 'csr'%}">CSR</a>
+											</li>
+											
+											<li class="dropdown">
+												<a href="{% url 'gallary'%}">Gallery</a>
+											</li>
+											
+											<li class="dropdown">
+												<a href="{%url 'goreto_special'%}">Goreto Special</a>
+												{% comment %} <ul>
+																				
+													<li>{% for special in goreto_special %}<a style="cursor:pointer" href="{%url 'contact_us' %}"> Contact Us </a></li>
+																							
+												</ul> {% endcomment %}
+											</li>
 										</ul>
 									</div>
 								</nav>
 							</div>
 							<ul class="menu-right-content clearfix">
-								<li class="user-link">
-									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
+								<li class="nav-item">
+									<a href="{% url 'plan_trip'%}" class="theme-btn">Plan Your Trip</a>
 								</li>
-							</ul>
+							</ul>							
 						</div>
 					</div>
 				</div>
+				<script>
+					document.querySelectorAll('.mobile-menu.navigation li').forEach(function(li) {
+						li.addEventListener('click', function() {
+							// Toggle the submenu visibility
+							var submenu = li.querySelector('ul');
+							if (submenu.style.display === 'none') {
+								submenu.style.display = 'block'; // Or whatever method you're using to show the submenu
+							} else {
+								submenu.style.display = 'none';
+							}
+						});
+					});
+				</script>
+				
+				<style>
+
+					
+
+					.mobile-menu .navigation li > ul, .mobile-menu .navigation li > ul > li > ul, .mobile-menu .navigation > li.dropdown > .megamenu {
+						display: none;
+					}
+
+					
+					.mobile-menu .dropdown ul ul {
+							top: 0;
+							left: 0;
+					}
+					.mobile-menu .dropdown ul ul ul {
+						top: 0;
+						left: 125%;
+					}
+					
+					
+					
+					
+					.fa.fa-twitter::before{
+						content:"𝕏";
+					}
+					.menu-right-content {
+						display: flex;
+						align-items: center;
+						justify-content: flex-end;
+						list-style: none;
+					}
+					
+					.nav-item {
+						margin-left: 20px; /* Adjust spacing between items */
+					}
+					
+					.nav-link {
+						text-decoration: none;
+						color: #333; /* Link color */
+						padding: 10px 15px;
+						border-radius: 5px;
+						background-color: #007bff; /* Button color */
+						font-weight: bold;
+						transition: background-color 0.3s ease; /* Smooth transition */
+					}
+					
+					.nav-link:hover {
+						background-color: #00000; /* Darker shade on hover */
+						color: #000000;
+					}
+					
+					/* Media query to hide navigation in mobile view */
+					@media screen and (max-width: 768px) {
+						.menu-right-content {
+							display: none;
+	
+							
+						}
+					}
+							
+
+				</style>
 	
 				<!--sticky Header-->
 				<div class="sticky-header">
@@ -215,7 +376,7 @@
 						<div class="outer-box">
 							<div class="logo-box">
 								
-								<figure class="logo"><a href="{% url 'index' %}"><img src="{{company.logo_image.url}}" alt=""></a></figure>
+								<figure class="logo"><a href="{% url 'index' %}"><img src="{% static "assets/images/scroll_logo.png" %}" alt=""></a></figure>
 							</div>
 							<div class="menu-area">
 								<nav class="main-menu clearfix">
@@ -223,9 +384,8 @@
 								</nav>
 							</div>
 							<ul class="menu-right-content clearfix">
-								
-								<li class="user-link">
-									<a href="{% url 'login'%}"><i class="icon-Profile"></i></a>
+								<li class="nav-item">
+									<a href="{% url 'plan_trip'%}" class="theme-btn">Plan Your Trip</a>
 								</li>
 							</ul>
 						</div>
@@ -239,7 +399,7 @@
 				<div class="close-btn"><i class="fas fa-times"></i></div>
 	
 				<nav class="menu-box">
-					<div class="nav-logo"><a href="index.html"><img src="Content/assets/images/logo-2.png" alt="" title=""></a></div>
+					<div class="nav-logo"><a href="index.html"></a></div>
 					<div class="menu-outer"><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header--></div>
 					<div class="contact-info">
 						<h4>Contact Info</h4>
@@ -251,17 +411,18 @@
 					</div>
 					<div class="social-links">
 						<ul class="clearfix">
-							<li><a href="index.html"><span class="fab fa-twitter"></span></a></li>
-							<li><a href="index.html"><span class="fab fa-facebook-square"></span></a></li>
-							<li><a href="index.html"><span class="fab fa-pinterest-p"></span></a></li>
-							<li><a href="index.html"><span class="fab fa-instagram"></span></a></li>
-							<li><a href="index.html"><span class="fab fa-youtube"></span></a></li>
+							<li><a href="https://twitter.com/goretotreks" target="_blank" rel="noopener noreferrer"><span class="fa fa-twitter"></span></a></li>
+							<li><a href="https://www.facebook.com/goretotrek"><span class="fab fa-facebook-square"></span></a></li>
+							<li><a href="https://www.instagram.com/goretotreks/"><span class="fab fa-instagram"></span></a></li>
+							<li><a href="https://www.youtube.com/@goretotreks1606"><span class="fab fa-youtube"></span></a></li>
 						</ul>
 					</div>
 				</nav>
 			</div>
 			<!-- End Mobile Menu -->
 	
+
+
 
 					<!-- Add this chatbox and icon to your HTML wherever you want it to appear -->
 			<div id="whatsapp-chatbox" class="whatsapp-chatbox">
@@ -289,7 +450,7 @@
 				}
 
 				.goog-te-gadget-simple{
-					background-color: #ff7c5b;
+					background-color: #008fd6;
 					line-height: 40px;
 					position: fixed;
 					bottom: 7%;
@@ -359,7 +520,85 @@
 			</style>
 			
 	
+	<!-- Logo added later like magical Himalayan-->
+	<style>
+		/* CSS for logo */
+		.custom-logo {
+			position: fixed;
+			top: 30px;
+			left: 150px;
+			z-index: 9999; /* Ensure it appears above other content */
+			opacity: 1; /* Initially visible */
+			transition: opacity 0.3s ease; /* Add smooth transition */
+			width: 100px; /* Set width as needed */
+			height: auto; /* Maintain aspect ratio */
+		}
+		
+		/* CSS to hide logo on scroll */
+		.hidden {
+			opacity: 0;
+		}
+
 	
+	</style>
+		{% comment %} <img class="custom-logo" style="cursor:pointer" src="{% static 'assets/images/squarelogo.jpeg'%}" alt="Logo" width="500"> {% endcomment %}
+		<script>
+			// JavaScript to hide logo on scroll
+			window.addEventListener('scroll', function() {
+				var logo = document.querySelector('.custom-logo');
+				if (window.scrollY > 50) { // Adjust the scroll threshold as needed
+					logo.classList.add('hidden');
+				} else {
+					logo.classList.remove('hidden');
+				}
+			});
+		</script>
+
+		{% if messages %}
+			<div id="customToast" class="custom-toast">
+				<div class="toast-body">
+					{% for message in messages %}
+						{{ message }}
+					{% endfor %}
+				</div>
+			</div>
+		{% endif %}
+
+		<style>
+			.custom-toast {
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				background-color: #4CAF50;
+				color: white;
+				padding: 16px;
+				border-radius: 5px;
+				box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2);
+				z-index: 1000;
+				visibility: hidden;
+				opacity: 0;
+				transition: visibility 0s, opacity 0.5s linear;
+			}
+
+			.custom-toast.show {
+				visibility: visible;
+				opacity: 1;
+			}
+		</style>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				var customToast = document.getElementById('customToast');
+				if (customToast) {
+					customToast.classList.add('show');
+					setTimeout(function() {
+						customToast.classList.remove('show');
+					}, 5000); // 10 seconds
+				}
+			});
+		</script>
+
+
     {% block content %}
 
 
@@ -370,24 +609,30 @@
 
 	<script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
  <!-- main-footer -->
- <footer class="main-footer bg-color-2">
+
+ <footer class="main-footer bg-color-2" id="leg">
 	<div class="footer-top pt-130">
-		<div class="vector-bg" style="background-image: url({%static 'assets/images/shape/shape-11.png'%}); "></div>
-		<div class="auto-container">
+		<div class="vector-bg" style="background-image: url({%static 'assets/images/shape/1212.png'%}); "></div>
+		<div class="auto-container" style="margin-top:2px; margin-bottom:2px;">
 			<div class="row clearfix">
 				<div class="col-lg-3 col-md-6 col-sm-12 footer-column">
 					<div class="footer-widget logo-widget">
-
-						
-						
-						<figure class="footer-logo" style="margin-bottom: 5px;"><a href="index.html"> <h3 style="color:#FF7C5B">GORETO TREK</h3> </a></figure>
+						{% comment %} <figure class="footer-logo" style="margin-bottom: 5px;"><a href="{% url 'index' %}"> <h3 style="color:#008fd6">Goreto Treks</h3> </a></figure> {% endcomment %}
+						<div class="widget-title">
+							<h3>Goreto Treks</h3>
+						</div>
 						<div class="text">
-							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure </p>
+							<p>Explore Your Travel With Goreto Treks . Discover your next great adventure with us.</p>
 						</div>
 						<ul class="social-links clearfix">
-							<li><a href="https://www.facebook.com/goretotrek"><i class="fab fa-facebook-f"></i></a></li>
-							<li><a href="https://www.instagram.com/goretotreks/"><i class="fab fa-instagram"></i></a></li>
-							<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html"><i class="fab fa-tripadvisor"></i></a></li>
+							<li><a href="https://www.facebook.com/goretotrek" target="_blank"><i class="fab fa-facebook-f" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="https://www.instagram.com/goretotreks/" target="_blank"><i class="fab fa-instagram" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="https://www.tripadvisor.com/Attraction_Review-g293890-d15755650-Reviews-Goreto_Treks-Kathmandu_Kathmandu_Valley_Bagmati_Zone_Central_Region.html" target="_blank"><i class="fab fa-tripadvisor" style="font-size: 30px; padding:8px;"></i></a></li>
+						</ul>
+						<ul class="social-links clearfix" style="margin-top:10px">
+							<li><a href="https://twitter.com/goretotreks" target="_blank"><i class="fa fa-twitter" style="font-size: 35px; padding:10px;"></i></a></li>
+							<li><a href="https://www.youtube.com/@goretotreks1606" target="_blank"><i class="fab fa-youtube" style="font-size: 30px; padding:10px;"></i></a></li>
+							<li><a href="#" target="_blank"><i class="fab fa-linkedin" style="font-size: 30px; padding:8px;"></i></a></li>
 						</ul>
 					</div>
 				</div>
@@ -398,11 +643,10 @@
 						</div>
 						<div class="widget-content">
 							<ul class="links-list clearfix">
-								<li><a href="Chomolungma/About.html">About Us</a></li>
-								
-								
-								<li><a href="#">Our Blog</a></li>
-								<li><a href="Chomolungma/Contact.html">Contact Us</a></li>
+								<li><a style="cursor:pointer" href="{% url 'trekking' %}">Trekking</a></li>
+								{% for activity in footer_activities %} 
+								<li><a style="cursor:pointer" href="{% url 'tour_list' activity.slug %}">{{activity.name}}</a></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
@@ -413,13 +657,10 @@
 							<h3>Gallery</h3>
 						</div>
 						<div class="widget-content">
-							<ul class="image-list clearfix">			
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-1.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-2.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-3.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-4.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-5.jpg" alt=""></a></figure></li>
-								<li><figure class="image-box"><a href="gallery-1.html"><img src="Content/assets/images/resource/footer-gallery-6.jpg" alt=""></a></figure></li>
+							<ul class="image-list clearfix">
+								{% for image in gallary_images%}			
+								<li><figure class="image-box"><a href="{% url 'gallary' %}"><img style="float: left; width: 400px; height: 200px; object-fit: cover;"src="{{image.image.url}}" alt=""></a></figure></li>
+								{% endfor %}
 							</ul>
 						</div>
 					</div>
@@ -431,30 +672,34 @@
 						</div>
 						<div class="widget-content">
 							<ul class="info-list clearfix">
-								<li><i class="fas fa-map-marker-alt"></i>{{company.address}}</li>
-								<li><i class="fas fa-microphone"></i><a href="tel:{{company.contact}}">{{company.contact}}</a></li>
-								<li><i class="fas fa-envelope"></i><a href="mailto:{{company.email}}">{{company.email}}</a></li>
+								<li><a href="https://maps.app.goo.gl/ua15KsG7UcuBbr6V6" target="_blank"><i class="fas fa-map-marker-alt"></i>{{company.address}}</a></li>
+								<li><a href="https://wa.me/+9779851316017" target="_blank"><i class="fab fa-whatsapp" style="font-size: 25px"></i>{{company.contact}}</a></li>
+								<li><a href="mailto:{{company.email}}" target="_blank"><i class="fas fa-envelope"></i>{{company.email}}</a></li>
+								<li><a href="tel:+977 015915493" target="_blank"><i class="fa fa-phone fa-rotate-90"></i>+977 015915493</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
+				<hr>
 				<div class="w-100 d-flex justify-content-center text-center">
 					<aside id="nepamount_association_widget-5" class="col-md-12">
 						<div class="footer-widget">
-							<h3 class="widget-title">IN Association With</h3>
+							<div class="widget-title">
+								<h3>In Association With</h3>
+							</div>
 							<ul class="social-icons">
 								<ul class="footsocial">
-									<a href="http://www.nepal.gov.np/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/nepal-gray-1.png" alt="">
+									<a target="_blank" class="footer-aslogo">
+										<img style="width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/nepgov.png'%}" alt="">
 									</a>
-									<a href="https://ntb.gov.np/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/ntb.png" alt="">
+									<a target="_blank" class="footer-aslogo">
+										<img style=" width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/ntb1.png'%}" alt="">
 									</a>
-									<a href="https://www.taan.org.np/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/taanlogo.png" alt="">
+									<a class="footer-aslogo">
+										<img style=" width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/taan.png'%}" alt="">
 									</a>
-									<a href="https://www.nepalmountaineering.org/" target="_blank" class="footer-aslogo">
-										<img src="https://nepamount.com.np/wp-content/uploads/2022/06/nm.png" alt="">
+									<a class="footer-aslogo">
+										<img style=" width: 110px; height: 90px; object-fit: cover;" src="{% static 'assets/images/nma1.png'%}" alt="">
 									</a>
 								</ul>
 							</ul>
@@ -472,8 +717,8 @@
 					<p><a href="index.html">Goreto Trek</a> &copy; 2024 All Right Reserved</p>
 				</div>
 				<ul class="footer-nav pull-right">
-					<li><a href="index.html">Terms of Service</a></li>
-					<li><a href="index.html">Privacy Policy</a></li>
+					<li><a href="{%url 'terms_services'%}">Terms of Service</a></li>
+					<li><a href="{% url 'privacy_policy'%}">Privacy Policy</a></li>
 					<li><span>Made with <i class="fas fa-heart" style="color:red"></i></span> <a href="#" target="_blank">by Amrit Dhakal.</a> </li>
 				</ul>
 			</div>
@@ -534,7 +779,7 @@
 <!-- main-js -->
 <script src="{% static 'assets/js/script.js' %}"></script>
 <script src="{% static 'js/knockout-3.5.1.js' %}"></script>
-<script src="{% static 'js/Techyatra.Globals.kof9e3.js?v=1.1' %}"></script>
+
 <script src="{% static 'js/toastr.js' %}"></script>
 <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
 <script src="{% static 'js/jquery-ui.mim.js' %}"></script>
@@ -549,20 +794,34 @@
 <script src="../code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <script>
-    function toggleChatbox() {
+    {% comment %} function toggleChatbox() {
         var chatbox = document.getElementById('whatsapp-chatbox');
         chatbox.style.display = (chatbox.style.display === 'block') ? 'none' : 'block';
         if (chatbox.style.display === 'block') {
             appendMessage('Hello, how can I help you?');
         }
-    }
+    } {% endcomment %}
 
+	var messageAppended = false; // Flag to track if message is appended
+
+function toggleChatbox() {
+    var chatbox = document.getElementById('whatsapp-chatbox');
+    if (chatbox.style.display === 'none') {
+        chatbox.style.display = 'block';
+        if (!messageAppended) {
+            appendMessage('Hello, how can I help you?');
+            messageAppended = true;
+        }
+    } else {
+        chatbox.style.display = 'none';
+    }
+}
     function sendMessage() {
         var replyText = document.getElementById('whatsapp-reply').value;
         appendMessage(replyText);
         document.getElementById('whatsapp-reply').value = '';  // Clear the reply textarea
         // Redirect to WhatsApp with the replyText
-        window.open('https://api.whatsapp.com/send?phone=1234567890&text=' + encodeURIComponent(replyText), '_blank');
+        window.open('https://api.whatsapp.com/send?phone=+9779851316017&text=' + encodeURIComponent(replyText), '_blank');
     }
 
     function appendMessage(message) {
@@ -601,24 +860,49 @@ window.fbAsyncInit = function () {
 </body>
 <!-- End of .page_wrapper -->
 
-<!-- Mirrored from travel.zeniusnepal.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Jan 2024 17:21:48 GMT -->
+
 
 <!-- Code provided by Google -->
 <div id="google_translate_element"></div>
+
 <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-	includedLanguages: 'es,ru,ja,zh-CN,ko,de,pt',
-	autoDisplay: true,
-	gaTrack: true,
-	hl: 'en',
-	forceTranslation: 'en',
-	 autoDisplay: true}, 'google_translate_element');
-  }
+    function googleTranslateElementInit() {
+        if (!window.googleTranslateInitialized) {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,zh-CN,ko,ru,nl,de,es,fr,ja',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                multilanguagePage: true,
+                gaTrack: true
+            }, 'google_translate_element');
+            window.googleTranslateInitialized = true;
+        }
+    }
+
+    // Load Google Translate script
+    (function() {
+        if (!window.googleTranslateScriptLoaded) {
+            var gtScript = document.createElement('script');
+            gtScript.type = 'text/javascript';
+            gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            document.getElementsByTagName('head')[0].appendChild(gtScript);
+            window.googleTranslateScriptLoaded = true;
+        }
+    })();
+
+    // Ensure the translation element is initialized only once
+    jQuery(document).ready(function($) {
+        if (!window.googleTranslateInitialized) {
+            googleTranslateElementInit();
+        }
+
+        // Reload page on menu-translate-header link click
+        $('.menu-translate-header ul li a').click(function(event) {
+            window.location = $(this).attr('href');
+            location.reload();
+        });
+    });
 </script>
-	
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
 
 </html>
-
 

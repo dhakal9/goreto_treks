@@ -38,14 +38,16 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label> Description </label>
-                                {{ form.description }}
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
                                 <label> Image </label>
                                 {{ form.image }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label> Description </label>
+                                {{ form.description }}
                             </div>
                         </div>
                     </div>
@@ -80,11 +82,11 @@
         <tr>
         <td>{{destination.name}} </td>
         <td> {{designation.slogan}}</td>
-        <td>{{destination.description}} </td>
+        <td>{{destination.description|slice:":300"|safe  }}....... </td>
         <td><img src="{{destination.image.url}}" style="width: 50px; height: 45px;"></td>
         <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
         <td>
-        <a type="button" href="" class="btn btn-link btn-sm btn-rounded">
+        <a type="button" href="{% url 'update_destination' destination.destination_id%}" class="btn btn-link btn-sm btn-rounded">
         Edit
         </a>
         <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">

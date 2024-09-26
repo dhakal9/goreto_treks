@@ -10,6 +10,11 @@
         <div class="content-box">
             <h1>{{country.name}}</h1>
             <p>Where Culture Meets Mountains!</p>
+            <p style="position:absolute"><a href="{% url 'index' %}style="color: #ffffff; text-decoration: none;"
+                onmouseover="this.style.color='#000000'"
+                onmouseout="this.style.color='#ffffff'"">Home</a> / <a href="{% url 'destination' %}"style="color: #ffffff; text-decoration: none;"
+                onmouseover="this.style.color='#000000'"
+                onmouseout="this.style.color='#ffffff'">Destination</a> / {{country.name}}</p>
         </div>
     </div>
 </section>
@@ -25,9 +30,9 @@
                 <div class="col-lg-4 col-md-6 col-sm-12 place-block">
                     <div class="place-block-one">
                         <div class="inner-box">
-                            <figure class="image-box"><img src="{{region.image.url}}" alt=""></figure>
+                            <figure class="image-box"><img style="float: left; width: 500px; height: 250px; object-fit: cover;" src="{{region.image.url}}" alt=""></figure>
                             <div class="text">
-                                <h3><a href="{% url 'tour_list' region.region_id%}">{{region.name}}</a></h3>
+                                <h3><a href="{% url 'tour_list' region.slug%}">{{region.name}}</a></h3>
                             </div>
                         </div>
                     </div>

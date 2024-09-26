@@ -15,6 +15,7 @@ import environ
 from django.contrib.messages import constants as messages
 env = environ.Env()
 environ.Env.read_env()
+from datetime import timedelta
 
 
 MESSAGE_TAGS = {
@@ -35,10 +36,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-bs4h3ep9-t*(j%-hh%ad_b0s_zt=&_wzdyw&z!#gm4z8#y2oeg'
 
+#inline fomset factory
+#nginx
+
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -52,19 +57,30 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'tour',
+    'django_summernote',
+    'tinymce',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_auto_logout.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'core.urls'
+
+AUTO_LOGOUT = {
+    'IDLE_TIME': timedelta(minutes=20),
+    'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
+}
 
 TEMPLATES = [
     {
@@ -78,6 +94,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'home.for_logo.additional_context',
+                'django_auto_logout.context_processors.auto_logout_client',
             ],
         },
     },
@@ -143,13 +160,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
-# STATICFILES_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
 
-MEDIA_URL = 'media/'
+STATIC_URL = "/static/"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+if DEBUG:
+
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+else:
+
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
@@ -162,24 +185,29 @@ AUTH_USER_MODEL = 'home.CustomUser'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = env('EMAIL_PORT')
+# EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+# EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_HOST_USER="dhakalamrit19@gmail.com"
+EMAIL_HOST_PASSWORD="alaw nggs jrkm nkbl"
+EMAIL_PORT=587
 EMAIL_USE_TLS = True
 
-CKEDITOR_UPLOAD_PATH="uploads/"
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+SUMMERNOTE_THEME = 'bs4'
+
+CKEDITOR_BASEPATH = "/static/ckeditor5/ckeditor5/"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline', 'Strike'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Table', 'SpecialChar'],
-            ['Source'],
-        ],
+        'toolbar': 'full',
         'height': 300,
-        'width': 800,
+        'width': '100%',
+        'extraPlugins': ','.join([
+            'codesnippet',
+        ]),
     },
 }

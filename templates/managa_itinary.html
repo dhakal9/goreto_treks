@@ -1,0 +1,160 @@
+{% extends "admin_base.html" %}
+{% block content %}
+
+<!-- Page Content -->
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+        
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 class="page-title">Manage Itineraries</h3>
+                    </div>
+                </div>
+            </div>
+            <!-- /Page Header -->
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ formset.management_form }}
+                <div id="form-container">
+                    {% for form in formset %}
+                        <div class="form-row">
+                            {% if forloop.first %}
+                                <div class="form-group">
+                                    <label for="id_tour">Tour</label>
+                                    <input type="text" name="tour" value="{{ tour.name }}" class="form-control" readonly>
+                                </div>
+                            {% endif %}
+                            {{ form.as_p }}
+                        </div>
+                    {% endfor %}
+                </div>
+                <button type="button" id="add-more" class="btn btn-secondary">Add More</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+
+            <h4>Itineraries</h4>
+            <table class="table align-middle mb-0 bg-white table-striped" width="100%">
+                <thead>
+                    <tr>
+                        <th>Tour Name</th>
+                        <th>Day</th>
+                        <th>Name</th>
+                        <th>Start/End</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for itinary in tour.itineraries.all %}
+                        <tr>
+                            <td>{{ itinary.tour.name }}</td>
+                            <td>{{ itinary.day }}</td>
+                            <td>{{ itinary.name }}</td>
+                            <td>{{ itinary.start_end }}</td>
+                            <td>{{ itinary.description }}</td>
+                            <td><span class="badge badge-success rounded-pill d-inline">Active</span></td>
+                            <td>
+                                <a href="{% url 'edit_itinary' itinary.itinary_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
+                                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#deleteModal{{ itinary.itinary_id }}">Delete</button>
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteModal{{ itinary.itinary_id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ itinary.itinary_id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteModalLabel{{ itinary.itinary_id }}">Delete Itinerary</h5>
+                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this itinerary?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                                                <a href="{% url 'delete_itinary' itinary.itinary_id %}" class="btn btn-primary">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h4>List Of Tours</h4><br>
+            <table class="table align-middle mb-0 bg-white table-striped" width="100%">
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Regions</th>
+                        <th>Name</th>
+                        <th>Days</th>
+                        <th>Price</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tour in tours %}
+                        <tr>
+                            <td>{{ tour.destination.name }}</td>
+                           
+                            <td>{{ tour.region.name }}</td>
+                            <td>{{ tour.name }}</td>
+                            <td>{{ tour.days }}</td>
+                            <td>{{ tour.price }} $</td>
+                            <td><span class="badge badge-success rounded-pill d-inline">Active</span></td>
+                            <td>
+                                <a href="{% url 'edit_tour_itinary' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
+                                <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#deleteTourModal{{ tour.activity_id }}">Delete</button>
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="deleteTourModal{{ tour.activity_id }}" tabindex="-1" aria-labelledby="deleteTourModalLabel{{ tour.activity_id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="deleteTourModalLabel{{ tour.activity_id }}">Delete Tour</h5>
+                                                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to delete this tour?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                                                <a href="{% url 'delete_tour' tour.activity_id %}" class="btn btn-primary">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('add-more').addEventListener('click', function (e) {
+        e.preventDefault();
+        let formContainer = document.getElementById('form-container');
+        let totalForms = document.querySelector('#id_form-TOTAL_FORMS');
+        let formCount = parseInt(totalForms.value);
+
+        let newForm = formContainer.children[0].cloneNode(true);
+        let formRegex = new RegExp(`form-(\\d){1}-`, 'g');
+
+        newForm.innerHTML = newForm.innerHTML.replace(formRegex, `form-${formCount}-`);
+        formContainer.appendChild(newForm);
+
+        totalForms.value = formCount + 1;
+    });
+});
+</script>
+
+{% endblock content %}

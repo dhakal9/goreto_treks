@@ -1,283 +1,385 @@
-
 {% extends "admin_base.html" %}
 {% block content %}
+{% load static %}
 <div class="content container-fluid">
-
-                <h4 class="card-title">Tour</h4>
-                <ul class="nav nav-tabs nav-tabs-top">
-                    <li class="nav-item"><a class="nav-link active" href="#top-tab1" data-toggle="tab">Tour Details</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#top-tab2" data-toggle="tab">Itinary</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#top-tab3" data-toggle="tab">Include/Exclude</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#top-tab4" data-toggle="tab">Gallary</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#top-tab5" data-toggle="tab">FAQ</a></li>
-                </ul>
-                <div class="tab-content">
-
-                    <div class="tab-pane show active" id="top-tab1">
-                        {% comment %} Tour Details form {% endcomment %}
-                        <form method='POST' enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Destination <span class="text-danger">*</span></label>
-                                        {{ form.destination }}
-                                    </div>
+    <h4 class="card-title">Tour</h4>
+    <ul class="nav nav-tabs nav-tabs-top">
+        <li class="nav-item"><a class="nav-link active" href="#top-tab1" data-toggle="tab">Tour Details</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane show active" id="top-tab1">
+            <form method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Destination <span class="text-danger">*</span></label>
+                            {{ form.destination }}
+                            {% if form.destination.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.destination.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Region <span class="text-danger">*</span></label>
-                                        {{ form.region }}
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Name <span class="text-danger">*</span></label>
-                                        {{ form.name }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Description </label><br>
-                                        {{ form.description }}
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Departure </label>
-                                        {{ form.depature }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Time </label>
-                                        {{ form.time }}
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Start/End </label>
-                                        {{ form.start_end }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Max Price </label>
-                                        {{ form.max_price }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Actual Price</label>
-                                        {{ form.price }}
-                                    </div>
-                                </div>
-                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Transportation </label>
-                                        {{ form.transport }}
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Days</label>
-                                        {{ form.days }}
-                                    </div>
-                                </div>
-                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Age</label>
-                                        {{ form.age }}
-                                    </div>
-                                </div> 
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Best Season</label>
-                                        {{ form.season }}
-                                    </div>
-                                </div>
-                                 <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Altitude</label>
-                                        {{ form.altitude }}
-                                    </div>
-                                </div> 
-                            </div>
-                    
-                            <!-- Add the remaining fields as needed -->
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Map </label>
-                                        {{ form.map }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Map Overview </label><br>
-                                        {{ form.map_overview }}
-                                    </div>
-                                </div>
-                            </div>
-                    
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Image </label>
-                                        {{ form.image }}
-                                    </div>
-                                </div>
-            
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Active </label>
-                                        {{ form.is_active }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="submit-section">
-                                <button class="btn btn-primary submit-btn" type="submit">Submit</button>
-                            </div>
-                        </form>
+                            {% endif %}
+                        </div>
                     </div>
-                
-
-                    <div class="tab-pane" id="top-tab2">
-                        <form method='POST' enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Tour Name <span class="text-danger">*</span></label>
-                                        {{ form1.tour }}
-                                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Region <span class="text-danger">*</span></label>
+                            {{ form.region }}
+                            {% if form.region.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.region.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Plan Name <span class="text-danger">*</span></label>
-                                        {{ form1.name }}
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label> Day Sequence <span class="text-danger">*</span></label>
-                                        {{ form1.day }}
-                                    </div>
-                                </div>
-                            </div>    
-                            <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> Start And End  <span class="text-danger">*</span></label>
-                                            {{ form1.start_end }}
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label> Description <span class="text-danger">*</span></label><br>
-                                            {{ form1.description }}
-                                        </div>
-                                    </div>
-                                </div>
-                                    <div class="submit-section">
-                                        <button class="btn btn-primary submit-btn" type="submit">Submit</button>
-                                    </div>
-                        
-                        </form>
+                            {% endif %}
+                        </div>
                     </div>
-                    {% comment %} Itinary tab {% endcomment %}
-                    <div class="tab-pane" id="top-tab3">
-                        Tab content 3
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Name <span class="text-danger">*</span></label>
+                            {{ form.name }}
+                            {% if form.name.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.name.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Departure</label>
+                            {{ form.depature }}
+                            {% if form.depature.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.depature.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Start/End</label>
+                            {{ form.start_end }}
+                            {% if form.start_end.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.start_end.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Max Price</label>
+                            {{ form.max_price }}
+                            {% if form.max_price.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.max_price.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Actual Price</label>
+                            {{ form.price }}
+                            {% if form.price.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.price.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Transportation</label>
+                            {{ form.transport }}
+                            {% if form.transport.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.transport.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Days</label>
+                            {{ form.days }}
+                            {% if form.days.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.days.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Age</label>
+                            {{ form.age }}
+                            {% if form.age.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.age.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Best Season</label>
+                            {{ form.season }}
+                            {% if form.season.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.season.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Altitude</label>
+                            {{ form.altitude }}
+                            {% if form.altitude.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.altitude.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div> 
+                </div>
+
+                <!-- Add the remaining fields as needed -->
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Map</label>
+                            {{ form.map }}
+                            {% if form.map.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.map.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Image</label>
+                            {{ form.image }}
+                            {% if form.image.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.image.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Diffuculty Level</label>
+                            {{ form.difficulty_level }}
+                            {% if form.difficulty_level.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.difficulty_level.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group mr-3">
+                                <label>Itianary Pdf</label><br>
+                                {{ form.itinary_pdf }}
+                                {% if form.itinary_pdf.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.itinary_pdf.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Description</label><br>
+                            {{ form.description }}
+                            {% if form.description.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.description.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Map Overview</label><br>
+                            {{ form.map_overview }}
+                            {% if form.map_overview.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.map_overview.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Total Reviews</label><br>
+                            {{ form.total_reviews }}
+                            {% if form.total_reviews.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.star_rating.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Rating out of 5</label><br>
+                            {{ form.star_rating }}
+                            {% if form.star_rating.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.star_rating.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group mr-3">
+                            <label>Grop Prices</label><br>
+                            <p>One Person</p>
+                            {{ form.price_1 }}<br>
+                            <p>Two Person</p>
+                            {{ form.price_2 }}<br>
+                            <p>Three-Five Person</p>
+                            {{ form.price_35 }}<br>
+                            <p>Five-Ten Person</p>
+                            {{ form.price_510 }}<br>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="submit-section">
+                    <button class="btn btn-primary submit-btn" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h4>List Of Tours</h4><br>
+        <table id="myTable" class="table align-middle mb-0 bg-white table-striped" width="100%">
+            <thead class="bt-5">
+                <tr>
+                    <th>Destination</th>
+                    <th>Regions</th>
+                    <th>Name</th>
+                    <th>Days</th>
+                    <th>Price</th>
+                    <th>Attraction</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tour in tours %}
+                    <tr>
+                        <td>{{ tour.destination.name }}</td>
+                        <td>{{ tour.region.name }}</td>
+                        <td>{{ tour.name }}</td>
+                        <td>{{ tour.days }}</td>
+                        <td>{{ tour.price }}</td>
+                        <td>
+                            <a href="{% url 'toggle_attraction_status' tour.activity_id%}">
+                                <button type="button" class="{% if tour.is_attraction %}btn-success{% else %}btn-danger{% endif %}">
+                                    {% if tour.is_attraction %}Active in Home{% else %}Hidden in Home{% endif %}
+                                </button>
+                            </a>
+                            {% comment %} <button type="button" class="toggle-attraction-btn btn {% if tour.is_attraction %}btn-success{% else %}btn-danger{% endif %}" data-activity-id="{{ tour.activity_id }}">
+                                {% if tour.is_attraction %}Active in Home{% else %}Hidden in Home{% endif %}
+                            </button> {% endcomment %}
+                        </td>
+                        <td>
+                            <a type="button" href="{% url 'edit_tour' tour.activity_id %}" class="btn btn-link btn-sm btn-rounded">Edit</a>
+                            <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal{{ tour.activity_id }}">Delete</button>
+                            <div class="modal fade" id="exampleModal{{ tour.activity_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel{{ tour.activity_id }}">Delete Priority Level</h5>
+                                            <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">Are You Sure want to delete?</div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
+                                            <a href="{% url 'delete_tour' tour.activity_id %}" class="btn btn-primary">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-
-
-
-<div class="container-fluid">
-    <h4>List Of Host Users </h4><br>
-    
-    <table id="myTable"  class="table align-middle mb-0 bg-white table-striped" width="100%">
-    <!-- <table  id="example" class="table align-middle mb-0 bg-white"> -->
-    <thead class="bt-5">
-    <tr>
-    <th>Destination</th>
-    <th>Regions</th>
-    <th>Name</th>
-    <th>Days</th>
-    <th>Price</th>
-    <th>Status</th>
-    <th>Actions</th>
-    </tr>
-    </thead>
-    
-     {% for tour in tours %} 
-    <tr>
-    <td>{{tour.destination.name}} </td>
-    <td> {{tour.region.name}}</td>
-    <td>{{tour.name}} </td>
-    <td>{{tour.days}} </td>
-    <td>{{tour.price}} $</td>
-    <td> <span class="badge badge-success rounded-pill d-inline">Active</span> </td>
-    <td>
-    <a type="button" href="" class="btn btn-link btn-sm btn-rounded">
-    Edit
-    </a>
-    <a type="action"  href="#"  class="btn btn-link btn-sm btn-rounded">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-mdb-toggle="modal"  data-mdb-target="#exampleModal {{tour.activity_id}}">
-    Delete
-    </button>
-    
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal {{tour.activity_id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-    <div class="modal-content">
-    <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Delete Priority Level</h5>
-    <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-    </div>
-    <div class="modal-body"> Are You Sure want to delete ? </div>
-    <div class="modal-footer">
-    <button type="button"  class="btn btn-secondary" data-mdb-dismiss="modal">Close</button>
-    <a type="action" href="" class="btn btn-link btn-sm btn-rounded">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-    Delete
-    </button>
-    </a>
-    </div>
-    </div>
-    </div>
-    </a>
-    
-    </td>
-    </tr>
-    {% endfor %}
-
-    </table>
-<div>
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
@@ -285,22 +387,49 @@
         $('#id_destination').change(function() {
             var destinationId = $(this).val();
             $.ajax({
-                url: '{% url "get_regions" %}', 
+                url: '{% url "get_regions" %}',
                 data: {'destination_id': destinationId},
                 dataType: 'json',
                 success: function(data) {
-                    var regionSelect = $('#id_region');
-                    regionSelect.empty(); 
-                    $.each(data.regions, function(key, value) {
-                        regionSelect.append($('<option>').text(value.name).attr('value', key));
-                    });
+                    const regionSelect = $('#id_region');
+            regionSelect.empty();
+
+                regionSelect.append(
+                data.regions.reduce((options, region) => (
+                options.concat($('<option>').text(region.name).attr('value', region.region_id))
+            ), [])
+);
                 },
                 error: function(error) {
                     console.log('Error fetching regions:', error);
+                }
+            });
+
+        });
+
+
+        $(document).on('click', '.toggle-attraction-btn', function() {
+            var button = $(this);
+            var activityId = button.data('activity-id');
+            
+            $.ajax({
+                url: '{% url "toggle_attraction_status" 0 %}'.replace('0', activityId),
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    if (data.is_attraction) {
+                        button.text('Active').removeClass('btn-danger').addClass('btn-success');
+                    } else {
+                        button.text('Inactive').removeClass('btn-success').addClass('btn-danger');
+                    }
+                    $('#myTable').DataTable().ajax.reload();
+                },
+                error: function(error) {
+                    console.log('Error toggling attraction status:', error);
                 }
             });
         });
     });
 </script>
 
-{% endblock content%}
+{% endblock content %}

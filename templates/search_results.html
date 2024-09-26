@@ -1,0 +1,36 @@
+{% extends 'base.html'%}
+{%block content%}
+{% if query %}
+    <h2>Search Results for "{{ query }}":</h2>
+{% endif %}
+
+<!-- Display Destination Search Results -->
+{% if destinations %}
+    <h3>Destination Results:</h3>
+    <ul>
+        {% for destination in destinations %}
+            <li>{{ destination.name }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Display Region Search Results -->
+{% if regions %}
+    <h3>Region Results:</h3>
+    <ul>
+        {% for region in regions %}
+            <li>{{ region.name }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<!-- Display Tour Search Results -->
+{% if tours %}
+    <h3>Tour Results:</h3>
+    <ul>
+        {% for tour in tours %}
+            <li>{{ tour.name }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{%endblock content%}

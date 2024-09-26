@@ -361,7 +361,7 @@ img {
   padding: 17.5px 41.5px;
   border-radius: 4px;
   z-index: 1;
-  box-shadow: 0px 15px 25px 0px rgba(255,124,91,0.3);
+  box-shadow: 0px 15px 25px 0px rgba(20, 156, 229, 0.3);
   transition: all 500ms ease;
 }
 
@@ -408,7 +408,7 @@ img {
 
 .theme-btn-two:hover{
   color: #ffffff;
-  box-shadow: 0px 15px 25px 0px rgba(255,124,91,0.3);
+  box-shadow: 0px 15px 25px 0px rgba(42, 135, 216, 0.3);
 }
 
 .theme-btn-two:before{
@@ -477,7 +477,7 @@ img {
 }
 
 .sec-pad{
-  padding: 114px 0px 120px 0px;
+  padding: 100px 0px 40px 0px;
 }
 
 .sec-pad-2{
@@ -533,7 +533,8 @@ img {
   display: block;
   font-size: 50px;
   line-height: 60px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Work Sans', sans-serif;
+  /* font-family: 'Playfair Display', serif; */
   font-weight: 900;
 }
 
@@ -589,6 +590,7 @@ img {
   z-index:999;
   opacity:1;
   visibility:visible;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   -ms-animation-name: fadeInDown;
   -moz-animation-name: fadeInDown;
   -op-animation-name: fadeInDown;
@@ -969,7 +971,7 @@ img {
 
 .main-menu .navigation > li > ul > li > ul{
   position:absolute;
-  right:100%;
+  left:100%;
   top:0%;
   width:230px;
   z-index:100;
@@ -1012,7 +1014,58 @@ img {
   -webkit-transform: translateY(5px);
   transform: translateY(5px);
 }
+/* added later for sub-sub-Nav */
+/* Updated CSS for sub-sub menu */
 
+.main-menu .navigation > li > ul > li > ul > li > ul > li {
+
+  top: 5%;
+  left: 100%; 
+  /* display: none;  */
+  background-color: #fff;
+  padding: 0px 5px;
+  z-index: 999;
+}
+
+/* Show sub-sub menu when parent li is hovered */
+.main-menu .navigation > li > ul > li > ul > li:hover > ul > li {
+  display: block;
+}
+
+/* Add styles for sub-sub menu items */
+.main-menu .navigation > li > ul > li > ul > li > ul > li > a {
+  position:relative;
+  display:block;
+  padding:7px 0px;
+  line-height:24px;
+  font-weight:600;
+  font-size:15px;
+  font-family: 'Work Sans', sans-serif;
+  text-transform:capitalize;
+  color:#061a3a;
+  text-align: left;
+  transition:all 500ms ease;
+  -moz-transition:all 500ms ease;
+  -webkit-transition:all 500ms ease;
+  -ms-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+}
+
+/* Style for the dropdown arrow */
+.main-menu .navigation > li > ul > li > ul > li > ul > li.dropdown > a:after {
+  font-family: 'Font Awesome 5 Pro';
+  content: "\f105";
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  display: block;
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 900;
+  z-index: 5;  
+}
+
+/* endof added later for sub-sub-Nav */
 .main-menu .navigation > li > ul > li:hover > ul > li{
   opacity: 1;
   visibility: visible;
@@ -1039,16 +1092,37 @@ img {
   -webkit-transition-delay: 0.25s;
   transition-delay: 0.25s;
 }
-
-.main-menu .navigation > li > ul > li > ul > li:last-child{
-  border-bottom:none; 
+/* added later */
+.main-menu .navigation > li > ul > li > ul > li > ul > li:nth-child(2n+5) {
+  -webkit-transition-delay: 0.25s;
+  transition-delay: 0.25s;
 }
 
 .main-menu .navigation > li > ul > li > ul > li:last-child{
   border-bottom:none; 
 }
+
 
 .main-menu .navigation > li > ul > li > ul > li > a{
+  position:relative;
+  display:block;
+  padding:7px 0px;
+  line-height:24px;
+  font-weight:600;
+  font-size:15px;
+  font-family: 'Work Sans', sans-serif;
+  text-transform:capitalize;
+  color:#061a3a;
+  text-align: left;
+  transition:all 500ms ease;
+  -moz-transition:all 500ms ease;
+  -webkit-transition:all 500ms ease;
+  -ms-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+}
+
+/* added later */
+.main-menu .navigation > li > ul > li > ul > li > ul > li > a{
   position:relative;
   display:block;
   padding:7px 0px;
@@ -1156,7 +1230,7 @@ img {
 }
 
 .main-header.style-two .menu-area .mobile-nav-toggler .icon-bar{
-  background-color: #ffffff;
+  background-color: #072063;
 }
 
 .menu-area .mobile-nav-toggler .icon-bar:last-child{
@@ -1630,14 +1704,14 @@ div#mCSB_1_container{
 
 .booking-form .form-group{
   position: relative;
-  float: left;
-  width: 33.333%;
+  float: none;
+  width: 50.333%;
   margin: 0px;
 }
 
 .booking-form .form-group input[type='text']{
   position: relative;
-  max-width: 286px;
+  max-width: 500px;
   width: 100%;
   height: 64px;
   background: #fff;
@@ -1737,7 +1811,7 @@ div#mCSB_1_container{
   content: '';
   width: 0;
   height: 0;
-  background: rgba(255, 255, 255,.2);
+  background: rgba(59, 199, 231, 0.2);
   border-radius: 0%;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -2070,7 +2144,7 @@ div#mCSB_1_container{
 
 .tour-block-one .inner-box .lower-content{
   position: relative;
-  padding: 33px 35px 40px 40px;
+  padding: 33px 10px 40px 15px;
 }
 
 .tour-block-one .inner-box .lower-content .rating span{
@@ -2091,9 +2165,9 @@ div#mCSB_1_container{
 
 .tour-block-one .inner-box .lower-content h3{
   display: block;
-  font-size: 24px;
+  font-size: 20px;
   line-height: 30px;
-  font-weight: 700;
+  font-weight: 300;
   margin-bottom: 5px;
 }
 
@@ -2962,7 +3036,7 @@ div#mCSB_1_container{
 
 .footer-top{
   position: relative;
-  padding: 100px 0px 110px 0px;
+  padding: 100px 0px 10px 0px;
 }
 
 .footer-top p,
@@ -3002,9 +3076,9 @@ div#mCSB_1_container{
   display: inline-block;
   font-size: 15px;
   color: #ffffff;
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
   background: rgba(255,255,255,0.1);
   border-radius: 50%;
@@ -3267,7 +3341,7 @@ div#mCSB_1_container{
   right: 0px;
   width: 5000px;
   height: 100%;
-  background: #008fd6;
+  background: #ffffff;
 }
 
 .main-header.style-two .header-lower .search-box-btn,
@@ -3637,7 +3711,7 @@ div#mCSB_1_container{
 
 .funfact-style-two{
   position: relative;
-  padding: 60px 0px;
+  padding: 2px 0px;
 }
 
 .funfact-style-two .pattern-layer{
@@ -5320,7 +5394,7 @@ div#mCSB_1_container{
 .tours-page-section{
   position: relative;
   background: #ffffff;
-  padding: 205px 0px 120px 0px;
+  padding: 50px 0px 120px 0px;
 }
 
 .wrapper.list .tour-list-content{
@@ -5799,7 +5873,7 @@ div#mCSB_1_container{
 .tour-details-content .tour-plan .single-box{
   position: relative;
   padding-left: 110px;
-  padding-bottom: 62px;
+  padding-bottom: 10px;
 }
 
 .tour-details-content .tour-plan .single-box:last-child{
@@ -5910,7 +5984,6 @@ div#mCSB_1_container{
   border-radius: 10px;
   margin-bottom: 10px;
   overflow: hidden;
-  background: #000000;
 }
 
 .tour-details-content .photo-gallery .image-box .image img{
@@ -6139,7 +6212,7 @@ div#mCSB_1_container{
 
 .tour-details .tour-sidebar{
   position: relative;
-  margin-top: -163px;
+  margin-top: -125px;
   z-index: 1;
 }
 
@@ -7124,7 +7197,7 @@ div#mCSB_1_container{
 
 .sidebar-page-container{
   position: relative;
-  padding: 150px 0px;
+  padding: 100px 0px;
 }
 
 .blog-grid-content .news-block-one .inner-box{
